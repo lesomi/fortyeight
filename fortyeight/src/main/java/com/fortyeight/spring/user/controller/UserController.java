@@ -80,6 +80,7 @@ public class UserController {
 	@RequestMapping("/user/insertUserEnd.do")
 	public String insertUserEnd(User u, Model model, MultipartFile upFile, HttpSession session) {
 		
+		
 		logger.debug("----- 회원가입 로직 진행 들어옴 -----");
 		String path = session.getServletContext().getRealPath("/resources/upload/user"); // 저장경로
 		File f = new File(path);
@@ -109,6 +110,7 @@ public class UserController {
 			u.setOriProfile(ori);
 			u.setRenameProfile(rename);
 		}
+		System.out.println("form으로 넘어오는 값이 있는가? "+u);
 		
 		// 비밀번호 암호화
 		System.out.println("암호화 되기 전 비밀번호 : "+u.getPassword());
@@ -128,7 +130,8 @@ public class UserController {
 		String page = "";
 		if(result>0) {
 			model.addAttribute("msg","회원가입이 완료되었습니다!");
-			page = "redirect:/";
+			model.addAttribute("loc", "/");
+			page = "common/msg";
 		}
 		else {
 			model.addAttribute("msg","회원가입이 실패되었습니다. 다시 진행해주세요.");

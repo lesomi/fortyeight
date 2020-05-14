@@ -293,7 +293,7 @@
 							<span class="blankRight">거래주소</span>
 						</td>
 						<td>
-							<input type="text" class="form-control control2" name="dealaddr" id="dealaddr" placeholder="지번주소 또는 도로명주소 작성" required/>
+							<input type="text" class="form-control control2" name="dealAddr" id="dealAddr" placeholder="지번주소 또는 도로명주소 작성" required/>
 						</td>
 					</tr>
 					<tr>
@@ -711,15 +711,15 @@
 	
 	/* 입력한 주소를 대입 */
 	$(function(){
-		console.log($("#dealaddr").val());
+		console.log($("#dealAddr").val());
 		
-		$("#dealaddr").keyup(function() {
+		$("#dealAddr").keyup(function() {
 			// 주소로 좌표를 검색합니다(이때, 주소는 사용자가 입력한 [거래주소]로 값을 대입한다.)
-			geocoder.addressSearch( $('#dealaddr').val() , function(result, status) {
+			geocoder.addressSearch( $('#dealAddr').val() , function(result, status) {
 		
 			    // 정상적으로 검색이 완료됐으면 
 			     if (status === kakao.maps.services.Status.OK) {
-			    	 console.log($("#dealaddr").val());
+			    	 console.log($("#dealAddr").val());
 		
 			        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 		
