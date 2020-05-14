@@ -142,6 +142,12 @@
 	        </c:if>
         </div>
     </header>
+    
+    <style>
+    *{
+    border:1px solid green;
+    }
+    </style>
 
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -156,10 +162,17 @@
 					<div class="modal-body">
 						<input type="text" class="form-control" name="userId" placeholder="아이디" required> <br />
 						<input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+						<div class="d-flex" style="padding-top:20px;">
+							<div class="flex:2">
+								<label style="padding-left:20px;"><input type="checkbox" name="remeber" id="remember">&nbsp;&nbsp;자동로그인</label>
+							</div>
+							<div>
+								<a href="${path}/user/find.do">아이디/비밀번호 찾기</a>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer d-flex justify-content-center">
 						<button type="submit" class="btn btn-dark hdBtn">로그인</button>
-						<button type="button" class="btn btn-dark hdBtn" data-dismiss="modal" onclick="location.replace('${path}/user/find.do')">아이디/비밀번호 찾기</button>
 					</div>
 				</form>
 			</div>
