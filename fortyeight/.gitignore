@@ -1,0 +1,4 @@
+/target/
+/src/main/webapp/WEB-INF/classes/
+/Users/
+/src/main/webapp/WEB-INF/spring/javaMail-context.xml

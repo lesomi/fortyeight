@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="user">
+	<!-- 특이사항 : USER TABLE 이름 변경 => MEMBER -->
+	<!-- 로그인 -->
+	<select id="selectLogin" resultType="user" parameterType="string">
+		SELECT * FROM MEMBER WHERE USERID = #{userId}
+	</select>
+	
+	<!-- [회원가입]-닉네임찾기 -->
+	<select id="selectNick" resultType="user" parameterType="string">
+		SELECT * FROM MEMBER WHERE NICKNAME = #{nickName}
+	</select>
+	
+	<!-- [회원가입]-전화번호찾기 -->
+	<select id="selectPhone" resultType="user" parameterType="string">
+		SELECT * FROM MEMBER WHERE PHONE = #{phone}
+	</select>
+	
+	<!-- [회원가입] 이메일찾기 -->
+	<select id="selectEmail" resultType="user" parameterType="string">
+		SELECT * FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+</mapper>
