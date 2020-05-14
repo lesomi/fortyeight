@@ -1,6 +1,8 @@
 package com.fortyeight.spring.user.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
@@ -100,12 +101,6 @@ public class UserController {
 		return page;
 	}
 	
-	//아이디/비밀번호 찾기 페이지 이동
-	@RequestMapping("/user/find.do")
-	public String find() {
-		return "user/findUser";
-	}
-	
 //	[회원가입] - 아이디 체크 ajax(첫번째 ajax 활용)
 	@RequestMapping("/user/checkId.do")
 	@ResponseBody
@@ -149,10 +144,19 @@ public class UserController {
 	// [회원가입] -이메일 체크 ajax(〃)
 	@RequestMapping("/user/checkEmail.do")
 	@ResponseBody
-	public boolean checkEmail(String email) {
+	public Map<String,Object> checkEmail(String email) {
 		User u=service.selectEmail(email);
 		boolean flag = u!=null? false : true;
-		return flag;
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("user", u);
+		map.put("flag", flag);
+		return map;
+	}
+	
+	//아이디/비밀번호 찾기 페이지 이동
+	@RequestMapping("/user/find.do")
+	public String find() {
+		return "user/findUser";
 	}
 	
 	//아이디찾기 화면 전환용
