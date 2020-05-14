@@ -213,6 +213,13 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- SQL문 로그로 남기기.. -->
+		<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
+		<dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
 		
 		
 
