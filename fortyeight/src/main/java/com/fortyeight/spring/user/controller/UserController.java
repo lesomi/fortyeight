@@ -48,16 +48,19 @@ public class UserController {
 	public String login(String userId,String password,Model model) {
 		User login=service.selectLogin(userId);
 		
+		String page="";
 		if(login !=null && encoder.matches(password, login.getPassword())) { 
 			//로그인 성공
 			model.addAttribute("loginUser",login);
+			page = "redirect:/";
 		}else {
 			//로그인 실패
 			model.addAttribute("msg","아이디 또는 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("loc","/");
+			page = "common/msg";
 		}
-		model.addAttribute("loc","/");
 		
-		return "common/msg";
+		return page;
 	}
 	
 	//로그아웃
