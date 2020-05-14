@@ -37,4 +37,12 @@ public class UserServiceImpl implements UserService {
 	public User selectEmail(String email) {
 		return dao.selectEmail(session,email);
 	}
+
+	// 회원가입
+	@Override
+	public int insertUser(User u) {
+		return dao.insertUser(session, u);
+	}
+	
+	
 }

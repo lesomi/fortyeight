@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
@@ -28,6 +29,8 @@ public class UserController {
 	private UserService service;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	@Autowired
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	//회원가입 화면 전환
 	@RequestMapping("/user/agreeUser.do")
@@ -72,6 +75,14 @@ public class UserController {
 	@RequestMapping("/user/insertUserEnd.do")
 	public String insertUserEnd(User u, Model model, MultipartFile upFile, HttpSession session) {
 		
+		logger.debug("----- 회원가입 로직 진행 들어옴 -----");
+		String path = session.getServletContext().getRealPath("/resources/upload/user"); // 저장경로
+		
+		
+		
+		
+		
+		
 		// 비밀번호 암호화
 		System.out.println("암호화 되기 전 비밀번호 : "+u.getPassword());
 		u.setPassword(encoder.encode(u.getPassword()));
@@ -82,9 +93,9 @@ public class UserController {
 		u.setPhone(encoder.encode(u.getPhone()));
 		System.out.println("암호화된 전화번호 : "+u.getPhone());
 		
-		// DB에 값 저장(프론트단 구현중...)
-		int result = 0;
-		// int result = service.insertUser(u);
+		// DB에 값 저장
+		int result = service.insertUser(u);
+		logger.debug("회원가입이 성공했습니까? 0이면 false, 1이면 true "+result);
 		
 		// 페이지 분기처리
 		String page = "";
