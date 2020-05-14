@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 <style>
 	table{
 		margin: 0 auto;
@@ -34,55 +30,72 @@
 	}
 </style>
 
+<table>
+	<tr>
+		<td width="135px">이메일</td>
+		<td><input type="text" class="form-control control2" name="email" id="email" required></td>
+		<td width="135px">
+			<button type="button" class="btn btn-dark eBtn">인증번호 발송</button>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<p class="blankTopP" id="emailMsg">이메일 확인 메세지</p>
+		</td>
+		<td></td>
+	</tr>
+	<tr id="hideTr">
+		<td></td>
+		<td>
+			<input type="text" class="form-control control2">
+		</td>
+		<td>
+			시간
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<button type="button" class="btn btn-dark hdBtn">확인</button>
+		</td>
+	</tr>
+</table>
+
 <script>
 	$(function(){
 		$(".eBtn").prop("disabled",true);
 		$("#hideTr").css("display","none");
 		$("#email").keyup(function(){
-			let email=$("#email").val();
-			if(email.trim().length>0){
-				$(".eBtn").prop("disabled", false);
-				$(".eBtn").click(function(){
-					$("#emailMsg").css("visibility", "visible");
-					$("#emailMsg").css("color", "green");
-					$("#emailMsg").html("인증번호가 발송되었습니다.");
-					$("#hideTr").css("display","");
-				});
-			}
+			const email=$("#email").val();
+			console.log(email);
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/checkEmail.do",
+				data: {email : email},
+				success: function(data) {
+					if(!data.flag){
+						console.log(data.flag);
+						//이메일이 존재
+						if(email.trim().length>0){
+							$(".eBtn").prop("disabled", false);
+							$("#emailMsg").css("visibility", "visible");
+							$("#emailMsg").css("color", "green");
+							$("#emailMsg").html("이메일 인증을 진행하세요.");
+							
+							$(".eBtn").click(function(){
+								$("#emailMsg").css("visibility", "visible");
+								$("#emailMsg").css("color", "green");
+								$("#emailMsg").html("인증번호가 발송되었습니다.");
+								$("#hideTr").css("display","");
+							});
+						}
+					}else{
+						//이메일이 없음
+						$("#emailMsg").css("visibility", "visible");
+						$("#emailMsg").css("color", "red");
+						$("#emailMsg").html("이메일이 존재하지 않습니다.");
+					}
+				}
+			});
 		});
 	});
 </script>
-</head>
-<body>
-	<table>
-		<tr>
-			<td width="135px">이메일</td>
-			<td><input type="text" class="form-control control2" name="email" id="email" required></td>
-			<td width="135px">
-				<button type="button" class="btn btn-dark eBtn">인증번호 발송</button>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<p class="blankTopP" id="emailMsg">이메일 확인 메세지</p>
-			</td>
-			<td></td>
-		</tr>
-		<tr id="hideTr">
-			<td></td>
-			<td>
-				<input type="text" class="form-control control2">
-			</td>
-			<td>
-				시간
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3">
-				<button type="button" class="btn btn-dark hdBtn">확인</button>
-			</td>
-		</tr>
-	</table>
-</body>
-</html>
