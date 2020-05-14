@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fortyeight.spring.user.model.vo.User;
 
+
 @Repository
 public class UserDaoImpl implements UserDao {
 

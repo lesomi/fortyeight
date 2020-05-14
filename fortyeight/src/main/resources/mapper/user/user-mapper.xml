@@ -26,7 +26,7 @@
 	<insert id="insertUser" parameterType="user">
 		INSERT INTO MEMBER VALUES(
 			SEQ_USERNO.NEXTVAL, #{userId}, #{password}, #{nickName}, #{email}, #{phone}, #{dealAddr},
-			DEFAULT, DEFAULT, DEFAULT, #{profile}
+			DEFAULT, DEFAULT, DEFAULT, #{oriProfile}, #{renameProfile}
 		)
 	</insert>
 </mapper>

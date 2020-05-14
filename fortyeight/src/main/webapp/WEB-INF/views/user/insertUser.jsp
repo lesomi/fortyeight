@@ -152,7 +152,7 @@
 		
 		<!-- 회원가입 작성 -->
 		<div id="insertContent">
-			<form action="${path}/user/insertUser.do" method="post" enctype="multipart/form-data">
+			<form action="${path}/user/insertUserEnd.do" method="post" enctype="multipart/form-data">
 				<table id="insertTable">
 					<tr>
 						<td>
@@ -307,10 +307,10 @@
 						</td>
 					</tr>
 				</table>
+				<button type="submit" id="insert" class="btn btn-dark enrollBtn">회원가입</button>
+				<button type="button" class="btn btn-dark enrollBtn" onclick="javascript:history.back();">뒤로가기</button>	
 			</form>
 			
-			<button type="submit" id="insert" class="btn btn-dark enrollBtn">회원가입</button>
-			<button type="button" class="btn btn-dark enrollBtn" onclick="javascript:history.back();">뒤로가기</button>	
 		</div>
 		
 	</div>
