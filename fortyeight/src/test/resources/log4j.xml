@@ -10,6 +10,43 @@
 		</layout>
 	</appender>
 	
+	
+	
+	
+	<!-- SQL문 로그 찍기 -->
+	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-mm-dd HH:mm:ss}]%-5p: %l - %m%n" />
+		</layout>
+	</appender>
+	
+	<!-- name="jdbc.sqlonly" : sql 구문을 찍는 녀석 -->
+	<!-- additivity : root에 추가할 것인가? false : 아니! -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- Application Loggers -->
 	<logger name="com.fortyeight.spring">
 		<level value="info" />

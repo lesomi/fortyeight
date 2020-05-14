@@ -20,5 +20,6 @@ public class User {
 	private Date enrollDate;
 	private String status;
 	private int reportcount;
-	private String profile;
+	private String oriProfile;
+	private String renameProfile;
 }

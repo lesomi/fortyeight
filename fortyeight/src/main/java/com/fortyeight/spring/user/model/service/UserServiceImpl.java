@@ -1,6 +1,8 @@
 package com.fortyeight.spring.user.model.service;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao dao;
 	@Autowired
 	private SqlSessionTemplate session;
+	@Autowired
+	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	//로그인
 	@Override
@@ -37,4 +41,13 @@ public class UserServiceImpl implements UserService {
 	public User selectEmail(String email) {
 		return dao.selectEmail(session,email);
 	}
+
+	// 회원가입
+	@Override
+	public int insertUser(User u) {
+		return dao.insertUser(session, u);
+		
+	}
+	
+	
 }

@@ -1,12 +1,17 @@
 package com.fortyeight.spring.user.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.text.SimpleDateFormat;
+
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +34,8 @@ public class UserController {
 	private UserService service;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	@Autowired
+	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	//회원가입 화면 전환
 	@RequestMapping("/user/agreeUser.do")
@@ -73,6 +80,36 @@ public class UserController {
 	@RequestMapping("/user/insertUserEnd.do")
 	public String insertUserEnd(User u, Model model, MultipartFile upFile, HttpSession session) {
 		
+		logger.debug("----- 회원가입 로직 진행 들어옴 -----");
+		String path = session.getServletContext().getRealPath("/resources/upload/user"); // 저장경로
+		File f = new File(path);
+		
+		if(!f.exists()) { // 파일이 없으면 생성한다.
+			f.mkdirs();
+		}
+		
+		// 파일 저장 로직 : 파일 이름이 중복적으로 저장되면 안 되기 때문에 rename 처리가 필요하다.
+		if(!upFile.isEmpty()) {
+			// 파일명 생성
+			String ori = upFile.getOriginalFilename();
+			String ext = ori.substring(ori.lastIndexOf('.'));
+			
+			// 파일 이름 리네임
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rnd = (int)(Math.random()*1000);
+			String rename = sdf.format(System.currentTimeMillis())+"_"+rnd+ext; // 새 이름 부여
+			
+			// 리네임 파일 저장
+			try {
+				upFile.transferTo(new File(path+"/"+rename)); // 파일을 실제로 저장
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+			}
+			u.setOriProfile(ori);
+			u.setRenameProfile(rename);
+		}
+		
 		// 비밀번호 암호화
 		System.out.println("암호화 되기 전 비밀번호 : "+u.getPassword());
 		u.setPassword(encoder.encode(u.getPassword()));
@@ -83,9 +120,9 @@ public class UserController {
 		u.setPhone(encoder.encode(u.getPhone()));
 		System.out.println("암호화된 전화번호 : "+u.getPhone());
 		
-		// DB에 값 저장(프론트단 구현중...)
-		int result = 0;
-		// int result = service.insertUser(u);
+		// DB에 값 저장
+		int result = service.insertUser(u);
+		logger.debug("회원가입이 성공했습니까? 0이면 false, 1이면 true "+result);
 		
 		// 페이지 분기처리
 		String page = "";

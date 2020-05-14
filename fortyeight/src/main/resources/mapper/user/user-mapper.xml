@@ -21,4 +21,12 @@
 	<select id="selectEmail" resultType="user" parameterType="string">
 		SELECT * FROM MEMBER WHERE EMAIL = #{email}
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="user">
+		INSERT INTO MEMBER VALUES(
+			SEQ_USERNO.NEXTVAL, #{userId}, #{password}, #{nickName}, #{email}, #{phone}, #{dealAddr},
+			DEFAULT, DEFAULT, DEFAULT, #{oriProfile}, #{renameProfile}
+		)
+	</insert>
 </mapper>

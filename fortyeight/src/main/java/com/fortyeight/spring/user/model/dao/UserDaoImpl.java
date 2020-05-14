@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fortyeight.spring.user.model.vo.User;
 
+
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -30,5 +31,11 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User selectEmail(SqlSessionTemplate session, String email) {
 		return session.selectOne("user.selectEmail",email);
+	}
+
+	// 회원가입
+	@Override
+	public int insertUser(SqlSessionTemplate session, User u) {
+		return session.insert("user.insertUser", u);
 	}
 }
