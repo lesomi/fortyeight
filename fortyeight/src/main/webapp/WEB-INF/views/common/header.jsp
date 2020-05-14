@@ -112,13 +112,13 @@
             	<img id="logoImg" src="${path}/resources/img/forty-eight.png" onclick="location.replace('${path}')">
            	</div>
             <div class="p-1 divSize">
-                <a href="#" class="aFont">사고</a>
+                <a href="${path}/market/buyMarket.do" class="aFont">사고</a>
             </div>
             <div class="p-1 divSize">
-                <a href="#" class="aFont">팔고</a>
+                <a href="${path}/market/selMarket.do" class="aFont">팔고</a>
             </div>
             <div class="p-1 divSize" id="scDiv">
-                <a href="#" class="aFont">모여봐요</a>
+                <a href="${path}/board/boardList.do" class="aFont">모여봐요</a>
             </div>
             
             <!-- 만약, session에 로그인한 값이 없으면? -->
