@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
 	public User selectPwCk(Map<String,String> pwCk) {
 		return dao.selectPwCk(session,pwCk);
 	}
+
+	@Override
+	public int updatePassword(Map<String, Object> map) {
+		return dao.updatePassword(session,map);
+	}
 	
 	
 }

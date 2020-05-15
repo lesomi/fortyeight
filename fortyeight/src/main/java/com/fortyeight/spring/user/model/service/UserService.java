@@ -11,4 +11,5 @@ public interface UserService {
 	User selectEmail(String email); // 회원가입-이메일찾기
 	int insertUser(User u); // 회원가입 DB 저장
 	User selectPwCk(Map<String,String> pwCk);
+	int updatePassword(Map<String,Object> map);
 }
