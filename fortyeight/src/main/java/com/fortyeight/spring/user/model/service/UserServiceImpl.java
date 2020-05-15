@@ -1,5 +1,7 @@
 package com.fortyeight.spring.user.model.service;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +49,11 @@ public class UserServiceImpl implements UserService {
 	public int insertUser(User u) {
 		return dao.insertUser(session, u);
 		
+	}
+
+	@Override
+	public User selectPwCk(Map<String,String> pwCk) {
+		return dao.selectPwCk(session,pwCk);
 	}
 	
 	
