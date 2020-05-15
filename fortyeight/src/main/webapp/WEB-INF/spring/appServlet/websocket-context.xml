@@ -5,5 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd">
 
-
+	<!-- 웹소켓 서버 등록하기 -->
+	<websocket:handlers>
+		<websocket:mapping handler="chattingServer" path="/chatting"/>
+	</websocket:handlers>
+	<bean id="chattingServer" class="com.fortyeight.spring.common.websocket.ChattingServer"/>
+	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	
 </beans>
