@@ -44,7 +44,10 @@
 				success: function(data) {
 					if(!data.flag){
 						console.log(data.flag);
-						$("#idCk").html(data.user.userId);
+						var id=data.user.userId;
+						console.log(id);
+						id = id.replace(/(?<=.{2})./, "*");
+						$("#idCk").html(id);
 						console.log(data.user.userId);
 						//이메일이 존재
 						if(email.trim().length>0){
