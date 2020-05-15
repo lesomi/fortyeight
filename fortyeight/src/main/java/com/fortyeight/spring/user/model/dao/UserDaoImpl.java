@@ -1,5 +1,7 @@
 package com.fortyeight.spring.user.model.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -37,5 +39,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int insertUser(SqlSessionTemplate session, User u) {
 		return session.insert("user.insertUser", u);
+	}
+
+	@Override
+	public User selectPwCk(SqlSessionTemplate session, Map<String,String> pwCk) {
+		return session.selectOne("user.selectPwCk", pwCk);
 	}
 }
