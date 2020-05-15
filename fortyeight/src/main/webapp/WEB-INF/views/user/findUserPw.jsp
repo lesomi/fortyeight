@@ -46,6 +46,13 @@
 						$("#pwCk").click(function(){
 							if(data){
 								//아이디 이메일 일치
+								$.ajax({
+									url:"${pageContext.request.contextPath}/user/pwMailSending.do",
+									data:{userId:userId,email:email},
+									success:function(data){
+										console.log("ddd"+data);
+									}
+								});
 								$("#pwCk").attr("data-target","#pwCheckModal");
 							}else{
 								//아이디 이메일 불일치
