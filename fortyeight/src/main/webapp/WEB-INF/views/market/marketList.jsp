@@ -156,6 +156,20 @@
         	border: 1px rgb(66,66,66);
         }
 
+        /* [필터 적용될 span 설정] */
+        span.filterSpan {
+        	font-weight: bolder;
+        	color: rgb(60,60,60);
+        	margin-right: 20px;
+        }
+        span.filterSpan:hover {
+        	color: gray;
+        	cursor: pointer;
+        }
+        span#firstSpan {
+        	margin-left: 22%;
+        }
+
 
         /* 영역사이 hr 설정 */
         hr {
@@ -272,6 +286,8 @@
         <article id="firstArticle">
             
             <h1>어드민이 등록한 이미지 3~4장이 슬라이드 처리됩니다.</h1>
+            <h4>여기서는 범위지정한 값을 가져와서 뿌려져야 한다.</h4>
+            <!-- 슬라이드 효과 참고 https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp -->
             
         </article>
 
@@ -286,7 +302,7 @@
                 <br>
                 <button class="btn btn-warning firstbtn otherBtn" type="button" >여성의류/잡화</button> 
                 <button class="btn btn-warning otherBtn" type="button" >뷰티/미용</button> 
-                <button class="btn btn-warning otherBtn" type="button" >남성패션/잡화</button> 
+                <button class="btn btn-warning otherBtn" type="button" >남성의류/잡화</button> 
                 <button class="btn btn-warning otherBtn" type="button" >스포츠/레저/게임</button> 
                 <button class="btn btn-warning otherBtn" type="button" >기타</button> 
             </div>
@@ -295,7 +311,10 @@
 
             <div id="categoryTitle">
                 <h2>팝니다</h2>
-                <button type="button" class="btn btn-warning" id="selBtn" >작성</button>
+                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeSell.do');">작성</button>
+                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
+                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
+                		onclick="location.replace('');">거래위치 수정</button>
             </div>
 
             <!-- --------- 판매글 노출 -------------- -->
@@ -319,7 +338,7 @@
                         <!-- select -->
                         <div class="col-4" id="filterDiv">
                         	<!-- 최신순/인기순/가격순 -->
-                        	<span class="listSort filterSpan">최신순</span>
+                        	<span class="listSort filterSpan" id="firstSpan">최신순</span>
                         	<span class="listSort filterSpan">인기순</span>
                         	<span class="listSort filterSpan">가격순</span>
                         </div>
@@ -341,8 +360,8 @@
                                                 <span id="JimOnOff">찜하기</span>
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
-                                            <div id="selContent">
-                                                <p id="articleTitle" onclick="location.replace('');">닌텐도 스위치 팝니다 판다구요 판단말입니다</p>
+                                            <div id="selContent" onclick="location.replace('');">
+                                                <p id="articleTitle">닌텐도 스위치 팝니다 판다구요 판단말입니다</p>
                                                 <p id="addr">광진구 중곡동 <span>1분 전</span></p>
                                                 <p>10,000원</p>
                                             </div>
