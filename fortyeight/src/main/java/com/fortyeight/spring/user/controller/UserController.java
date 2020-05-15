@@ -213,4 +213,16 @@ public class UserController {
 	public String findUserPw() {
 		return "user/findUserPw";
 	}
+	
+	//비밀번호 찾기 아이디, 이메일 확인
+	@RequestMapping("/user/findUserPwck.do")
+	@ResponseBody
+	public boolean findUserPwCk(String userId,String email) {
+		Map<String,String> pwCk=new HashMap<String, String>();
+		pwCk.put("userId", userId);
+		pwCk.put("email", email);
+		User u=service.selectPwCk(pwCk);
+		boolean flag=u!=null?true:false;
+		return flag;
+	}
 }
