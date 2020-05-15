@@ -15,7 +15,7 @@
 		/* 타이틀 div 영역 설정 */
 		div#titleDiv {
 			margin-bottom: 5%;
-			border-bottom: 1px solid rgb(70,70,70);
+			border-bottom: 1px solid rgba(66, 66, 66, 0.3);
 		}
 		
 		/* 모두동의합니다 멘트 설정 */
