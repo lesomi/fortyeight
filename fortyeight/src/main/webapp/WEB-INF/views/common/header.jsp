@@ -16,6 +16,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+
+<!-- 폰트 적용 -->
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 	<style>
         /* 전체에 폰트 적용 */
         /* 전체 margin, padding 조절 */
@@ -112,13 +116,13 @@
             	<img id="logoImg" src="${path}/resources/img/forty-eight.png" onclick="location.replace('${path}')">
            	</div>
             <div class="p-1 divSize">
-                <a href="#" class="aFont">사고</a>
+                <a href="${path}/market/buyMarket.do" class="aFont">사고</a>
             </div>
             <div class="p-1 divSize">
-                <a href="#" class="aFont">팔고</a>
+                <a href="${path}/market/selMarket.do" class="aFont">팔고</a>
             </div>
             <div class="p-1 divSize" id="scDiv">
-                <a href="#" class="aFont">모여봐요</a>
+                <a href="${path}/board/boardList.do" class="aFont">모여봐요</a>
             </div>
             
             <!-- 만약, session에 로그인한 값이 없으면? -->
