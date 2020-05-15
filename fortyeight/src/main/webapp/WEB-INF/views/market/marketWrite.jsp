@@ -33,6 +33,7 @@
 		/* 테이블 영역 설정 */
 		table#writeTB {
 			margin: 0 auto;
+			margin-bottom: 100px;
 			text-align: center;
 		}
 		
@@ -42,6 +43,13 @@
 			margin-bottom: 10px; */
 			text-align: center;
 			font-size: 13px;
+		}
+		
+		/* 제목 글자수 설정 */
+		span#titleCounter {
+			position: absolute;
+			right: 15%;
+			top: 68%;
 		}
 		
 		/* '여기' 설정 */
@@ -64,8 +72,62 @@
 		/* 내용 글자수 체크하는 놈 설정 */
 		span#counter {
 			position: absolute;
-			right: 16%;
+			right: 17%;
 			margin-top: 14%;
+		}
+		
+		/* 사진등록 div 설정 */
+		div#fileDiv {
+			width: 400px;
+		} 
+		/* 이미지 크기 */
+		img#uploadImg {
+			width: 200px;
+			height: 200px;
+		}
+		
+		/* 플러스, 마이너스 이미지 설정 */
+		img#plus {
+			position: absolute; 
+			right: -45%;
+		}
+		img#minus {
+			position: absolute; 
+			right: -30%;
+			display: none;
+		}
+		
+		/* 플러스 이미지 눌렀을 때 */
+		img#plus:hover, img#minus:hover {
+			cursor: pointer;
+		}
+		
+		
+		/* --- */
+		
+		tr.upload_line {
+			display: none;
+		}
+		
+		
+		/* --- */
+		
+		/* 버튼의 위치 설정 */
+		button#insert {
+			margin-left: 34%;
+			margin-right: 5%;
+		}
+		
+		/* 버튼 설정 */
+		button.enrollBtn {
+			font-weight: bolder;
+			width: 150px;
+			height: 50px;
+		}
+		
+		/* 버튼에 마우스를 올렸을 때  */
+		button.enrollBtn:hover {
+			color: rgb(251, 192, 41);
 		}
 	</style>
 <section>
@@ -73,8 +135,8 @@
 		<!-- 판매글 작성 : 형식은 회원가입과 비슷하게... -->
 		
 		<div id="sellTitle">
-			<h2>팝니다</h2>
-			<h6>(작성자 : <c:out value="${loginUser.getNickName}"/>님)</h6>
+			<h2>거래글 작성하자!</h2>
+			<h6>(작성자 : <c:out value="${loginUser.nickName}"/>님)</h6>
 		</div>
 		
 		<div id="writeSellDiv">
@@ -117,17 +179,21 @@
 					<tr>
 						<td>제목</td>
 						<td>
-							<input type="text" class="form-control" id="title" placeholder="30글자 이내 작성"/>
+							<input type="text" class="form-control" id="title" placeholder="30글자 이내 작성" maxlength="30"/>
+							<span></span>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><p id="titleMsg">제목 안내글 작성</p></td>
+						<!-- <td colspan="2"><p id="titleMsg">제목 안내글 작성</p></td> -->
+						<td colspan="2">
+							<span style="color:#aaa;" id="titleCounter">(0 / 최대 30자)</span>
+						</td>
 					</tr>
 					
 					<tr>
 						<td>거래주소</td>
 						<td>
-							<input type="text" class="form-control" id="dealAddr" value="${loginUser.dealAddr}"/>
+							<input type="text" class="form-control" id="dealAddr" value="${loginUser.dealAddr}" readonly="readonly"/>
 						</td>
 					</tr>
 					<tr>
@@ -153,24 +219,149 @@
 					</tr>
 					
 					<tr>
-						<td colspan="2">
-							<textarea rows="10" cols="130" placeholder="당신의 게시글을 어필하세요! 1000글자 내 작성이 필요합니다."></textarea>
-							<span style="color:#aaa;" id="counter">(0 / 최대 1000자)</span>
-						</td>
+						<td style="text-align: center;">사진등록</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="height: 20px;"></td>
 					</tr>
 					
 					
+					<!-- 여기가 여러개 추가될 것! -->
+					<tr class="upload_line">
+						<td id="fildTd" colspan="2">
+							<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/>
+							<div class="custom-file" id="fileDiv">
+			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
+			                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">파일을 선택하세요</label>
+			                    <img src="${path}/resources/img/plusIcon.png" id="plus">
+			                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
+		                	</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="height: 20px;"></td>
+					</tr>
+					<!-- 여기까지 -->
 					
-					
+					<tr>
+						<td colspan="2">
+							<textarea id="text" rows="10" cols="130" placeholder="당신의 게시글을 어필하세요! 1000글자 내 작성이 필요합니다." maxlength="1000"></textarea>
+							<span style="color:#aaa;" id="counter">(0 / 최대 1000자)</span>
+						</td>
+					</tr>
 				</table>
+				<button type="submit" id="insert" class="btn btn-dark enrollBtn">등록하자!</button>
+				<button type="button" class="btn btn-dark enrollBtn" onclick="javascript:history.back();">뒤로가기</button>
 			</form>
 		</div>
 	</div>
+	
 	<div class="push"></div>
 </section>
 
 <script>
+/* ---------------------------------------------- [글자 수 카운트] ----------------------------------------------------- */
+	// 제목 글자수 카운트
 	$(function () {
+		$('#title').keyup(function () {
+			var title = $(this).val();
+			$('#titleCounter').html("("+title.length+" / 최대 30자)"); // 제목 글자수 카운팅
+			console.log('현재 제목 글자 수  :' +title.length);
+			
+			if(title.length == 30) {
+				$("#title").focus();
+				$('#titleCounter').css("color","red");
+				$('#titleCounter').css("fontWeight","bolder");
+			}
+		});
+	});
+	// textarea 글자수 카운트
+	$(function () {
+		$('#text').keyup(function () {
+			var content = $(this).val();
+			$('#counter').html("("+content.length+" / 최대 1000자)"); // 내용 글자수 카운팅
+			console.log("현재 글자 수 : "+content.length);
+			
+			if(content.length == 1000) {
+				$("#text").focus();
+				$('#counter').css("color","red");
+				$('#counter').css("fontWeight","bolder");
+			}
+		});
+	});
+	
+/* ---------------------------------------------- [파일 업로드] ----------------------------------------------------- */
+	$(function() {
+		const upFile = document.querySelector('#upFile');
+		upFile.addEventListener('change', function(e) {
+			// 파일명 변경
+			const fileName = this.files[0].name;
+			$(this).next(".custom-file-label").html(fileName);
+	
+			// 업로드한 파일 속성 보기
+			var getFile = e.target.files;
+			console.log(getFile);
+	
+			// 이미지 태그 생성
+			//var image = document.createElement('img');
+			var img = document.getElementById('uploadImg');
+	
+			/* FileReader 객체 생성 */
+			var reader = new FileReader();
+	
+			/* reader 시작시 함수 구현 */
+			reader.onload = (function(aImg) {
+				console.log(1);
+	
+				return function(e) {
+					console.log(3);
+					/* base64 인코딩 된 스트링 데이터 */
+					// aImg.src = e.target.result
+					aImg.setAttribute("src",e.target.result);
+				}
+			})(img);
+	
+			if (getFile) {
+				/* 
+				    get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+				    onload 에 설정했던 return 으로 넘어간다.
+				        이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+				 */
+				reader.readAsDataURL(getFile[0]);
+				console.log(2);
+			}
+		});
+	});
+/* ---------------------------------------------- [plus 눌렀을 때 라인 추가] ----------------------------------------------------- */
+	$(function () {	
+		const upFile = document.querySelector('#upFile');
+		$('#plus').click( function () {
+			if(upFile.value!=null) {
+				console.log('사진 이름 확인 완료!');
+				// 태그 생성
+				const tr = document.createElement('tr');
+				const td = document.createElement('td');
+				const img = document.createElement('img');
+				const div = document.createElement('div');
+				const input = document.createElement('input');
+				const lavel = document.createElement('label');
+				const subPlus2 = document.createElement('img');
+				const subMinus2 = document.createElement('img');
+				
+				const tr2 = document.createElement('tr');
+				const td2 = document.createElement('td');
+
+				// 속성 생성
+				tr.attr('class', 'upload_line');
+				td.attr("colspan","2");
+				
+			}
+			else {
+				console.log('사진 이름 확인 불가능!');
+				alert('사진을 업로드 진행하세요.');
+				plus.off('click');
+			}
+		});
 		
 	});
 </script>

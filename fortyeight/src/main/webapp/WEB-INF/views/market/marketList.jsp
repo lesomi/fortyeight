@@ -287,8 +287,6 @@
             
             <h1>어드민이 등록한 이미지 3~4장이 슬라이드 처리됩니다.</h1>
             <h4>여기서는 범위지정한 값을 가져와서 뿌려져야 한다.</h4>
-            <!-- 슬라이드 효과 참고 https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp -->
-            
         </article>
 
         <!-- 두번째 article -->
@@ -311,10 +309,12 @@
 
             <div id="categoryTitle">
                 <h2>팝니다</h2>
-                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeSell.do');">작성</button>
-                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
-                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
-                		onclick="location.replace('');">거래위치 수정</button>
+                <c:if test="${loginUser!=null}">
+	                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeSell.do');">작성</button>
+	                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
+	                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
+	                		onclick="location.replace('');">거래위치 수정</button>
+             	</c:if>
             </div>
 
             <!-- --------- 판매글 노출 -------------- -->
