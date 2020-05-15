@@ -131,24 +131,22 @@
 </table>
 
 <div class="modal fade" id="idCheckModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">아이디 확인</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<form action="${pageContext.request.contextPath}/user/login.do" method="post">
-					<div class="modal-body" style="text-align:center">
-						<span>회원님의 아이디는 </span>
-						<strong><span id="idCk"></span></strong>
-						<span>입니다.</span>
-					</div>
-					<div class="modal-footer d-flex justify-content-center">
-						<button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-dark hdBtn" data-toggle="modal" data-target="#loginModal">로그인</button>
-					</div>
-				</form>
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">아이디 확인</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<form action="${pageContext.request.contextPath}/user/login.do" method="post">
+				<div class="modal-body" style="text-align: center">
+					<span>회원님의 아이디는 </span> <strong><span id="idCk"></span></strong> <span>입니다.</span>
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+					<button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-dark hdBtn" data-toggle="modal" data-target="#loginModal">로그인</button>
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
