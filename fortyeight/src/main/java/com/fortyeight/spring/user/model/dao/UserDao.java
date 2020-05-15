@@ -13,4 +13,5 @@ public interface UserDao {
 	User selectEmail(SqlSessionTemplate session,String email); // 회원가입-이메일찾기
 	int insertUser(SqlSessionTemplate session, User u); // 회원가입
 	User selectPwCk(SqlSessionTemplate session,Map<String,String> pwCk);
+	int updatePassword(SqlSessionTemplate session,Map<String,Object> map);
 }

@@ -45,4 +45,9 @@ public class UserDaoImpl implements UserDao {
 	public User selectPwCk(SqlSessionTemplate session, Map<String,String> pwCk) {
 		return session.selectOne("user.selectPwCk", pwCk);
 	}
+
+	@Override
+	public int updatePassword(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.update("user.updatePassword",map);
+	}
 }
