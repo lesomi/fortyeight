@@ -138,8 +138,8 @@
 		</div>
 		
 		<div id="writeSellDiv">
-			<form action="${path}/market/writeSellEnd.do" method="post" enctype="multipart/form-data">
-				<table id="writeTB" class="table table-borderless" style="border: 1px solid;">
+			<form action="${path}/market/writeBuySellEnd.do" method="post" enctype="multipart/form-data">
+				<table id="writeTB" class="table table-borderless">
 					<tr>
 						<td>거래활동</td>
 						<td>
@@ -225,7 +225,7 @@
 					
 					
 					<!-- 여기가 여러개 추가될 것! -->
-					<tr style="border: 1px solid;">
+					<tr>
 						<td colspan="2">
 							<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
 							<div class="custom-file" id="fileDiv">

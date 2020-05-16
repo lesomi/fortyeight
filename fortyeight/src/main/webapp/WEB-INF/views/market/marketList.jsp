@@ -310,7 +310,7 @@
             <div id="categoryTitle">
                 <h2>팝니다</h2>
                 <c:if test="${loginUser!=null}">
-	                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeSell.do');">작성</button>
+	                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
 	                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
 	                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
 	                		onclick="location.replace('');">거래위치 수정</button>
