@@ -87,27 +87,25 @@
 		}
 		
 		/* 플러스, 마이너스 이미지 설정 */
-		img#plus {
+		img#plus, img#plus2 {
 			position: absolute; 
 			right: -45%;
 		}
-		img#minus {
+		img#minus, img#minus2 {
 			position: absolute; 
 			right: -30%;
-			display: none;
 		}
 		
 		/* 플러스 이미지 눌렀을 때 */
-		img#plus:hover, img#minus:hover {
+		img#plus:hover, img#minus:hover,
+		img#plus2:hover, img#minus2:hover {
 			cursor: pointer;
 		}
 		
 		
 		/* --- */
 		
-		tr.upload_line {
-			display: none;
-		}
+		
 		
 		
 		/* --- */
@@ -141,7 +139,7 @@
 		
 		<div id="writeSellDiv">
 			<form action="${path}/market/writeSellEnd.do" method="post" enctype="multipart/form-data">
-				<table id="writeTB" class="table table-borderless">
+				<table id="writeTB" class="table table-borderless" style="border: 1px solid;">
 					<tr>
 						<td>거래활동</td>
 						<td>
@@ -227,13 +225,13 @@
 					
 					
 					<!-- 여기가 여러개 추가될 것! -->
-					<tr class="upload_line">
-						<td id="fildTd" colspan="2">
-							<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/>
+					<tr style="border: 1px solid;">
+						<td colspan="2">
+							<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
 							<div class="custom-file" id="fileDiv">
 			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
 			                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">파일을 선택하세요</label>
-			                    <img src="${path}/resources/img/plusIcon.png" id="plus">
+			                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
 			                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
 		                	</div>
 						</td>
@@ -243,6 +241,10 @@
 					</tr>
 					<!-- 여기까지 -->
 					
+					
+					
+					
+					<!-- 글작성 내용 -->
 					<tr>
 						<td colspan="2">
 							<textarea id="text" rows="10" cols="130" placeholder="당신의 게시글을 어필하세요! 1000글자 내 작성이 필요합니다." maxlength="1000"></textarea>
@@ -284,13 +286,15 @@
 			
 			if(content.length == 1000) {
 				$("#text").focus();
-				$('#counter').css("color","red");
-				$('#counter').css("fontWeight","bolder");
+				$('#counter').css({
+					color: 'red',
+					fontWeight: 'bolder'
+				});
 			}
 		});
 	});
 	
-/* ---------------------------------------------- [파일 업로드] ----------------------------------------------------- */
+/* ---------------------------------------------- [첫번째 파일 업로드] ----------------------------------------------------- */
 	$(function() {
 		const upFile = document.querySelector('#upFile');
 		upFile.addEventListener('change', function(e) {
@@ -318,6 +322,16 @@
 					/* base64 인코딩 된 스트링 데이터 */
 					// aImg.src = e.target.result
 					aImg.setAttribute("src",e.target.result);
+					
+					
+					
+					// ----
+					/* minus 클릭 시 이미지 삭제 */
+					$('#minus').click(function () {
+						$('#upFile').next(".custom-file-label").html('파일을 선택하세요.');
+						e.target.result
+						aImg.setAttribute('src','${path}/resources/img/plusImg원본.png'); // 이미지 삭제
+					});
 				}
 			})(img);
 	
@@ -332,37 +346,54 @@
 			}
 		});
 	});
-/* ---------------------------------------------- [plus 눌렀을 때 라인 추가] ----------------------------------------------------- */
+/* ---------------------------------------------- [하다말았어ㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓㅓplus 눌렀을 때 라인 추가, 두번째 파일 업로드] ----------------------------------------------------- */
 	$(function () {	
 		const upFile = document.querySelector('#upFile');
-		$('#plus').click( function () {
-			if(upFile.value!=null) {
-				console.log('사진 이름 확인 완료!');
-				// 태그 생성
-				const tr = document.createElement('tr');
-				const td = document.createElement('td');
-				const img = document.createElement('img');
-				const div = document.createElement('div');
-				const input = document.createElement('input');
-				const lavel = document.createElement('label');
-				const subPlus2 = document.createElement('img');
-				const subMinus2 = document.createElement('img');
-				
-				const tr2 = document.createElement('tr');
-				const td2 = document.createElement('td');
-
-				// 속성 생성
-				tr.attr('class', 'upload_line');
-				td.attr("colspan","2");
-				
-			}
-			else {
-				console.log('사진 이름 확인 불가능!');
-				alert('사진을 업로드 진행하세요.');
-				plus.off('click');
-			}
+		$('#upFile').change(function () {
+			$('#plus').click( function () {
+				if(upFile.value!=null) {
+					console.log('사진 이름 확인 완료!'+upFile.value);
+					/* 두번째 시도.. javascript */
+					$('#upload_line1').css('display','inline');
+					
+					
+					/* 첫번째 시도... JQuery */
+					/* const table = document.getElementById('writeTB');
+					const tr = document.createElement('tr');
+					
+					table.append($('<tr>').attr('border','1px')
+						 	.append($('<td>').attr('colspan','2')
+						 		.append($('<img>').attr({ 
+						 			id: 'uploadImg2', src: '${path}/resources/img/plusImg원본.png'
+					 			})
+						 		.after($('<div>').addClass('custom-file').attr('width','400px')
+						 			.append($('<input>').addClass('custom-file-input').attr({
+						 				type: 'file',
+						 				name: 'upFile2',
+						 				id: 'upFile2'
+						 			})
+						 			.after($('<label>').addClass('custom-file-label').attr('for','upFile2').css({
+						 				width: '400px',
+						 				marginLeft: '50px'
+						 			})
+						 			.after($('<img>').attr({
+						 				id: 'plus2',
+						 				src: '${path}/resources/img/plusIcon.png'
+						 			}))
+						 			.after($('<img>').attr({
+						 				id: 'minus2',
+						 				src: '${path}/resources/img/minusIcon.png'
+						 			}))
+						 			)))))); */
+					
+				}
+				else {
+					console.log('사진 이름 확인 불가능!');
+					alert('사진을 업로드 진행하세요.');
+					plus.off('click');
+				}
+			});
 		});
-		
 	});
 </script>
 
