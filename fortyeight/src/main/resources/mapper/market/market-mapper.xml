@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="market">
+	
+	<!-- 마켓 글 등록 1. market insert -->
+	<insert id="insertMarket" parameterType="market">
+		INSERT INTO MARKET VALUES (
+			SEQ_MKNO.NEXTVAL, #{userNo}, #{mkTitle}, #{dealAddr}, #{category}, #{mkPrice}, #{mkType},
+			#{dealType}, DEFAULT, #{mkContent}, DEFAULT, '판매중'
+		)
+		
+		<selectKey order="AFTER" keyProperty="mkNo" resultType="_int">
+			SELECT SEQ_MKNO.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<insert id="insertMkImg" parameterType="mkImg">
+		INSERT INTO MKIMG VALUES (
+			SEQ_MKIMGNO.NEXTVAL, #{mkNo}, #{oriMkImg}, #{renameMkImg}
+		)
+	</insert>
+	
+</mapper>

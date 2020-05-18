@@ -144,10 +144,10 @@
 						<td>거래활동</td>
 						<td>
 							<div class="form-group">
-								<select class="form-control">
+								<select class="form-control" name="mkType" id="mkType">
 									<option value="" disabled selected>거래활동을 선택하세요</option>
-									<option class="selectOption" value="buy">삽니다</option>
-									<option class="selectOption" value="sell">팝니다</option>
+									<option class="selectOption" value="삽니다">삽니다</option>
+									<option class="selectOption" value="팝니다">팝니다</option>
 								</select>
 							</div>
 						</td>
@@ -158,7 +158,7 @@
 						<td>카테고리</td>
 						<td>
 							<div class="form-group">
-								<select class="form-control">
+								<select class="form-control" name="category" id="category">
 									<option value="" disabled selected>카테고리를 선택하세요</option>
 									<option class="selectOption" value="digital">디지털/가전</option>
 									<option class="selectOption" value="interior">가구/인테리어</option>
@@ -177,7 +177,7 @@
 					<tr>
 						<td>제목</td>
 						<td>
-							<input type="text" class="form-control" id="title" placeholder="30글자 이내 작성" maxlength="30"/>
+							<input type="text" class="form-control" name="mkTitle" id="mkTitle" placeholder="30글자 이내 작성" maxlength="30"/>
 							<span></span>
 						</td>
 					</tr>
@@ -191,7 +191,7 @@
 					<tr>
 						<td>거래주소</td>
 						<td>
-							<input type="text" class="form-control" id="dealAddr" value="${loginUser.dealAddr}" readonly="readonly"/>
+							<input type="text" class="form-control" id="dealAddr" name="dealAddr" value="${loginUser.dealAddr}" readonly="readonly"/>
 						</td>
 					</tr>
 					<tr>
@@ -204,10 +204,10 @@
 						<td>거래방법</td>
 						<td>
 							<div class="form-group">
-								<select class="form-control">
+								<select class="form-control" name="dealType" id="dealType">
 									<option value="" disabled selected>거래방법을 선택하세요</option>
-									<option class="selectOption" value="buy">택배</option>
-									<option class="selectOption" value="sell">직거래</option>
+									<option class="selectOption" value="택배">택배</option>
+									<option class="selectOption" value="직거래">직거래</option>
 								</select>
 							</div>
 						</td>
@@ -215,6 +215,18 @@
 					<tr>
 						<td colspan="2" style="height: 20px;"></td>
 					</tr>
+					
+					<tr>
+						<td>가격</td>
+						<td>
+							<input type="number" name="mkPrice" id="mkPrice" class="form-control" placeholder="입력 예 : 10000"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="height: 20px;"></td>
+					</tr>
+					
+					
 					
 					<tr>
 						<td style="text-align: center;">사진등록</td>
@@ -243,11 +255,10 @@
 					
 					
 					
-					
 					<!-- 글작성 내용 -->
 					<tr>
 						<td colspan="2">
-							<textarea id="text" rows="10" cols="130" placeholder="당신의 게시글을 어필하세요! 1000글자 내 작성이 필요합니다." maxlength="1000"></textarea>
+							<textarea id="mkContent" name="mkContent" rows="10" cols="130" placeholder="당신의 게시글을 어필하세요! 1000글자 내 작성이 필요합니다." maxlength="1000"></textarea>
 							<span style="color:#aaa;" id="counter">(0 / 최대 1000자)</span>
 						</td>
 					</tr>
@@ -265,13 +276,13 @@
 /* ---------------------------------------------- [글자 수 카운트] ----------------------------------------------------- */
 	// 제목 글자수 카운트
 	$(function () {
-		$('#title').keyup(function () {
+		$('#mkTitle').keyup(function () {
 			var title = $(this).val();
 			$('#titleCounter').html("("+title.length+" / 최대 30자)"); // 제목 글자수 카운팅
 			console.log('현재 제목 글자 수  :' +title.length);
 			
 			if(title.length == 30) {
-				$("#title").focus();
+				$("#mkTitle").focus();
 				$('#titleCounter').css("color","red");
 				$('#titleCounter').css("fontWeight","bolder");
 			}
@@ -279,13 +290,13 @@
 	});
 	// textarea 글자수 카운트
 	$(function () {
-		$('#text').keyup(function () {
+		$('#mkContent').keyup(function () {
 			var content = $(this).val();
 			$('#counter').html("("+content.length+" / 최대 1000자)"); // 내용 글자수 카운팅
 			console.log("현재 글자 수 : "+content.length);
 			
 			if(content.length == 1000) {
-				$("#text").focus();
+				$("#mkContent").focus();
 				$('#counter').css({
 					color: 'red',
 					fontWeight: 'bolder'
