@@ -9,7 +9,7 @@
 	<websocket:handlers>
 		<websocket:mapping handler="chattingServer" path="/chatting"/>
 	</websocket:handlers>
-	<bean id="chattingServer" class="com.fortyeight.spring.common.websocket.ChattingServer"/>
+	<bean id="chattingServer" class="com.fortyeight.spring.chatting.controller.ChattingServer"/>
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
 	
 </beans>

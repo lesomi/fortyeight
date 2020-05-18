@@ -1,4 +1,4 @@
-package com.fortyeight.spring.common.websocket;
+package com.fortyeight.spring.chatting.vo;
 
 import java.sql.Date;
 

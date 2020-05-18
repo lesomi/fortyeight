@@ -1,4 +1,4 @@
-package com.fortyeight.spring.common.websocket;
+package com.fortyeight.spring.chatting.controller;
 
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketMessage;
