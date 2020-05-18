@@ -15,5 +15,6 @@ public class Chatting {
 	private String sender;
 	private String receiver;
 	private Date chatDate;
-	private String msg;
+	private String chatting;
+	private int roomNo;
 }
