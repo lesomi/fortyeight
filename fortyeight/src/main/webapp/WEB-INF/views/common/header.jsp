@@ -150,14 +150,12 @@
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
 				<form action="${pageContext.request.contextPath}/user/login.do" method="post">
 					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<img src="${path }/resources/img/forty-eight.png">
 						<input type="text" class="form-control" name="userId" placeholder="아이디" required> <br />
 						<input type="password" class="form-control" name="password" placeholder="비밀번호" required>
 						<div class="d-flex" style="padding-top:20px;">
@@ -169,7 +167,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer d-flex justify-content-center">
+					<div class="d-flex justify-content-center pb-4">
 						<button type="submit" class="btn btn-dark hdBtn">로그인</button>
 					</div>
 				</form>
