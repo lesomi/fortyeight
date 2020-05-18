@@ -4,5 +4,7 @@
 	<typeAliases>
 		<typeAlias type="com.fortyeight.spring.common.StringArrayType" alias="strArr"/>
 		<typeAlias type="com.fortyeight.spring.user.model.vo.User" alias="user"/>
+		<typeAlias type="com.fortyeight.spring.market.model.vo.Market" alias="market"/>
+		<typeAlias type="com.fortyeight.spring.market.model.vo.MkImg" alias="mkImg"/>
 	</typeAliases>
 </configuration>
