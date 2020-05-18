@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div></div>
+	<input type="text" id="" name="">
+	<input type="button" id="" name="" value="전송">
 </body>
 </html>
