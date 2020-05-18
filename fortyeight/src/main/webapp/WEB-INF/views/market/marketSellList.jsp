@@ -273,6 +273,17 @@
             cursor: pointer;
         }
         
+        p#addr {
+        	width: 180px;
+        	
+        	/* 글씨가 다음 줄로 내려가지 않게 선언 */
+            white-space: nowrap;
+            /* 글씨가 범위를 넘어가면 생략 */
+            overflow: hidden;
+            /* 범위를 넘어가면 줄임말 표시 */
+            text-overflow: ellipsis;
+        }
+        
         /* 채팅 수 설정 */
         span#spanChatt {
             /* 오른쪽 띄움 */
@@ -348,12 +359,15 @@
 
                     <!-- 두번째 줄 -->
                     <div class="row">
+                    	<!-- 여기서부터 for문 필요 -->
+                    	<c:forEach items="${list}" var="i">
                             <div class="selArticle col-6">
                                 <!-- card 형식의 판매글 -->
                                 <div class="backColor card">
                                     <div class="row">
                                         <div class="marginDiv col-6">
-                                            <img id="selArticle_img" src="${path}/resources/img/switch.jpg">
+                                        	<!-- 사진은 불러오는 방법이 다름 -->
+                                            	<img id="selArticle_img" src="${path}/resources/img/switch.jpg">
                                         </div>
                                         <div class="col-6">
                                             <div id="JimDiv">
@@ -361,20 +375,27 @@
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
                                             <div id="selContent" onclick="location.replace('');">
-                                                <p id="articleTitle">닌텐도 스위치 팝니다 판다구요 판단말입니다</p>
-                                                <p id="addr">광진구 중곡동 <span>1분 전</span></p>
+                                                <p id="articleTitle">${i.mkTitle}</p>
+                                                <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>
                                             </div>
-                                            <span id="spanChatt">채팅 &nbsp;&nbsp; 1</span> <span>찜하기 &nbsp;&nbsp; 1</span> 
+                                            <span id="spanChatt">댓글 &nbsp;&nbsp; 1</span> <span>찜하기 &nbsp;&nbsp; 1</span> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        <!-- for문 끝 -->
+                        </c:forEach>
                     </div>
             </div>
             <!-- 판매글 class.container /div -->
         </article>
 	</div>
+	
+	<div id="page-container">
+		${pageBar}
+	</div>
+	
 	<div class="push"></div>
 </section>
 

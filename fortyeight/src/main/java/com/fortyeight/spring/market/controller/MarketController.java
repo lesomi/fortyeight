@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,8 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fortyeight.spring.common.PagingFactory;
+import com.fortyeight.spring.common.RealTimeFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -33,8 +38,40 @@ public class MarketController {
 	
 	// [팝니다] 화면으로 전환
 	@RequestMapping("/market/selMarket.do")
-	public String selMarket() {
-		return "market/marketList";
+	public ModelAndView sellMarket(ModelAndView mv,
+									@RequestParam(required=false, defaultValue="1") int cPage,
+									@RequestParam(required=false, defaultValue="6") int numPerPage) {
+		
+		// Print list
+		List<Market> list = service.marketList(cPage, numPerPage);
+		// dips
+		
+		
+		// paging
+		int totalData = service.selectMarketCount();
+		
+		logger.debug("--------- [ 조회 결과 ] ----------"
+					+"\n 1. market list : "+list
+					+"\n 2. totalData : "+totalData
+					+"\n------------------------------");
+		
+		
+		
+		// data 저장
+		mv.addObject("list",list);
+		// paging 저장
+		mv.addObject("total",totalData);
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do"));
+//		mv.addObject("realTime",RealTimeFactory.formatTimeString());
+		
+		mv.setViewName("market/marketSellList");
+		return mv;
+	}
+	
+	// [삽니다] 화면으로 전환
+	@RequestMapping("/market/buyMarket.do")
+	public String buyMarket() {
+		return "market/marketBuyList";
 	}
 	
 	// [삽니다/팝니다] 작성 버튼 눌렀을 때 글작성 화면으로 전황

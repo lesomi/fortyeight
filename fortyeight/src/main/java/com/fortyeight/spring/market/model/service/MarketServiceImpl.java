@@ -53,7 +53,19 @@ public class MarketServiceImpl implements MarketService {
 		}
 		return result;
 	}
-	
-	
 
+	// [팝니다] List 출력
+	@Override
+	public List<Market> marketList(int cPage, int numPerPage) {
+		return dao.marketList(session, cPage, numPerPage);
+	}
+
+	// [팝니다] paging
+	@Override
+	public int selectMarketCount() {
+		return dao.selectMarketCount(session);
+	}
+	
+	
+	
 }

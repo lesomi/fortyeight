@@ -1,5 +1,8 @@
 package com.fortyeight.spring.market.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +25,20 @@ public class MarketDaoImpl implements MarketDao {
 		return session.insert("market.insertMkImg", mi);
 	}
 
-	
+	// market list 출력
+	@Override
+	public List<Market> marketList(SqlSessionTemplate session, int cPage, int numPerPage) {
+		return session.selectList("market.marketList", null, new RowBounds((cPage-1)*numPerPage, numPerPage));
+	}
 
+	// [팝니다] paging 
+	@Override
+	public int selectMarketCount(SqlSessionTemplate session) {
+		return session.selectOne("market.selectMarketCount");
+	}
+
+	
+	
 	
 
 }

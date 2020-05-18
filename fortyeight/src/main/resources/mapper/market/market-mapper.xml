@@ -14,10 +14,22 @@
 		</selectKey>
 	</insert>
 	
+	<!-- 마켓 글 등록 2. market image insert -->
 	<insert id="insertMkImg" parameterType="mkImg">
 		INSERT INTO MKIMG VALUES (
 			SEQ_MKIMGNO.NEXTVAL, #{mkNo}, #{oriMkImg}, #{renameMkImg}
 		)
 	</insert>
 	
+	<!-- Print market List : 상관성 쿼리 이용 -->
+	<select id="marketList" resultType="market">
+		SELECT 
+		    * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='팝니다'
+		ORDER BY MKDATE DESC
+	</select>
+	
+	<!-- [팝니다] paging -->
+	<select id="selectMarketCount" resultType="_int">
+		SELECT COUNT(*) FROM MARKET
+	</select>
 </mapper>
