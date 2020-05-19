@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
-import com.fortyeight.spring.common.RealTimeFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -37,31 +36,31 @@ public class MarketController {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	// [팝니다] 화면으로 전환
+	// 카테고리, 제목, 정렬 등 검색도 포함
 	@RequestMapping("/market/selMarket.do")
 	public ModelAndView sellMarket(ModelAndView mv,
+									@RequestParam Map<String, String> map,
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
 		
 		// Print list
-		List<Market> list = service.marketList(cPage, numPerPage);
-		// dips
+		List<Market> list = service.marketList(map, cPage, numPerPage);
 		
 		
 		// paging
-		int totalData = service.selectMarketCount();
+		int totalData = service.selectMarketCount(map);
 		
 		logger.debug("--------- [ 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
-		
-		
-		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do"));
+		
+		// category 분기처ㅣ
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do?category=all"));
 //		mv.addObject("realTime",RealTimeFactory.formatTimeString());
 		
 		mv.setViewName("market/marketSellList");
@@ -144,7 +143,7 @@ public class MarketController {
 						   +"\n--------------------------");
 		
 		mk = new Market(0, loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), null, null);
+						mk.getDealType(), mk.getMkContent(), null, null, null);
 		
 		// DB에 값 저장
 		int result = 0;

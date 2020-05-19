@@ -1,6 +1,7 @@
 package com.fortyeight.spring.market.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -56,14 +57,14 @@ public class MarketServiceImpl implements MarketService {
 
 	// [팝니다] List 출력
 	@Override
-	public List<Market> marketList(int cPage, int numPerPage) {
-		return dao.marketList(session, cPage, numPerPage);
+	public List<Market> marketList(Map<String, String> map, int cPage, int numPerPage) {
+		return dao.marketList(session, map, cPage, numPerPage);
 	}
 
 	// [팝니다] paging
 	@Override
-	public int selectMarketCount() {
-		return dao.selectMarketCount(session);
+	public int selectMarketCount(Map<String, String> map) {
+		return dao.selectMarketCount(session, map);
 	}
 
 	//팝니다 상세
@@ -71,6 +72,12 @@ public class MarketServiceImpl implements MarketService {
 	public Market selectView(int mkNo) {
 		return dao.selectView(session,mkNo);
 	}
+	
+	// 제목검색
+	/*
+	 * @Override public List<Market> searchMarket(Map<String, String> map) { return
+	 * dao.searchMarket(session, map); }
+	 */
 	
 	
 	
