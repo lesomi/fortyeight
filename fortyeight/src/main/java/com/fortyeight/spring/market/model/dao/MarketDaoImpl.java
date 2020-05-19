@@ -37,6 +37,11 @@ public class MarketDaoImpl implements MarketDao {
 		return session.selectOne("market.selectMarketCount");
 	}
 
+	@Override
+	public Market selectView(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectView",mkNo);
+	}
+
 	
 	
 	

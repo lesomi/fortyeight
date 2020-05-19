@@ -13,4 +13,5 @@ public interface MarketDao {
 	
 	List<Market> marketList(SqlSessionTemplate session, int cPage, int numPerPage); // market list 출력
 	int selectMarketCount(SqlSessionTemplate session);
+	Market selectView(SqlSessionTemplate session,int mkNo);
 }
