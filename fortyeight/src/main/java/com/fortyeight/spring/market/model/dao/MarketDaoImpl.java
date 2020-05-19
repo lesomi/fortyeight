@@ -35,15 +35,17 @@ public class MarketDaoImpl implements MarketDao {
 
 	// [팝니다] paging 
 	@Override
-	public int selectMarketCount(SqlSessionTemplate session) {
-		return session.selectOne("market.selectMarketCount");
+	public int selectMarketCount(SqlSessionTemplate session, Map<String, String> map) {
+		return session.selectOne("market.selectMarketCount", map);
 	}
 
-	// 제목검색
-	@Override
-	public List<Market> searchMarket(SqlSessionTemplate session, Map<String, String> map) {
-		return session.selectList("market.searchMarket", map);
-	}
+	/*
+	 * // 제목검색
+	 * 
+	 * @Override public List<Market> searchMarket(SqlSessionTemplate session,
+	 * Map<String, String> map) { return session.selectList("market.searchMarket",
+	 * map); }
+	 */
 
 	
 	

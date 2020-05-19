@@ -11,6 +11,8 @@ public interface MarketService {
 	
 	// -----
 	List<Market> marketList(Map<String, String> map, int cPage, int numPerPage); // 리스트 출력(팝니다)
-	int selectMarketCount(); // 팝니다 paging 처리
-	List<Market> searchMarket(Map<String, String> map); // 제목검색
+	int selectMarketCount(Map<String, String> map); // 팝니다 paging 처리
+	/*
+	 * List<Market> searchMarket(Map<String, String> map); // 제목검색
+	 */
 }

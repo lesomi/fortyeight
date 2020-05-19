@@ -48,7 +48,7 @@ public class MarketController {
 		
 		
 		// paging
-		int totalData = service.selectMarketCount();
+		int totalData = service.selectMarketCount(map);
 		
 		logger.debug("--------- [ 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
@@ -58,7 +58,9 @@ public class MarketController {
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do"));
+		
+		// category 분기처ㅣ
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do?category=all"));
 //		mv.addObject("realTime",RealTimeFactory.formatTimeString());
 		
 		mv.setViewName("market/marketSellList");

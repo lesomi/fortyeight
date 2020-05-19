@@ -301,7 +301,71 @@
         
         
         /* ----- */
-        
+        /* 라디오박스 설정 */
+        /* reset */
+		* {
+		  margin: 0;
+		  padding: 0;
+		}
+		
+		body {
+		  padding: 20px;
+		}
+		
+		/* temp grid */
+		.widthDiv {
+		  width: 20%;
+		}
+		
+		.only-sr {
+		  overflow: hidden !important;
+		  position: absolute !important;
+		  left: -9999px !important;
+		  width: 1px;
+		  height: 1px;
+		}
+		
+		/* form | radio */
+		.radio-items {
+		  display: table;
+		  width: 100%;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+		}
+		.radio-items > div {
+		  display: table-cell;
+		  height: 49px;
+		  line-height: 49px;
+		  text-align: center;
+		}
+		.radio-items > div:first-child {
+		  border-left: none;
+		  width: auto !important;
+		}
+		.radio-items label {
+			  font-weight: bolder;
+			  display: block;
+			  width: 100%;
+			  height: 100%;
+			  color: #454a60;
+			  vertical-align: middle;
+			  box-sizing: border-box;
+			  cursor: pointer;
+		}
+		.radio-items input[type="radio"]:hover + label {
+			border-radius: 20px;
+		  	color: rgb(251,192,41);
+		}
+		.radio-items input[type="radio"]:checked + label {
+			border-radius: 20px;
+		  	background-color: rgb(60,60,60);
+		  	color: #ffffff;
+		}
+		
+		.ie8 .radio-items input[type="radio"].checked + label {
+		  background-color: #454a60;
+		  color: #fff;
+}
 	</style>
 <section>
 	<div class="container" style="margin-top: 200px;">
@@ -317,7 +381,7 @@
         <article id="secondArticle">
         	
             <div id="btnDiv" class="container">
-                <button class="btn btn-warning firstbtn btnValue" type="button" value="all">전체</button>
+                <!-- <button class="btn btn-warning firstbtn btnValue" type="button" value="all">전체</button>
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="digital">디지털/가전</button>
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="interior">가구/인테리어</button>
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="child">유아용/유아도서</button>
@@ -327,7 +391,57 @@
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="beauty">뷰티/미용</button> 
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="man">남성의류/잡화</button> 
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="sport">스포츠/레저/게임</button> 
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button>
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button> -->
+                
+                <!-- 라디오박스 -->
+                <div>
+				    <div class="radio-items">
+				        <div class="widthDiv">
+				            <input id="all" class="only-sr checked" type="radio" name="category" value="all" checked>
+				            <label for="all">전체</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="digital" class="only-sr" type="radio" name="category" value="2">
+				            <label for="digital">디지털/가전</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="child" class="only-sr" type="radio" name="category" value="3">
+				            <label for="child">유아용/유아도서</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="interior" class="only-sr" type="radio" name="category" value="4">
+				            <label for="interior">가구/인테리어</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="life" class="only-sr" type="radio" name="category" value="4">
+				            <label for="life">생활/가공식품</label>
+				        </div>
+				    </div>
+				</div>
+				<div>
+				    <div class="radio-items">
+				        <div class="widthDiv">
+				            <input id="woman" class="only-sr checked" type="radio" name="category" value="1" checked>
+				            <label for="woman">여성의류/잡화</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="beauty" class="only-sr" type="radio" name="category" value="2">
+				            <label for="beauty">뷰티/미용</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="man" class="only-sr" type="radio" name="category" value="3">
+				            <label for="man">남성의류/잡화</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="sport" class="only-sr" type="radio" name="category" value="4">
+				            <label for="sport">스포츠/레저/게임</label>
+				        </div>
+				        <div class="widthDiv">
+				            <input id="etc" class="only-sr" type="radio" name="category" value="4">
+				            <label for="etc">기타</label>
+				        </div>
+				    </div>
+				</div>
             </div>
 
             <hr>
@@ -431,19 +545,58 @@
 
 <script>
 /* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
+	function hasClass(target, className) {
+	    if( (' ' + target.className + ' ').replace(/[\n\t]/g, ' ').indexOf(' ' + className + ' ') > -1 ) return true;
+	    return false;
+	}
+	function removeClass(target, className){
+	    var elClass = ' ' + target.className + ' ';
+	    while(elClass.indexOf(' ' + className + ' ') !== -1){
+	         elClass = elClass.replace(' ' + className + ' ', '');
+	    }
+	    target.className = elClass;
+	}
+	function addClass(target, className){
+	    target.className += ' ' + className;   
+	}
+	
+	if( hasClass( document.getElementsByTagName('html')[0], 'ie8' ) ) { // ie8 일 경우
+	    var radios = document.querySelectorAll('input[type="radio"]'),
+	        i,
+	        len = radios.length;
+	　
+	    for( i = 0; i < len; i++ ) {
+	        radios[i].attachEvent('onchange', function(e) {
+	            var siblingsChecked = this.parentNode.parentNode.querySelector('.checked'); // 이전 checked 버튼
+	            
+	            removeClass(siblingsChecked, 'checked'); // checked 삭제
+	            addClass(this, 'checked'); // checked 부여
+	        });
+	    }
+	}
+
+
+
+
+
+
+
 	// 카테고리를 눌렀을 때
 	$(function () {
+		
+		
 		$('.btnValue').click(function () {
 			location.replace('${path}/market/selMarket.do?category='+$(this).val());
 		});
-	});
-	
-	// 검색아이콘을 눌렀을 때
-	$(function () {
+		var category = $('.btnValue').val();
+		console.log("카테고리 : "+category);
+		// 검색아이콘을 눌렀을 때
 		$('#search').click(function () {
-			location.replace('${path}/market/selMarket.do?category='+$('#inputTitle').val());
+			location.replace('${path}/market/selMarket.do?category='+category+'&title='+$('#inputTitle').val());
 		});
 	});
+	
+	
 </script>
 
 

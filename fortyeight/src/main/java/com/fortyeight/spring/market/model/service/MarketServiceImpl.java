@@ -63,15 +63,15 @@ public class MarketServiceImpl implements MarketService {
 
 	// [팝니다] paging
 	@Override
-	public int selectMarketCount() {
-		return dao.selectMarketCount(session);
+	public int selectMarketCount(Map<String, String> map) {
+		return dao.selectMarketCount(session, map);
 	}
 
 	// 제목검색
-	@Override
-	public List<Market> searchMarket(Map<String, String> map) {
-		return dao.searchMarket(session, map);
-	}
+	/*
+	 * @Override public List<Market> searchMarket(Map<String, String> map) { return
+	 * dao.searchMarket(session, map); }
+	 */
 	
 	
 	
