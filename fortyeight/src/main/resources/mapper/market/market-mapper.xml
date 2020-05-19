@@ -32,4 +32,8 @@
 	<select id="selectMarketCount" resultType="_int">
 		SELECT COUNT(*) FROM MARKET
 	</select>
+	
+	<select id="selectView" resultType="market" parameterType="_int">
+		SELECT * FROM MARKET WHERE MKNO = #{mkNo}
+	</select>
 </mapper>
