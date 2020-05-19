@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class Chatting {
 	private int chatNo;
 	private String chatType;
-	private String sender;
-	private String receiver;
+	private int sender;
+	private int receiver;
 	private Date chatDate;
 	private String chatting;
 	private int roomNo;
