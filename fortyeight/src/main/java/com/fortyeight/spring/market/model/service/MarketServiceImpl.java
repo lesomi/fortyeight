@@ -65,6 +65,12 @@ public class MarketServiceImpl implements MarketService {
 	public int selectMarketCount() {
 		return dao.selectMarketCount(session);
 	}
+
+	//팝니다 상세
+	@Override
+	public Market selectView(int mkNo) {
+		return dao.selectView(session,mkNo);
+	}
 	
 	
 	
