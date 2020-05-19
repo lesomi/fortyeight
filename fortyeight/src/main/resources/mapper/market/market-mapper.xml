@@ -22,14 +22,67 @@
 	</insert>
 	
 	<!-- Print market List : 상관성 쿼리 이용 -->
-	<select id="marketList" resultType="market">
-		SELECT 
-		    * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='팝니다' AND DELETED='N'
-		ORDER BY MKDATE DESC
+	<select id="marketList" resultType="market" parameterType="map">
+		SELECT * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='팝니다' AND DELETED='N'
+			<choose>
+				<when test=' category eq "all" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "digital" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "interior" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "child" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "life" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "woman" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "beauty" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "man" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "sport" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "etc" '>
+					AND CATEGORY = #{category}
+				</when>
+			</choose>
+			<!-- 제목이 있다면? -->
+			<if test=' title!=null and title!="" '> 
+				AND MKTITLE = ${title}
+			</if>
+			<!-- 정렬 순서에 대해서 -->
+			<!-- <if test='  '>
+			</if> -->
+		<!-- ORDER BY MKDATE DESC -->
 	</select>
 	
 	<!-- [팝니다] paging -->
 	<select id="selectMarketCount" resultType="_int">
 		SELECT COUNT(*) FROM MARKET
+	</select>
+	
+	<!-- 제목검색 -->
+	<select id="searchMarket" parameterType="map" resultType="market">
+		SELECT * FROM MARKET WHERE MKTYPE='팝니다'
+				<choose>
+					<when test=' category eq ${category} '>
+						AND CATEGORY = #{category}
+					</when>
+				</choose>
+				<if test=' title!=null and title!="" '>
+					AND MKTITLE = #{title}
+				</if>
+			<!-- AND MKTITLE LIKE '%'||#{title}||'%' -->
+		
 	</select>
 </mapper>

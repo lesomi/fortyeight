@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
-import com.fortyeight.spring.common.RealTimeFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -37,14 +36,15 @@ public class MarketController {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	// [팝니다] 화면으로 전환
+	// 카테고리, 제목, 정렬 등 검색도 포함
 	@RequestMapping("/market/selMarket.do")
 	public ModelAndView sellMarket(ModelAndView mv,
+									@RequestParam Map<String, String> map,
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
 		
 		// Print list
-		List<Market> list = service.marketList(cPage, numPerPage);
-		// dips
+		List<Market> list = service.marketList(map, cPage, numPerPage);
 		
 		
 		// paging
@@ -54,9 +54,6 @@ public class MarketController {
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
-		
-		
-		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장

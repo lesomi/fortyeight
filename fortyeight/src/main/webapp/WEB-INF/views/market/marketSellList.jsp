@@ -157,16 +157,17 @@
         }
 
         /* [필터 적용될 span 설정] */
-        span.filterSpan {
+        a.filterSpan {
         	font-weight: bolder;
         	color: rgb(60,60,60);
         	margin-right: 20px;
         }
-        span.filterSpan:hover {
+        a.filterSpan:hover {
         	color: gray;
         	cursor: pointer;
+        	text-decoration: none;
         }
-        span#firstSpan {
+        a#firstSpan {
         	margin-left: 22%;
         }
 
@@ -297,6 +298,10 @@
         span#dealStatus {
         	margin-right: 50px;
         }
+        
+        
+        /* ----- */
+        
 	</style>
 <section>
 	<div class="container" style="margin-top: 200px;">
@@ -310,18 +315,19 @@
 
         <!-- 두번째 article -->
         <article id="secondArticle">
+        	
             <div id="btnDiv" class="container">
-                <button class="btn btn-warning firstbtn " type="button" >전체</button>
-                <button class="btn btn-warning otherBtn" type="button" >디지털/가전</button>
-                <button class="btn btn-warning otherBtn" type="button" >가구/인테리어</button>
-                <button class="btn btn-warning otherBtn" type="button" >유아용/유아도서</button>
-                <button class="btn btn-warning otherBtn" type="button" >생활/가공식품</button> 
+                <button class="btn btn-warning firstbtn btnValue" type="button" value="all">전체</button>
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="digital">디지털/가전</button>
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="interior">가구/인테리어</button>
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="child">유아용/유아도서</button>
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="life">생활/가공식품</button> 
                 <br>
-                <button class="btn btn-warning firstbtn otherBtn" type="button" >여성의류/잡화</button> 
-                <button class="btn btn-warning otherBtn" type="button" >뷰티/미용</button> 
-                <button class="btn btn-warning otherBtn" type="button" >남성의류/잡화</button> 
-                <button class="btn btn-warning otherBtn" type="button" >스포츠/레저/게임</button> 
-                <button class="btn btn-warning otherBtn" type="button" >기타</button> 
+                <button class="btn btn-warning firstbtn otherBtn btnValue" type="button" value="woman">여성의류/잡화</button> 
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="beauty">뷰티/미용</button> 
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="man">남성의류/잡화</button> 
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="sport">스포츠/레저/게임</button> 
+                <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button>
             </div>
 
             <hr>
@@ -349,7 +355,7 @@
                                     <img id="search" src="${path}/resources/img/search.PNG" alt="search">
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="제목 검색">
+                            <input type="text" class="form-control" id="inputTitle" placeholder="제목 검색">
                         </div>
 
                         <div class="col-4"></div>
@@ -357,17 +363,18 @@
                         <!-- select -->
                         <div class="col-4" id="filterDiv">
                         	<!-- 최신순/인기순/가격순 -->
-                        	<span class="listSort filterSpan" id="firstSpan">최신순</span>
-                        	<span class="listSort filterSpan">인기순</span>
-                        	<span class="listSort filterSpan">가격순</span>
+                        	<a href="#" class="listSort filterSpan clickSpan" id="firstSpan">최신순</a>
+                        	<a href="#" class="listSort filterSpan clickSpan">인기순</a>
+                        	<a href="#" class="listSort filterSpan clickSpan">가격순</a>
                         </div>
                     </div>
-
+				
 
 
                     <!-- 두번째 줄 -->
                     <div class="row">
                     	<!-- 여기서부터 for문 필요 -->
+                    	<c:if test='${not empty list}'>
                     	<c:forEach items="${list}" var="i">
                             <div class="selArticle col-6">
                                 <!-- card 형식의 판매글 -->
@@ -405,6 +412,10 @@
                             </div>
                         <!-- for문 끝 -->
                         </c:forEach>
+                        </c:if>
+                        <c:if test='${empty list}'>
+                        	<p style="text-align: center;">검색 결과가 없습니다.</p>
+                        </c:if>
                     </div>
             </div>
             <!-- 판매글 class.container /div -->
@@ -419,7 +430,20 @@
 </section>
 
 <script>
+/* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
+	// 카테고리를 눌렀을 때
+	$(function () {
+		$('.btnValue').click(function () {
+			location.replace('${path}/market/selMarket.do?category='+$(this).val());
+		});
+	});
 	
+	// 검색아이콘을 눌렀을 때
+	$(function () {
+		$('#search').click(function () {
+			location.replace('${path}/market/selMarket.do?category='+$('#inputTitle').val());
+		});
+	});
 </script>
 
 
