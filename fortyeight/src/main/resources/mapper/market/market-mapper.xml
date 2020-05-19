@@ -24,7 +24,7 @@
 	<!-- Print market List : 상관성 쿼리 이용 -->
 	<select id="marketList" resultType="market">
 		SELECT 
-		    * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='팝니다'
+		    * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='팝니다' AND DELETED='N'
 		ORDER BY MKDATE DESC
 	</select>
 	

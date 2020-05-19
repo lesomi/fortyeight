@@ -216,6 +216,9 @@
             /* 아래로 띄움 */
             margin-bottom: 50px;
         }
+        div.selArticle:hover {
+        	cursor: pointer;
+        }
         /* 카드 영역 배경색상 설정 */
         div.backColor {
             background-color:rgb(239, 239, 239);
@@ -288,6 +291,11 @@
         span#spanChatt {
             /* 오른쪽 띄움 */
             margin-right: 50px;
+        }
+        
+        /* 분기처리에 따른 설정 */
+        span#dealStatus {
+        	margin-right: 50px;
         }
 	</style>
 <section>
@@ -363,7 +371,7 @@
                     	<c:forEach items="${list}" var="i">
                             <div class="selArticle col-6">
                                 <!-- card 형식의 판매글 -->
-                                <div class="backColor card">
+                                <div class="backColor card" onclick="location.replace('');">
                                     <div class="row">
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
@@ -371,10 +379,21 @@
                                         </div>
                                         <div class="col-6">
                                             <div id="JimDiv">
+                                            	<!-- if문 필요 -->
+                                            	<c:if test='${i.dealStatus eq "판매중"}'>
+                                            		<span class="badge badge-success" id="dealStatus">판매중</span>
+                                            	</c:if>
+                                            	<c:if test='${i.dealStatus eq "예약중"}'>
+                                            		<span class="badge badge-warning" id="dealStatus" style="color: white;">예약중</span>
+                                            	</c:if>
+                                            	<c:if test='${i.dealStatus eq "판매완료"}'>
+                                            		<span class="badge badge-danger" style="margin-right: 45px;">판매완료</span>
+                                            	</c:if>
+                                            	<!-- if문 끝 -->
                                                 <span id="JimOnOff">찜하기</span>
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
-                                            <div id="selContent" onclick="location.replace('');">
+                                            <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>

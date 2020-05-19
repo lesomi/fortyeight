@@ -144,7 +144,7 @@ public class MarketController {
 						   +"\n--------------------------");
 		
 		mk = new Market(0, loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), null, null);
+						mk.getDealType(), mk.getMkContent(), null, null, null);
 		
 		// DB에 값 저장
 		int result = 0;
