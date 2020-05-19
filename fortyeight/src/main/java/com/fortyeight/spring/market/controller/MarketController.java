@@ -176,4 +176,12 @@ public class MarketController {
 		}
 		return "common/msg";
 	}
+	
+	@RequestMapping("/market/marketView.do")
+	public String marketView(int mkNo,Model m) {
+		Market mk=service.selectView(mkNo);
+		m.addAttribute("mk",mk);
+		
+		return "market/marketView";
+	}
 }
