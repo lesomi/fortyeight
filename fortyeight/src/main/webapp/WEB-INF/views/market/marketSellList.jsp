@@ -492,7 +492,7 @@
                     	<c:forEach items="${list}" var="i">
                             <div class="selArticle col-6">
                                 <!-- card 형식의 판매글 -->
-                                <div class="backColor card" onclick="location.replace('');">
+                                <div class="backColor card" onclick="location.replace('${path}/market/marketView.do?mkNo='+${i.mkNo });">
                                     <div class="row">
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
@@ -514,7 +514,7 @@
                                                 <span id="JimOnOff">찜하기</span>
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
-                                            <div id="selContent" onclick="location.replace('${path}/market/marketView.do?mkNo='+${i.mkNo });">
+                                            <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>
