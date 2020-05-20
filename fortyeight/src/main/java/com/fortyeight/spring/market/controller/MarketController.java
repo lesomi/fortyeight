@@ -58,9 +58,13 @@ public class MarketController {
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
+		// map 보내기
+		mv.addObject("cateMap",map.get("category"));
+		mv.addObject("inputTitle", map.get("title"));
+		System.out.println("category : "+map.get("category"));
 		
-		// category 분기처ㅣ
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do?category=all"));
+		// category 분기처리
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do"));
 //		mv.addObject("realTime",RealTimeFactory.formatTimeString());
 		
 		mv.setViewName("market/marketSellList");

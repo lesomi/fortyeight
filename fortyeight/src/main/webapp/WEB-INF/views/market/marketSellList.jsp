@@ -146,7 +146,7 @@
         	/* 위치 설정 */
         	position: absolute;
         	right: 19%;
-        	top: 97%;
+        	top: 102%;
         }
         /* [판매글작성] 버튼에 마우스를 올렸을 때 */
         button#selBtn:hover {
@@ -158,7 +158,6 @@
 
         /* [필터 적용될 span 설정] */
         a.filterSpan {
-        	font-weight: bolder;
         	color: rgb(60,60,60);
         	margin-right: 20px;
         }
@@ -365,7 +364,13 @@
 		.ie8 .radio-items input[type="radio"].checked + label {
 		  background-color: #454a60;
 		  color: #fff;
-}
+		}
+		
+		
+		/* [검색] 버튼 설정 */
+		button#btnSearch {
+			width: 200px;
+		}
 	</style>
 <section>
 	<div class="container" style="margin-top: 200px;">
@@ -393,27 +398,38 @@
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="sport">스포츠/레저/게임</button> 
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button> -->
                 
-                <!-- 라디오박스 -->
-                <div>
+                
+            </div>
+
+            
+
+            <!-- --------- 판매글 노출 -------------- -->
+
+            <div class="container">
+            
+            
+            <form action="${path}/market/selMarket.do" method="post">
+            	<!-- 라디오박스 -->
+                <div id="radioDiv">
 				    <div class="radio-items">
 				        <div class="widthDiv">
-				            <input id="all" class="only-sr checked" type="radio" name="category" value="all" checked>
+				            <input id="all" class="only-sr checked" type="radio" name="category" value="all">
 				            <label for="all">전체</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="digital" class="only-sr" type="radio" name="category" value="2">
+				            <input id="digital" class="only-sr" type="radio" name="category" value="digital">
 				            <label for="digital">디지털/가전</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="child" class="only-sr" type="radio" name="category" value="3">
+				            <input id="child" class="only-sr" type="radio" name="category" value="child">
 				            <label for="child">유아용/유아도서</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="interior" class="only-sr" type="radio" name="category" value="4">
+				            <input id="interior" class="only-sr" type="radio" name="category" value="interior">
 				            <label for="interior">가구/인테리어</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="life" class="only-sr" type="radio" name="category" value="4">
+				            <input id="life" class="only-sr" type="radio" name="category" value="life">
 				            <label for="life">생활/가공식품</label>
 				        </div>
 				    </div>
@@ -421,47 +437,42 @@
 				<div>
 				    <div class="radio-items">
 				        <div class="widthDiv">
-				            <input id="woman" class="only-sr checked" type="radio" name="category" value="1" checked>
+				            <input id="woman" class="only-sr" type="radio" name="category" value="woman">
 				            <label for="woman">여성의류/잡화</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="beauty" class="only-sr" type="radio" name="category" value="2">
+				            <input id="beauty" class="only-sr" type="radio" name="category" value="beauty">
 				            <label for="beauty">뷰티/미용</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="man" class="only-sr" type="radio" name="category" value="3">
+				            <input id="man" class="only-sr" type="radio" name="category" value="man">
 				            <label for="man">남성의류/잡화</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="sport" class="only-sr" type="radio" name="category" value="4">
+				            <input id="sport" class="only-sr" type="radio" name="category" value="sport">
 				            <label for="sport">스포츠/레저/게임</label>
 				        </div>
 				        <div class="widthDiv">
-				            <input id="etc" class="only-sr" type="radio" name="category" value="4">
+				            <input id="etc" class="only-sr" type="radio" name="category" value="etc">
 				            <label for="etc">기타</label>
 				        </div>
 				    </div>
 				</div>
-            </div>
+				
+            	<hr>
 
-            <hr>
-
-            <div id="categoryTitle">
-                <h2>팝니다</h2>
-                <c:if test="${loginUser!=null}">
-	                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
-	                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
-	                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
-	                		onclick="location.replace('');">거래위치 수정</button>
-             	</c:if>
-            </div>
-
-            <!-- --------- 판매글 노출 -------------- -->
-
-            <div class="container">
-
-                    <!-- 첫번째 줄 -->
-                    <div id="oneRow" class="row">
+	            <div id="categoryTitle">
+	                <h2>팝니다</h2>
+	                <c:if test="${loginUser!=null}">
+		                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
+		                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
+		                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
+		                		onclick="location.replace('');">거래위치 수정</button>
+	             	</c:if>
+	            </div>
+            
+            	<!-- 첫번째 줄 -->
+                   <div id="oneRow" class="row">
                         <!-- 검색창 -->
                         <div class="input-group col-4">
                             <div id="spanDiv" class="input-group-prepend">
@@ -471,20 +482,21 @@
                             </div>
                             <input type="text" class="form-control" id="inputTitle" placeholder="제목 검색">
                         </div>
-
+                        
                         <div class="col-4"></div>
-
+                        
                         <!-- select -->
                         <div class="col-4" id="filterDiv">
                         	<!-- 최신순/인기순/가격순 -->
-                        	<a href="#" class="listSort filterSpan clickSpan" id="firstSpan">최신순</a>
-                        	<a href="#" class="listSort filterSpan clickSpan">인기순</a>
-                        	<a href="#" class="listSort filterSpan clickSpan">가격순</a>
+                        	<!-- <a href="javascript:void(0)" class="listSort filterSpan sort" id="firstSpan">최신순</a>
+                        	<a href="javascript:void(0)" class="listSort filterSpan sort">인기순</a>
+                        	<a href="javascript:void(0)" class="listSort filterSpan sort">가격순</a> -->
                         </div>
                     </div>
-				
+            
+			</form>
 
-
+			<!-- form 결과 출력 -->
                     <!-- 두번째 줄 -->
                     <div class="row">
                     	<!-- 여기서부터 for문 필요 -->
@@ -522,6 +534,7 @@
                                             <span id="spanChatt">댓글 &nbsp;&nbsp; 1</span> <span>찜하기 &nbsp;&nbsp; 1</span> 
                                         </div>
                                     </div>
+                                    <!-- div.row -->
                                 </div>
                             </div>
                         <!-- for문 끝 -->
@@ -544,8 +557,10 @@
 </section>
 
 <script>
-/* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
-	function hasClass(target, className) {
+
+ 
+ /* 코드 주인 찾아요! 엄마를 잃어버렸어요! */
+	/* function hasClass(target, className) {
 	    if( (' ' + target.className + ' ').replace(/[\n\t]/g, ' ').indexOf(' ' + className + ' ') > -1 ) return true;
 	    return false;
 	}
@@ -573,30 +588,29 @@
 	            addClass(this, 'checked'); // checked 부여
 	        });
 	    }
-	}
+	} */
 
-
-
-
-
-
-
-	// 카테고리를 눌렀을 때
+/* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
 	$(function () {
+		// 첫 load 했을 때 고정
+		$('#'+'${cateMap}').prop('checked', true);
+		$('#inputTitle').attr('value','${inputTitle}');
 		
-		
-		$('.btnValue').click(function () {
+		// 카테고리를 눌렀을 때
+		$('input[name=category]').click(function () {
+			//var category = $('input[name=category]').val();
+			$(this).prop('checked', true);
+			$('#all').prop('checked', false);
 			location.replace('${path}/market/selMarket.do?category='+$(this).val());
+			//일단냅둠
+			//location.replace('${path}/market/selMarket.do?category='+$('#'+'${cateMap}').val()+'&title='+$('#inputTitle').val());
 		});
-		var category = $('.btnValue').val();
-		console.log("카테고리 : "+category);
+		
 		// 검색아이콘을 눌렀을 때
 		$('#search').click(function () {
-			location.replace('${path}/market/selMarket.do?category='+category+'&title='+$('#inputTitle').val());
+			location.replace('${path}/market/selMarket.do?category='+$('#'+'${cateMap}').val()+'&title='+$('#inputTitle').val());
 		});
 	});
-	
-	
 </script>
 
 

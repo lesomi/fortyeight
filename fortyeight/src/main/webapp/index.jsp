@@ -103,7 +103,7 @@
 		<div id="content">
 			<button type="button" id="firstBtn" class="btn btn-dark inxBtn" onclick="location.replace('${path}/market/buyMarket.do');">사러가요</button>
 			<br>
-			<button type="button" id="secondBtn" class="btn btn-dark inxBtn" onclick="location.replace('${path}/market/selMarket.do')">팔러가요</button>
+			<button type="button" id="secondBtn" class="btn btn-dark inxBtn" onclick="location.replace('${path}/market/selMarket.do?category=all')">팔러가요</button>
 		</div>
 	</div>
 </section>
