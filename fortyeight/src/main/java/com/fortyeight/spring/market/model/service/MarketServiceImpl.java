@@ -72,12 +72,20 @@ public class MarketServiceImpl implements MarketService {
 	public Market selectView(int mkNo) {
 		return dao.selectView(session,mkNo);
 	}
+
+	//[삽니다] 리스트
+	@Override
+	public List<Market> marketBuyList(Map<String, String> map, int cPage, int numPerPage) {
+		return dao.marketBuyList(session, map, cPage, numPerPage);
+	}
+
+	//[삽니다] 페이징
+	@Override
+	public int selectMarketBuyCount(Map<String, String> map) {
+		return dao.selectMarketBuyCount(session, map);
+	}
 	
-	// 제목검색
-	/*
-	 * @Override public List<Market> searchMarket(Map<String, String> map) { return
-	 * dao.searchMarket(session, map); }
-	 */
+	
 	
 	
 	

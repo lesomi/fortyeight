@@ -11,10 +11,10 @@ public interface MarketService {
 	
 	Market selectView(int mkNo);
 	
-	// -----
+	// ----- 팝니다
 	List<Market> marketList(Map<String, String> map, int cPage, int numPerPage); // 리스트 출력(팝니다)
 	int selectMarketCount(Map<String, String> map); // 팝니다 paging 처리
-	/*
-	 * List<Market> searchMarket(Map<String, String> map); // 제목검색
-	 */
+	// ----- 삽니다
+	List<Market> marketBuyList(Map<String, String> map, int cPage, int numPerPage);
+	int selectMarketBuyCount(Map<String, String> map);
 }

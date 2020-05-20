@@ -45,13 +45,19 @@ public class MarketDaoImpl implements MarketDao {
 		return session.selectOne("market.selectView",mkNo);
 	}
 
-	/*
-	 * // 제목검색
-	 * 
-	 * @Override public List<Market> searchMarket(SqlSessionTemplate session,
-	 * Map<String, String> map) { return session.selectList("market.searchMarket",
-	 * map); }
-	 */
+	// [삽니다] 리스트 출력
+	@Override
+	public List<Market> marketBuyList(SqlSessionTemplate session, Map<String, String> map, int cPage, int numPerPage) {
+		return session.selectList("market.marketBuyList", map, new RowBounds((cPage-1)*numPerPage, numPerPage));
+	}
+
+	// [삽니다] 페이징처리
+	@Override
+	public int selectMarketBuyCount(SqlSessionTemplate session, Map<String, String> map) {
+		return session.selectOne("market.selectMarketBuyCount", map);
+	}
+
+	
 
 	
 	

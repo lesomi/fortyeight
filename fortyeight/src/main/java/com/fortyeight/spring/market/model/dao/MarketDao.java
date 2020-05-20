@@ -14,10 +14,11 @@ public interface MarketDao {
 	int insertMarket(SqlSessionTemplate session, MkImg mi); // 마켓 글 등록2
 	
 	Market selectView(SqlSessionTemplate session,int mkNo); //마켓 팝니다 상세
+	
+	// ----- 팝니다
 	List<Market> marketList(SqlSessionTemplate session, Map<String, String> map, int cPage, int numPerPage); // market list 출력
 	int selectMarketCount(SqlSessionTemplate session, Map<String, String> map); // paging
-	/*
-	 * List<Market> searchMarket(SqlSessionTemplate session, Map<String, String>
-	 * map); // 제목검색
-	 */
+	// ----- 삽니다
+	List<Market> marketBuyList(SqlSessionTemplate session, Map<String, String> map, int cPage, int numPerPage);
+	int selectMarketBuyCount(SqlSessionTemplate session, Map<String, String> map);
 }

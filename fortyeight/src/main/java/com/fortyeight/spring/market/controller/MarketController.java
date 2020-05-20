@@ -50,7 +50,7 @@ public class MarketController {
 		// paging
 		int totalData = service.selectMarketCount(map);
 		
-		logger.debug("--------- [ 조회 결과 ] ----------"
+		logger.debug("--------- [ 판매글 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
@@ -61,6 +61,7 @@ public class MarketController {
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));
+		
 		System.out.println("category : "+map.get("category"));
 		
 		// category 분기처리
@@ -73,9 +74,46 @@ public class MarketController {
 	
 	// [삽니다] 화면으로 전환
 	@RequestMapping("/market/buyMarket.do")
-	public String buyMarket() {
-		return "market/marketBuyList";
+	public ModelAndView buyMarket(ModelAndView mv,
+									@RequestParam Map<String, String> map,
+									@RequestParam(required=false, defaultValue="1") int cPage,
+									@RequestParam(required=false, defaultValue="6") int numPerPage) {
+		// Print list
+		List<Market> list = service.marketBuyList(map, cPage, numPerPage);
+		// paging
+		int totalData = service.selectMarketBuyCount(map);
+		
+		logger.debug("--------- [ 구매글 조회 결과 ] ----------"
+				+"\n 1. market list : "+list
+				+"\n 2. totalData : "+totalData
+				+"\n------------------------------");
+		
+		// data 저장
+		mv.addObject("list",list);
+		// paging 저장
+		mv.addObject("total",totalData);
+		// map 보내기
+		mv.addObject("cateMap",map.get("category"));
+		mv.addObject("inputTitle", map.get("title"));
+		System.out.println("category : "+map.get("category"));
+		
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do"));
+		
+		mv.setViewName("market/marketBuyList");
+		return mv;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// [삽니다/팝니다] 작성 버튼 눌렀을 때 글작성 화면으로 전황
 	@RequestMapping("/market/writeBuySell.do")
