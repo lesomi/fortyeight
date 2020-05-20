@@ -119,7 +119,7 @@
                 <a href="${path}/market/buyMarket.do" class="aFont">사고</a>
             </div>
             <div class="p-1 divSize">
-                <a href="${path}/market/selMarket.do" class="aFont">팔고</a>
+                <a href="${path}/market/selMarket.do?category=all" class="aFont">팔고</a>
             </div>
             <div class="p-1 divSize" id="scDiv">
                 <a href="${path}/board/boardList.do" class="aFont">모여봐요</a>

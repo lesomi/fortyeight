@@ -62,7 +62,7 @@
 			</if>
 			<!-- 정렬 순서에 대해서 -->
 			<!-- <if test='  '>
-			</if> --> -->
+			</if>  -->
 		<!-- ORDER BY MKDATE DESC --> 
 	</select>
 	
