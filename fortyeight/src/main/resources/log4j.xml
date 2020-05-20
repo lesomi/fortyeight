@@ -10,6 +10,24 @@
 		</layout>
 	</appender>
 	
+	
+	<!-- SQL문 로그로 남기기 appender -->
+	<appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-mm-dd HH:mm:ss}]%-5p: %l - %m%n"></param>
+		</layout>
+	</appender>
+	<!-- SQL문 로그로 남기기 logger -->
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="INFO"/>
+		<appender-ref ref="sqlLogger"/>
+	</logger>
+	
+	
 	<!-- Application Loggers -->
 	<logger name="com.fortyeight.spring">
 		<level value="debug" />
