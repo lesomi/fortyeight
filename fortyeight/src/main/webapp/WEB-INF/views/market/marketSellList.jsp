@@ -393,8 +393,19 @@
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="sport">스포츠/레저/게임</button> 
                 <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button> -->
                 
-                <!-- 라디오박스 -->
-                <div>
+                
+            </div>
+
+            
+
+            <!-- --------- 판매글 노출 -------------- -->
+
+            <div class="container">
+            
+            
+            <form action="${path}/market/selMarket.do" method="post">
+            	<!-- 라디오박스 -->
+                <div id="radioDiv">
 				    <div class="radio-items">
 				        <div class="widthDiv">
 				            <input id="all" class="only-sr checked" type="radio" name="category" value="all" checked>
@@ -442,23 +453,20 @@
 				        </div>
 				    </div>
 				</div>
-            </div>
+            
+            	<hr>
 
-            <hr>
-
-            <div id="categoryTitle">
-                <h2>팝니다</h2>
-                <c:if test="${loginUser!=null}">
-	                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
-	                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
-	                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
-	                		onclick="location.replace('');">거래위치 수정</button>
-             	</c:if>
-            </div>
-
-            <!-- --------- 판매글 노출 -------------- -->
-
-            <div class="container">
+	            <div id="categoryTitle">
+	                <h2>팝니다</h2>
+	                <c:if test="${loginUser!=null}">
+		                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
+		                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
+		                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
+		                		onclick="location.replace('');">거래위치 수정</button>
+	             	</c:if>
+	            </div>
+            
+            
 
                     <!-- 첫번째 줄 -->
                     <div id="oneRow" class="row">
@@ -482,9 +490,9 @@
                         	<a href="#" class="listSort filterSpan clickSpan">가격순</a>
                         </div>
                     </div>
-				
+			</form>
 
-
+			<!-- form 결과 출력 -->
                     <!-- 두번째 줄 -->
                     <div class="row">
                     	<!-- 여기서부터 for문 필요 -->
@@ -522,6 +530,7 @@
                                             <span id="spanChatt">댓글 &nbsp;&nbsp; 1</span> <span>찜하기 &nbsp;&nbsp; 1</span> 
                                         </div>
                                     </div>
+                                    <!-- div.row -->
                                 </div>
                             </div>
                         <!-- for문 끝 -->
@@ -545,7 +554,9 @@
 
 <script>
 /* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
-	function hasClass(target, className) {
+ 
+ /* 코드 주인 찾아요! 엄마를 잃어버렸어요! */
+	/* function hasClass(target, className) {
 	    if( (' ' + target.className + ' ').replace(/[\n\t]/g, ' ').indexOf(' ' + className + ' ') > -1 ) return true;
 	    return false;
 	}
@@ -573,18 +584,11 @@
 	            addClass(this, 'checked'); // checked 부여
 	        });
 	    }
-	}
+	} */
 
-
-
-
-
-
-
+	
 	// 카테고리를 눌렀을 때
 	$(function () {
-		
-		
 		$('.btnValue').click(function () {
 			location.replace('${path}/market/selMarket.do?category='+$(this).val());
 		});
