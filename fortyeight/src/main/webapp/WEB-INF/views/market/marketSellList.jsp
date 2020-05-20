@@ -488,9 +488,9 @@
                         <!-- select -->
                         <div class="col-4" id="filterDiv">
                         	<!-- 최신순/인기순/가격순 -->
-                        	<a href="#" class="listSort filterSpan clickSpan" id="firstSpan">최신순</a>
-                        	<a href="#" class="listSort filterSpan clickSpan">인기순</a>
-                        	<a href="#" class="listSort filterSpan clickSpan">가격순</a>
+                        	<!-- <a href="javascript:void(0)" class="listSort filterSpan sort" id="firstSpan">최신순</a>
+                        	<a href="javascript:void(0)" class="listSort filterSpan sort">인기순</a>
+                        	<a href="javascript:void(0)" class="listSort filterSpan sort">가격순</a> -->
                         </div>
                     </div>
             
@@ -504,7 +504,7 @@
                     	<c:forEach items="${list}" var="i">
                             <div class="selArticle col-6">
                                 <!-- card 형식의 판매글 -->
-                                <div class="backColor card" onclick="location.replace('');">
+                                <div class="backColor card" onclick="location.replace('${path}/market/marketView.do?mkNo='+${i.mkNo });">
                                     <div class="row">
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
@@ -526,7 +526,7 @@
                                                 <span id="JimOnOff">찜하기</span>
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
-                                            <div id="selContent" onclick="location.replace('${path}/market/marketView.do?mkNo='+${i.mkNo });">
+                                            <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>
@@ -594,6 +594,7 @@
 	$(function () {
 		// 첫 load 했을 때 고정
 		$('#'+'${cateMap}').prop('checked', true);
+		$('#inputTitle').attr('value','${inputTitle}');
 		
 		// 카테고리를 눌렀을 때
 		$('input[name=category]').click(function () {
@@ -601,15 +602,14 @@
 			$(this).prop('checked', true);
 			$('#all').prop('checked', false);
 			location.replace('${path}/market/selMarket.do?category='+$(this).val());
+			//일단냅둠
+			//location.replace('${path}/market/selMarket.do?category='+$('#'+'${cateMap}').val()+'&title='+$('#inputTitle').val());
 		});
 		
 		// 검색아이콘을 눌렀을 때
 		$('#search').click(function () {
 			location.replace('${path}/market/selMarket.do?category='+$('#'+'${cateMap}').val()+'&title='+$('#inputTitle').val());
 		});
-		
-		// 정렬 눌렀을 때
-		
 	});
 </script>
 
