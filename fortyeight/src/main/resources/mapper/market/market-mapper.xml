@@ -109,17 +109,4 @@
 	<select id="selectView" resultType="market" parameterType="_int">
 		SELECT * FROM MARKET WHERE MKNO = #{mkNo}
 	</select>
-	<!-- 제목검색 -->
-	<!-- <select id="searchMarket" parameterType="map" resultType="market">
-		SELECT * FROM MARKET WHERE MKTYPE='팝니다'
-				<choose>
-					<when test=' category eq ${category} '>
-						AND CATEGORY = #{category}
-					</when>
-				</choose>
-				<if test=' title!=null and title!="" '>
-					AND MKTITLE = #{title}
-				</if>
-			AND MKTITLE LIKE '%'||#{title}||'%'
-	</select> -->
 </mapper>
