@@ -33,7 +33,7 @@
 				<div>닉네임</div>
 				<div>${mk.dealAddr }</div>
 			</div>
-			<button>채팅</button>
+			<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
 		</div>
 	</div>
 	<div class="push"></div>
@@ -41,3 +41,9 @@
 
 <!-- footer 설정 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<script>
+	function accessChatting(){
+		open("${path}/chattingView.do","_blank","width=400,height=600");
+	}
+</script>
