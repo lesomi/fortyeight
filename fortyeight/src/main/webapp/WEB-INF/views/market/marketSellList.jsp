@@ -514,11 +514,7 @@
                                                 <span id="JimOnOff">찜하기</span>
                                                 <input type="checkbox" checked data-toggle="toggle" data-size="sm">
                                             </div>
-<<<<<<< HEAD
                                             <div id="selContent" onclick="location.replace('${path}/market/marketView.do?mkNo='+${i.mkNo });">
-=======
-                                            <div id="selContent">
->>>>>>> branch 'dev' of https://github.com/lesomi/fortyeight.git
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>
