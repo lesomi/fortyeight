@@ -156,6 +156,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<img src="${path }/resources/img/forty-eight.png">
+						
 						<input type="text" class="form-control" name="userId" placeholder="아이디" required> <br />
 						<input type="password" class="form-control" name="password" placeholder="비밀번호" required>
 						<div class="d-flex" style="padding-top:20px;">
