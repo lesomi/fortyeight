@@ -110,6 +110,18 @@
 		SELECT * FROM MARKET WHERE MKNO = #{mkNo}
 	</select>
 	
+	<select id="selectMkComment" resultType="mkcomment" parameterType="_int">
+		SELECT 
+			MKCOMMNO, MKCOMMENT.USERNO, MEMBER.NICKNAME, MKREF, COMMLEVEL, COMMCONTENT, MKCOMMREF, COMMDATE 
+		FROM MKCOMMENT FULL JOIN MEMBER ON (MKCOMMENT.USERNO = MEMBER.USERNO) 
+		WHERE MKREF = #{mkNo}
+	</select>
+	
+	<select id="selectMkCommentCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(*) FROM MKCOMMENT WHERE MKREF= #{mkNo}
+	</select>
+	
+	
 	<!-- [삽니다] 리스트 출력 -->
 	<select id="marketBuyList" resultType="market" parameterType="map">
 		SELECT * FROM MARKET FULL JOIN MKIMG ON (MARKET.MKNO=MKIMG.MKNO) WHERE MKTYPE='삽니다' AND DELETED='N'
@@ -193,4 +205,10 @@
 			</if> 
 			ORDER BY MKDATE DESC
 	</select>
+	
+	
+	<!-- 마켓 댓글 삭제 -->
+	<delete id="marketCommentDelete" parameterType="map">
+		DELETE FROM MKCOMMENT WHERE MKREF=${mkNo} AND MKCOMMNO=${mkCommNo}
+	</delete>
 </mapper>

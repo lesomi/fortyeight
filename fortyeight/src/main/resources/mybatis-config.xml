@@ -6,6 +6,6 @@
 		<typeAlias type="com.fortyeight.spring.user.model.vo.User" alias="user"/>
 		<typeAlias type="com.fortyeight.spring.market.model.vo.Market" alias="market"/>
 		<typeAlias type="com.fortyeight.spring.market.model.vo.MkImg" alias="mkImg"/>
-		<typeAlias type="com.fortyeight.spring.market.model.vo.MkComment" alias="mkComment"></typeAlias>
+		<typeAlias type="com.fortyeight.spring.market.model.vo.MkComment" alias="mkcomment"></typeAlias>
 	</typeAliases>
 </configuration>

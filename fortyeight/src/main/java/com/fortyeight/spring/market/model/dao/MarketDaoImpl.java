@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 
 @Repository
@@ -39,10 +40,28 @@ public class MarketDaoImpl implements MarketDao {
 		return session.selectOne("market.selectMarketCount", map);
 	}
 
-	//마켓 팝니다 상세
+	//마켓상세화면 출력
 	@Override
 	public Market selectView(SqlSessionTemplate session, int mkNo) {
 		return session.selectOne("market.selectView",mkNo);
+	}
+
+	// 마켓 상세화면 밑 [댓글] 리스트 출력
+	@Override
+	public List<MkComment> selectComment(SqlSessionTemplate session, int mkNo, int cPage, int numPerPage) {
+		return session.selectList("market.selectMkComment", mkNo, new RowBounds((cPage-1)*numPerPage, numPerPage));
+	}
+
+	// 마켓 상세화면 밑 [댓글] 페이징처리
+	@Override
+	public int selectCommentCount(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkCommentCount", mkNo);
+	}
+
+	// 마켓 댓글 삭제
+	@Override
+	public int marketCommentDelete(SqlSessionTemplate session, Map<String, String> map) {
+		return session.delete("market.marketCommentDelete", map);
 	}
 
 	// [삽니다] 리스트 출력
