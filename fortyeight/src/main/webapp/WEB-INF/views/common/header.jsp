@@ -116,7 +116,7 @@
             	<img id="logoImg" src="${path}/resources/img/forty-eight.png" onclick="location.replace('${path}')">
            	</div>
             <div class="p-1 divSize">
-                <a href="${path}/market/buyMarket.do" class="aFont">사고</a>
+                <a href="${path}/market/buyMarket.do?category=all" class="aFont">사고</a>
             </div>
             <div class="p-1 divSize">
                 <a href="${path}/market/selMarket.do?category=all" class="aFont">팔고</a>
@@ -138,7 +138,7 @@
 	        <!-- 만약, session에 로그인한 값이 있으면? -->
 	        <c:if test="${loginUser!=null }">
 	        	<div class="p-1 divSize">
-	                <a href="${path}/user/mypage.do" class="aFont">마이페이지</a>
+	                <a href="${path}/user/mypage.do?userNo=${loginUser.userNo}" class="aFont">마이페이지</a>
 	            </div>
 	            <div class="p-1 divSize">
 	                <a href="${path}/user/logout.do" class="aFont">로그아웃</a>

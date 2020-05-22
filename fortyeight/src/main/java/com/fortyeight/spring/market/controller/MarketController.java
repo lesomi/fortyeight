@@ -16,12 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 import com.fortyeight.spring.user.controller.UserController;
 import com.fortyeight.spring.user.model.vo.User;
@@ -50,7 +52,7 @@ public class MarketController {
 		// paging
 		int totalData = service.selectMarketCount(map);
 		
-		logger.debug("--------- [ 조회 결과 ] ----------"
+		logger.debug("--------- [ 판매글 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
@@ -61,6 +63,7 @@ public class MarketController {
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));
+		
 		System.out.println("category : "+map.get("category"));
 		
 		// category 분기처리
@@ -73,17 +76,43 @@ public class MarketController {
 	
 	// [삽니다] 화면으로 전환
 	@RequestMapping("/market/buyMarket.do")
-	public String buyMarket() {
-		return "market/marketBuyList";
+	public ModelAndView buyMarket(ModelAndView mv,
+									@RequestParam Map<String, String> map,
+									@RequestParam(required=false, defaultValue="1") int cPage,
+									@RequestParam(required=false, defaultValue="6") int numPerPage) {
+		// Print list
+		List<Market> list = service.marketBuyList(map, cPage, numPerPage);
+		// paging
+		int totalData = service.selectMarketBuyCount(map);
+		
+		logger.debug("--------- [ 구매글 조회 결과 ] ----------"
+				+"\n 1. market list : "+list
+				+"\n 2. totalData : "+totalData
+				+"\n------------------------------");
+		
+		// data 저장
+		mv.addObject("list",list);
+		// paging 저장
+		mv.addObject("total",totalData);
+		// map 보내기
+		mv.addObject("cateMap",map.get("category"));
+		mv.addObject("inputTitle", map.get("title"));
+		System.out.println("category : "+map.get("category"));
+		
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do"));
+		
+		mv.setViewName("market/marketBuyList");
+		return mv;
 	}
 	
-	// [삽니다/팝니다] 작성 버튼 눌렀을 때 글작성 화면으로 전황
+	
+	// 마켓 글작성 화면으로 전황
 	@RequestMapping("/market/writeBuySell.do")
 	public String writeSell() {
 		return "market/marketWrite";
 	}
 	
-	// [삽니다/팝니다] 글 작성하기(insert)
+	// 마켓 글 작성하기(insert)
 	@RequestMapping("/market/writeBuySellEnd.do")
 	public String writeBuySellEnd(Market mk, Model m, MultipartFile upFile, HttpSession session) {
 		logger.debug("----- 마켓 글 작성 로직 진행 들어옴 -----");
@@ -179,12 +208,59 @@ public class MarketController {
 		}
 		return "common/msg";
 	}
-	
+	// 마켓 상세화면과 댓글 리스트 출력 - select
 	@RequestMapping("/market/marketView.do")
-	public String marketView(int mkNo,Model m) {
+	public ModelAndView marketView(int mkNo,ModelAndView mv,
+							@RequestParam(required=false, defaultValue="1") int cPage,
+							@RequestParam(required=false, defaultValue="10") int numPerPage) {
 		Market mk=service.selectView(mkNo);
-		m.addAttribute("mk",mk);
 		
-		return "market/marketView";
+		// ---- ㅆ
+		List<MkComment> list = service.selectComment(mkNo, cPage, numPerPage); // 댓글리스트
+		int totalData = service.selectCommentCount(mkNo); // 페이징처리
+		
+		mv.addObject("list",list);
+		mv.addObject("total", totalData);
+		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo));
+		
+		// ---- ㅆ
+				
+		mv.addObject("mk",mk);
+		mv.addObject("mkNo", mkNo);
+		
+		mv.setViewName("market/marketView"); 
+		return mv;
+	}
+	
+	// 마켓 댓글 삭제 -delete
+	@RequestMapping("/market/marketCommentDelete.do")
+	@ResponseBody
+	public boolean marketCommentDelete(@RequestParam Map<String, String> map) {
+		logger.debug("----- [댓글 삭제 controller 진입!] -----");
+		System.out.println("값을 가져왔는가? : "+map);
+		System.out.println("--------------------------------");
+		
+		int result = service.marketCommentDelete(map);
+		System.out.println("----- [댓글 삭제 결과] -----"
+						 + "result : "+result
+						 + "-----------------------");
+		boolean flag = result!=0? true : false; // true : 삭제, false : 삭제안함
+		System.out.println(""+flag);
+		return flag;
+	}
+	
+	// 마켓 댓글 등록 - insert
+	@RequestMapping("/market/marketCommentInsert.do")
+	@ResponseBody
+	public boolean marketCommentInsert(@RequestParam Map<String, String> map) {
+		logger.debug("----- [댓글 등록 controller 진입!] -----");
+		System.out.println("값을 가져왔는가? : "+map);
+		System.out.println("--------------------------------");
+		int result = service.marketCommentInsert(map);
+		System.out.println("----- [댓글 등록 결과] -----"
+						 + "result : "+result
+						 + "-----------------------");
+		boolean flag = result!=0? true : false; // true : 등록, false : 등록안함
+		return flag;
 	}
 }
