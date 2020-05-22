@@ -19,7 +19,7 @@
 	button.replyBtn { margin: 0 auto; }
 	span#fontSize { margin-left: 5%; font-weight: normal; font-size: 12px; }
 	button#replyBtns { width:50px; height: 30px; font-size: 12px; }
-	button#replyDelete { width:50px; height: 30px; font-size: 12px; }
+	button.replyDelete { width:50px; height: 30px; font-size: 12px; }
 </style>
 
 <section>
@@ -70,8 +70,8 @@
 		
 		<!-- 댓글 결과창 -->
 		<table class="table" style="text-align: center;">
-		
 			<c:forEach var="i" items="${list}">
+				<c:if test="${i.commLevel eq 1}">
 					<tr>
 						<th colspan="4" style="text-align: left; background-color: rgb(241,241,241);">
 							 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${i.nickName}님
@@ -83,18 +83,27 @@
 						</th>
 					</tr>
 					<tr>
-						<td colspan="3" id="comment">${i.commContent}</td>
+						<td colspan="3" id="comment">
+							${i.commContent}
+							
+							<%-- <c:if test="${i.mkCommNo eq i.mkCommRef}"> --%>
+								<div style="width: 100%; background-color: pink;">
+									
+								</div>
+							<%-- </c:if> --%>
+						</td>
 						<td>
 							<div class="input-group-append" id="replyDiv">
 								<c:if test='${loginUser != null}'>
 									<button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> <!-- JQuery this -->
 									<c:if test='${i.userNo eq loginUser.userNo}'>
-										<button class="btn btn-dark deleteBtn" id="replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
+										<button class="btn btn-dark deleteBtn replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
 									</c:if>
 								</c:if>
 							</div>
 						</td>
 					</tr>
+					
 					<tr class="replyTr">
 						<td colspan="4">
 							<div class="input-group mb-3">
@@ -105,6 +114,7 @@
 							</div>
 						</td>
 					</tr>
+				</c:if>
 			</c:forEach>
 		</table>
 	</div>
@@ -142,9 +152,11 @@
 		
 		// 답글다는 영역을 안보이게 처리
 		$('.replyTr').hide();
+		
 		// 답글달기 버튼을 눌렀을 때
 		$('.replyBtn').click(function () {
 			console.log('보여주자!');
+			console.log($(this).parents().next());
 			$(this).parents().parents().parents().next().slideToggle();
 		});
 		
@@ -191,7 +203,7 @@
 		});
 		
 		// 댓글 삭제
-		$('#replyDelete').click(function () {
+		$('.replyDelete').click(function () {
 			const result = confirm('댓글을 삭제하시겠습니까?');
 			console.log('result : '+result);
 			console.log('mkNo : ${mkNo}');

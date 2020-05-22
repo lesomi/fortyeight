@@ -225,4 +225,19 @@ public class UserController {
 		boolean flag=u!=null?true:false;
 		return flag;
 	}
+	
+	
+//	------------------------
+	
+	// 마이페이지 전환
+	@RequestMapping("/user/mypage.do")
+	public String mypage(String userId) {
+		return "user/mypage";
+	}
+	
+	// 회원정보수정 전환
+	@RequestMapping("/user/userUpdate.do")
+	public String userUpdate(String userId) {
+		return "user/userUpdate";
+	}
 }

@@ -138,7 +138,7 @@
 	        <!-- 만약, session에 로그인한 값이 있으면? -->
 	        <c:if test="${loginUser!=null }">
 	        	<div class="p-1 divSize">
-	                <a href="${path}/user/mypage.do" class="aFont">마이페이지</a>
+	                <a href="${path}/user/mypage.do?userNo=${loginUser.userNo}" class="aFont">마이페이지</a>
 	            </div>
 	            <div class="p-1 divSize">
 	                <a href="${path}/user/logout.do" class="aFont">로그아웃</a>
