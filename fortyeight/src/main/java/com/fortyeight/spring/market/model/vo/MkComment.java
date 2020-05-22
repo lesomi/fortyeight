@@ -13,6 +13,7 @@ public class MkComment {
 	// 마켓 댓글 관련 객체
 	private int mkCommNo;
 	private int userNo;
+	private String userId;
 	private String nickName;
 	private int mkRef; // 마켓 원글 번호
 	private int commLevel;

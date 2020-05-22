@@ -79,6 +79,7 @@
 								<fmt:formatDate value="${i.commDate}" pattern="yyyy년 MM월 dd일, HH시 mm분"/> 등록
 							</span>
 							<input type="hidden" id="mkCommNo" value="${i.mkCommNo}"/>
+							<input type="hidden" id="userId" value="${i.userId}"/>
 						</th>
 					</tr>
 					<tr>
@@ -87,7 +88,9 @@
 							<div class="input-group-append" id="replyDiv">
 								<c:if test='${loginUser != null}'>
 									<button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> <!-- JQuery this -->
-									<button class="btn btn-dark deleteBtn" id="replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
+									<c:if test='${i.userNo eq loginUser.userNo}'>
+										<button class="btn btn-dark deleteBtn" id="replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
+									</c:if>
 								</c:if>
 							</div>
 						</td>
@@ -148,24 +151,43 @@
 		
 		// 댓글 등록
 		$('#writeBtn').click(function () {
-			alert('댓글 등록 완료!');
-			console.log('----- 마켓의 댓글 등록 로직이 실행됩니다. -----');
-			$.ajax({
-				url: "${path}/market/marketCommentInsert.do",
-				type: 'POST',
-				data { mkNo : '${mkNo}' },
-				success: function(data) {
-					console.log('success에 진입했습니다.');
-					if(data) {
-						console.log('-- 댓글등록 if문 진입 --');
-						location.replace('${path}/market/marketView.do?mkNo=${mkNo}');
-					}
-					else {
-						console.log('-- 댓글등록 else문 진입 --');
-						console.log('댓글 등록이 실패되었습니다.');
-					}
+			if( ${loginUser == null} ) {
+				$(this).parents().parents().parents().next().slideToggle(); // 로그인하기
+			}
+			else {
+				const comment = $('#mkTitle').val();
+				console.log(comment);
+				if(!comment) { // 들어오는 댓글이 빈칸이면?
+					alert('빈 칸의 댓글은 등록할 수 없습니다.');
+					$('#mkTitle').focus();
 				}
-			});
+				else {
+					alert('댓글 등록 완료!');
+					console.log('----- 마켓의 댓글 등록 로직이 실행됩니다. -----');
+					console.log('현재 댓글 추가하는 userNo : ${loginUser.userNo}');
+					
+					$.ajax({
+						url: "${path}/market/marketCommentInsert.do",
+						type: 'POST',
+						data: { 
+							userNo : '${loginUser.userNo}',
+							mkNo : '${mkNo}',
+							comment : $('#mkTitle').val() 
+						},
+						success: function(data) {
+							console.log('success에 진입했습니다.');
+							if(data) {
+								console.log('-- 댓글등록 if문 진입 --');
+								location.replace('${path}/market/marketView.do?mkNo=${mkNo}');
+							}
+							else {
+								console.log('-- 댓글등록 else문 진입 --');
+								console.log('댓글 등록이 실패되었습니다.');
+							}
+						}
+					});
+				}
+			}
 		});
 		
 		// 댓글 삭제

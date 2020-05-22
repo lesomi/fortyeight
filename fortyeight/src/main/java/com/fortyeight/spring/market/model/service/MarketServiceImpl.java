@@ -91,6 +91,12 @@ public class MarketServiceImpl implements MarketService {
 	public int marketCommentDelete(Map<String, String> map) {
 		return dao.marketCommentDelete(session, map);
 	}
+	
+	// 마켓 댓글 추가
+	@Override
+	public int marketCommentInsert(Map<String, String> map) {
+		return dao.marketCommentInsert(session, map);
+	}
 
 	//[삽니다] 리스트
 	@Override

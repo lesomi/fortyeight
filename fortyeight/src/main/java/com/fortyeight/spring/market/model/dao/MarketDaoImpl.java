@@ -63,6 +63,12 @@ public class MarketDaoImpl implements MarketDao {
 	public int marketCommentDelete(SqlSessionTemplate session, Map<String, String> map) {
 		return session.delete("market.marketCommentDelete", map);
 	}
+	
+	// 마켓 댓글 추가
+	@Override
+	public int marketCommentInsert(SqlSessionTemplate session, Map<String, String> map) {
+		return session.insert("market.marketCommentInsert", map);
+	}
 
 	// [삽니다] 리스트 출력
 	@Override

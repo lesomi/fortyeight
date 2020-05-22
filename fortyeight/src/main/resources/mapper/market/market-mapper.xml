@@ -112,13 +112,13 @@
 	
 	<select id="selectMkComment" resultType="mkcomment" parameterType="_int">
 		SELECT 
-			MKCOMMNO, MKCOMMENT.USERNO, MEMBER.NICKNAME, MKREF, COMMLEVEL, COMMCONTENT, MKCOMMREF, COMMDATE 
+			MKCOMMNO, MKCOMMENT.USERNO, MEMBER.USERID, MEMBER.NICKNAME, MKREF, COMMLEVEL, COMMCONTENT, MKCOMMREF, COMMDATE 
 		FROM MKCOMMENT FULL JOIN MEMBER ON (MKCOMMENT.USERNO = MEMBER.USERNO) 
 		WHERE MKREF = #{mkNo}
 	</select>
 	
 	<select id="selectMkCommentCount" resultType="_int" parameterType="_int">
-		SELECT COUNT(*) FROM MKCOMMENT WHERE MKREF= #{mkNo}
+		SELECT COUNT(*) FROM MKCOMMENT WHERE MKREF= #{mkNo} ORDER BY COMMDATE DESC
 	</select>
 	
 	
@@ -211,4 +211,9 @@
 	<delete id="marketCommentDelete" parameterType="map">
 		DELETE FROM MKCOMMENT WHERE MKREF=${mkNo} AND MKCOMMNO=${mkCommNo}
 	</delete>
+	
+	<!-- 마켓 댓글 등록 -->
+	<insert id="marketCommentInsert" parameterType="map">
+		INSERT INTO MKCOMMENT VALUES (SEQ_MK_COMMNO.NEXTVAL, ${userNo}, ${mkNo}, DEFAULT, #{comment}, 0, DEFAULT)
+	</insert>
 </mapper>

@@ -14,6 +14,7 @@ public interface MarketService {
 	List<MkComment> selectComment(int mkNo, int cPage, int numPerPage); // 마켓 댓글리스트 출력
 	int selectCommentCount(int mkNo); // 댓글리스트 페이징
 	int marketCommentDelete(Map<String, String> map); // 댓글 삭제
+	int marketCommentInsert(Map<String, String> map);// 댓글 추가
 	
 	// ----- 팝니다
 	List<Market> marketList(Map<String, String> map, int cPage, int numPerPage); // 리스트 출력(팝니다)
