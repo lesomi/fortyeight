@@ -1,5 +1,12 @@
 package com.fortyeight.spring.board.model.dao;
 
-public interface BoardDao {
+import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+
+import com.fortyeight.spring.board.model.vo.Board;
+
+public interface BoardDao {
+	List<Board> selectList(SqlSessionTemplate session,int cPage,int numPerPage);
+	int selectBoardCount(SqlSessionTemplate session);
 }
