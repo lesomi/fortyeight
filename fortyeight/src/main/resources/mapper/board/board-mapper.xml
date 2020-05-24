@@ -8,4 +8,8 @@
 	<select id="selectBoardCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD
 	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		INSERT INTO BOARD VALUES(SEQ_BOARDNO.NEXTVAL,#{userNo},#{boardTitle},#{boardContent},DEFAULT,#{boardType},DEFAULT)
+	</insert>
 </mapper>
