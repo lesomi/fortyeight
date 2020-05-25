@@ -15,7 +15,6 @@ import com.fortyeight.spring.board.model.service.BoardService;
 import com.fortyeight.spring.board.model.vo.Board;
 import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.user.controller.UserController;
-import com.fortyeight.spring.user.model.vo.User;
 
 @Controller
 public class boardController {
@@ -76,5 +75,20 @@ public class boardController {
 		mv.setViewName("board/boardView");
 		
 		return mv;
+	}
+	
+	@RequestMapping("/board/deleteBoard.do")
+	public String deleteBoard(int boardNo,Model m) {
+		int result=service.deleteBoard(boardNo);
+		
+		if(result>0) {
+			m.addAttribute("msg","게시글이 삭제되었습니다.");
+			m.addAttribute("loc","/board/boardList.do");
+		}else {
+			m.addAttribute("msg","게시글 삭제 실패");
+			m.addAttribute("loc","/board/boardView.do?boardNo="+boardNo);
+		}
+		
+		return "common/msg";
 	}
 }
