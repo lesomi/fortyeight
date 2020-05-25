@@ -42,11 +42,11 @@
 		
 		border-radius: 30px;
 		background-color: #e9ecef; }
-	#userId, #nickName, #password, #email, #phone, #dealAddr, #map, #numberSender { margin-bottom: 30px; }
+	#userId, #nickName, #password, #email, #phone, #dealAddr, #map, #numberSender, #fileDiv { margin-bottom: 30px; }
 	.blankP { padding-bottom: 10px; }
 	#modification { margin-top: 50px; margin-bottom: 100px; position: relative; left: 45%; }
 	#modification:hover { color: rgb(251,192,41); }
-	#pwChange { cursor: pointer; color: blue; position: absolute; top: 75%; left: 67%; }
+	#pwChange { cursor: pointer; color: blue; font-weight: bolder;}
 </style>
 
 <section>
@@ -65,12 +65,20 @@
             	<form action="${path}/user/updateUser.do?userNo=${loginUser.userNo}" method="post" enctype="multipart/form-data">
 					<div class="form-group" id="centerDiv">
 						<!-- 프로필 -->
-						<c:if test="${loginUser.renameProfile eq ''}">
-							<img id="profile" src="${path}/resources/img/default_profile.png"/>
+						<p>프로필 : </p>
+						<c:if test="${loginUser.renameProfile eq null}">
+							<div class="custom-file" id="fileDiv">
+			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
+			                    <label class="custom-file-label" style="width: 400px; margin-left: 50px;" for="upFile">파일을 선택하세요</label>
+			                </div>
 						</c:if>
-						<c:if test="${loginUser.renameProfile ne ''}">
-							<img id="profile" src="${path}/resources/img/${loginUser.renameProfile}"/>
+						<c:if test="${loginUser.renameProfile ne null}">
+							<div class="custom-file">
+			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
+			                    <label class="custom-file-label" style="width: 400px; margin-left: 50px;" for="upFile">${loginUser.renameProfile}</label>
+			                </div>
 						</c:if>
+						<br><br>
 						<!-- 아이디 -->
 						<label for="userId">아이디 : </label> 
 						<input type="text" class="form-control inputWidth" id="userId" name="userId" value="${loginUser.userId}" readonly>
@@ -79,9 +87,9 @@
 						<input type="text" class="form-control inputWidth" name="nickMyName" id="nickMyName" value="${loginUser.nickName}" required/>
 						<p id="nickMsg"></p>
 						<!-- 비밀번호 -->
-						<label for="password">비밀번호 : </label>
+						<label for="password">비밀번호 :  <span id="pwChange">비밀번호 변경</span> </label>
 						<input type="text" class="form-control inputWidth" name="password" id="password" value="비공개" readonly/>
-						<span id="pwChange">비밀번호 변경</span>
+						
 						<!-- <button type="button" id="pwBtn" class="btn btn-dark" data-toggle="collapse" data-target="#passwordDiv">수정</button> -->
 						<!-- 비밀번호 수정 칸 -->
 						<div id="passwordDiv">
@@ -126,6 +134,15 @@
 
 
 <script>
+/* -------------------------------------------------- [프로필 사진 설정] ------------------------------------------------------------ */
+	$(function() {
+		var upFile = document.querySelector('#upFile');
+		upFile.addEventListener('change', function(e) {
+			// 파일명 변경
+			const fileName = this.files[0].name;
+			$(this).next(".custom-file-label").html(fileName);
+		});
+	});
 /* -------------------------------------------------- [비밀번호 유효성 검사] ------------------------------------------------------------ */
 	// [비밀번호 변경] 눌렀을 때.
 	$(function () {
