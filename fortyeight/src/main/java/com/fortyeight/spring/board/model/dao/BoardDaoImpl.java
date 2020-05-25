@@ -31,4 +31,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("board.selectBoardView",boardNo);
 	}
 
+	@Override
+	public int deleteBoard(SqlSessionTemplate session, int boardNo) {
+		return session.update("board.deleteBoard",boardNo);
+	}
+
 }

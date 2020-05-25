@@ -11,4 +11,5 @@ public interface BoardDao {
 	int selectBoardCount(SqlSessionTemplate session);
 	int insertBoard(SqlSessionTemplate session,Board b);
 	Board selectBoardView(SqlSessionTemplate session, int boardNo);
+	int deleteBoard(SqlSessionTemplate session,int boardNo);
 }
