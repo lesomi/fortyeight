@@ -17,4 +17,5 @@ public class Board {
 	private Date boardDate;
 	private String boardType;
 	private String deleted;
+	private String nickName;
 }
