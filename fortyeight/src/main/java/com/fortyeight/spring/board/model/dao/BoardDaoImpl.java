@@ -36,4 +36,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.update("board.deleteBoard",boardNo);
 	}
 
+	@Override
+	public int updateBoard(SqlSessionTemplate session, Board b) {
+		return session.update("board.updateBoard",b);
+	}
+
 }
