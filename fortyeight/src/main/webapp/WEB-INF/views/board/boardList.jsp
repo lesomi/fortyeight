@@ -14,19 +14,21 @@
 		<button type="button" class="btn btn-warning" onclick="location.replace('${path}/board/insertBoard.do');">작성</button>
 		<table class="table">
 			<tr>
-				<td></td>
-				<td>유형</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>등록일자</td>
+				<th></th>
+				<th>유형</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일자</th>
 			</tr>
 			<c:if test="${not empty board }">
 				<c:forEach items="${board }" var="b">
 					<tr>
 						<td>${b.boardNo }</td>
 						<td>${b.boardType }</td>
-						<td>${b.boardTitle }</td>
-						<td>작성자 닉넴</td>
+						<td>
+							<a href="${path }/board/boardView.do?boardNo=${b.boardNo }">${b.boardTitle }</a>
+						</td>
+						<td>${b.nickName }</td>
 						<td>${b.boardDate }</td>
 					</tr>
 				</c:forEach>
