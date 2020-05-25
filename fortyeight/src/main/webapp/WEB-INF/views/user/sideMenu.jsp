@@ -8,14 +8,13 @@
 	<style>
 		/* 상위 태그에 높이 지정 */
 	    html,body{
-	        height: 100%;
+	    	height: 100%;
 	    }
 	    /* 전체를 감싸는 div  높이, 넓이 설정*/
 	    div#wrapper{
 	    
 	        width: 100%;
-	        height: 100%;
-	
+			height: 100%;
 	        margin-top: 62px;
 	    }
 	    /* 사이드 바 */
@@ -206,7 +205,7 @@
 
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
-                            <a class="collapse-item" href="${path}/user/userUpdate.do?userNo=${loginUser.userNo}">회원 정보 수정</a>
+                            <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 수정</a>
                             <a class="collapse-item" href="#">회원 탈퇴</a>
                         </div>
                     </li>
