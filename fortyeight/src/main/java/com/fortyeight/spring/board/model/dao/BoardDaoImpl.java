@@ -26,4 +26,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.insert("board.insertBoard",b);
 	}
 
+	@Override
+	public Board selectBoardView(SqlSessionTemplate session, int boardNo) {
+		return session.selectOne("board.selectBoardView",boardNo);
+	}
+
 }

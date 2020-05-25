@@ -10,4 +10,5 @@ public interface BoardDao {
 	List<Board> selectList(SqlSessionTemplate session,int cPage,int numPerPage);
 	int selectBoardCount(SqlSessionTemplate session);
 	int insertBoard(SqlSessionTemplate session,Board b);
+	Board selectBoardView(SqlSessionTemplate session, int boardNo);
 }
