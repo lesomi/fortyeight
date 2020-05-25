@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board">
 	<select id="selectList" resultType="board">
-		SELECT * FROM BOARD B JOIN MEMBER M ON(B.USERNO=M.USERNO) ORDER BY BOARDDATE DESC
+		SELECT * FROM BOARD B JOIN MEMBER M ON(B.USERNO=M.USERNO) WHERE DELETED = 'N' ORDER BY BOARDDATE DESC
 	</select>
 	
 	<select id="selectBoardCount" resultType="_int">
-		SELECT COUNT(*) FROM BOARD
+		SELECT COUNT(*) FROM BOARD WHERE DELETED = 'N'
 	</select>
 	
 	<insert id="insertBoard" parameterType="board">
@@ -16,4 +16,8 @@
 	<select id="selectBoardView" resultType="board" parameterType="_int">
 		SELECT * FROM BOARD B JOIN MEMBER M ON(B.USERNO=M.USERNO) WHERE BOARDNO = #{boardNo}
 	</select>
+	
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE BOARD SET DELETED = 'Y' WHERE BOARDNO = #{boardNo}
+	</update>
 </mapper>
