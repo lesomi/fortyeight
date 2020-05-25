@@ -91,4 +91,32 @@ public class boardController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/board/updateBoard.do")
+	public ModelAndView updateBoard(int boardNo,ModelAndView mv) {
+		Board b=service.selectBoardView(boardNo);
+		
+		mv.addObject("b",b);
+		mv.setViewName("board/updateBoard");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/board/updateBoardEnd.do")
+	public String updateBoardEnd(Board b,Model m) {
+		System.out.println(b);
+		
+		int result=service.updateBoard(b);
+		System.out.println(result);
+	
+		if(result>0) {
+			m.addAttribute("msg","게시글이 수정되었습니다.");
+			m.addAttribute("loc","/board/boardView.do?boardNo="+b.getBoardNo());
+		}else {
+			m.addAttribute("msg","게시글 수정 실패");
+			m.addAttribute("loc","/board/updateBoard.do?boardNo="+b.getBoardNo());
+		}
+		
+		return "common/msg";
+	}
 }
