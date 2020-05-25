@@ -20,4 +20,8 @@
 	<update id="deleteBoard" parameterType="_int">
 		UPDATE BOARD SET DELETED = 'Y' WHERE BOARDNO = #{boardNo}
 	</update>
+	
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent} WHERE BOARDNO = #{boardNo}
+	</update>
 </mapper>
