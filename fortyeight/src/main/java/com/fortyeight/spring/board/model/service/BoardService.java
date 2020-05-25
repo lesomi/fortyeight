@@ -9,4 +9,5 @@ public interface BoardService {
 	int selectBoardCount();
 	int insertBoard(Board b);
 	Board selectBoardView(int boardNo);
+	int deleteBoard(int boardNo);
 }
