@@ -194,6 +194,7 @@ public class UserController {
 	public Map<String, Object> checkEmail(String email) {
 		User u = service.selectEmail(email);
 		boolean flag = u != null ? false : true;
+		System.out.println("email이 있나요?"+flag);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user", u);
 		map.put("flag", flag);
@@ -239,8 +240,22 @@ public class UserController {
 	}
 
 	// 회원정보수정 전환
-	@RequestMapping("/user/userUpdate.do")
+	@RequestMapping("/user/updateUser.do")
 	public String userUpdate(int userNo) {
 		return "user/updateUser";
+	}
+	
+	// 마이페이지 - 회원정보수정(현재 비밀번호)
+	@RequestMapping("/user/selectPassword.do")
+	@ResponseBody
+	public boolean selectPassword(String pwNow, HttpSession session) {
+		User loginUser = (User)session.getAttribute("loginUser");
+		System.out.println("세션을 가져오는가? "+loginUser);
+		System.out.println("입력한 비밀번호 값도 가져오는가? "+pwNow);
+		User u = service.selectLogin(loginUser.getUserId());
+		// 입력한 비밀번호와 현재 비밀번호 비교
+		boolean flag = encoder.matches(pwNow, u.getPassword());
+		System.out.println("입력한 비밀번호와 현재 비밀번호의 비교 : "+flag);
+		return flag;
 	}
 }

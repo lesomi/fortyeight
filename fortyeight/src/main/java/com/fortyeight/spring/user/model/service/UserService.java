@@ -12,5 +12,4 @@ public interface UserService {
 	int insertUser(User u); // 회원가입 DB 저장
 	User selectPwCk(Map<String,String> pwCk);
 	int updatePassword(Map<String,Object> map);
-	int selectUser(int userNo); // 회원정보 수정
 }

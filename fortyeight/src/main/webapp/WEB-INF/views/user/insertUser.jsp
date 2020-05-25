@@ -169,7 +169,6 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p style="position:relative; left: 65px; height:50px;">사진 크기는 10mb 이하 업로드 가능합니다.</p>
 						</td>
 					</tr>
 				
@@ -609,7 +608,7 @@
 						success: function(data) {
 							console.log(data);
 							// Ajax 안에서 분기처리 
-							if(!data) { 
+							if(!data.flag) { 
 								console.log('이메일이 존재합니다. 사용할 수 없습니다.');
 								$("#emailMsg").css("visibility", "visible");
 								$("#emailMsg").css("color", "red");
