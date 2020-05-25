@@ -20,6 +20,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import com.fortyeight.spring.user.model.vo.User;
+
 
 
 
@@ -141,7 +143,20 @@ public class AESEncrypt {
 	}
 	
 	
+	public static void encryptUser(User u) {
+		u.setPassword(encrypt(u.getPassword()));
+		u.setPhone(encrypt(u.getPhone()));
+	}
 	
+	public static void decryptMember(User u) {
+		try {
+			u.setPassword(decrypt(u.getPassword()));
+			u.setPhone(decrypt(u.getPhone()));
+		}
+		catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 

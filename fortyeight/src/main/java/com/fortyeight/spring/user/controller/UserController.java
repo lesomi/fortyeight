@@ -2,6 +2,7 @@ package com.fortyeight.spring.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fortyeight.spring.common.AESEncrypt;
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
 
@@ -33,7 +36,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	@Autowired
-	private BCryptPasswordEncoder encoder;
+	private BCryptPasswordEncoder encoder; // 단방향 암호화
 	@Autowired
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	
@@ -49,7 +52,7 @@ public class UserController {
 		User login=service.selectLogin(userId);
 		
 		String page="";
-		if(login !=null && encoder.matches(password, login.getPassword())) { 
+		if(login!=null) { 
 			//로그인 성공
 			model.addAttribute("loginUser",login);
 			page = "redirect:/";
@@ -113,17 +116,22 @@ public class UserController {
 			u.setOriProfile(ori);
 			u.setRenameProfile(rename);
 		}
-		System.out.println("form으로 넘어오는 값이 있는가? "+u);
-		
 		// 비밀번호 암호화
 		System.out.println("암호화 되기 전 비밀번호 : "+u.getPassword());
-		u.setPassword(encoder.encode(u.getPassword()));
-		System.out.println("암호화된 비밀번호 : "+u.getPassword());
+		/* u.setPassword(encoder.encode(u.getPassword())); */ // 단방향 암호화
+		String password = AESEncrypt.encrypt(u.getPassword());  // 양방향 암호화
+		System.out.println("암호화된 비밀번호 : "+password);
 		
 		// 전화번호 암호화
 		System.out.println("암호화 되기 전 전화번호 : "+u.getPhone());
-		u.setPhone(encoder.encode(u.getPhone()));
-		System.out.println("암호화된 전화번호 : "+u.getPhone());
+		/* u.setPhone(encoder.encode(u.getPhone())); */ // 단방향 암호화
+		String phone = AESEncrypt.encrypt(u.getPhone()); // 양방향 암호화
+		System.out.println("암호화된 전화번호 : "+phone);
+		
+		u = new User(u.getUserNo(), u.getUserId(), password, u.getNickName(), u.getEmail(), phone, u.getDealAddr(),
+							null, null, 0, u.getOriProfile(), u.getRenameProfile());
+		
+		System.out.println("form으로 넘어오는 값이 있는가? "+u);
 		
 		// DB에 값 저장
 		int result = service.insertUser(u);
@@ -237,7 +245,12 @@ public class UserController {
 	
 	// 회원정보수정 전환
 	@RequestMapping("/user/userUpdate.do")
-	public String userUpdate(String userId) {
-		return "user/userUpdate";
+	public ModelAndView userUpdate(String userId, ModelAndView mv) {
+		User user = service.selectLogin(userId);
+		AESEncrypt.decryptMember(user);
+		System.out.println("복호화 처리 되었는가?"+user);
+		mv.addObject("user",user);
+		mv.setViewName("user/updateUser");
+		return mv;
 	}
 }
