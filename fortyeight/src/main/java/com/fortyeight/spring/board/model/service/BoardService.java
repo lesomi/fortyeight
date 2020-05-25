@@ -8,4 +8,5 @@ public interface BoardService {
 	List<Board> selectList(int cPage,int numPerPage);
 	int selectBoardCount();
 	int insertBoard(Board b);
+	Board selectBoardView(int boardNo);
 }

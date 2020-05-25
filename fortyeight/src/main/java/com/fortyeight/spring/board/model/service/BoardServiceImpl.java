@@ -36,4 +36,9 @@ public class BoardServiceImpl implements BoardService {
 	public int insertBoard(Board b) {
 		return dao.insertBoard(session,b);
 	}
+
+	@Override
+	public Board selectBoardView(int boardNo) {
+		return dao.selectBoardView(session,boardNo);
+	}
 }
