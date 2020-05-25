@@ -34,6 +34,7 @@ public class boardController {
 		int totalData = service.selectBoardCount();
 		
 		mv.addObject("board",list);
+		System.out.println(list);
 		
 		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/board/boardList.do"));
 		
@@ -49,7 +50,7 @@ public class boardController {
 	
 	@RequestMapping("/board/insertBoardEnd.do")
 	public String insertBoard(Board b,Model m) {
-		b=new Board(0,b.getUserNo(),b.getBoardTitle(),b.getBoardContent(),null,b.getBoardType(),null);
+		b=new Board(0,b.getUserNo(),b.getBoardTitle(),b.getBoardContent(),null,b.getBoardType(),null,null);
 		
 		int result=service.insertBoard(b);
 		
@@ -65,5 +66,15 @@ public class boardController {
 		}
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/board/boardView.do")
+	public ModelAndView boardView(int boardNo, ModelAndView mv) {
+		Board b=service.selectBoardView(boardNo);
+		
+		mv.addObject("b",b);
+		mv.setViewName("board/boardView");
+		
+		return mv;
 	}
 }
