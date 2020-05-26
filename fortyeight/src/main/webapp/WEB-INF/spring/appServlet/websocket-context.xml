@@ -12,4 +12,10 @@
 	<bean id="chattingServer" class="com.fortyeight.spring.chatting.controller.ChattingServer"/>
 	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/>
 	
+	<!-- <websocket:handlers>
+		<websocket:mapping handler="alram" path="/alram"/>
+	</websocket:handlers>
+	<bean id="alram" class="com.fortyeight.spring.chatting.controller.ChattingServer"/>
+	<bean class="com.fasterxml.jackson.databind.ObjectMapper"/> -->
+	
 </beans>
