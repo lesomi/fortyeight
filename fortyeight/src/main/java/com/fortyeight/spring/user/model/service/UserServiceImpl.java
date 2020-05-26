@@ -60,6 +60,12 @@ public class UserServiceImpl implements UserService {
 	public int updatePassword(Map<String, Object> map) {
 		return dao.updatePassword(session,map);
 	}
+
+	// 회원정보 수정
+	@Override
+	public int updateUser(User u) {
+		return dao.updateUser(session,u);
+	}
 	
 	
 }
