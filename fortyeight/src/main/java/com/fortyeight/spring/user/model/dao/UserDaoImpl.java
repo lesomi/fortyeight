@@ -56,6 +56,12 @@ public class UserDaoImpl implements UserDao {
 	public int updateUser(SqlSessionTemplate session, User u) {
 		return session.update("user.updateUser", u);
 	}
+
+	// 회원탈퇴
+	@Override
+	public int deleteUser(SqlSessionTemplate session, int userNo) {
+		return session.delete("user.deleteUser", userNo);
+	}
 	
 	
 }

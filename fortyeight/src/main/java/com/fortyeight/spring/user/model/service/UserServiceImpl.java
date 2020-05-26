@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService {
 	public int updateUser(User u) {
 		return dao.updateUser(session,u);
 	}
+
+	// 회원탈퇴
+	@Override
+	public int deleteUser(int userNo) {
+		return dao.deleteUser(session, userNo);
+	}
 	
 	
 }

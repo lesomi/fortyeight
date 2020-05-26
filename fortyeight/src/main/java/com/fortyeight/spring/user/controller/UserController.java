@@ -52,7 +52,7 @@ public class UserController {
 		User login = service.selectLogin(userId);
 
 		String page = "";
-		if (login != null && encoder.matches(password, login.getPassword())) {
+		if ( login != null && encoder.matches(password, login.getPassword()) && login.getStatus().equals("N") ) {
 			// 로그인 성공
 			model.addAttribute("loginUser", login);
 			page = "redirect:/";
@@ -309,6 +309,37 @@ public class UserController {
 		} else {
 			model.addAttribute("msg","회원정보수정이 실패되었습니다. 다시 수정하세요.");
 			model.addAttribute("loc","/user/updateUser.do");
+			page = "common/msg";
+		}
+		return page;
+	}
+	
+	
+	
+	// 마이페이지 - 회원탈퇴 화면 전환
+	@RequestMapping("/user/deleteUser.do")
+	public String deleteUser(int userNo) {
+		return "user/deleteUser";
+	}
+	
+	// 마이페이지 - 회원탈퇴
+	@RequestMapping("/user/deleteUserEnd.do")
+	public String deleteUserEnd(int userNo, Model model, SessionStatus status) {
+		System.out.println("회원탈퇴하는 유저 번호 : "+userNo);
+		int result = service.deleteUser(userNo); // 진짜 삭제하는게 아니라, status값을 N->Y 으로 update할것.
+		
+		String page = "";
+		if(result>0) {
+			if (!status.isComplete()) {// 세션이 만료되지 않았다면
+				status.setComplete();// 로그아웃
+			}
+			model.addAttribute("msg","회원탈퇴가 완료되었습니다. 다음에 또 만나요!");
+			model.addAttribute("loc","/");
+			page = "common/msg";
+		}
+		else {
+			model.addAttribute("msg","회원탈퇴가 실패되었습니다. 다시 진행하세요.");
+			model.addAttribute("loc","/user/deleteUser.do");
 			page = "common/msg";
 		}
 		return page;

@@ -206,7 +206,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
                             <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 수정</a>
-                            <a class="collapse-item" href="#">회원 탈퇴</a>
+                            <a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
                         </div>
                     </li>
 

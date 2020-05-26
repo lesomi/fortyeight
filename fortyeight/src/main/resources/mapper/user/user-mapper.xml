@@ -51,4 +51,9 @@
 			</if>
 		WHERE USERNO=#{userNo}
 	</update>
+	
+	<!-- 마이페이지 - 회원탈퇴 -->
+	<update id="deleteUser" parameterType="_int">
+		UPDATE MEMBER SET STATUS='Y' WHERE USERNO=#{userNo}
+	</update>
 </mapper>

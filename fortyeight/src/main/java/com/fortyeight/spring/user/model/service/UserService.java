@@ -13,4 +13,5 @@ public interface UserService {
 	User selectPwCk(Map<String,String> pwCk);
 	int updatePassword(Map<String,Object> map);
 	int updateUser(User u); // 회원정보수정
+	int deleteUser(int userNo); // 회원탈퇴
 }
