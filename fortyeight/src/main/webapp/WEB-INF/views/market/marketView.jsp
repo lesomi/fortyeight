@@ -20,6 +20,7 @@
 	span#fontSize { margin-left: 5%; font-weight: normal; font-size: 12px; }
 	button#replyBtns { width:50px; height: 30px; font-size: 12px; }
 	button.replyDelete { width:50px; height: 30px; font-size: 12px; }
+	*{border:1px solid green;}
 </style>
 
 <section>
@@ -28,19 +29,45 @@
 	</div>
 
 	<div class="container"  style="margin-top: 50px;">
-		<div>
-			<!-- 이미지슬라이드 -->
-		</div>
-		<div>
-			<div>
-				<div>${mk.mkTitle}</div>
-				<div>${mk.mkPrice}</div>
-			</div>
-			<div>
-				<div>닉네임</div>
-				<div>${mk.dealAddr }</div>
-			</div>
-			<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
+		<div style="width:500px;margin:0 auto;">
+			<table class="table">
+				<tr>
+					<c:if test="${renameMkImg ne null }">
+						<td colspan="2">
+							<!-- 이미지 슬라이드 -->
+							<img src="${path }/resources/upload/market/">
+						</td>
+					</c:if>
+				</tr>
+				<tr>
+					<td colspan="2">				
+						${mk.mkTitle}
+					</td>
+					<td style="width:50px;">찜</td>
+				</tr>
+				<tr>
+					<c:if test="${loginUser ne null }">
+						<td style="width:200px;">닉</td>
+						<td colspan="2">
+							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
+						</td>
+					</c:if>
+					<c:if test="${loginUser eq null }">
+						<td colspan="3">
+							닉
+						</td>
+					</c:if>
+				</tr>
+				<tr>
+					<td style="width:200px;">${mk.mkPrice}원</td>
+					<td colspan="2">${mk.dealAddr}</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						${mk.mkContent }
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	
@@ -132,6 +159,8 @@
 
 <script>
 	function accessChatting(){
+		let alram=new WebSocket("ws://localhost:9090${path}/alram");
+		
 		open("${path}/chattingView.do","_blank","width=400,height=600");
 	}
 	
@@ -164,10 +193,9 @@
 		
 		// 댓글 등록
 		$('#writeBtn').click(function () {
-			if( ${loginUser == null} ) {
+			if( ${loginUser eq null} ) {
 				$(this).parents().parents().parents().next().slideToggle(); // 로그인하기
-			}
-			else {
+			}else {
 				const comment = $('#mkTitle').val();
 				console.log(comment);
 				if(!comment) { // 들어오는 댓글이 빈칸이면?
