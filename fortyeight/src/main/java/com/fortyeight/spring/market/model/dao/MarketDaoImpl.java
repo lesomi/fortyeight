@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MarketViewImg;
 import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -46,6 +47,12 @@ public class MarketDaoImpl implements MarketDao {
 	@Override
 	public Market selectView(SqlSessionTemplate session, int mkNo) {
 		return session.selectOne("market.selectView",mkNo);
+	}
+	
+	//마켓상세뷰 닉네임만 출력
+	@Override
+	public String selectMkViewNick(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkViewNick", mkNo);
 	}
 
 	// 마켓 상세화면 밑 [댓글] 리스트 출력
@@ -99,6 +106,12 @@ public class MarketDaoImpl implements MarketDao {
 	@Override
 	public List<MkCommCount> marketSellCommentCount(SqlSessionTemplate session) {
 		return session.selectList("market.marketSellCommentCount");
+	}
+
+	// 마켓상세뷰 이미지 출력
+	@Override
+	public MarketViewImg selectMkViewImg(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkViewImg", mkNo);
 	}
 
 	

@@ -13,6 +13,7 @@ import com.fortyeight.spring.common.MyException;
 import com.fortyeight.spring.market.model.dao.MarketDao;
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MarketViewImg;
 import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -128,6 +129,18 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public List<MkCommCount> marketSellCommentCount() {
 		return dao.marketSellCommentCount(session);
+	}
+
+	// 마켓 상세뷰 닉네임만 출력
+	@Override
+	public String selectMkViewNick(int mkNo) {
+		return dao.selectMkViewNick(session, mkNo);
+	}
+
+	// 마켓 상세뷰 이미지 출력
+	@Override
+	public MarketViewImg selectMkViewImg(int mkNo) {
+		return dao.selectMkViewImg(session, mkNo);
 	}
 	
 	

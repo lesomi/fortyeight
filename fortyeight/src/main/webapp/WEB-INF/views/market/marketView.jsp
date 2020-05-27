@@ -21,88 +21,129 @@
 	button#replyBtns { width:50px; height: 30px; font-size: 12px; }
 	button.replyDelete { width:50px; height: 30px; font-size: 12px; }
 	*{border:1px solid green;}
+	
+	#centerTr { text-align: center; }
+	#slideImg { width: 200px; height: 200px; }
 </style>
 
 <section>
 	<div style="margin-top: 115px;height: 80px;background-color:lightgray">
-		<span>팝니다 > ${mk.category}</span>
+		<span><strong>[${mk.mkType} - ${mk.category}]</strong></span>
 	</div>
 
 	<div class="container"  style="margin-top: 50px;">
 		<div style="width:500px;margin:0 auto;">
 			<table class="table">
-				<tr>
-					<c:if test="${renameMkImg ne null }">
+				<tr id="centerTr">
+					<!-- 이미지 슬라이드 -->
+					<c:if test="${mviBuy.renameMkImg ne null }">
 						<td colspan="4">
-							<!-- 이미지 슬라이드 -->
-							<img src="${path }/resources/upload/market/">
+							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
 						</td>
 					</c:if>
 				</tr>
-				<tr>
-					<td colspan="2">				
-						${mk.mkTitle}
-					</td>
+				<!-- 로그인이 아닐 때, 찜목록/드롭다운리스트 안 보이게 처리한다. -->
+				<c:if test='${empty loginUser}'>
+					<tr>
+						<td colspan="4">				
+							 ${mk.mkTitle}
+						</td>
 					
-					<!-- if문 분기처리 -판매완료일때 -->
-					<td style="width:50px;" colspan="2">
-						<button type="button" id="dipsBtn">
-							<img src="${path }/resources/img/blackStar.png" width="25px">
-						</button>
-						<%-- <c:if test="${loginUser.userNo eq dips.userNo }">
-							<c:if test="${mk.mkNo eq dips.mkNo }">
-								<button type="button" id="canDipsBtn">
-									<img src="${path }/resources/img/yellowStar.png" width="25px">
-								</button>
+						<!-- if문 분기처리 -판매완료일때 -->
+						<%-- <td style="width:50px;" colspan="2">
+							<button type="button" id="dipsBtn">
+								<img src="${path }/resources/img/blackStar.png" width="25px">
+							</button>
+							<!-- 에러나는 중...ㅎ -->
+							<c:if test="${loginUser.userNo eq dips.userNo }">
+								<c:if test="${mk.mkNo eq dips.mkNo }"> 
+									<button type="button" id="canDipsBtn">
+										<img src="${path }/resources/img/yellowStar.png" width="25px">
+									</button>
+								</c:if>
 							</c:if>
-						</c:if> --%>
-					</td>
-					
-					<!-- if문 분기처리 -판매완료가 아닐때 -->
-					<td style="width:50px;">
-						<button type="button" id="dipsBtn">
-							<img src="${path }/resources/img/blackStar.png" width="25px">
-						</button>
-						<%-- <c:if test="${loginUser.userNo eq dips.userNo }">
-							<c:if test="${mk.mkNo eq dips.mkNo }">
-								<button type="button" id="canDipsBtn">
-									<img src="${path }/resources/img/yellowStar.png" width="25px">
-								</button>
+						</td> --%>
+						
+						<!-- if문 분기처리 -판매완료가 아닐때 -->
+						<%-- <td style="width:50px;">
+							<button type="button" id="dipsBtn">
+								<img src="${path }/resources/img/blackStar.png" width="25px">
+							</button>
+							<!-- 에러나는 중...ㅎ -->
+							<c:if test="${loginUser.userNo eq dips.userNo }">
+								<c:if test="${mk.mkNo eq dips.mkNo }">
+									<button type="button" id="canDipsBtn">
+										<img src="${path }/resources/img/yellowStar.png" width="25px">
+									</button>
+								</c:if>
 							</c:if>
+						</td> --%>
+						<%-- <td style="width:50px;">
+							<div class="dropdown">
+								<button type="button" data-toggle="dropdown">
+							    	<img src="${path }/resources/img/menubar.png" width="25px;">
+							  	</button>
+							  	<div class="dropdown-menu">
+							  		<!-- if문 분기처리 자리 -판매중 -->
+								    <a class="dropdown-item" href="#">수정</a>
+								    <a class="dropdown-item" href="#">삭제</a>
+								    <a class="dropdown-item" href="#">예약중</a>
+								    <a class="dropdown-item" href="#">판매완료</a>
+								    
+								    <!-- if문 분기처리 자리 -예약중 -->
+								    <a class="dropdown-item" href="#">수정</a>
+								    <a class="dropdown-item" href="#">삭제</a>
+								    <a class="dropdown-item" href="#">판매중</a>
+								    <a class="dropdown-item" href="#">판매완료</a>
+							  	</div>
+							</div>
+						</td> --%>
+						<!-- 로그인일 때,  찜목록/드롭다운리스트 보이게 처리한다. -->
+						<%-- <c:if test="">
 						</c:if> --%>
-					</td>
-					<td style="width:50px;">
-						<div class="dropdown">
-							<button type="button" data-toggle="dropdown">
-						    	<img src="${path }/resources/img/menubar.png" width="25px;">
-						  	</button>
-						  	<div class="dropdown-menu">
-						  		<!-- if문 분기처리 자리 -판매중 -->
-							    <a class="dropdown-item" href="#">수정</a>
-							    <a class="dropdown-item" href="#">삭제</a>
-							    <a class="dropdown-item" href="#">예약중</a>
-							    <a class="dropdown-item" href="#">판매완료</a>
-							    
-							    <!-- if문 분기처리 자리 -예약중 -->
-							    <a class="dropdown-item" href="#">수정</a>
-							    <a class="dropdown-item" href="#">삭제</a>
-							    <a class="dropdown-item" href="#">판매중</a>
-							    <a class="dropdown-item" href="#">판매완료</a>
-						  	</div>
-						</div>
-					</td>
-					
-				</tr>
+					</tr>
+				</c:if>
+				
+				<!-- 로그인일 때, 찜목록/드롭다운리스트 보이게 처리한다. -->
+				<c:if test='${not empty loginUser}'>
+					<tr>
+						<td colspan="4">				
+							 ${mk.mkTitle}
+						</td>
+						
+						<!-- if문 분기처리 -판매완료일때 -->
+						<c:if test=''>
+							<td style="width:50px;" colspan="2">
+								<button type="button" id="dipsBtn">
+									<img src="${path }/resources/img/blackStar.png" width="25px">
+								</button>
+								<!-- 에러나는 중...ㅎ -->
+								<c:if test="${loginUser.userNo eq dips.userNo }">
+									<c:if test="${mk.mkNo eq dips.mkNo }"> 
+										<button type="button" id="canDipsBtn">
+											<img src="${path }/resources/img/yellowStar.png" width="25px">
+										</button>
+									</c:if>
+								</c:if>
+							</td>
+						</c:if>
+					</tr>
+				</c:if>
+				
+				
+				
 				<tr>
 					<c:if test="${loginUser ne null }">
-						<td style="width:200px;">닉</td>
+						<td style="width:200px;">
+							${nickName}님
+						</td>
 						<td colspan="3">
 							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
 						</td>
 					</c:if>
 					<c:if test="${loginUser eq null }">
 						<td colspan="4">
-							닉
+							${nickName}님
 						</td>
 					</c:if>
 				</tr>
@@ -218,7 +259,7 @@
 	
 	alram.onopen=function(data){
 		console.log(data);
-		websocket.send(JSON.stringify(new Alram("new","접속 -alram",'${loginUser.userNo}',0)));
+		alram.send(JSON.stringify(new Alram("new","접속 -alram",'${loginUser.userNo}',0)));
 	}
 	
 	alram.onmessage=function(data){

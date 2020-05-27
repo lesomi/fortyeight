@@ -24,6 +24,7 @@ import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MarketViewImg;
 import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -226,16 +227,24 @@ public class MarketController {
 	public ModelAndView marketView(int mkNo,ModelAndView mv,
 							@RequestParam(required=false, defaultValue="1") int cPage,
 							@RequestParam(required=false, defaultValue="10") int numPerPage) {
-		Market mk=service.selectView(mkNo);
+		Market mk=service.selectView(mkNo); // 마켓리스트
 		
 		List<Dips> dips=service.selectDips(mkNo);
 		
 		// ---- ㅆ
+		MarketViewImg mviBuy = service.selectMkViewImg(mkNo); // 마켓이미지 불러오기(삽니다)
+		System.out.println("[삽니다]마켓이미지는 잘 가져오는가? "+mviBuy);
+		
+		String nickName = service.selectMkViewNick(mkNo); // 마켓뷰 작성자 '닉네임'만 불러오기
+		System.out.println("해당 마켓뷰의 작성자 닉네임은? : "+nickName);
+		
 		List<MkComment> list = service.selectComment(mkNo, cPage, numPerPage); // 댓글리스트
 		int totalData = service.selectCommentCount(mkNo); // 페이징처리
 		
 		mv.addObject("list",list);
 		mv.addObject("total", totalData);
+		mv.addObject("nickName", nickName); // 마켓뷰 작성자 '닉네임'만 담기
+		mv.addObject("mviBuy", mviBuy); // 마켓뷰 이미지 담기
 		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo));
 		
 		// ---- ㅆ

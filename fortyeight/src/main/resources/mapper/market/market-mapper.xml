@@ -307,4 +307,15 @@
 			</if> 
 			ORDER BY MKDATE DESC
 	</select>
+	
+	<!-- 마켓 상세뷰 '닉네임'만 출력 -->
+	<select id="selectMkViewNick" resultType="string" parameterType="_int">
+		SELECT NICKNAME FROM MARKET MK FULL JOIN MEMBER M ON(MK.USERNO = M.USERNO) WHERE MKNO=#{mkNo}
+	</select>
+	
+	<!-- 마켓 상세뷰 '이미지' 출력 -->
+	<select id="selectMkViewImg" resultType="mkViewImg" parameterType="_int">
+		SELECT MARKET.MKNO, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
+		WHERE MARKET.MKTYPE='삽니다' AND MARKET.DELETED='N'AND MARKET.MKNO=#{mkNo}
+	</select>
 </mapper>
