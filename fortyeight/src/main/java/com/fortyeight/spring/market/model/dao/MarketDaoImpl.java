@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -80,6 +81,12 @@ public class MarketDaoImpl implements MarketDao {
 	@Override
 	public int selectMarketBuyCount(SqlSessionTemplate session, Map<String, String> map) {
 		return session.selectOne("market.selectMarketBuyCount", map);
+	}
+
+	//마켓 상세 찜 리스트
+	@Override
+	public List<Dips> selectDips(SqlSessionTemplate session, int mkNo) {
+		return session.selectList("market.selectDips", mkNo);
 	}
 
 	

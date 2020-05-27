@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.ui.Model;
 
+import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -15,6 +15,7 @@ public interface MarketDao {
 	int insertMarket(SqlSessionTemplate session, MkImg mi); // 마켓 글 등록2
 	
 	Market selectView(SqlSessionTemplate session,int mkNo); //마켓 상세화면 출력
+	List<Dips> selectDips(SqlSessionTemplate session,int mkNo); //마켓 상세 찜 리스트
 	List<MkComment> selectComment(SqlSessionTemplate session, int mkNo, int cPage, int numPerPage); // 마켓 상세화면 밑 댓글 리스트 출력
 	int selectCommentCount(SqlSessionTemplate session, int mkNo); // 마켓 상세화면 밑 댓글 페이징처리
 	int marketCommentDelete(SqlSessionTemplate session, Map<String, String> map);// 마켓 댓글 삭제
