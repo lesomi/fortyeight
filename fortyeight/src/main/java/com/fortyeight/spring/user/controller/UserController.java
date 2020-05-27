@@ -344,4 +344,11 @@ public class UserController {
 		}
 		return page;
 	}
+	
+	
+	// 마이페이지 - 거래내역 화면 전환
+	@RequestMapping("/user/selectDealHistory.do")
+	public String selectDealHistory(int userNo) {
+		return "user/selectDealHistory";
+	}
 }
