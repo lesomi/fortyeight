@@ -216,4 +216,9 @@
 	<insert id="marketCommentInsert" parameterType="map">
 		INSERT INTO MKCOMMENT VALUES (SEQ_MK_COMMNO.NEXTVAL, ${userNo}, ${mkNo}, DEFAULT, #{comment}, 0, DEFAULT)
 	</insert>
+	
+	<!-- 마켓 찜 리스트 -->
+	<select id="selectDips" resultType="dips" parameterType="_int">
+		SELECT * FROM DIPS WHERE MKNO = #{mkNo}
+	</select>
 </mapper>
