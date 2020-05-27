@@ -33,7 +33,7 @@
 			<table class="table">
 				<tr>
 					<c:if test="${renameMkImg ne null }">
-						<td colspan="2">
+						<td colspan="4">
 							<!-- 이미지 슬라이드 -->
 							<img src="${path }/resources/upload/market/">
 						</td>
@@ -43,27 +43,69 @@
 					<td colspan="2">				
 						${mk.mkTitle}
 					</td>
-					<td style="width:50px;">찜</td>
+					
+					<!-- if문 분기처리 -판매완료일때 -->
+					<td style="width:50px;" colspan="2">
+						<button type="button" id="dipsBtn">
+							<img src="${path }/resources/img/blackStar.png" width="25px">
+						</button>
+						<%-- <c:if test="${loginUser.userNo eq dips.userNo }">
+							<c:if test="${mk.mkNo eq dips.mkNo }">
+								<button type="button" id="canDipsBtn">
+									<img src="${path }/resources/img/yellowStar.png" width="25px">
+								</button>
+							</c:if>
+						</c:if> --%>
+					</td>
+					
+					<!-- if문 분기처리 -판매완료가 아닐때 -->
+					<td style="width:50px;">
+						<button type="button" id="dipsBtn">
+							<img src="${path }/resources/img/blackStar.png" width="25px">
+						</button>
+						<%-- <c:if test="${loginUser.userNo eq dips.userNo }">
+							<c:if test="${mk.mkNo eq dips.mkNo }">
+								<button type="button" id="canDipsBtn">
+									<img src="${path }/resources/img/yellowStar.png" width="25px">
+								</button>
+							</c:if>
+						</c:if> --%>
+					</td>
+					<td style="width:50px;">
+						<div class="dropdown">
+							<button type="button" data-toggle="dropdown">
+						    	<img src="${path }/resources/img/menubar.png" width="25px;">
+						  	</button>
+						  	<div class="dropdown-menu">
+						  	<!-- if문 분기처리 자리 -판매중 -->
+							    <a class="dropdown-item" href="#">수정</a>
+							    <a class="dropdown-item" href="#">삭제</a>
+							    <a class="dropdown-item" href="#">예약중</a>
+							    <a class="dropdown-item" href="#">판매완료</a>
+						  	</div>
+						</div>
+					</td>
+					
 				</tr>
 				<tr>
 					<c:if test="${loginUser ne null }">
 						<td style="width:200px;">닉</td>
-						<td colspan="2">
+						<td colspan="3">
 							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
 						</td>
 					</c:if>
 					<c:if test="${loginUser eq null }">
-						<td colspan="3">
+						<td colspan="4">
 							닉
 						</td>
 					</c:if>
 				</tr>
 				<tr>
 					<td style="width:200px;">${mk.mkPrice}원</td>
-					<td colspan="2">${mk.dealAddr}</td>
+					<td colspan="3">${mk.dealAddr}</td>
 				</tr>
 				<tr>
-					<td colspan="3">
+					<td colspan="4">
 						${mk.mkContent }
 					</td>
 				</tr>
@@ -157,15 +199,50 @@
 <!-- footer 설정 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+<!-- 채팅 -->
 <script>
-	function accessChatting(){
-		let alram=new WebSocket("ws://localhost:9090${path}/alram");
-		
-		open("${path}/chattingView.do","_blank","width=400,height=600");
+	function accessChatting(userNo){
+		if(${loginUser.userNo ne mk.userNo}){			
+			requestChatting();
+		}
+		open("${path}/chattingView.do?userNo="+userNo,"_blank","width=400,height=600");
 	}
 	
-	// -----
+	let alram=new WebSocket("ws://localhost:9090${path}/alram");
 	
+	alram.onopen=function(data){
+		console.log(data);
+		websocket.send(JSON.stringify(new Alram("new","접속 -alram",'${loginUser.userNo}',0)));
+	}
+	
+	alram.onmessage=function(data){
+		const msg=JSON.parse(data.data);
+		switch(msg.type){
+			case "msg" : openChatting(msg);break;
+		}
+	}
+	
+	function openChatting(msg){
+		if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
+			accessChatting(data.sender);
+		}
+	}
+	
+	function requestChatting(){
+		alram.send(JSON.stringify(new Alram("msg","구매 / 판매 문의 메세지",'${loginUser.userNo}','${mk.userNo}')));
+	}
+	
+	function Alram(type, msg, sender, receiver){
+		this.type=type;
+		this.msg=msg;
+		this.sender=sender;
+		this.receiver=receiver;
+	}
+	
+</script>
+
+<script>
+	// -----
 	$(function () {
 		// 댓글 글자수 카운트
 		$('#mkTitle').keyup(function () {

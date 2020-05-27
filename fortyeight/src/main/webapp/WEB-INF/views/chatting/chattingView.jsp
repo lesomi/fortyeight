@@ -17,7 +17,7 @@
 	
 	websocket.onopen=function(data){
 		console.log(data);
-		websocket.send(JSON.stringify(new Chatting(0,"new",'${loginUser.userNo}',0,null,"",0)));
+		websocket.send(JSON.stringify(new Chatting(0,"new",'${loginUser.userNo}',0,null,"접속 -chatting",0)));
 	}
 	
 	websocket.onmessage=function(data){
