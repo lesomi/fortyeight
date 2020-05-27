@@ -376,11 +376,11 @@
 	<div class="container" style="margin-top: 200px;">
 		<!-- 첫번째 article -->
         <!-- 동네 설정과 배경화면 멘트 -->
-        <article id="firstArticle">
+        <!-- <article id="firstArticle">
             
             <h1>어드민이 등록한 이미지 3~4장이 슬라이드 처리됩니다.</h1>
             <h4>여기서는 범위지정한 값을 가져와서 뿌려져야 한다.</h4>
-        </article>
+        </article> -->
 
         <!-- 두번째 article -->
         <article id="secondArticle">
