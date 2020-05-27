@@ -20,7 +20,7 @@
 <!-- 폰트 적용 -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-	<style>
+<style>
         /* 전체에 폰트 적용 */
         /* 전체 margin, padding 조절 */
         *{
@@ -175,3 +175,45 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 채팅 -->
+	<script>
+		function accessChatting(userNo){
+			if('${loginUser.userNo}'==$("#mkWriter").val()){			
+				requestChatting();
+			}
+			open("${path}/chattingView.do?userNo="+userNo,"_blank","width=400,height=600");
+		}
+		
+		let alram=new WebSocket("ws://localhost:9090${path}/alram");
+		
+		alram.onopen=function(data){
+			console.log(data);
+			alram.send(JSON.stringify(new Alram("new","접속 -alram",'${loginUser.userNo}',0)));
+		}
+		
+		alram.onmessage=function(data){
+			const msg=JSON.parse(data.data);
+			switch(msg.type){
+				case "msg" : openChatting(msg);break;
+			}
+		}
+		
+		function openChatting(msg){
+			if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
+				accessChatting(msg.sender);
+			}
+		}
+		
+		function requestChatting(){
+			alram.send(JSON.stringify(new Alram("msg","구매 / 판매 문의 메세지",'${loginUser.userNo}',$("#mkWriter").val())));
+		}
+		
+		function Alram(type, msg, sender, receiver){
+			this.type=type;
+			this.msg=msg;
+			this.sender=sender;
+			this.receiver=receiver;
+		}
+		
+	</script>
