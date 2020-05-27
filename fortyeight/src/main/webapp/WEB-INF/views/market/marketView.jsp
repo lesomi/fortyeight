@@ -77,10 +77,16 @@
 						    	<img src="${path }/resources/img/menubar.png" width="25px;">
 						  	</button>
 						  	<div class="dropdown-menu">
-						  	<!-- if문 분기처리 자리 -판매중 -->
+						  		<!-- if문 분기처리 자리 -판매중 -->
 							    <a class="dropdown-item" href="#">수정</a>
 							    <a class="dropdown-item" href="#">삭제</a>
 							    <a class="dropdown-item" href="#">예약중</a>
+							    <a class="dropdown-item" href="#">판매완료</a>
+							    
+							    <!-- if문 분기처리 자리 -예약중 -->
+							    <a class="dropdown-item" href="#">수정</a>
+							    <a class="dropdown-item" href="#">삭제</a>
+							    <a class="dropdown-item" href="#">판매중</a>
 							    <a class="dropdown-item" href="#">판매완료</a>
 						  	</div>
 						</div>
