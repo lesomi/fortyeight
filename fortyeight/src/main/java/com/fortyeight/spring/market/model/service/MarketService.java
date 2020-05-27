@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MarketViewImg;
 import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -14,6 +15,8 @@ public interface MarketService {
 	
 	Market selectView(int mkNo); // 마켓 상세화면
 	List<Dips> selectDips(int mkNo); //마켓 상세 찜 리스
+	String selectMkViewNick(int mkNo); // 마켓 상세 닉네임
+	MarketViewImg selectMkViewImg(int mkNo); // 마켓 뷰 '이미지'만 출력
 	List<MkComment> selectComment(int mkNo, int cPage, int numPerPage); // 마켓 댓글리스트 출력
 	int selectCommentCount(int mkNo); // 댓글리스트 페이징
 	int marketCommentDelete(Map<String, String> map); // 댓글 삭제

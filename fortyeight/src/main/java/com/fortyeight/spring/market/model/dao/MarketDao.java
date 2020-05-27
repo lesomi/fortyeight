@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MarketViewImg;
 import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -17,6 +18,8 @@ public interface MarketDao {
 	
 	Market selectView(SqlSessionTemplate session,int mkNo); //마켓 상세화면 출력
 	List<Dips> selectDips(SqlSessionTemplate session,int mkNo); //마켓 상세 찜 리스트
+	String selectMkViewNick(SqlSessionTemplate session,int mkNo); // 마켓 상세뷰 닉네임만 출력
+	MarketViewImg selectMkViewImg(SqlSessionTemplate session,int mkNo);
 	List<MkComment> selectComment(SqlSessionTemplate session, int mkNo, int cPage, int numPerPage); // 마켓 상세화면 밑 댓글 리스트 출력
 	int selectCommentCount(SqlSessionTemplate session, int mkNo); // 마켓 상세화면 밑 댓글 페이징처리
 	int marketCommentDelete(SqlSessionTemplate session, Map<String, String> map);// 마켓 댓글 삭제
