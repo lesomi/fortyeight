@@ -3,6 +3,7 @@ package com.fortyeight.spring.market.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -11,6 +12,7 @@ public interface MarketService {
 	int insertMarket(Market mk, List<MkImg> files); // 글 등록
 	
 	Market selectView(int mkNo); // 마켓 상세화면
+	List<Dips> selectDips(int mkNo); //마켓 상세 찜 리스
 	List<MkComment> selectComment(int mkNo, int cPage, int numPerPage); // 마켓 댓글리스트 출력
 	int selectCommentCount(int mkNo); // 댓글리스트 페이징
 	int marketCommentDelete(Map<String, String> map); // 댓글 삭제
