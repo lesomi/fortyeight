@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
+import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
@@ -215,6 +216,8 @@ public class MarketController {
 							@RequestParam(required=false, defaultValue="10") int numPerPage) {
 		Market mk=service.selectView(mkNo);
 		
+		List<Dips> dips=service.selectDips(mkNo);
+		
 		// ---- ㅆ
 		List<MkComment> list = service.selectComment(mkNo, cPage, numPerPage); // 댓글리스트
 		int totalData = service.selectCommentCount(mkNo); // 페이징처리
@@ -226,6 +229,7 @@ public class MarketController {
 		// ---- ㅆ
 				
 		mv.addObject("mk",mk);
+		mv.addObject("dips",dips);
 		mv.addObject("mkNo", mkNo);
 		
 		mv.setViewName("market/marketView"); 
