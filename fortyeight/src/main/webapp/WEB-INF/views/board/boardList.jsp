@@ -11,7 +11,9 @@
 
 <section>
 	<div class="container" style="margin-top: 200px;">
-		<button type="button" class="btn btn-warning" onclick="location.replace('${path}/board/insertBoard.do');">작성</button>
+		<div class="float-right m-4">
+			<button type="button" class="btn btn-warning" onclick="location.replace('${path}/board/insertBoard.do');">작성</button>
+		</div>
 		<table class="table">
 			<tr>
 				<th></th>
