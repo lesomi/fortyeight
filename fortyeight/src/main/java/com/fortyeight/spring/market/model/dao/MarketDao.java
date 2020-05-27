@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.ui.Model;
 
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 
@@ -26,4 +27,7 @@ public interface MarketDao {
 	// ----- 삽니다
 	List<Market> marketBuyList(SqlSessionTemplate session, Map<String, String> map, int cPage, int numPerPage);
 	int selectMarketBuyCount(SqlSessionTemplate session, Map<String, String> map);
+	
+	List<MkCommCount> marketCommentCount(SqlSessionTemplate session); // 마켓 댓글 수(삽니다)
+	List<MkCommCount> marketSellCommentCount(SqlSessionTemplate session); // 마켓 댓글 수(팝니다)
 }

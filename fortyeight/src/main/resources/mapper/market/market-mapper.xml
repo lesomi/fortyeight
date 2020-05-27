@@ -216,4 +216,90 @@
 	<insert id="marketCommentInsert" parameterType="map">
 		INSERT INTO MKCOMMENT VALUES (SEQ_MK_COMMNO.NEXTVAL, ${userNo}, ${mkNo}, DEFAULT, #{comment}, 0, DEFAULT)
 	</insert>
+	
+	<!-- 마켓 댓글 수(삽니다) 조회 -->
+	<select id="marketBuyCommentCount" resultType="commCount">
+	SELECT A.MKNO, A.CATEGORY, (SELECT COUNT(*) FROM MKCOMMENT MK WHERE MK.MKREF=A.MKNO ) AS COMMCOUNT
+	FROM MARKET A FULL JOIN MKIMG IMG ON(A.MKNO = IMG.MKNO) WHERE MKTYPE='삽니다' AND DELETED='N'
+			<choose>
+				<when test=' category eq "all" '>
+					AND 1=1
+				</when>
+				<when test=' category eq "digital" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "interior" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "child" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "life" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "woman" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "beauty" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "man" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "sport" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "etc" '>
+					AND CATEGORY = #{category}
+				</when>
+			</choose>
+			<!-- 제목이 있다면? -->
+			<if test=' title!=null and title!="" '> 
+				AND MKTITLE LIKE '%'||#{title}||'%'
+			</if> 
+			ORDER BY MKDATE DESC
+	</select>
+	
+	<!-- 마켓 댓글 수(팝니다) 조회 -->
+	<select id="marketSellCommentCount" resultType="commCount">
+	SELECT A.MKNO, A.CATEGORY, (SELECT COUNT(*) FROM MKCOMMENT MK WHERE MK.MKREF=A.MKNO ) AS COMMCOUNT
+	FROM MARKET A FULL JOIN MKIMG IMG ON(A.MKNO = IMG.MKNO) WHERE MKTYPE='팝니다' AND DELETED='N'
+			<choose>
+				<when test=' category eq "all" '>
+					AND 1=1
+				</when>
+				<when test=' category eq "digital" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "interior" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "child" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "life" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "woman" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "beauty" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "man" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "sport" '>
+					AND CATEGORY = #{category}
+				</when>
+				<when test=' category eq "etc" '>
+					AND CATEGORY = #{category}
+				</when>
+			</choose>
+			<!-- 제목이 있다면? -->
+			<if test=' title!=null and title!="" '> 
+				AND MKTITLE LIKE '%'||#{title}||'%'
+			</if> 
+			ORDER BY MKDATE DESC
+	</select>
 </mapper>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 import com.fortyeight.spring.user.controller.UserController;
@@ -47,19 +48,24 @@ public class MarketController {
 		
 		// 리스트 불러오기(마켓, 마켓이미지)
 		List<Market> list = service.marketList(map, cPage, numPerPage);
-		
-		
 		// paging
 		int totalData = service.selectMarketCount(map);
+		// 댓글 수 출력(팝니다)
+		List<MkCommCount> comm = service.marketSellCommentCount();
 		
 		logger.debug("--------- [ 판매글 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
+		logger.debug("--------- [ 구매글 댓글 수 조회 결과 ] ----------"
+					+ "\n 1. commCount : "+comm);
+		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
+		// 댓글수 저장
+		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));
@@ -84,18 +90,22 @@ public class MarketController {
 		List<Market> list = service.marketBuyList(map, cPage, numPerPage);
 		// paging
 		int totalData = service.selectMarketBuyCount(map);
-		// 댓글 수
-		
+		// 댓글 수 출력(삽니다)
+		List<MkCommCount> comm = service.marketCommentCount();
 		
 		logger.debug("--------- [ 구매글 조회 결과 ] ----------"
 				+"\n 1. market list : "+list
 				+"\n 2. totalData : "+totalData
 				+"\n------------------------------");
+		logger.debug("--------- [ 구매글 댓글 수 조회 결과 ] ----------"
+				+ "\n 1. commCount : "+comm);
 		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
+		// 댓글수 저장
+		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));

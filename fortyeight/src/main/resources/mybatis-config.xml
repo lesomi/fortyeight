@@ -8,5 +8,6 @@
 		<typeAlias type="com.fortyeight.spring.market.model.vo.MkImg" alias="mkImg"/>
 		<typeAlias type="com.fortyeight.spring.market.model.vo.MkComment" alias="mkcomment"></typeAlias>
 		<typeAlias type="com.fortyeight.spring.board.model.vo.Board" alias="board"></typeAlias>
+		<typeAlias type="com.fortyeight.spring.market.model.vo.MkCommCount" alias="commCount"></typeAlias>
 	</typeAliases>
 </configuration>

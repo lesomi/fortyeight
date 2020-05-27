@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fortyeight.spring.common.MyException;
 import com.fortyeight.spring.market.model.dao.MarketDao;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 import com.fortyeight.spring.user.model.service.UserServiceImpl;
@@ -108,6 +109,18 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public int selectMarketBuyCount(Map<String, String> map) {
 		return dao.selectMarketBuyCount(session, map);
+	}
+
+	// 마켓 댓글 수 출력(삽니다)
+	@Override
+	public List<MkCommCount> marketCommentCount() {
+		return dao.marketCommentCount(session);
+	}
+
+	// 마켓 댓글 수 출력(팝니다)
+	@Override
+	public List<MkCommCount> marketSellCommentCount() {
+		return dao.marketSellCommentCount(session);
 	}
 	
 	
