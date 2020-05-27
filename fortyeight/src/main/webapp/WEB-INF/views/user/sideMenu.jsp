@@ -206,7 +206,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
                             <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 수정</a>
-                            <a class="collapse-item" href="#">회원 탈퇴</a>
+                            <a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
                         </div>
                     </li>
 
@@ -239,15 +239,15 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                             <i class="fas fa-list"></i>
-                            <span>거래 내역 보기</span>
+                            <span onclick="location.replace('${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}');">거래 내역 보기</span>
                         </a>
-                        <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
+                        <!-- <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
                                 <a class="collapse-item" href="#">구매내역</a>
                                 <a class="collapse-item" href="#">판매내역</a>
                                 <a class="collapse-item" href="#">진행내역</a>
                             </div>
-                        </div>
+                        </div> -->
                     </li>
 
                     <hr class="sidebar-divider my-0">

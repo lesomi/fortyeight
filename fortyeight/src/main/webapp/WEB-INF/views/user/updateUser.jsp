@@ -62,10 +62,10 @@
         	<h3 id="updateTitle">회원정보 수정</h3>
         	<div id="blank2"></div>
             <div id="content">
-            	<form action="${path}/user/updateUser.do?userNo=${loginUser.userNo}" method="post" enctype="multipart/form-data">
+            	<form action="${path}/user/updateUserEnd.do?userNo=${loginUser.userNo}" method="post" enctype="multipart/form-data">
 					<div class="form-group" id="centerDiv">
 						<!-- 프로필 -->
-						<p>프로필 : </p>
+						<p><span style="color: red; font-weight:bolder;">*</span> 프로필 : </p>
 						<c:if test="${loginUser.renameProfile eq null}">
 							<div class="custom-file" id="fileDiv">
 			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
@@ -83,34 +83,34 @@
 						<label for="userId">아이디 : </label> 
 						<input type="text" class="form-control inputWidth" id="userId" name="userId" value="${loginUser.userId}" readonly>
 						<!-- 닉네임 -->
-						<label for="nickName">닉네임 : </label>
+						<label for="nickMyName"><span style="color: red; font-weight:bolder;">*</span>닉네임 : </label>
 						<input type="text" class="form-control inputWidth" name="nickMyName" id="nickMyName" value="${loginUser.nickName}" required/>
 						<p id="nickMsg"></p>
 						<!-- 비밀번호 -->
-						<label for="password">비밀번호 :  <span id="pwChange">비밀번호 변경</span> </label>
+						<label for="password"><span style="color: red; font-weight:bolder;">*</span>비밀번호 :  <span id="pwChange">비밀번호 변경</span> </label>
 						<input type="text" class="form-control inputWidth" name="password" id="password" value="비공개" readonly/>
 						
 						<!-- <button type="button" id="pwBtn" class="btn btn-dark" data-toggle="collapse" data-target="#passwordDiv">수정</button> -->
 						<!-- 비밀번호 수정 칸 -->
 						<div id="passwordDiv">
-							<label for="pwNow">· 현재 비밀번호 : </label>
+							<label for="pwNow"><span style="color: red; font-weight:bolder;">*</span> 현재 비밀번호 : </label>
 							<input type="password" class="form-control inputWidth" name="pwNow" id="pwNow" required />
 							<p id="pwNowMsg"></p>
-							<label for="pwNow">· 변경할 비밀번호 : </label>
+							<label for="pwNow"><span style="color: red; font-weight:bolder;">*</span> 변경할 비밀번호 : </label>
 							<input type="password" class="form-control inputWidth" name="pwNew" id="pwNew" required />
 							<p id="pwNewMsg"></p>
-							<label for="pwNow">· 변경할 비밀번호 확인 : </label>
+							<label for="pwNow"><span style="color: red; font-weight:bolder;">*</span> 변경할 비밀번호 확인 : </label>
 							<input type="password" class="form-control inputWidth" name="pwck" id="pwck" required />
 							<p id="pwchkMsg"></p>
 						</div>
 						
 						<!-- 이메일 -->
-						<label for="email">이메일 : </label>
+						<label for="email"><span style="color: red; font-weight:bolder;">*</span>이메일 : </label>
 						<input type="email" class="form-control inputWidth" name="email" id="email" value="${loginUser.email}" required/>
 						<button type="button" id="emailBtn" class="btn btn-dark">인증번호 전송</button>
 						<p class="blankP" id="emailMsg"></p>
 						<!-- 이메일 인증 입력창 -->
-						<label for="numberSender">이메일 인증번호 : </label>
+						<label for="numberSender"><span style="color: red; font-weight:bolder;">*</span>이메일 인증번호 : </label>
 						<input type="text" class="form-control inputWidth" name="numberSender" id="numberSender" placeholder="인증번호 입력" required/>
 						<p class="blankP" id="numMsg"></p>
 						<!-- 휴대폰번호 -->
@@ -221,7 +221,7 @@
 			if(pwchk.trim().length>7 || pwchk.indexOf(" ")>0) {
 				console.log('첫번째 if문에 들어옵니다');
 				// 비밀번호 확인 글자가 8글자 이상이거나 공백이 없으면 [비밀번호]와 비교한다
-				if(pwchk==$('#password').val()) {
+				if(pwchk==$('#pwNew').val()) {
 					// 일치하면...
 					console.log('두 비밀번호가 일치합니다.');
 					$("#pwchkMsg").css("visibility", "visible");

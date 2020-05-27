@@ -39,4 +39,21 @@
 	<update id="updatePassword" parameterType="map">
 		UPDATE MEMBER SET PASSWORD = #{password} WHERE USERID = #{userId}
 	</update>
+	
+	<!-- 마이페이지 - 회원정보수정 -->
+	<update id="updateUser" parameterType="user">
+		UPDATE MEMBER SET 
+			PASSWORD=#{password}, NICKNAME=#{nickName}, EMAIL=#{email}, PHONE=#{phone}, DEALADDR=#{dealAddr}
+			<if test=' (oriProfile eq "" and oriProfile eq null) || (renameProfile eq "" and renameProfile eq null) '>
+			</if>
+			<if test=' (oriProfile neq "" and oriProfile neq null) || (renameProfile neq "" and renameProfile neq null) '>
+				ORIPROFILE=#{oriProfile}, RENAMEPROFILE=#{renameProfile}
+			</if>
+		WHERE USERNO=#{userNo}
+	</update>
+	
+	<!-- 마이페이지 - 회원탈퇴 -->
+	<update id="deleteUser" parameterType="_int">
+		UPDATE MEMBER SET STATUS='Y' WHERE USERNO=#{userNo}
+	</update>
 </mapper>

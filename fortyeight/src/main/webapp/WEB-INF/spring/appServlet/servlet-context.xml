@@ -30,6 +30,27 @@
 		<beans:property name="maxUploadSize" value="10485760"/>
 	</beans:bean>
 	
+	<!-- interceptor 등록하기 -->
+	<interceptors>
+		<interceptor>
+			<!-- 전체중에서 -->
+			<mapping path="/**"/>
+			<!-- 이건 로그인 없이도 접근이 가능해 -->
+			<exclude-mapping path="/user/login.do"/>
+			<exclude-mapping path="/user/agreeUser.do"/>			
+			<exclude-mapping path="/user/insertUser*"/>
+			<exclude-mapping path="/user/check*"/>			
+			<exclude-mapping path="/user/find*"/>	
+			<exclude-mapping path="/market/selMarket.do"/>
+			<exclude-mapping path="/market/buyMarket.do"/>
+			<exclude-mapping path="/market/marketView.do"/>
+			<!-- login interceptor를 거쳐갈 것 -->
+			<beans:bean class="com.fortyeight.spring.common.interceptor.LoginUserInterceptor"></beans:bean>
+			
+		</interceptor>
+	</interceptors>
+	
+	
 	<!-- jackson converter 등록 -->
 	<beans:bean id="jacksonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

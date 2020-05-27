@@ -24,6 +24,7 @@ import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.market.model.service.MarketService;
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 import com.fortyeight.spring.user.controller.UserController;
@@ -46,21 +47,26 @@ public class MarketController {
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
 		
-		// Print list
+		// 리스트 불러오기(마켓, 마켓이미지)
 		List<Market> list = service.marketList(map, cPage, numPerPage);
-		
-		
 		// paging
 		int totalData = service.selectMarketCount(map);
+		// 댓글 수 출력(팝니다)
+		List<MkCommCount> comm = service.marketSellCommentCount();
 		
 		logger.debug("--------- [ 판매글 조회 결과 ] ----------"
 					+"\n 1. market list : "+list
 					+"\n 2. totalData : "+totalData
 					+"\n------------------------------");
+		logger.debug("--------- [ 구매글 댓글 수 조회 결과 ] ----------"
+					+ "\n 1. commCount : "+comm);
+		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
+		// 댓글수 저장
+		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));
@@ -81,20 +87,26 @@ public class MarketController {
 									@RequestParam Map<String, String> map,
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
-		// Print list
+		// 리스트 불러오기(마켓, 마켓이미지)
 		List<Market> list = service.marketBuyList(map, cPage, numPerPage);
 		// paging
 		int totalData = service.selectMarketBuyCount(map);
+		// 댓글 수 출력(삽니다)
+		List<MkCommCount> comm = service.marketCommentCount();
 		
 		logger.debug("--------- [ 구매글 조회 결과 ] ----------"
 				+"\n 1. market list : "+list
 				+"\n 2. totalData : "+totalData
 				+"\n------------------------------");
+		logger.debug("--------- [ 구매글 댓글 수 조회 결과 ] ----------"
+				+ "\n 1. commCount : "+comm);
 		
 		// data 저장
 		mv.addObject("list",list);
 		// paging 저장
 		mv.addObject("total",totalData);
+		// 댓글수 저장
+		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
 		mv.addObject("inputTitle", map.get("title"));
@@ -177,7 +189,7 @@ public class MarketController {
 						   +"\n--------------------------");
 		
 		mk = new Market(0, loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), null, null, null);
+						mk.getDealType(), mk.getMkContent(), null, null, null, 0, null);
 		
 		// DB에 값 저장
 		int result = 0;

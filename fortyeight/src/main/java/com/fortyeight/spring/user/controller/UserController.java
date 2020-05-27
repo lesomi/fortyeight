@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -51,7 +52,7 @@ public class UserController {
 		User login = service.selectLogin(userId);
 
 		String page = "";
-		if (login != null && encoder.matches(password, login.getPassword())) {
+		if ( login != null && encoder.matches(password, login.getPassword()) && login.getStatus().equals("N") ) {
 			// 로그인 성공
 			model.addAttribute("loginUser", login);
 			page = "redirect:/";
@@ -257,5 +258,97 @@ public class UserController {
 		boolean flag = encoder.matches(pwNow, u.getPassword());
 		System.out.println("입력한 비밀번호와 현재 비밀번호의 비교 : "+flag);
 		return flag;
+	}
+	
+	// 마이페이지 - 회원정보 수정 버튼 누를때 update 처리
+	@RequestMapping("/user/updateUserEnd.do")
+	public String updateUser(@RequestParam String pwNew, @RequestParam String nickMyName,
+							User u, Model model, MultipartFile upFile, HttpSession session) {
+		logger.debug("----- 마이페이지 [회원정보수정] 로직 진행 들어옴 -----");
+		String path = session.getServletContext().getRealPath("/resources/upload/user"); // 저장경로
+		File f = new File(path);
+
+		if (!f.exists()) { // 파일이 없으면 생성한다.
+			f.mkdirs();
+		}
+
+		// 파일 저장 로직 : 파일 이름이 중복적으로 저장되면 안 되기 때문에 rename 처리가 필요하다.
+		if (!upFile.isEmpty()) {
+			// 파일명 생성
+			String ori = upFile.getOriginalFilename();
+			String ext = ori.substring(ori.lastIndexOf('.'));
+
+			// 파일 이름 리네임
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rnd = (int) (Math.random() * 1000);
+			String rename = sdf.format(System.currentTimeMillis()) + "_" + rnd + ext; // 새 이름 부여
+
+			// 리네임 파일 저장
+			try {
+				upFile.transferTo(new File(path + "/" + rename)); // 파일을 실제로 저장
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			u.setOriProfile(ori);
+			u.setRenameProfile(rename);
+		}
+		
+		u.setPassword(encoder.encode(pwNew)); // 비밀번호 암호화
+		
+		u = new User(u.getUserNo(), u.getUserId(), u.getPassword(), nickMyName, u.getEmail(), u.getPhone(), u.getDealAddr(), u.getEnrollDate(), u.getStatus(),
+					u.getReportcount(), u.getOriProfile(), u.getRenameProfile());
+		System.out.println("업데이트하려는 유저는? "+u);
+		int result = service.updateUser(u);
+		
+		// 페이지 분기처리
+		String page="";
+		if (result > 0) {
+			model.addAttribute("msg","회원정보수정이 완료되었습니다.");
+			model.addAttribute("loc","/user/mypage.do");
+			page = "common/msg";
+		} else {
+			model.addAttribute("msg","회원정보수정이 실패되었습니다. 다시 수정하세요.");
+			model.addAttribute("loc","/user/updateUser.do");
+			page = "common/msg";
+		}
+		return page;
+	}
+	
+	
+	
+	// 마이페이지 - 회원탈퇴 화면 전환
+	@RequestMapping("/user/deleteUser.do")
+	public String deleteUser(int userNo) {
+		return "user/deleteUser";
+	}
+	
+	// 마이페이지 - 회원탈퇴
+	@RequestMapping("/user/deleteUserEnd.do")
+	public String deleteUserEnd(int userNo, Model model, SessionStatus status) {
+		System.out.println("회원탈퇴하는 유저 번호 : "+userNo);
+		int result = service.deleteUser(userNo); // 진짜 삭제하는게 아니라, status값을 N->Y 으로 update할것.
+		
+		String page = "";
+		if(result>0) {
+			if (!status.isComplete()) {// 세션이 만료되지 않았다면
+				status.setComplete();// 로그아웃
+			}
+			model.addAttribute("msg","회원탈퇴가 완료되었습니다. 다음에 또 만나요!");
+			model.addAttribute("loc","/");
+			page = "common/msg";
+		}
+		else {
+			model.addAttribute("msg","회원탈퇴가 실패되었습니다. 다시 진행하세요.");
+			model.addAttribute("loc","/user/deleteUser.do");
+			page = "common/msg";
+		}
+		return page;
+	}
+	
+	
+	// 마이페이지 - 거래내역 화면 전환
+	@RequestMapping("/user/selectDealHistory.do")
+	public String selectDealHistory(int userNo) {
+		return "user/selectDealHistory";
 	}
 }

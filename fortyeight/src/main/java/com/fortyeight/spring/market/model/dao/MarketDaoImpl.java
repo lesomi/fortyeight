@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.fortyeight.spring.market.model.vo.Dips;
 import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.market.model.vo.MkCommCount;
 import com.fortyeight.spring.market.model.vo.MkComment;
 import com.fortyeight.spring.market.model.vo.MkImg;
 
@@ -87,6 +88,17 @@ public class MarketDaoImpl implements MarketDao {
 	@Override
 	public List<Dips> selectDips(SqlSessionTemplate session, int mkNo) {
 		return session.selectList("market.selectDips", mkNo);
+	}
+	// 마켓 댓글 수(삽니다)
+	@Override
+	public List<MkCommCount> marketCommentCount(SqlSessionTemplate session) {
+		return session.selectList("market.marketBuyCommentCount");
+	}
+
+	// 마켓 댓글 수(팝니다)
+	@Override
+	public List<MkCommCount> marketSellCommentCount(SqlSessionTemplate session) {
+		return session.selectList("market.marketSellCommentCount");
 	}
 
 	

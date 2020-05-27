@@ -508,7 +508,12 @@
                                     <div class="row">
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
-                                            	<img id="selArticle_img" src="${path}/resources/img/switch.jpg">
+                                        	<c:if test='${not empty i.renameMkImg}'> 
+                                            	<img id="selArticle_img" src="${path}/resources/upload/market/${i.renameMkImg}">
+                                            </c:if>
+                                           	<c:if test='${empty i.renameMkImg}'>
+                                            	<img id="selArticle_img" src="${path}/resources/img/noImage.png">
+                                            </c:if>
                                         </div>
                                         <div class="col-6">
                                             <div id="JimDiv">
@@ -523,15 +528,23 @@
                                             		<span class="badge badge-danger" style="margin-right: 45px;">판매완료</span>
                                             	</c:if>
                                             	<!-- if문 끝 -->
-                                                <span id="JimOnOff">찜하기</span>
-                                                <input type="checkbox" checked data-toggle="toggle" data-size="sm">
+                                            	
+                                            	<!-- 찜하기 스위치 삭제 -->
+                                                <!-- <span id="JimOnOff">찜하기</span>
+                                                <input type="checkbox" checked data-toggle="toggle" data-size="sm"> -->
                                             </div>
                                             <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
                                                 <p>10,000원</p>
                                             </div>
-                                            <span id="spanChatt">댓글 &nbsp;&nbsp; 1</span> <span>찜하기 &nbsp;&nbsp; 1</span> 
+                                            <!-- 댓글 수 출력 -->
+                                            <c:forEach items="${comm}" var="c">
+	                                           	<c:if test='${i.mkNo eq c.mkNo}'>
+	                                            	<span id="spanChatt">댓글 &nbsp;&nbsp; ${c.commCount}</span> 
+	                                            </c:if>
+                                            </c:forEach> 
+											<span>찜하기 &nbsp;&nbsp; 1</span> 
                                         </div>
                                     </div>
                                     <!-- div.row -->

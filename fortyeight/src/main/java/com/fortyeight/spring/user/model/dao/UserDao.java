@@ -14,4 +14,6 @@ public interface UserDao {
 	int insertUser(SqlSessionTemplate session, User u); // 회원가입
 	User selectPwCk(SqlSessionTemplate session,Map<String,String> pwCk);
 	int updatePassword(SqlSessionTemplate session,Map<String,Object> map);
+	int updateUser(SqlSessionTemplate session, User u); // 회원정보수정
+	int deleteUser(SqlSessionTemplate session, int userNo); // 회원탈퇴
 }
