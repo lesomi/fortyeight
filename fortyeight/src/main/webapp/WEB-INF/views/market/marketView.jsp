@@ -31,6 +31,7 @@
 	<div class="container"  style="margin-top: 50px;">
 		<div style="width:500px;margin:0 auto;">
 			<table class="table">
+				<input type="hidden" id="mkWriter" value="${mk.userNo }">
 				<tr>
 					<c:if test="${renameMkImg ne null }">
 						<td colspan="4">
@@ -204,48 +205,6 @@
 
 <!-- footer 설정 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-<!-- 채팅 -->
-<script>
-	function accessChatting(userNo){
-		if(${loginUser.userNo ne mk.userNo}){			
-			requestChatting();
-		}
-		open("${path}/chattingView.do?userNo="+userNo,"_blank","width=400,height=600");
-	}
-	
-	let alram=new WebSocket("ws://localhost:9090${path}/alram");
-	
-	alram.onopen=function(data){
-		console.log(data);
-		websocket.send(JSON.stringify(new Alram("new","접속 -alram",'${loginUser.userNo}',0)));
-	}
-	
-	alram.onmessage=function(data){
-		const msg=JSON.parse(data.data);
-		switch(msg.type){
-			case "msg" : openChatting(msg);break;
-		}
-	}
-	
-	function openChatting(msg){
-		if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
-			accessChatting(data.sender);
-		}
-	}
-	
-	function requestChatting(){
-		alram.send(JSON.stringify(new Alram("msg","구매 / 판매 문의 메세지",'${loginUser.userNo}','${mk.userNo}')));
-	}
-	
-	function Alram(type, msg, sender, receiver){
-		this.type=type;
-		this.msg=msg;
-		this.sender=sender;
-		this.receiver=receiver;
-	}
-	
-</script>
 
 <script>
 	// -----
