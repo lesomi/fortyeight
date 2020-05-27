@@ -45,7 +45,7 @@ public class MarketController {
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
 		
-		// Print list
+		// 리스트 불러오기(마켓, 마켓이미지)
 		List<Market> list = service.marketList(map, cPage, numPerPage);
 		
 		
@@ -80,10 +80,12 @@ public class MarketController {
 									@RequestParam Map<String, String> map,
 									@RequestParam(required=false, defaultValue="1") int cPage,
 									@RequestParam(required=false, defaultValue="6") int numPerPage) {
-		// Print list
+		// 리스트 불러오기(마켓, 마켓이미지)
 		List<Market> list = service.marketBuyList(map, cPage, numPerPage);
 		// paging
 		int totalData = service.selectMarketBuyCount(map);
+		// 댓글 수
+		
 		
 		logger.debug("--------- [ 구매글 조회 결과 ] ----------"
 				+"\n 1. market list : "+list
@@ -176,7 +178,7 @@ public class MarketController {
 						   +"\n--------------------------");
 		
 		mk = new Market(0, loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), null, null, null);
+						mk.getDealType(), mk.getMkContent(), null, null, null, 0, null);
 		
 		// DB에 값 저장
 		int result = 0;
