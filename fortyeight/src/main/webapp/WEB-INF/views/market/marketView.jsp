@@ -34,15 +34,10 @@
 	<div class="container"  style="margin-top: 50px;">
 		<div style="width:500px;margin:0 auto;">
 			<table class="table">
-<<<<<<< HEAD
 				<input type="hidden" id="mkWriter" value="${mk.userNo }">
-				<tr>
-					<c:if test="${renameMkImg ne null }">
-=======
 				<tr id="centerTr">
 					<!-- 이미지 슬라이드 -->
 					<c:if test="${mviBuy.renameMkImg ne null }">
->>>>>>> branch 'dev' of https://github.com/lesomi/fortyeight.git
 						<td colspan="4">
 							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
 						</td>
