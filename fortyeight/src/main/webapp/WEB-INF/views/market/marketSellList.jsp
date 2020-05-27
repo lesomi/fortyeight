@@ -508,7 +508,12 @@
                                     <div class="row">
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
-                                            	<img id="selArticle_img" src="${path}/resources/img/switch.jpg">
+                                        	<c:if test='${not empty i.renameMkImg}'> 
+                                            	<img id="selArticle_img" src="${path}/resources/upload/market/${i.renameMkImg}">
+                                            </c:if>
+                                           	<c:if test='${empty i.renameMkImg}'>
+                                            	<img id="selArticle_img" src="${path}/resources/img/noImage.png">
+                                            </c:if>
                                         </div>
                                         <div class="col-6">
                                             <div id="JimDiv">
