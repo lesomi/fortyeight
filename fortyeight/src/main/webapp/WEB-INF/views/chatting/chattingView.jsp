@@ -13,11 +13,12 @@
 <script>
 	const websocket=new WebSocket("ws://localhost:9090${path}/chatting");
 	
-	let receiver=0;
+	let receiver=${param.receiver};
+	let room=${param.userNo};
 	
 	websocket.onopen=function(data){
 		console.log(data);
-		websocket.send(JSON.stringify(new Chatting(0,"new",'${loginUser.userNo}',0,null,"접속 -chatting",0)));
+		websocket.send(JSON.stringify(new Chatting(0,"new",'${loginUser.userNo}',${param.receiver},null,"접속 -chatting",room)));
 	}
 	
 	websocket.onmessage=function(data){
@@ -29,6 +30,7 @@
 	
 	function addMessage(msg){
 		$("#msg-container").append("<p>"+msg.sender+" : "+msg.chatting+"</p>");
+		receiver=msg.sender;
 	}
 	
 	function Chatting(chatNo,chatType,sender,receiver,chatDate,chatting,roomNo){
@@ -48,7 +50,7 @@
 				alert("전송할 데이터가 없습니다.");
 				return;
 			}else{
-				websocket.send(JSON.stringify(new Chatting(0,"msg",'${loginUser.userNo}',receiver,null,chat,0)));
+				websocket.send(JSON.stringify(new Chatting(0,"msg",'${loginUser.userNo}',receiver,null,chat,room)));
 			}
 		});
 	});
