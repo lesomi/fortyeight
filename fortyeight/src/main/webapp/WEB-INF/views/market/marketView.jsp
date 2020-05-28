@@ -20,7 +20,6 @@
 	span#fontSize { margin-left: 5%; font-weight: normal; font-size: 12px; }
 	button#replyBtns { width:50px; height: 30px; font-size: 12px; }
 	button.replyDelete { width:50px; height: 30px; font-size: 12px; }
-	*{border:1px solid green;}
 	
 	#centerTr { text-align: center; }
 	#slideImg { width: 200px; height: 200px; }
@@ -44,6 +43,7 @@
 						</td>
 					</c:if>
 				</tr>
+				
 				<!-- 로그인이 아닐 때, 찜목록/드롭다운리스트 안 보이게 처리한다. -->
 				<c:if test='${empty loginUser}'>
 					<tr>
@@ -53,26 +53,40 @@
 					</tr>
 				</c:if>
 				
+				
+				<!-- [삽니다 view 시작] -->
 				<!-- 로그인일 때, 찜목록/드롭다운리스트 보이게 처리한다. -->
-				<c:if test='${not empty loginUser}'>
+				<c:if test='${not empty loginUser && mk.mkType eq "삽니다"}'>
 					<tr>
-						<!-- if문 분기처리   1.[구매중]일때(값은 판매중!) -->
+						<!-- 1.[구매중]일때(값은 판매중!) -->
 						<c:if test='${mk.dealStatus eq "판매중"}'>
 							<td colspan="2">				
 								 ${mk.mkTitle} <span class="badge badge-success" id="dealStatus">구매중</span>
 							</td>
 							<td style="width:50px;" colspan="1">
-								<c:forEach items="${dips}" var="d">
-									<!-- 찜목록 분기처리 -->
-									<c:if test="${d.userNo ne loginUser.userNo}">
+								<!-- 찜목록 분기처리 -->
+								<!-- 찜목록이 비었을 때 -->
+								<c:if test="${empty dips}">
+									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
 										<button type="button" id="canDipsBtn">
 											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
-									<c:if test="${d.userNo eq loginUser.userNo}">
-										<button type="button" id="canDipsBtn">
-											<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
-										</button>
+								</c:if>
+								<!-- 찜목록이 안 비어져 있을 때 -->
+								<c:forEach items="${dips}" var="d">
+									<c:if test="${not empty dips}">
+										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
+										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+										<c:if test="${d.userNo eq loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -93,55 +107,64 @@
 								</td>
 							</c:if>
 						</c:if>
-						<!-- if문 분기처리   2.[예약중]일때 -->
+						
+						<!-- 2. 삽니다 이면서 [예약중]일때 -->
 						<c:if test='${mk.dealStatus eq "예약중"}'>
 							<td colspan="2">				
 								 ${mk.mkTitle} <span class="badge badge-warning" id="dealStatus" style="color: white;">예약중</span>
 							</td>
 							<td style="width:50px;" colspan="1">
 								<!-- 찜목록 분기처리 -->
+								<!-- 찜목록이 비었을 때 -->
 								<c:if test="${empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
-									</button>
+									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+										<button type="button" id="canDipsBtn">
+											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+										</button>
+									</c:if>
 								</c:if>
-								<c:if test="${not empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
-									</button>
-								</c:if>
+								<!-- 찜목록이 안 비어져 있을 때 -->
+								<c:forEach items="${dips}" var="d">
+									<c:if test="${not empty dips}">
+										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
+										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+										<c:if test="${d.userNo eq loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+									</c:if>
+								</c:forEach>
 							</td>
-							<td style="width:50px;">
-								<div class="dropdown">
-									<button type="button" data-toggle="dropdown">
-								    	<img src="${path }/resources/img/menubar.png" width="25px;">
-								  	</button>
-								  	<div class="dropdown-menu">
-									    <a class="dropdown-item" href="#">마켓수정</a>
-									    <a class="dropdown-item" href="#">마켓삭제</a>
-									    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
-									    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
-								  	</div>
-								</div>
-							</td>
+							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
+							<c:if test="${loginUser.userNo eq mk.userNo}">
+								<td style="width:50px;">
+									<div class="dropdown">
+										<button type="button" data-toggle="dropdown">
+									    	<img src="${path }/resources/img/menubar.png" width="25px;">
+									  	</button>
+									  	<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
+										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
+									  	</div>
+									</div>
+								</td>
+							</c:if>
 						</c:if>
-						<!-- if문 분기처리   3.[구매완료]일때(값은 판매완료!) -->
+						
+						<!-- if문 분기처리   3. 삽니다 이면서 [구매완료]일때(값은 판매완료!) -->
 						<c:if test='${mk.dealStatus eq "판매완료"}'>
 							<td colspan="2">				
 								 ${mk.mkTitle} <span class="badge badge-danger" id="dealStatus">구매완료</span>
 							</td>
 							<td style="width:50px;" colspan="1">
-								<!-- 찜목록 분기처리 -->
-								<c:if test="${empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
-									</button>
-								</c:if>
-								<c:if test="${not empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
-									</button>
-								</c:if>
+								
 							</td>
 							<td style="width:50px;">
 								
@@ -149,7 +172,137 @@
 						</c:if>
 					</tr>
 				</c:if>
+				<!-- [삽니다 view 끝] -->
 				
+				<!-- [팝니다 view 시작] -->
+				<!-- 로그인일 때, 찜목록/드롭다운리스트 보이게 처리한다. -->
+				<c:if test='${not empty loginUser && mk.mkType eq "팝니다"}'>
+					<tr>
+						<!-- 1.[판매중] 일 때 -->
+						<c:if test='${mk.dealStatus eq "판매중"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-success" id="dealStatus">판매중</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<!-- 찜목록 분기처리 -->
+								<!-- 찜목록이 비었을 때 -->
+								<c:if test="${empty dips}">
+									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+										<button type="button" id="canDipsBtn">
+											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+										</button>
+									</c:if>
+								</c:if>
+								<!-- 찜목록이 안 비어져 있을 때 -->
+								<c:forEach items="${dips}" var="d">
+									<c:if test="${not empty dips}">
+										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
+										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+										<c:if test="${d.userNo eq loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</td>
+							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
+							<c:if test="${loginUser.userNo eq mk.userNo}">
+								<td style="width:50px;">
+									<div class="dropdown">
+										<button type="button" data-toggle="dropdown">
+									    	<img src="${path }/resources/img/menubar.png" width="25px;">
+									  	</button>
+									  	<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
+										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
+									  	</div>
+									</div>
+								</td>
+							</c:if>
+						</c:if>
+						
+						<!-- 2. 팝니다 이면서 [예약중]일때 -->
+						<c:if test='${mk.dealStatus eq "예약중"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-warning" id="dealStatus" style="color: white;">예약중</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<!-- 찜목록 분기처리 -->
+								<!-- 찜목록이 비었을 때 -->
+								<c:if test="${empty dips}">
+									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+										<button type="button" id="canDipsBtn">
+											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+										</button>
+									</c:if>
+								</c:if>
+								<!-- 찜목록이 안 비어져 있을 때 -->
+								<c:forEach items="${dips}" var="d">
+									<c:if test="${not empty dips}">
+										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
+										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+										<c:if test="${d.userNo eq loginUser.userNo}">
+											<button type="button" id="canDipsBtn">
+												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+											</button>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</td>
+							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
+							<c:if test="${loginUser.userNo eq mk.userNo}">
+								<td style="width:50px;">
+									<div class="dropdown">
+										<button type="button" data-toggle="dropdown">
+									    	<img src="${path }/resources/img/menubar.png" width="25px;">
+									  	</button>
+									  	<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
+										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
+									  	</div>
+									</div>
+								</td>
+							</c:if>
+						</c:if>
+						
+						<!-- if문 분기처리   3. 삽니다 이면서 [구매완료]일때(값은 판매완료!) -->
+						<c:if test='${mk.dealStatus eq "판매완료"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-danger" id="dealStatus">판매완료</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<!-- 찜목록 분기처리 -->
+								<%-- <c:if test="${empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+									</button>
+								</c:if>
+								<c:if test="${not empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+									</button>
+								</c:if> --%>
+							</td>
+							<td style="width:50px;">
+								
+							</td>
+						</c:if>
+					</tr>
+				</c:if>
+				<!-- [팝니다 view 끝] -->
 				
 				
 				<tr>

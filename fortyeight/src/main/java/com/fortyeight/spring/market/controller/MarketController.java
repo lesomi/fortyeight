@@ -402,11 +402,11 @@ public class MarketController {
 		int result = service.updateComplete(map);
 		
 		if(result>0) {
-			m.addAttribute("msg","거래상태가 수정되었습니다. [구매완료]");
+			m.addAttribute("msg","거래상태가 수정되었습니다. [거래완료]");
 			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
 		}
 		else {
-			m.addAttribute("msg","거래상태 수정이 실패되었습니다. [구매완료] 관리자에게 문의하세요!");
+			m.addAttribute("msg","거래상태 수정이 실패되었습니다. [거래완료] 관리자에게 문의하세요!");
 			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
 		}
 		return "common/msg";
