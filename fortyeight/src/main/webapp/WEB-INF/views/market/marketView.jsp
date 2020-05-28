@@ -24,6 +24,7 @@
 	
 	#centerTr { text-align: center; }
 	#slideImg { width: 200px; height: 200px; }
+	#dealStatus { margin-left: 20px; }
 </style>
 
 <section>
@@ -49,83 +50,101 @@
 						<td colspan="4">				
 							 ${mk.mkTitle}
 						</td>
-					
-						<!-- if문 분기처리 -판매완료일때 -->
-						<%-- <td style="width:50px;" colspan="2">
-							<button type="button" id="dipsBtn">
-								<img src="${path }/resources/img/blackStar.png" width="25px">
-							</button>
-							<!-- 에러나는 중...ㅎ -->
-							<c:if test="${loginUser.userNo eq dips.userNo }">
-								<c:if test="${mk.mkNo eq dips.mkNo }"> 
-									<button type="button" id="canDipsBtn">
-										<img src="${path }/resources/img/yellowStar.png" width="25px">
-									</button>
-								</c:if>
-							</c:if>
-						</td> --%>
-						
-						<!-- if문 분기처리 -판매완료가 아닐때 -->
-						<%-- <td style="width:50px;">
-							<button type="button" id="dipsBtn">
-								<img src="${path }/resources/img/blackStar.png" width="25px">
-							</button>
-							<!-- 에러나는 중...ㅎ -->
-							<c:if test="${loginUser.userNo eq dips.userNo }">
-								<c:if test="${mk.mkNo eq dips.mkNo }">
-									<button type="button" id="canDipsBtn">
-										<img src="${path }/resources/img/yellowStar.png" width="25px">
-									</button>
-								</c:if>
-							</c:if>
-						</td> --%>
-						<%-- <td style="width:50px;">
-							<div class="dropdown">
-								<button type="button" data-toggle="dropdown">
-							    	<img src="${path }/resources/img/menubar.png" width="25px;">
-							  	</button>
-							  	<div class="dropdown-menu">
-							  		<!-- if문 분기처리 자리 -판매중 -->
-								    <a class="dropdown-item" href="#">수정</a>
-								    <a class="dropdown-item" href="#">삭제</a>
-								    <a class="dropdown-item" href="#">예약중</a>
-								    <a class="dropdown-item" href="#">판매완료</a>
-								    
-								    <!-- if문 분기처리 자리 -예약중 -->
-								    <a class="dropdown-item" href="#">수정</a>
-								    <a class="dropdown-item" href="#">삭제</a>
-								    <a class="dropdown-item" href="#">판매중</a>
-								    <a class="dropdown-item" href="#">판매완료</a>
-							  	</div>
-							</div>
-						</td> --%>
-						<!-- 로그인일 때,  찜목록/드롭다운리스트 보이게 처리한다. -->
-						<%-- <c:if test="">
-						</c:if> --%>
 					</tr>
 				</c:if>
 				
 				<!-- 로그인일 때, 찜목록/드롭다운리스트 보이게 처리한다. -->
 				<c:if test='${not empty loginUser}'>
 					<tr>
-						<td colspan="4">				
-							 ${mk.mkTitle}
-						</td>
-						
-						<!-- if문 분기처리 -판매완료일때 -->
-						<c:if test=''>
-							<td style="width:50px;" colspan="2">
-								<button type="button" id="dipsBtn">
-									<img src="${path }/resources/img/blackStar.png" width="25px">
-								</button>
-								<!-- 에러나는 중...ㅎ -->
-								<c:if test="${loginUser.userNo eq dips.userNo }">
-									<c:if test="${mk.mkNo eq dips.mkNo }"> 
+						<!-- if문 분기처리   1.[구매중]일때(값은 판매중!) -->
+						<c:if test='${mk.dealStatus eq "판매중"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-success" id="dealStatus">구매중</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<c:forEach items="${dips}" var="d">
+									<!-- 찜목록 분기처리 -->
+									<c:if test="${d.userNo ne loginUser.userNo}">
 										<button type="button" id="canDipsBtn">
-											<img src="${path }/resources/img/yellowStar.png" width="25px">
+											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
+									<c:if test="${d.userNo eq loginUser.userNo}">
+										<button type="button" id="canDipsBtn">
+											<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+										</button>
+									</c:if>
+								</c:forEach>
+							</td>
+							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
+							<c:if test="${loginUser.userNo eq mk.userNo}">
+								<td style="width:50px;">
+									<div class="dropdown">
+										<button type="button" data-toggle="dropdown">
+									    	<img src="${path }/resources/img/menubar.png" width="25px;">
+									  	</button>
+									  	<div class="dropdown-menu">
+										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
+										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
+									  	</div>
+									</div>
+								</td>
+							</c:if>
+						</c:if>
+						<!-- if문 분기처리   2.[예약중]일때 -->
+						<c:if test='${mk.dealStatus eq "예약중"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-warning" id="dealStatus" style="color: white;">예약중</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<!-- 찜목록 분기처리 -->
+								<c:if test="${empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+									</button>
 								</c:if>
+								<c:if test="${not empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+									</button>
+								</c:if>
+							</td>
+							<td style="width:50px;">
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+									    <a class="dropdown-item" href="#">마켓수정</a>
+									    <a class="dropdown-item" href="#">마켓삭제</a>
+									    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
+									    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
+								  	</div>
+								</div>
+							</td>
+						</c:if>
+						<!-- if문 분기처리   3.[구매완료]일때(값은 판매완료!) -->
+						<c:if test='${mk.dealStatus eq "판매완료"}'>
+							<td colspan="2">				
+								 ${mk.mkTitle} <span class="badge badge-danger" id="dealStatus">구매완료</span>
+							</td>
+							<td style="width:50px;" colspan="1">
+								<!-- 찜목록 분기처리 -->
+								<c:if test="${empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
+									</button>
+								</c:if>
+								<c:if test="${not empty dips}">
+									<button type="button" id="canDipsBtn">
+										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
+									</button>
+								</c:if>
+							</td>
+							<td style="width:50px;">
+								
 							</td>
 						</c:if>
 					</tr>
@@ -149,7 +168,9 @@
 					</c:if>
 				</tr>
 				<tr>
-					<td style="width:200px;">${mk.mkPrice}원</td>
+					<td style="width:200px;">
+						<fmt:formatNumber value="${mk.mkPrice}"/>원
+					</td>
 					<td colspan="3">${mk.dealAddr}</td>
 				</tr>
 				<tr>
@@ -276,7 +297,7 @@
 		
 		// 댓글 등록
 		$('#writeBtn').click(function () {
-			if( ${loginUser eq null} ) {
+			if(${loginUser eq null})  {
 				$(this).parents().parents().parents().next().slideToggle(); // 로그인하기
 			}else {
 				const comment = $('#mkTitle').val();
@@ -340,4 +361,69 @@
 			}
 		});
 	});
+	
+// -----------------------------------------------------[ 마켓뷰 찜 등록, 삭제 ajax 처리 ]--------------------------------------------------------------------
+	$(function () {
+		$('#canDipsBtn').click(function () {
+			if($('#starDips').attr('src').includes('black')) {
+				console.log("black이 들어가 있다. 찜목록에 추가가 된 상태가 아니다! -> "+$('#starDips').attr('src').includes('black'));
+				$.ajax({
+					url: "${path}/market/insertDips.do",
+					data: {mkNo:'${mkNo}', userNo:'${loginUser.userNo}'},
+					success: function(data) {
+						if(data) {
+							$('#starDips').attr('src','${path}/resources/img/yellowStar.png');
+						}
+						else {
+							alert('찜목록 추가가 실패되었습니다. 관리자에게 문의하세요!');
+						}
+					}
+				});
+			}
+			else {
+				console.log("yellow가 들어가 있다. 찜목록에 추가가 된 상태다! -> "+$('#starDips').attr('src').includes('black'));
+				$.ajax({
+					url: "${path}/market/deleteDips.do",
+					data: {mkNo:'${mkNo}', userNo:'${loginUser.userNo}'},
+					success: function(data) {
+						if(data) {
+							$('#starDips').attr('src','${path}/resources/img/blackStar.png');
+						}
+						else {
+							alert('찜목록 삭제가 실패되었습니다. 관리자에게 문의하세요!');
+						}
+					}
+				});
+			}
+		});
+		
+	});
+
+// -----------------------------------------------------[ 마켓뷰 거래상태 ajax 처리 ]--------------------------------------------------------------------
+	/* $(function () {
+		// 거래상태 [예약중]을 눌렀을 때
+		$('#reservation').click(function () {
+			$.ajax({
+				url: "${path}/market/updateReservation.do",
+				data: {mkNo:'${mkNo}'},
+				success: function(data) {
+					if(data) {
+						console.log('거래상태 [예약중]으로 수정 완료!');
+						// 클래스 변경
+						$('#dealStatus').addClass("badge-warning");
+						$('#dealStatus').removeClass("badge-success");
+						// 뱃지 컬러 변경
+						$('#dealStatus').html('예약중');
+						// dropdown 내용 변경
+						$('#reservation').html('구매중').css('cursor','pointer');
+						$('#buyComplete').html('구매완료').css('cursor','pointer');
+					}
+					else {
+						console.log('거래상태 수정이 실패');
+						alert('거래상태 수정이 실패되었습니다. 관리자에게 문의하세요!');
+					}
+				}
+			});
+		});
+	}); */
 </script>

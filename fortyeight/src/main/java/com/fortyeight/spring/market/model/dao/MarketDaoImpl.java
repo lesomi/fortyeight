@@ -93,8 +93,8 @@ public class MarketDaoImpl implements MarketDao {
 
 	//마켓 상세 찜 리스트
 	@Override
-	public List<Dips> selectDips(SqlSessionTemplate session, int mkNo) {
-		return session.selectList("market.selectDips", mkNo);
+	public List<Dips> selectMkDips(SqlSessionTemplate session, Map<String, Integer> map) {
+		return session.selectList("market.selectDips", map);
 	}
 	// 마켓 댓글 수(삽니다)
 	@Override
@@ -114,10 +114,39 @@ public class MarketDaoImpl implements MarketDao {
 		return session.selectOne("market.selectMkViewImg", mkNo);
 	}
 
-	
+	// 마켓상세뷰 찜 추가
+	@Override
+	public int insertDips(SqlSessionTemplate session, Map<String, String> map) {
+		return session.insert("market.insertDips", map);
+	}
 
-	
-	
-	
+	// 마켓상세뷰 찜 리스트 출력(슬기)
+	@Override
+	public List<Dips> selectDips(SqlSessionTemplate session, Map<String, String> map) {
+		return session.selectList("market.selectDipsYSK", map);
+	}
 
+	// 마켓상세뷰 찜 삭제
+	@Override
+	public int deleteDips(SqlSessionTemplate session, Map<String, String> map) {
+		return session.delete("market.deleteDips", map);
+	}
+
+	// 마켓 상세뷰 거래상태 [예약중] 으로 업데이트
+	@Override
+	public int updateReservation(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateReservation", map);
+	}
+
+	// 마켓 상세뷰 거래상태 [구매중] 으로 업데이트
+	@Override
+	public int updateBuying(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateBuying", map);
+	}
+
+	// 마켓 상세뷰 거래상태 [구매완료] 으로 업데이트
+	@Override
+	public int updateComplete(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateComplete", map);
+	}
 }

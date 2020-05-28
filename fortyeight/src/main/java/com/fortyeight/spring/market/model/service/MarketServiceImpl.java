@@ -115,8 +115,8 @@ public class MarketServiceImpl implements MarketService {
 
 	//마켓 상세 찜 리스트
 	@Override
-	public List<Dips> selectDips(int mkNo) {
-		return dao.selectDips(session,mkNo);
+	public List<Dips> selectMkDips(Map<String, Integer> map) {
+		return dao.selectMkDips(session,map);
 	}
 	
 	// 마켓 댓글 수 출력(삽니다)
@@ -141,6 +141,42 @@ public class MarketServiceImpl implements MarketService {
 	@Override
 	public MarketViewImg selectMkViewImg(int mkNo) {
 		return dao.selectMkViewImg(session, mkNo);
+	}
+
+	// 마켓 상세뷰 찜 추가
+	@Override
+	public int insertDips(Map<String, String> map) {
+		return dao.insertDips(session, map);
+	}
+
+	// 마켓 상세뷰 찜 리스트 출력(슬기)
+	@Override
+	public List<Dips> selectDips(Map<String, String> map) {
+		return dao.selectDips(session, map);
+	}
+
+	// 마켓 상세뷰 찜 삭제
+	@Override
+	public int deleteDips(Map<String, String> map) {
+		return dao.deleteDips(session, map);
+	}
+
+	// 마켓 뷰 거래상태 변경(예약중)
+	@Override
+	public int updateReservation(Map<String, String> map) {
+		return dao.updateReservation(session, map);
+	}
+
+	// 마켓 뷰 거래상태 변경(구매중) -실제값:판매중
+	@Override
+	public int updateBuying(Map<String, String> map) {
+		return dao.updateBuying(session, map);
+	}
+
+	// 마켓 뷰 거래상태 변경(구매완료) -실제값:판매완료
+	@Override
+	public int updateComplete(Map<String, String> map) {
+		return dao.updateComplete(session, map);
 	}
 	
 	
