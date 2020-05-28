@@ -178,11 +178,13 @@
 	
 	<!-- 채팅 -->
 	<script>
-		function accessChatting(userNo){
-			if('${loginUser.userNo}'==$("#mkWriter").val()){			
+		function accessChatting(userNo,receiver){
+			console.log('${loginUser.userNo}'==$("#mkWriter").val());
+			console.log($("#mkWriter").val());
+			if('${loginUser.userNo}'!=$("#mkWriter").val()){			
 				requestChatting();
 			}
-			open("${path}/chattingView.do?userNo="+userNo,"_blank","width=400,height=600");
+			open("${path}/chattingView.do?userNo="+userNo+"&receiver="+receiver,"_blank","width=400,height=600");
 		}
 		
 		let alram=new WebSocket("ws://localhost:9090${path}/alram");
@@ -200,8 +202,11 @@
 		}
 		
 		function openChatting(msg){
-			if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
-				accessChatting(msg.sender);
+			console.log("openChatting 실행했니?");
+			if('${loginUser.userNo}'==msg.receiver){
+				if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
+					accessChatting(msg.sender,msg.receiver);
+				}
 			}
 		}
 		
