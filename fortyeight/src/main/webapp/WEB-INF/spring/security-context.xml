@@ -8,5 +8,5 @@
 	<!-- 비밀번호를 암호화할 bcryptpasswordencoder 객체를 등록한다. -->
 	<bean id="bcryptencoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<!-- 양방향 암호화, 복호화 객체 등록 -->
-	<bean id="bcryptdecoder" class="com.fortyeight.spring.common.AESEncrypt"/>
+	<!-- <bean id="bcryptdecoder" class="com.fortyeight.spring.common.AESEncrypt"/> -->
 </beans>
