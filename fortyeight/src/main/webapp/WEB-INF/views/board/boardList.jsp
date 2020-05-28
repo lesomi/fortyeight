@@ -10,9 +10,11 @@
 </jsp:include>
 
 <section>
-	<div class="container" style="margin-top: 200px;">
+	<div class="container" style="margin-top: 150px;height:600px;">
 		<div class="float-right m-4">
-			<button type="button" class="btn btn-warning" onclick="location.replace('${path}/board/insertBoard.do');">작성</button>
+			<c:if test="${loginUser ne null }">
+				<button type="button" class="btn btn-warning" onclick="location.replace('${path}/board/insertBoard.do');">작성</button>
+			</c:if>
 		</div>
 		<table class="table">
 			<tr>
