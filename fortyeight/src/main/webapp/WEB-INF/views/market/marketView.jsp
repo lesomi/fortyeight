@@ -139,7 +139,7 @@
 							${nickName}님
 						</td>
 						<td colspan="3">
-							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting();">채팅</button>
+							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting('${loginUser.userNo}','${mk.userNo }');">채팅</button>
 						</td>
 					</c:if>
 					<c:if test="${loginUser eq null }">
