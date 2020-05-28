@@ -2,6 +2,7 @@ package com.fortyeight.spring.chatting.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +24,9 @@ public class ChattingServer extends TextWebSocketHandler {
 	//세션관리용 객체 생성
 	private Map<Integer,WebSocketSession> clients=new HashMap<Integer, WebSocketSession>();
 	
+	private Set<WebSocketSession> clients2=new HashSet();
+	
+	
 	@Autowired
 	ObjectMapper mapper;
 
@@ -35,7 +39,8 @@ public class ChattingServer extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		log.debug(message.getPayload());
 		Chatting msg=getMessage(message.getPayload());
-		
+		session.getAttributes().put("data",msg);
+		clients2.add(session);
 		switch(msg.getChatType()) {
 			case "new":addClient(msg,session);break;
 			case "msg":sendMessage(msg,session);break;
@@ -51,6 +56,12 @@ public class ChattingServer extends TextWebSocketHandler {
 			Map.Entry<Integer, WebSocketSession> client=it.next();
 			if(!client.getValue().isOpen()) { //client의 session이 열려있지않으면
 				it.remove();
+			}
+		}
+		Iterator<WebSocketSession> it2=clients2.iterator();
+		while(it2.hasNext()) {
+			if(!it2.next().isOpen()) {
+				it2.remove();
 			}
 		}
 	}
@@ -78,12 +89,21 @@ public class ChattingServer extends TextWebSocketHandler {
 	}
 	
 	private void sendMessage(Chatting msg,WebSocketSession session) {
-		Set<Map.Entry<Integer, WebSocketSession>> entry=clients.entrySet();
-		for(Map.Entry<Integer, WebSocketSession> client : entry) {
-			try {
-				client.getValue().sendMessage(new TextMessage(mapper.writeValueAsString(msg)));
-			} catch (IOException e) {
-				e.printStackTrace();
+		//Set<Map.Entry<Integer, WebSocketSession>> entry=clients.entrySet();
+		//for(Map.Entry<Integer, WebSocketSession> client : entry) {
+		for(WebSocketSession client : clients2) {
+			Chatting data=(Chatting)client.getAttributes().get("data");
+			if(data.getRoomNo()==msg.getRoomNo() && 
+					(data.getSender()==msg.getReceiver()||
+					data.getReceiver()==msg.getSender()
+					||data.getSender()==msg.getSender()||
+					data.getReceiver()==msg.getReceiver())) {
+				
+				try {
+					client.sendMessage(new TextMessage(mapper.writeValueAsString(msg)));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
