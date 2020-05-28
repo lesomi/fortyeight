@@ -146,7 +146,7 @@
         	/* 위치 설정 */
         	position: absolute;
         	right: 19%;
-        	top: 102%;
+        	top: 60%;
         }
         /* [판매글작성] 버튼에 마우스를 올렸을 때 */
         button#selBtn:hover {
@@ -384,25 +384,6 @@
 
         <!-- 두번째 article -->
         <article id="secondArticle">
-        	
-            <div id="btnDiv" class="container">
-                <!-- <button class="btn btn-warning firstbtn btnValue" type="button" value="all">전체</button>
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="digital">디지털/가전</button>
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="interior">가구/인테리어</button>
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="child">유아용/유아도서</button>
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="life">생활/가공식품</button> 
-                <br>
-                <button class="btn btn-warning firstbtn otherBtn btnValue" type="button" value="woman">여성의류/잡화</button> 
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="beauty">뷰티/미용</button> 
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="man">남성의류/잡화</button> 
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="sport">스포츠/레저/게임</button> 
-                <button class="btn btn-warning otherBtn btnValue" type="button" value="etc">기타</button> -->
-                
-                
-            </div>
-
-            
-
             <!-- --------- 판매글 노출 -------------- -->
 
             <div class="container">

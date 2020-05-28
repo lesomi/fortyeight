@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -224,12 +225,20 @@ public class MarketController {
 	}
 	// 마켓 상세화면과 댓글 리스트 출력 - select
 	@RequestMapping("/market/marketView.do")
-	public ModelAndView marketView(int mkNo,ModelAndView mv,
+	public ModelAndView marketView(int mkNo, ModelAndView mv,
 							@RequestParam(required=false, defaultValue="1") int cPage,
-							@RequestParam(required=false, defaultValue="10") int numPerPage) {
+							@RequestParam(required=false, defaultValue="10") int numPerPage,
+							HttpSession session) {
 		Market mk=service.selectView(mkNo); // 마켓리스트
 		
-		List<Dips> dips=service.selectDips(mkNo);
+		// 세션 갖고오기
+		User loginUser = (User)session.getAttribute("loginUser");
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("mkNo", mkNo);
+		map.put("userNo", loginUser.getUserNo());
+		List<Dips> dips=service.selectMkDips(map); // 찜목록 리스트
+		
+		
 		
 		// ---- ㅆ
 		MarketViewImg mviBuy = service.selectMkViewImg(mkNo); // 마켓이미지 불러오기(삽니다)
@@ -288,4 +297,80 @@ public class MarketController {
 		boolean flag = result!=0? true : false; // true : 등록, false : 등록안함
 		return flag;
 	}
+	
+	
+	// 마켓 찜 목록 찾기 -select
+	@RequestMapping("/market/selectDips")
+	@ResponseBody
+	public boolean selectDips(@RequestParam Map<String, String> map) {
+		logger.debug("----- [마켓 찜 목록 (Ajax) controller 진입!] -----");
+		System.out.println("찜등록하기 위한 정보는 가져왔는가? : "+map);
+		System.out.println("--------------------------------");
+		List<Dips> dips=service.selectDips(map);
+		System.out.println("----- [찜 목록 결과] -----"
+							 + "result : "+dips
+							 + "-----------------------");
+		boolean flag = false;
+		
+		// 값이 비어있는가, 비어있지 않은가?
+		if(dips.isEmpty()) {
+			flag = false;
+		}
+		else {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	// 마켓 찜 등록 -insert
+	@RequestMapping("/market/insertDips")
+	@ResponseBody
+	public boolean insertDips(@RequestParam Map<String, String> map) {
+		logger.debug("----- [마켓 찜 등록 (Ajax) controller 진입!] -----");
+		System.out.println("찜등록하기 위한 정보는 가져왔는가? : "+map);
+		System.out.println("--------------------------------");
+		
+		// 찜 추가
+		int result = service.insertDips(map);
+		System.out.println("----- [찜 등록 결과] -----"
+							 + "result : "+result
+							 + "-----------------------");
+		boolean flag = result>0? true:false; // true:등록, false:등록실패
+		return flag;
+	}
+	
+	// 마켓 찜 삭제 -delete
+		@RequestMapping("/market/deleteDips")
+		@ResponseBody
+		public boolean deleteDips(@RequestParam Map<String, String> map) {
+			logger.debug("----- [마켓 찜 삭제 (Ajax) controller 진입!] -----");
+			System.out.println("찜삭제하기 위한 정보는 가져왔는가? : "+map);
+			System.out.println("--------------------------------");
+			
+			// 찜 삭제
+			int result = service.deleteDips(map);
+			System.out.println("----- [찜 삭제 결과] -----"
+								 + "result : "+result
+								 + "-----------------------");
+			boolean flag = result>0? true:false; // true:등록, false:등록실패
+			return flag;
+		}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,7 +17,10 @@ public interface MarketDao {
 	int insertMarket(SqlSessionTemplate session, MkImg mi); // 마켓 글 등록2
 	
 	Market selectView(SqlSessionTemplate session,int mkNo); //마켓 상세화면 출력
-	List<Dips> selectDips(SqlSessionTemplate session,int mkNo); //마켓 상세 찜 리스트
+	List<Dips> selectMkDips(SqlSessionTemplate session, Map<String, Integer> map); //마켓 상세 찜 리스트
+	List<Dips> selectDips(SqlSessionTemplate session, Map<String, String> map); // 마켓 상세 찜 리스트(ajax 메소드)
+	int insertDips(SqlSessionTemplate session, Map<String, String> map); // 마켓 상세뷰 찜 추가
+	int deleteDips(SqlSessionTemplate session, Map<String, String> map); // 마켓 상세뷰 찜 삭제
 	String selectMkViewNick(SqlSessionTemplate session,int mkNo); // 마켓 상세뷰 닉네임만 출력
 	MarketViewImg selectMkViewImg(SqlSessionTemplate session,int mkNo);
 	List<MkComment> selectComment(SqlSessionTemplate session, int mkNo, int cPage, int numPerPage); // 마켓 상세화면 밑 댓글 리스트 출력

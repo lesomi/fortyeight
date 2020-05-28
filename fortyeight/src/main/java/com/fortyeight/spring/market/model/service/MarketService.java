@@ -14,7 +14,10 @@ public interface MarketService {
 	int insertMarket(Market mk, List<MkImg> files); // 글 등록
 	
 	Market selectView(int mkNo); // 마켓 상세화면
-	List<Dips> selectDips(int mkNo); //마켓 상세 찜 리스
+	List<Dips> selectMkDips(Map<String, Integer> map); // 마켓 상세뷰 찜 리스트
+	List<Dips> selectDips(Map<String, String> map); // 마켓 상세뷰 찜 리스트(ajax쪽 메소드)
+	int insertDips(Map<String, String> map); // 마켓 뷰 찜 추가
+	int deleteDips(Map<String, String> map); // 마켓 뷰 찜 삭제
 	String selectMkViewNick(int mkNo); // 마켓 상세 닉네임
 	MarketViewImg selectMkViewImg(int mkNo); // 마켓 뷰 '이미지'만 출력
 	List<MkComment> selectComment(int mkNo, int cPage, int numPerPage); // 마켓 댓글리스트 출력
