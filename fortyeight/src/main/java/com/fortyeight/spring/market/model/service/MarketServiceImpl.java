@@ -160,6 +160,24 @@ public class MarketServiceImpl implements MarketService {
 	public int deleteDips(Map<String, String> map) {
 		return dao.deleteDips(session, map);
 	}
+
+	// 마켓 뷰 거래상태 변경(예약중)
+	@Override
+	public int updateReservation(Map<String, String> map) {
+		return dao.updateReservation(session, map);
+	}
+
+	// 마켓 뷰 거래상태 변경(구매중) -실제값:판매중
+	@Override
+	public int updateBuying(Map<String, String> map) {
+		return dao.updateBuying(session, map);
+	}
+
+	// 마켓 뷰 거래상태 변경(구매완료) -실제값:판매완료
+	@Override
+	public int updateComplete(Map<String, String> map) {
+		return dao.updateComplete(session, map);
+	}
 	
 	
 	

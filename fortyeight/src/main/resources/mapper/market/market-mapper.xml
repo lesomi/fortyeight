@@ -219,7 +219,7 @@
 	
 	<!-- 마켓 찜 리스트 -->
 	<select id="selectDips" resultType="dips" parameterType="map">
-		SELECT * FROM DIPS WHERE USERNO = #{userNo} AND MKNO = #{mkNo}
+		SELECT * FROM DIPS WHERE MKNO = #{mkNo}
 	</select>
 	
 	<!-- 마켓 댓글 수(삽니다) 조회 -->
@@ -326,11 +326,26 @@
 	
 	<!-- 마켓 상세뷰 찜 리스트 출력 -->
 	<select id="selectDipsYSK" parameterType="map" resultType="dips">
-		SELECT * FROM DIPS WHERE USERNO = #{userNo} AND MKNO = #{mkNo}
+		SELECT * FROM DIPS WHERE MKNO = #{mkNo}
 	</select>
 	
 	<!-- 마켓 상세뷰 찜 삭제 -->
 	<delete id="deleteDips" parameterType="map">
 		DELETE FROM DIPS WHERE USERNO=#{userNo} AND MKNO=#{mkNo}
 	</delete>
+	
+	<!-- 마켓 상세뷰 거래상태(예약중) 변경 -->
+	<update id="updateReservation" parameterType="map">
+		UPDATE MARKET SET DEALSTATUS='예약중' WHERE MKNO=#{mkNo}
+	</update>
+	
+	<!-- 마켓 상세뷰 거래상태(구매중-실제값은 판매중!) 변경 -->
+	<update id="updateBuying" parameterType="map">
+		UPDATE MARKET SET DEALSTATUS='판매중' WHERE MKNO=#{mkNo}
+	</update>
+	
+	<!-- 마켓 상세뷰 거래상태(구매완료-실제값은 판매완료!) 변경 -->
+	<update id="updateComplete" parameterType="map">
+		UPDATE MARKET SET DEALSTATUS='판매완료' WHERE MKNO=#{mkNo}
+	</update>
 </mapper>

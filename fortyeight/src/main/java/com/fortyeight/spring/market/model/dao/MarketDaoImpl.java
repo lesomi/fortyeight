@@ -132,10 +132,21 @@ public class MarketDaoImpl implements MarketDao {
 		return session.delete("market.deleteDips", map);
 	}
 
-	
+	// 마켓 상세뷰 거래상태 [예약중] 으로 업데이트
+	@Override
+	public int updateReservation(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateReservation", map);
+	}
 
-	
-	
-	
+	// 마켓 상세뷰 거래상태 [구매중] 으로 업데이트
+	@Override
+	public int updateBuying(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateBuying", map);
+	}
 
+	// 마켓 상세뷰 거래상태 [구매완료] 으로 업데이트
+	@Override
+	public int updateComplete(SqlSessionTemplate session, Map<String, String> map) {
+		return session.update("market.updateComplete", map);
+	}
 }

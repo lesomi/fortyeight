@@ -231,11 +231,12 @@ public class MarketController {
 							HttpSession session) {
 		Market mk=service.selectView(mkNo); // 마켓리스트
 		
+		
 		// 세션 갖고오기
-		User loginUser = (User)session.getAttribute("loginUser");
+		// User loginUser = (User)session.getAttribute("loginUser");
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("mkNo", mkNo);
-		map.put("userNo", loginUser.getUserNo());
+		// map.put("userNo", loginUser.getUserNo());
 		List<Dips> dips=service.selectMkDips(map); // 찜목록 리스트
 		
 		
@@ -323,7 +324,7 @@ public class MarketController {
 	}
 	
 	// 마켓 찜 등록 -insert
-	@RequestMapping("/market/insertDips")
+	@RequestMapping("/market/insertDips.do")
 	@ResponseBody
 	public boolean insertDips(@RequestParam Map<String, String> map) {
 		logger.debug("----- [마켓 찜 등록 (Ajax) controller 진입!] -----");
@@ -340,21 +341,76 @@ public class MarketController {
 	}
 	
 	// 마켓 찜 삭제 -delete
-		@RequestMapping("/market/deleteDips")
-		@ResponseBody
-		public boolean deleteDips(@RequestParam Map<String, String> map) {
-			logger.debug("----- [마켓 찜 삭제 (Ajax) controller 진입!] -----");
-			System.out.println("찜삭제하기 위한 정보는 가져왔는가? : "+map);
-			System.out.println("--------------------------------");
-			
-			// 찜 삭제
-			int result = service.deleteDips(map);
-			System.out.println("----- [찜 삭제 결과] -----"
-								 + "result : "+result
-								 + "-----------------------");
-			boolean flag = result>0? true:false; // true:등록, false:등록실패
-			return flag;
+	@RequestMapping("/market/deleteDips.do")
+	@ResponseBody
+	public boolean deleteDips(@RequestParam Map<String, String> map) {
+		logger.debug("----- [마켓 찜 삭제 (Ajax) controller 진입!] -----");
+		System.out.println("찜삭제하기 위한 정보는 가져왔는가? : "+map);
+		System.out.println("--------------------------------");
+		
+		// 찜 삭제
+		int result = service.deleteDips(map);
+		System.out.println("----- [찜 삭제 결과] -----"
+							 + "result : "+result
+							 + "-----------------------");
+		boolean flag = result>0? true:false; // true:등록, false:등록실패
+		return flag;
+	}
+		
+	
+	// 마켓 상세뷰 거래상태 [구매중-실제값:판매중] 으로 업데이트
+	@RequestMapping("/market/updateBuying.do")
+	public String updateBuying(@RequestParam Map<String, String> map, Model m) {
+		logger.debug("----- [마켓 거래상태 거래중 controller 진입!] -----");
+		System.out.println("거래상태를 변경하기 위한 정보는 가져왔는가? : "+map);
+		int result = service.updateBuying(map);
+		
+		if(result>0) {
+			m.addAttribute("msg","거래상태가 수정되었습니다. [거래중]");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
 		}
+		else {
+			m.addAttribute("msg","거래상태 수정이 실패되었습니다. [거래중] 관리자에게 문의하세요!");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
+		}
+		return "common/msg";
+	}
+	
+	// 마켓 상세뷰 거래상태 [예약중] 으로 업데이트
+	@RequestMapping("/market/updateReservation.do")
+	public String updateReservation(@RequestParam Map<String, String> map, Model m) {
+		logger.debug("----- [마켓 거래상태 예약중 controller 진입!] -----");
+		System.out.println("거래상태를 변경하기 위한 정보는 가져왔는가? : "+map);
+		int result = service.updateReservation(map);
+		
+		if(result>0) {
+			m.addAttribute("msg","거래상태가 수정되었습니다. [예약중]");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
+		}
+		else {
+			m.addAttribute("msg","거래상태 수정이 실패되었습니다. [예약중] 관리자에게 문의하세요!");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
+		}
+		return "common/msg";
+	}
+	
+	// 마켓 상세뷰 거래상태 [구매완료-실제값:판매완료] 으로 업데이트
+	@RequestMapping("/market/updateComplete.do")
+	public String updateComplete(@RequestParam Map<String, String> map, Model m) {
+		logger.debug("----- [마켓 거래상태 구매완료 controller 진입!] -----");
+		System.out.println("거래상태를 변경하기 위한 정보는 가져왔는가? : "+map);
+		int result = service.updateComplete(map);
+		
+		if(result>0) {
+			m.addAttribute("msg","거래상태가 수정되었습니다. [구매완료]");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
+		}
+		else {
+			m.addAttribute("msg","거래상태 수정이 실패되었습니다. [구매완료] 관리자에게 문의하세요!");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
+		}
+		return "common/msg";
+	}
 }
 
 
