@@ -263,7 +263,7 @@
                         </a>
                         <div id="collapseFour" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
-                                <a class="collapse-item" href="#">찜목록</a>
+                                <a class="collapse-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}">찜목록</a>
                             </div>
                         </div>
                     </li>

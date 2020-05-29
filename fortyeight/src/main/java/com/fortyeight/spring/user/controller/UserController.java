@@ -351,4 +351,10 @@ public class UserController {
 	public String selectDealHistory(int userNo) {
 		return "user/selectDealHistory";
 	}
+	
+	// 마이페이지 - 찜목록 화면 전환
+	@RequestMapping("/user/selectDipsList.do")
+	public String selectDipsList(int userNo) {
+		return "user/selectDipsList";
+	}
 }
