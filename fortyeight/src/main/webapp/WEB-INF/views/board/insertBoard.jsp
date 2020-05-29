@@ -11,7 +11,7 @@
 
 <section>
 	<div class="container" style="margin-top: 200px;">
-		<form action="${path }/board/insertBoardEnd.do" method="post">
+		<form action="${path }/board/insertBoardEnd.do" method="post" onsubmit="return selectCheck();">
 			<table style="width:700px;margin:0 auto">
 				<tr>
 					<td>
@@ -30,12 +30,12 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" class="form-control mb-3" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요">
+						<input type="text" class="form-control mb-3" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요" required>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<textarea class="form-control mb-2" id="boardContent" name="boardContent" rows="10"></textarea>
+						<textarea class="form-control mb-2" style="resize: none;" id="boardContent" name="boardContent" rows="10" required></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -52,6 +52,15 @@
 
 <!-- footer 설정 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<script>
+	function selectCheck(){
+		if($("#boardType").val()==null){
+			alert("글 유형을 선택해주세요.");
+			return false;
+		}
+	}
+</script>
 
 <div class="modal fade" id="insertBoardCancle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

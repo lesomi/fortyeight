@@ -29,12 +29,12 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="text" class="form-control mb-3" id="boardTitle" name="boardTitle" value="${b.boardTitle }">
+						<input type="text" class="form-control mb-3" id="boardTitle" name="boardTitle" value="${b.boardTitle }" required>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<textarea class="form-control mb-2" id="boardContent" name="boardContent" rows="10">${b.boardContent }</textarea>
+						<textarea class="form-control mb-2" style="resize: none;" id="boardContent" name="boardContent" rows="10" required>${b.boardContent }</textarea>
 					</td>
 				</tr>
 				<tr>
