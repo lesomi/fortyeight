@@ -57,6 +57,7 @@
 	function selectCheck(){
 		if($("#boardType").val()==null){
 			alert("글 유형을 선택해주세요.");
+			$("#boardType").focus();
 			return false;
 		}
 	}
