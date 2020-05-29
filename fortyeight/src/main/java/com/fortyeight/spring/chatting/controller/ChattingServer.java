@@ -14,7 +14,8 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fortyeight.spring.chatting.vo.Chatting;
+import com.fortyeight.spring.chatting.model.service.ChattingService;
+import com.fortyeight.spring.chatting.model.vo.Chatting;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +27,8 @@ public class ChattingServer extends TextWebSocketHandler {
 	
 	private Set<WebSocketSession> clients2=new HashSet();
 	
+	@Autowired
+	private ChattingService service;
 	
 	@Autowired
 	ObjectMapper mapper;
@@ -101,6 +104,7 @@ public class ChattingServer extends TextWebSocketHandler {
 				
 				try {
 					client.sendMessage(new TextMessage(mapper.writeValueAsString(msg)));
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
