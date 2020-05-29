@@ -1,5 +1,6 @@
 package com.fortyeight.spring.user.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fortyeight.spring.user.model.dao.UserDao;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -71,6 +73,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int deleteUser(int userNo) {
 		return dao.deleteUser(session, userNo);
+	}
+
+	// 마이페이지-찜목록
+	@Override
+	public List<UserDipsList> selectDipsList(Map<String, Object> map) {
+		return dao.selectDipsList(session, map);
+	}
+
+	// 마이페이지-찜목록 페이징
+	@Override
+	public int selectDipsListCount(Map<String, Object> map) {
+		return dao.selectDipsListCount(session, map);
 	}
 	
 	
