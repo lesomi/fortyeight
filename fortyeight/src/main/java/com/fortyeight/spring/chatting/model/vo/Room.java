@@ -1,4 +1,4 @@
-package com.fortyeight.spring.chatting.vo;
+package com.fortyeight.spring.chatting.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

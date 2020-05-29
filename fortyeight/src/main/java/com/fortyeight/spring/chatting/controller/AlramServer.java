@@ -13,7 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fortyeight.spring.chatting.vo.Alram;
+import com.fortyeight.spring.chatting.model.vo.Alram;
 
 import lombok.extern.slf4j.Slf4j;
 
