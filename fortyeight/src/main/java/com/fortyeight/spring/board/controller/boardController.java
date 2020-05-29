@@ -36,6 +36,7 @@ public class boardController {
 		System.out.println(list);
 		
 		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/board/boardList.do"));
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/board/boardList.do")); //서버용
 		
 		mv.setViewName("board/boardList");
 		
