@@ -10,15 +10,15 @@
 </jsp:include>
 
 <section>
-	<div class="container" style="margin-top: 200px;">
-		<div>
+	<div class="container" style="margin-top: 150px;">
+		<div class="float-right m-2">
 			<c:if test="${loginUser.userNo eq b.userNo }">
-				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#boardDelModal">삭제</button>
-				<button type="button" class="btn btn-warning" id="updateBoard" onclick="location.replace('${path}/board/updateBoard.do?boardNo='+${b.boardNo})">수정</button>
+				<button type="button" class="btn btn-warning m-2" data-toggle="modal" data-target="#boardDelModal">삭제</button>
+				<button type="button" class="btn btn-warning m-2" id="updateBoard" onclick="location.replace('${path}/board/updateBoard.do?boardNo='+${b.boardNo})">수정</button>
 			</c:if>
-			<button class="btn btn-warning" onclick="history.back();">목록</button>
+			<button class="btn btn-warning m-2" onclick="history.back();">목록</button>
 		</div>
-		<table class="table mt-2">
+		<table class="table">
 			<tr style="background-color:rgb(241,241,241);">
 				<td>${b.nickName }</td>
 				<td style="text-align:center;">${b.boardTitle }</td>
