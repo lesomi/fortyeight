@@ -47,7 +47,7 @@
 			<if test=' (oriProfile eq "" and oriProfile eq null) || (renameProfile eq "" and renameProfile eq null) '>
 			</if>
 			<if test=' (oriProfile neq "" and oriProfile neq null) || (renameProfile neq "" and renameProfile neq null) '>
-				ORIPROFILE=#{oriProfile}, RENAMEPROFILE=#{renameProfile}
+				, ORIPROFILE=#{oriProfile}, RENAMEPROFILE=#{renameProfile}
 			</if>
 		WHERE USERNO=#{userNo}
 	</update>

@@ -305,6 +305,14 @@ public class UserController {
 		if (result > 0) {
 			model.addAttribute("msg","회원정보수정이 완료되었습니다.");
 			model.addAttribute("loc","/user/mypage.do");
+			
+			// 세션에 있는 값을 update한 값으로 변경하자
+			String userId = u.getUserId();
+			User user = service.selectLogin(userId); // 변경된 유저의 값을 가져온다.
+			System.out.println("변경된 유저의 값은 ? : "+user);
+			// 변경된 유저의 값을 불러와서 model에 담는다(세션값)
+			model.addAttribute("loginUser", user);
+			
 			page = "common/msg";
 		} else {
 			model.addAttribute("msg","회원정보수정이 실패되었습니다. 다시 수정하세요.");

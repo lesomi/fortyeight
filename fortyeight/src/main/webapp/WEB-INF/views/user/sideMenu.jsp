@@ -184,7 +184,8 @@
     <div id="sidebar">
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                     <div id="userProfileDiv">
-                    	<img src="${path}/resources/upload/user/${loginUser.renameProfile}" id="userProfile"/>
+                    	${sessionScope.loginUser.renameProfile}
+                    	<img src="${path}/resources/upload/user/${sessionScope.loginUser.renameProfile}" id="userProfile"/>
                     	<span id="userId">${loginUser.userId}</span>
                     	<span id="nickName">${loginUser.nickName}님</span>
                     </div>
