@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	//const websocket=new WebSocket("ws://localhost:9090${path}/chatting");
 	const websocket=new WebSocket("wss://rclass.iptime.org${path}/chatting"); // 서버배포용
