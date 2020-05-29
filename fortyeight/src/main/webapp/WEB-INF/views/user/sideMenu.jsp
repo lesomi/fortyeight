@@ -259,13 +259,13 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
                             <i class="fas fa-list"></i>
-                            <span>찜목록</span>
+                            <span onclick='location.replace("${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=전체");'>찜목록</span>
                         </a>
-                        <div id="collapseFour" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
+                        <%-- <div id="collapseFour" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
                                 <a class="collapse-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}">찜목록</a>
                             </div>
-                        </div>
+                        </div> --%>
                     </li>
 
                     <hr class="sidebar-divider my-0">

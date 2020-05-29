@@ -1,11 +1,13 @@
 package com.fortyeight.spring.user.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 
 @Repository
@@ -61,6 +63,18 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int deleteUser(SqlSessionTemplate session, int userNo) {
 		return session.delete("user.deleteUser", userNo);
+	}
+
+	// 마이페이지-찜목록
+	@Override
+	public List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.selectList("user.selectDipsList", map);
+	}
+
+	// 마이페이지-찜목록 페이징
+	@Override
+	public int selectDipsListCount(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.selectOne("user.selectDipsListCount", map);
 	}
 	
 	

@@ -47,7 +47,7 @@
 			<if test=' (oriProfile eq "" and oriProfile eq null) || (renameProfile eq "" and renameProfile eq null) '>
 			</if>
 			<if test=' (oriProfile neq "" and oriProfile neq null) || (renameProfile neq "" and renameProfile neq null) '>
-				ORIPROFILE=#{oriProfile}, RENAMEPROFILE=#{renameProfile}
+				, ORIPROFILE=#{oriProfile}, RENAMEPROFILE=#{renameProfile}
 			</if>
 		WHERE USERNO=#{userNo}
 	</update>
@@ -56,4 +56,40 @@
 	<update id="deleteUser" parameterType="_int">
 		UPDATE MEMBER SET STATUS='Y' WHERE USERNO=#{userNo}
 	</update>
+	
+	<!-- 마이페이지 - 찜목록(select Ajax 포함) -->
+	<select id="selectDipsList" parameterType="map" resultType="dipsList">
+		SELECT 
+			MK.MKNO, MK.MKTYPE, MK.MKTITLE, MEM.NICKNAME, MK.MKDATE
+		FROM MARKET MK FULL JOIN DIPS D ON(MK.MKNO=D.MKNO) FULL JOIN MEMBER MEM ON(MEM.USERNO=MK.USERNO) WHERE D.USERNO=#{userNo}
+		<choose>
+			<when test='mkType eq "전체"'>
+				AND 1=1
+			</when>
+			<when test='mkType eq "삽니다"'>
+				AND MKTYPE='삽니다'
+			</when>
+			<when test='mkType eq "팝니다"'>
+				AND MKTYPE='팝니다'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 마이페이지-찜목록 페이징처리 -->
+	<select id="selectDipsListCount" resultType="_int" parameterType="map">
+		SELECT 
+			COUNT(*)
+		FROM MARKET MK FULL JOIN DIPS D ON(MK.MKNO=D.MKNO) FULL JOIN MEMBER MEM ON(MEM.USERNO=MK.USERNO) WHERE D.USERNO=#{userNo}
+		<choose>
+			<when test='mkType eq "전체"'>
+				AND 1=1
+			</when>
+			<when test='mkType eq "삽니다"'>
+				AND MKTYPE='삽니다'
+			</when>
+			<when test='mkType eq "팝니다"'>
+				AND MKTYPE='팝니다'
+			</when>
+		</choose>
+	</select>
 </mapper>

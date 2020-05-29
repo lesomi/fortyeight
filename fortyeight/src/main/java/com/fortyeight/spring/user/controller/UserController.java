@@ -2,10 +2,10 @@ package com.fortyeight.spring.user.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpSession;
@@ -24,9 +24,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fortyeight.spring.common.AESEncrypt;
+import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 @Controller
 @SessionAttributes({ "loginUser" })
@@ -305,6 +306,14 @@ public class UserController {
 		if (result > 0) {
 			model.addAttribute("msg","회원정보수정이 완료되었습니다.");
 			model.addAttribute("loc","/user/mypage.do");
+			
+			// 세션에 있는 값을 update한 값으로 변경하자
+			String userId = u.getUserId();
+			User user = service.selectLogin(userId); // 변경된 유저의 값을 가져온다.
+			System.out.println("변경된 유저의 값은 ? : "+user);
+			// 변경된 유저의 값을 불러와서 model에 담는다(세션값)
+			model.addAttribute("loginUser", user);
+			
 			page = "common/msg";
 		} else {
 			model.addAttribute("msg","회원정보수정이 실패되었습니다. 다시 수정하세요.");
@@ -354,7 +363,45 @@ public class UserController {
 	
 	// 마이페이지 - 찜목록 화면 전환
 	@RequestMapping("/user/selectDipsList.do")
-	public String selectDipsList(int userNo) {
+	public String selectDipsList(int userNo, @RequestParam String mkType, Model m,
+								@RequestParam(required=false, defaultValue="1") int cPage,
+								@RequestParam(required=false, defaultValue="5") int numPerPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNo", userNo);
+		map.put("mkType", mkType);
+		// 찜목록 가져오기
+		List<UserDipsList> list  = service.selectDipsList(map);
+		System.out.println("찜목록을 가져오는가? : "+list);
+		// 페이징처리
+		int totalData = service.selectDipsListCount(map);
+		
+		m.addAttribute("dipsList",list);
+		m.addAttribute("total", totalData);
+		m.addAttribute("mkType",mkType);
+		m.addAttribute("pageBar", PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do"));
 		return "user/selectDipsList";
 	}
+	
+	// 마이페이지-찜목록 필터
+	/*
+	 * @RequestMapping("/user/selectDipsListFilter.do")
+	 * 
+	 * @ResponseBody public ModelAndView selectDipsListFilter(ModelAndView mv, int
+	 * userNo,
+	 * 
+	 * @RequestParam Map<String, String> map,
+	 * 
+	 * @RequestParam(required=false, defaultValue="1") int cPage,
+	 * 
+	 * @RequestParam(required=false, defaultValue="5") int numPerPage) {
+	 * System.out.println("가져온 값은? : "+map);
+	 * 
+	 * // [전체]찜목록 가져오기 List<UserDipsList> list = service.selectDipsList(map); //
+	 * 페이징처리 int totalData = service.selectDipsListCount(userNo);
+	 * System.out.println("찜목록을 가져오는가? "+list); mv.addObject("dipsList", list);
+	 * mv.addObject("total", totalData); mv.addObject("pageBar",
+	 * PagingFactory.getPage(totalData, cPage, numPerPage,
+	 * "/spring/user/selectDipsList.do")); mv.setViewName("user/selectDipsList");
+	 * return mv; }
+	 */
 }

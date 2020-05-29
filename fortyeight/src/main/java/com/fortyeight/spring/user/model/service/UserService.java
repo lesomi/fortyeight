@@ -1,8 +1,10 @@
 package com.fortyeight.spring.user.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 public interface UserService {
 	User selectLogin(String userId); //로그인
@@ -14,4 +16,6 @@ public interface UserService {
 	int updatePassword(Map<String,Object> map);
 	int updateUser(User u); // 회원정보수정
 	int deleteUser(int userNo); // 회원탈퇴
+	List<UserDipsList> selectDipsList(Map<String, Object> map); // 마이페이지-찜목록
+	int selectDipsListCount(Map<String, Object> map); // 마이페이지-찜목록 페이징
 }
