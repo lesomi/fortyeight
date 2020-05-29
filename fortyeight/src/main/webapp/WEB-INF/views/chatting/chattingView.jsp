@@ -9,7 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 	//const websocket=new WebSocket("ws://localhost:9090${path}/chatting");
 	const websocket=new WebSocket("wss://rclass.iptime.org${path}/chatting"); // 서버배포용
@@ -52,14 +55,30 @@
 				return;
 			}else{
 				websocket.send(JSON.stringify(new Chatting(0,"msg",'${loginUser.userNo}',receiver,null,chat,room)));
+				$("#sendChat").val("");
+			}
+		});
+		
+		$("#sendChat").keydown(function(key) {
+			if (key.keyCode == 13) {
+				const chat=$("#sendChat").val();
+				if(chat.trim().length==0){
+					alert("전송할 데이터가 없습니다.");
+					return;
+				}else{
+					websocket.send(JSON.stringify(new Chatting(0,"msg",'${loginUser.userNo}',receiver,null,chat,room)));
+					$("#sendChat").val("");
+				}
 			}
 		});
 	});
 </script>
 </head>
 <body>
-	<div id="msg-container"></div>
-	<input type="text" id="sendChat" name="sendChat">
-	<input type="button" id="sendBtn" name="sendBtn" value="전송">
+	<div id="msg-container" style="height:540px;overflow:auto;"></div>
+	<div class="d-flex">
+		<input type="text" class="form-control m-2" id="sendChat" name="sendChat" style="width:300px">
+		<input type="button" class="btn btn-warning m-2" id="sendBtn" name="sendBtn" value="전송">
+	</div>
 </body>
 </html>
