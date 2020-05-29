@@ -27,8 +27,8 @@
 </style>
 
 <section>
-	<div style="margin-top: 115px;height: 80px;background-color:lightgray">
-		<span><strong>[${mk.mkType} - ${mk.category}]</strong></span>
+	<div class="pl-5 pt-4" style="margin-top: 115px;height: 70px;background-color:rgb(241,241,241)">
+		<span><strong>[ ${mk.mkType} > ${mk.category} ]</strong></span>
 	</div>
 
 	<div class="container"  style="margin-top: 50px;">
@@ -68,7 +68,7 @@
 								<!-- 찜목록이 비었을 때 -->
 								<c:if test="${empty dips}">
 									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-										<button type="button" id="canDipsBtn">
+										<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
@@ -78,12 +78,12 @@
 									<c:if test="${not empty dips}">
 										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
 										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
 										<c:if test="${d.userNo eq loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
@@ -94,7 +94,7 @@
 							<c:if test="${loginUser.userNo eq mk.userNo}">
 								<td style="width:50px;">
 									<div class="dropdown">
-										<button type="button" data-toggle="dropdown">
+										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
@@ -118,7 +118,7 @@
 								<!-- 찜목록이 비었을 때 -->
 								<c:if test="${empty dips}">
 									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-										<button type="button" id="canDipsBtn">
+										<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
@@ -128,12 +128,12 @@
 									<c:if test="${not empty dips}">
 										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
 										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
 										<c:if test="${d.userNo eq loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
@@ -144,7 +144,7 @@
 							<c:if test="${loginUser.userNo eq mk.userNo}">
 								<td style="width:50px;">
 									<div class="dropdown">
-										<button type="button" data-toggle="dropdown">
+										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
@@ -188,7 +188,7 @@
 								<!-- 찜목록이 비었을 때 -->
 								<c:if test="${empty dips}">
 									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-										<button type="button" id="canDipsBtn">
+										<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
@@ -198,12 +198,12 @@
 									<c:if test="${not empty dips}">
 										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
 										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
 										<c:if test="${d.userNo eq loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
@@ -214,7 +214,7 @@
 							<c:if test="${loginUser.userNo eq mk.userNo}">
 								<td style="width:50px;">
 									<div class="dropdown">
-										<button type="button" data-toggle="dropdown">
+										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
@@ -238,7 +238,7 @@
 								<!-- 찜목록이 비었을 때 -->
 								<c:if test="${empty dips}">
 									<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-										<button type="button" id="canDipsBtn">
+										<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 											<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 										</button>
 									</c:if>
@@ -248,7 +248,7 @@
 									<c:if test="${not empty dips}">
 										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
 										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
-											<button type="button" id="canDipsBtn">
+											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
@@ -264,7 +264,7 @@
 							<c:if test="${loginUser.userNo eq mk.userNo}">
 								<td style="width:50px;">
 									<div class="dropdown">
-										<button type="button" data-toggle="dropdown">
+										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
