@@ -36,13 +36,15 @@
             	<h3>찜목록</h3>
 
 				<!-- 필터적용 / 전체,삽니다,팝니다 -->
-				<div class="form-group">
-					<select class="form-control" id="filterDipsList">
-						<option value="전체" selected>전체</option>
-						<option value="삽니다">삽니다</option>
-						<option value="팝니다">팝니다</option>
-					</select>
+				<div class="dropdown">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">정렬</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=전체">전체</a>
+						<a class="dropdown-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=삽니다">삽니다</a> 
+						<a class="dropdown-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=팝니다">팝니다</a>
+					</div>
 				</div>
+				<br>
 
 
 				<table id="contentTB" class="table table-hover">
@@ -86,58 +88,6 @@
 	</div>
 	<div class="push"></div>
 </section>
-
-
-<script>
-	$(function () {
-		if('${mkType}'==$('#filterDipsList').val()) {
-			$('#filterDipsList').attr('selected', true);			
-		}
-		
-		// select된 option값 가져오기
-		const selectFilter = $('#filterDipsList option:selected').val();
-		// 필터 select 값에 따른 ajax 처리
-		if(selectFilter=="전체") {
-			console.log("전체 if문 진입");
-			$.ajax({
-				url: "${path}/user/selectDipsList.do",
-				data: {userNo:'${loginUser.userNo}', mkType:"전체"},
-				success: function(data) {
-					console.log('전체 리스트 불러오기 성공!');
-				},
-				error: function(data) {
-					console.log("전체 리스트 불러오기 실패!");
-				}
-			});
-		}
-		else if(selectFilter=="삽니다") {
-			console.log("삽니다 if문 진입");
-			$.ajax({
-				url: "${path}/user/selectDipsList.do",
-				data: {userNo:'${loginUser.userNo}', mkType:"삽니다"},
-				success: function(data) {
-					console.log('전체 리스트 불러오기 성공!');
-				},
-				error: function(data) {
-					console.log("전체 리스트 불러오기 실패!");
-				}
-			});
-		}
-		else if(selectFilter=="팝니다") {
-			console.log("전체 if문 진입");
-			$.ajax({
-				url: "${path}/user/selectDipsList.do",
-				data: {userNo:'${loginUser.userNo}', mkType:"팝니다"},
-				success: function(data) {
-					console.log('전체 리스트 불러오기 성공!');
-				},
-				error: function(data) {
-					console.log("전체 리스트 불러오기 실패!");
-				}
-			});
-		}
-	});
-</script>
 
 	<!-- footer 설정 -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
