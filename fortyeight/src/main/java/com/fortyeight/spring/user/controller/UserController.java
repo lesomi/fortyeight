@@ -239,8 +239,10 @@ public class UserController {
 
 	// 마이페이지 전환
 	@RequestMapping("/user/mypage.do")
-	public String mypage(String userId) {
-		return "user/mypage";
+	public ModelAndView mypage(String userId, ModelAndView mv) {
+		int buySu = service.buyHistory(userId); // 사용자 구매내역 
+		mv.setViewName("user/mypage");
+		return mv;
 	}
 
 	// 회원정보수정 전환
@@ -325,6 +327,11 @@ public class UserController {
 		return page;
 	}
 	
+	// 마이페이지-비밀번호변경 화면으로 전환
+	@RequestMapping("/user/updateUserPassword.do")
+	public String updateUserPassword(int userNo) {
+		return "user/updateUserPassword";
+	}
 	
 	
 	// 마이페이지 - 회원탈퇴 화면 전환
@@ -367,7 +374,7 @@ public class UserController {
 		map.put("dealStatus", dealStatus);
 		map.put("mkType", mkType);
 		// 거래내역 가져오기
-		List<UserDealHistory> list  = service.selectDealHistory(map);
+		List<UserDealHistory> list  = service.selectDealHistory(map, cPage, numPerPage);
 		System.out.println("거래내역을 가져오는가? : "+list);
 		// 페이징처리
 		int totalData = service.selectDealHistoryCount(map);
@@ -376,7 +383,8 @@ public class UserController {
 		m.addAttribute("total", totalData);
 		m.addAttribute("dealStatus", dealStatus);
 		m.addAttribute("mkType", mkType);
-		m.addAttribute("pageBar", PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/user/selectDealHistory.do"));
+		m.addAttribute("pageBar", PagingFactory.getMyPageDealHistory(totalData, cPage, numPerPage, "/spring/user/selectDealHistory.do",
+						userNo, mkType, dealStatus));
 		
 		return "user/selectDealHistory";
 	}
@@ -390,7 +398,7 @@ public class UserController {
 		map.put("userNo", userNo);
 		map.put("mkType", mkType);
 		// 찜목록 가져오기
-		List<UserDipsList> list  = service.selectDipsList(map);
+		List<UserDipsList> list  = service.selectDipsList(map, cPage, numPerPage);
 		System.out.println("찜목록을 가져오는가? : "+list);
 		// 페이징처리
 		int totalData = service.selectDipsListCount(map);
@@ -398,30 +406,7 @@ public class UserController {
 		m.addAttribute("dipsList",list);
 		m.addAttribute("total", totalData);
 		m.addAttribute("mkType",mkType);
-		m.addAttribute("pageBar", PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do"));
+		m.addAttribute("pageBar", PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do", userNo, mkType));
 		return "user/selectDipsList";
 	}
-	
-	// 마이페이지-찜목록 필터
-	/*
-	 * @RequestMapping("/user/selectDipsListFilter.do")
-	 * 
-	 * @ResponseBody public ModelAndView selectDipsListFilter(ModelAndView mv, int
-	 * userNo,
-	 * 
-	 * @RequestParam Map<String, String> map,
-	 * 
-	 * @RequestParam(required=false, defaultValue="1") int cPage,
-	 * 
-	 * @RequestParam(required=false, defaultValue="5") int numPerPage) {
-	 * System.out.println("가져온 값은? : "+map);
-	 * 
-	 * // [전체]찜목록 가져오기 List<UserDipsList> list = service.selectDipsList(map); //
-	 * 페이징처리 int totalData = service.selectDipsListCount(userNo);
-	 * System.out.println("찜목록을 가져오는가? "+list); mv.addObject("dipsList", list);
-	 * mv.addObject("total", totalData); mv.addObject("pageBar",
-	 * PagingFactory.getPage(totalData, cPage, numPerPage,
-	 * "/spring/user/selectDipsList.do")); mv.setViewName("user/selectDipsList");
-	 * return mv; }
-	 */
 }

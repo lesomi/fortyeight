@@ -62,7 +62,7 @@
                     <br><br><br><br><br>
 
                     <aside>
-                        <h3 style="text-align: center; margin-bottom: 50px; ">현재 소비자님의 거래정보는?</h3>
+                        <h3 style="text-align: center; margin-bottom: 50px; ">현재 ${loginUser.nickName}님의 거래정보는?</h3>
                         <table id="rightContent">
                             <tr>
                                 <td class="blank" id="buy_History">
@@ -90,7 +90,7 @@
 
                     <br><br><br>
                     <aside>
-                        <h3 style="text-align: center; margin-bottom: 50px; ">소비자님의 후기가 필요합니다!</h3>
+                        <h3 style="text-align: center; margin-bottom: 50px; ">${loginUser.nickName}님의 후기가 필요합니다!</h3>
                         <button class="btn btn-dark" id="reviewBtn">후기 써 보자!</button>
                     </aside>
                     <br><br><br><br>

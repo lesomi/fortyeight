@@ -12,7 +12,7 @@
 
 <style>
 	div#blank1 { margin-bottom: 150px; }
-	h3 { text-align: center; margin-bottom: 100px; }
+	h3 { text-align: center; margin-bottom: 50px; }
 	#contentTB { text-align: center; }
 	#moveBtn:hover { color: rgb(251, 191, 42); }
 </style>
@@ -33,7 +33,7 @@
 
 				<!-- 필터적용 / 전체,삽니다,팝니다 -->
 				<div class="dropdown dropright">
-					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">정렬</button>
+					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">정렬</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}&mkType=전체&dealStatus=전체">전체</a>
 						<div class="dropdown-header">[구매]</div>

@@ -20,8 +20,8 @@ public interface UserDao {
 	int updatePassword(SqlSessionTemplate session,Map<String,Object> map);
 	int updateUser(SqlSessionTemplate session, User u); // 회원정보수정
 	int deleteUser(SqlSessionTemplate session, int userNo); // 회원탈퇴
-	List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-찜목록
+	List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-찜목록
 	int selectDipsListCount(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-찜목록 페이징
-	List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-거래내역
+	List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-거래내역
 	int selectDealHistoryCount(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-거래내역 페이징
 }

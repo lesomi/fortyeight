@@ -79,8 +79,8 @@ public class UserServiceImpl implements UserService {
 
 	// 마이페이지-찜목록
 	@Override
-	public List<UserDipsList> selectDipsList(Map<String, Object> map) {
-		return dao.selectDipsList(session, map);
+	public List<UserDipsList> selectDipsList(Map<String, Object> map, int cPage, int numPerPage) {
+		return dao.selectDipsList(session, map, cPage, numPerPage);
 	}
 
 	// 마이페이지-찜목록 페이징
@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
 
 	// 마이페이지-거래내역
 	@Override
-	public List<UserDealHistory> selectDealHistory(Map<String, Object> map) {
-		return dao.selectDealHistory(session, map);
+	public List<UserDealHistory> selectDealHistory(Map<String, Object> map, int cPage, int numPerPage) {
+		return dao.selectDealHistory(session, map, cPage, numPerPage);
 	}
 
 	// 마이페이지-거래내역 페이징

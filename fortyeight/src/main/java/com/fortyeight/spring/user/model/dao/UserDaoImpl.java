@@ -3,6 +3,7 @@ package com.fortyeight.spring.user.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -69,8 +70,8 @@ public class UserDaoImpl implements UserDao {
 
 	// 마이페이지-찜목록
 	@Override
-	public List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map) {
-		return session.selectList("user.selectDipsList", map);
+	public List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage) {
+		return session.selectList("user.selectDipsList", map, new RowBounds((cPage-1)*numPerPage, numPerPage));
 	}
 
 	// 마이페이지-찜목록 페이징
@@ -81,8 +82,8 @@ public class UserDaoImpl implements UserDao {
 
 	// 마이페이지-거래내역
 	@Override
-	public List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map) {
-		return session.selectList("user.selectDealHistory", map);
+	public List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage) {
+		return session.selectList("user.selectDealHistory", map, new RowBounds((cPage-1)*numPerPage, numPerPage));
 	}
 
 	// 마이페이지-거래내역 페이징
