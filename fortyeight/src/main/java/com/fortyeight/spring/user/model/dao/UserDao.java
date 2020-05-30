@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDealHistory;
 import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 public interface UserDao {
@@ -20,4 +22,6 @@ public interface UserDao {
 	int deleteUser(SqlSessionTemplate session, int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-찜목록
 	int selectDipsListCount(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-찜목록 페이징
+	List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-거래내역
+	int selectDealHistoryCount(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-거래내역 페이징
 }

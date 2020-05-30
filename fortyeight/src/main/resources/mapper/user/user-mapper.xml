@@ -92,4 +92,60 @@
 			</when>
 		</choose>
 	</select>
+	
+	<!-- 마이페이지-거래내역 리스트 -->
+	<select id="selectDealHistory" parameterType="map" resultType="dealHistory">
+		SELECT MKNO, MKTYPE, DEALSTATUS, MKTITLE, CATEGORY, MKPRICE, DEALTYPE FROM MARKET WHERE USERNO=#{userNo}
+		<choose>
+			<when test='myType eq "전체" and dealStatus eq "전체"'>
+				AND 1=1			
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "판매중"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='판매중'
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "예약중"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='예약중'
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "판매완료"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='판매완료'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "판매중"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='판매중'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "예약중"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='예약중'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "판매완료"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='판매완료'
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 마이페이지-거래내역 페이징 -->
+	<select id="selectDealHistoryCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM MARKET WHERE USERNO=#{userNo}
+		<choose>
+			<when test='myType eq "전체" and dealStatus eq "전체"'>
+				AND 1=1			
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "판매중"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='판매중'
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "예약중"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='예약중'
+			</when>
+			<when test='mkType eq "삽니다" and dealStatus eq "판매완료"'>
+				AND MKTYPE='삽니다' AND DEALSTATUS='판매완료'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "판매중"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='판매중'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "예약중"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='예약중'
+			</when>
+			<when test='mkType eq "팝니다" and dealStatus eq "판매완료"'>
+				AND MKTYPE='팝니다' AND DEALSTATUS='판매완료'
+			</when>
+		</choose>
+	</select>
 </mapper>

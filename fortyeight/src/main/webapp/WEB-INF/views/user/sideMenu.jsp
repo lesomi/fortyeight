@@ -239,7 +239,7 @@
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                             <i class="fas fa-list"></i>
-                            <span onclick="location.replace('${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}');">거래 내역 보기</span>
+                            <span onclick="location.replace('${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}&mkType=전체&dealStatus=전체');">거래 내역 보기</span>
                         </a>
                         <!-- <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">

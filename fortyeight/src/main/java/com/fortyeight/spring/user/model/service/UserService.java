@@ -3,7 +3,9 @@ package com.fortyeight.spring.user.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDealHistory;
 import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 public interface UserService {
@@ -18,4 +20,6 @@ public interface UserService {
 	int deleteUser(int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(Map<String, Object> map); // 마이페이지-찜목록
 	int selectDipsListCount(Map<String, Object> map); // 마이페이지-찜목록 페이징
+	List<UserDealHistory> selectDealHistory(Map<String, Object> map); // 마이페이지-거래내역
+	int selectDealHistoryCount(Map<String, Object> map); // 마이페이지-거래내역 페이징
 }

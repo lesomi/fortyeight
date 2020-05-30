@@ -6,7 +6,9 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDealHistory;
 import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 
@@ -75,6 +77,18 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int selectDipsListCount(SqlSessionTemplate session, Map<String, Object> map) {
 		return session.selectOne("user.selectDipsListCount", map);
+	}
+
+	// 마이페이지-거래내역
+	@Override
+	public List<UserDealHistory> selectDealHistory(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.selectList("user.selectDealHistory", map);
+	}
+
+	// 마이페이지-거래내역 페이징
+	@Override
+	public int selectDealHistoryCount(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.selectOne("user.selectDealHistoryCount", map);
 	}
 	
 	

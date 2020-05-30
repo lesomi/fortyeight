@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.model.dao.UserDao;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDealHistory;
 import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 @Service
@@ -85,6 +87,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int selectDipsListCount(Map<String, Object> map) {
 		return dao.selectDipsListCount(session, map);
+	}
+
+	// 마이페이지-거래내역
+	@Override
+	public List<UserDealHistory> selectDealHistory(Map<String, Object> map) {
+		return dao.selectDealHistory(session, map);
+	}
+
+	// 마이페이지-거래내역 페이징
+	@Override
+	public int selectDealHistoryCount(Map<String, Object> map) {
+		return dao.selectDealHistoryCount(session, map);
 	}
 	
 	

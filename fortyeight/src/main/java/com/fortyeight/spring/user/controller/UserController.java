@@ -25,8 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
+import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
+import com.fortyeight.spring.user.model.vo.UserDealHistory;
 import com.fortyeight.spring.user.model.vo.UserDipsList;
 
 @Controller
@@ -357,7 +359,25 @@ public class UserController {
 	
 	// 마이페이지 - 거래내역 화면 전환
 	@RequestMapping("/user/selectDealHistory.do")
-	public String selectDealHistory(int userNo) {
+	public String selectDealHistory(int userNo, @RequestParam String dealStatus, @RequestParam String mkType, Model m,
+									@RequestParam(required=false, defaultValue="1") int cPage,
+									@RequestParam(required=false, defaultValue="5") int numPerPage) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNo", userNo);
+		map.put("dealStatus", dealStatus);
+		map.put("mkType", mkType);
+		// 거래내역 가져오기
+		List<UserDealHistory> list  = service.selectDealHistory(map);
+		System.out.println("거래내역을 가져오는가? : "+list);
+		// 페이징처리
+		int totalData = service.selectDealHistoryCount(map);
+		
+		m.addAttribute("history",list);
+		m.addAttribute("total", totalData);
+		m.addAttribute("dealStatus", dealStatus);
+		m.addAttribute("mkType", mkType);
+		m.addAttribute("pageBar", PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/user/selectDealHistory.do"));
+		
 		return "user/selectDealHistory";
 	}
 	
