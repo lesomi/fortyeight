@@ -22,6 +22,7 @@ public interface UserService {
 	int sellSu(int userNo); // 사용자 구매내역
 	int dipsSu(int userNo); // 사용자 찜목록 수
 	
+	int updatePasswordEnd(User u); // 비밀번호 수정
 	int updateUser(User u); // 회원정보수정
 	int deleteUser(int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-찜목록

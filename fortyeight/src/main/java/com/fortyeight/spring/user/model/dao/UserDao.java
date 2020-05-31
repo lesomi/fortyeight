@@ -24,6 +24,7 @@ public interface UserDao {
 	int sellSu(SqlSessionTemplate session, int userNo); // 사용자 판매내역
 	int dipsSu(SqlSessionTemplate session, int userNo); // 사용자 찜목록 수
 	
+	int updatePasswordEnd(SqlSessionTemplate session, User u); // 비밀번호 변경
 	int updateUser(SqlSessionTemplate session, User u); // 회원정보수정
 	int deleteUser(SqlSessionTemplate session, int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-찜목록

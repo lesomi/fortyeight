@@ -262,6 +262,28 @@ public class UserController {
 		return "user/updateUser";
 	}
 	
+	// 마이페이지 - 비밀번호 변경(다른 탭)
+	@RequestMapping("/user/updatePasswordEnd.do")
+	public String updatePasswordEnd(String pwNew, int userNo, User u, Model m) {
+		System.out.println("수정하려고 하는 값은? "+u);
+		u.setPassword(encoder.encode(pwNew)); // 비밀번호 인코딩
+		System.out.println("암호화 처리된 수정하려고 한 값은?"+u);
+		int result = service.updatePasswordEnd(u);
+		
+		String page="";
+		if(result>0) {
+			m.addAttribute("msg","비밀번호 변경이 완료되었습니다.");
+			m.addAttribute("loc","/user/mypage.do?userNo="+userNo);
+			page="common/msg";
+		}
+		else {
+			m.addAttribute("msg","비밀번호 변경이 실패되었습니다. 다시 진행하세요!");
+			m.addAttribute("loc","/user/updateUserPassword.do?userNo="+userNo);
+			page="common/msg";
+		}
+		return page;
+	}
+	
 	// 마이페이지 - 회원정보수정(현재 비밀번호)
 	@RequestMapping("/user/selectPassword.do")
 	@ResponseBody

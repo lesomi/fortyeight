@@ -165,4 +165,10 @@
 			</when>
 		</choose>
 	</select>
+	
+	
+	<!-- 마이페이지-비밀번호 변경 -->
+	<update id="updatePasswordEnd" parameterType="user">
+		UPDATE MEMBER SET PASSWORD=#{password} WHERE USERNO=#{userNo}
+	</update>
 </mapper>

@@ -112,6 +112,12 @@ public class UserDaoImpl implements UserDao {
 	public int selectDealHistoryCount(SqlSessionTemplate session, Map<String, Object> map) {
 		return session.selectOne("user.selectDealHistoryCount", map);
 	}
+
+	// 비밀번호 변경
+	@Override
+	public int updatePasswordEnd(SqlSessionTemplate session, User u) {
+		return session.update("user.updatePasswordEnd", u);
+	}
 	
 	
 }

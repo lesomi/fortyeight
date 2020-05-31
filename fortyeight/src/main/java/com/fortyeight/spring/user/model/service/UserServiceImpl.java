@@ -121,6 +121,12 @@ public class UserServiceImpl implements UserService {
 	public int selectDealHistoryCount(Map<String, Object> map) {
 		return dao.selectDealHistoryCount(session, map);
 	}
+
+	// 마이페이지-비밀번호 변경
+	@Override
+	public int updatePasswordEnd(User u) {
+		return dao.updatePasswordEnd(session, u);
+	}
 	
 	
 }
