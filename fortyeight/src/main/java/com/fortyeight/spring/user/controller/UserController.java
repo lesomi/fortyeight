@@ -450,4 +450,5 @@ public class UserController {
 		m.addAttribute("pageBar", PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do", userNo, mkType));
 		return "user/selectDipsList";
 	}
+	
 }
