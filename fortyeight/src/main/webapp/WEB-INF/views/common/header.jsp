@@ -191,8 +191,8 @@
 			open("${path}/chattingView.do?userNo="+userNo+"&receiver="+receiver,"_blank","width=400,height=600");
 		}
 		
-		//let alram=new WebSocket("ws://localhost:9090${path}/alram");
-		let alram=new WebSocket("wss://rclass.iptime.org${path}/alram"); // 서버배포용
+		let alram=new WebSocket("ws://localhost:9090${path}/alram");
+		//let alram=new WebSocket("wss://rclass.iptime.org${path}/alram"); // 서버배포용
 		
 		alram.onopen=function(data){
 			console.log(data);
