@@ -205,9 +205,9 @@
 
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="collapse-inner rounded">
-                            <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 수정</a>
-                            <a class="collapse-item" href="${path}/user/updateUserPassword.do?userNo=${loginUser.userNo}">비밀번호 수정</a>
-                            <a class="collapse-item" href="#">거래주소 수정</a>
+                            <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 변경</a>
+                            <a class="collapse-item" href="${path}/user/updateUserPassword.do?userNo=${loginUser.userNo}">비밀번호 변경</a>
+                            <a class="collapse-item" href="#">거래주소 변경</a>
                             <a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
                         </div>
                     </li>
