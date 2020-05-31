@@ -300,7 +300,7 @@ public class UserController {
 	
 	// 마이페이지 - 회원정보 수정 버튼 누를때 update 처리
 	@RequestMapping("/user/updateUserEnd.do")
-	public String updateUser(@RequestParam String pwNew, @RequestParam String nickMyName,
+	public String updateUser(/* @RequestParam String pwNew,*/ @RequestParam String nickMyName,
 							User u, Model model, MultipartFile upFile, HttpSession session) {
 		logger.debug("----- 마이페이지 [회원정보수정] 로직 진행 들어옴 -----");
 		String path = session.getServletContext().getRealPath("/resources/upload/user"); // 저장경로
@@ -331,7 +331,7 @@ public class UserController {
 			u.setRenameProfile(rename);
 		}
 		
-		u.setPassword(encoder.encode(pwNew)); // 비밀번호 암호화
+		/* u.setPassword(encoder.encode(pwNew)); */ // 비밀번호 암호화
 		
 		u = new User(u.getUserNo(), u.getUserId(), u.getPassword(), nickMyName, u.getEmail(), u.getPhone(), u.getDealAddr(), u.getEnrollDate(), u.getStatus(),
 					u.getReportcount(), u.getOriProfile(), u.getRenameProfile());
@@ -342,7 +342,7 @@ public class UserController {
 		String page="";
 		if (result > 0) {
 			model.addAttribute("msg","회원정보수정이 완료되었습니다.");
-			model.addAttribute("loc","/user/mypage.do");
+			model.addAttribute("loc","/user/mypage.do?userNo="+u.getUserNo());
 			
 			// 세션에 있는 값을 update한 값으로 변경하자
 			String userId = u.getUserId();
@@ -354,7 +354,7 @@ public class UserController {
 			page = "common/msg";
 		} else {
 			model.addAttribute("msg","회원정보수정이 실패되었습니다. 다시 수정하세요.");
-			model.addAttribute("loc","/user/updateUser.do");
+			model.addAttribute("loc","/user/updateUser.do?userNo="+u.getUserNo());
 			page = "common/msg";
 		}
 		return page;

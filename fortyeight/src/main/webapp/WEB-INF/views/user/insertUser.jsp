@@ -238,6 +238,13 @@
 					</tr>
 					
 					<tr>
+						<td colspan="2">
+							<span style="padding-bottom: 30px; font-weight: normal; color: red;">
+								이메일은 회원가입 이후로 변경이 불가합니다. 신중히 작성하세요.
+							</span>
+						</td>
+					</tr>
+					<tr>
 						<td>
 							<span class="blankStar">*</span>
 							<span class="blankRight">이메일</span>

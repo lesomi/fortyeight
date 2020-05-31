@@ -106,13 +106,13 @@
 						
 						<!-- 이메일 -->
 						<label for="email"><span style="color: red; font-weight:bolder;">*</span>이메일 : </label>
-						<input type="email" class="form-control inputWidth" name="email" id="email" value="${loginUser.email}" required/>
-						<button type="button" id="emailBtn" class="btn btn-dark">인증번호 전송</button>
-						<p class="blankP" id="emailMsg"></p>
+						<input type="email" class="form-control inputWidth" name="email" id="email" value="${loginUser.email}" readonly/>
+						<!-- <button type="button" id="emailBtn" class="btn btn-dark">인증번호 전송</button>
+						<p class="blankP" id="emailMsg"></p> -->
 						<!-- 이메일 인증 입력창 -->
-						<label for="numberSender"><span style="color: red; font-weight:bolder;">*</span>이메일 인증번호 : </label>
+						<!-- <label for="numberSender"><span style="color: red; font-weight:bolder;">*</span>이메일 인증번호 : </label>
 						<input type="text" class="form-control inputWidth" name="numberSender" id="numberSender" placeholder="인증번호 입력" required/>
-						<p class="blankP" id="numMsg"></p>
+						<p class="blankP" id="numMsg"></p> -->
 						<!-- 휴대폰번호 -->
 						<label for="phone">전화번호 : </label>
 						<input type="text" class="form-control inputWidth" name="phone" id="phone" value="${loginUser.phone}" required/>
