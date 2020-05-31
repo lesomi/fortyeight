@@ -16,6 +16,12 @@ public interface UserService {
 	int insertUser(User u); // 회원가입 DB 저장
 	User selectPwCk(Map<String,String> pwCk);
 	int updatePassword(Map<String,Object> map);
+	
+	// 마이페이지 화면전환 시 
+	int buySu(int userNo); // 사용자 구매내역
+	int sellSu(int userNo); // 사용자 구매내역
+	int dipsSu(int userNo); // 사용자 찜목록 수
+	
 	int updateUser(User u); // 회원정보수정
 	int deleteUser(int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-찜목록

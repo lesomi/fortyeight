@@ -239,8 +239,19 @@ public class UserController {
 
 	// 마이페이지 전환
 	@RequestMapping("/user/mypage.do")
-	public ModelAndView mypage(String userId, ModelAndView mv) {
-		int buySu = service.buyHistory(userId); // 사용자 구매내역 
+	public ModelAndView mypage(int userNo, ModelAndView mv) {
+		int buySu = service.buySu(userNo); // 사용자 구매내역
+		int sellSu = service.sellSu(userNo); // 사용자 판매내역
+		int dipsSu = service.dipsSu(userNo); // 사용자 찜목록 건수
+		
+		System.out.println("----- 조회 결과 -----");
+		System.out.println("현재 구매내역은 "+buySu+"건입니다. ");
+		System.out.println("현재 판매내역은 "+sellSu+"건입니다. ");
+		System.out.println("현재 찜목록은 "+dipsSu+"건입니다. ");
+		
+		mv.addObject("buySu", buySu);
+		mv.addObject("sellSu", sellSu);
+		mv.addObject("dipsSu", dipsSu);
 		mv.setViewName("user/mypage");
 		return mv;
 	}

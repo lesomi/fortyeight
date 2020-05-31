@@ -64,6 +64,27 @@ public class UserServiceImpl implements UserService {
 	public int updatePassword(Map<String, Object> map) {
 		return dao.updatePassword(session,map);
 	}
+	
+	// 마이페이지 진입시
+	// 사용자 구매내역
+	@Override
+	public int buySu(int userNo) {
+		return dao.buySu(session, userNo);
+	}
+	
+	// 마이페이지 진입시
+	// 사용자 판매내역
+	@Override
+	public int sellSu(int userNo) {
+		return dao.sellSu(session, userNo);
+	}
+	
+	// 마이페이지 진입시
+	// 사용자 찜목록 수
+	@Override
+	public int dipsSu(int userNo) {
+		return dao.dipsSu(session, userNo);
+	}
 
 	// 회원정보 수정
 	@Override

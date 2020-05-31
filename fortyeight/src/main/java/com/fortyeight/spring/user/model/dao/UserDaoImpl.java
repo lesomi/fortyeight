@@ -56,6 +56,27 @@ public class UserDaoImpl implements UserDao {
 		return session.update("user.updatePassword",map);
 	}
 
+	// 마이페이지 진입시
+	// 사용자 거래내역
+	@Override
+	public int buySu(SqlSessionTemplate session, int userNo) {
+		return session.selectOne("user.buySu", userNo);
+	}
+	
+	// 마이페이지 진입시
+	// 사용자 판매내역
+	@Override
+	public int sellSu(SqlSessionTemplate session, int userNo) {
+		return session.selectOne("user.sellSu", userNo);
+	}
+	
+	// 마이페이지 진입시
+	// 사용자 찜목록 수
+	@Override
+	public int dipsSu(SqlSessionTemplate session, int userNo) {
+		return session.selectOne("user.dipsSu", userNo);
+	}
+
 	// 회원정보수정
 	@Override
 	public int updateUser(SqlSessionTemplate session, User u) {

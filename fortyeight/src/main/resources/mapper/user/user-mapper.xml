@@ -40,6 +40,23 @@
 		UPDATE MEMBER SET PASSWORD = #{password} WHERE USERID = #{userId}
 	</update>
 	
+	<!-- 마이페이지 -->
+	
+	<!-- 사용자 거래내역 -->
+	<select id="buySu" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MARKET WHERE USERNO=#{userNo} AND MKTYPE='삽니다' AND DEALSTATUS='판매완료'
+	</select>
+	
+	<!-- 사용자 판매내역 -->
+	<select id="sellSu" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MARKET WHERE USERNO=#{userNo} AND MKTYPE='팝니다' AND DEALSTATUS='판매완료'
+	</select>
+	
+	<!-- 사용자 찜목록 수 -->
+	<select id="dipsSu" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM DIPS WHERE USERNO=#{userNo}
+	</select>
+	
 	<!-- 마이페이지 - 회원정보수정 -->
 	<update id="updateUser" parameterType="user">
 		UPDATE MEMBER SET 

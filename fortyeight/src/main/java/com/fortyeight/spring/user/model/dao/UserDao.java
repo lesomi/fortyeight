@@ -18,6 +18,12 @@ public interface UserDao {
 	int insertUser(SqlSessionTemplate session, User u); // 회원가입
 	User selectPwCk(SqlSessionTemplate session,Map<String,String> pwCk);
 	int updatePassword(SqlSessionTemplate session,Map<String,Object> map);
+	
+	// 마이페이지 진입시
+	int buySu(SqlSessionTemplate session, int userNo); // 사용자 거래내역
+	int sellSu(SqlSessionTemplate session, int userNo); // 사용자 판매내역
+	int dipsSu(SqlSessionTemplate session, int userNo); // 사용자 찜목록 수
+	
 	int updateUser(SqlSessionTemplate session, User u); // 회원정보수정
 	int deleteUser(SqlSessionTemplate session, int userNo); // 회원탈퇴
 	List<UserDipsList> selectDipsList(SqlSessionTemplate session, Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-찜목록
