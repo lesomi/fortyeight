@@ -87,12 +87,12 @@
 						<input type="text" class="form-control inputWidth" name="nickMyName" id="nickMyName" value="${loginUser.nickName}" required/>
 						<p id="nickMsg"></p>
 						<!-- 비밀번호 -->
-						<label for="password"><span style="color: red; font-weight:bolder;">*</span>비밀번호 :  <span id="pwChange">비밀번호 변경</span> </label>
-						<input type="text" class="form-control inputWidth" name="password" id="password" value="비공개" readonly/>
+						<!-- <label for="password"><span style="color: red; font-weight:bolder;">*</span>비밀번호 :  <span id="pwChange">비밀번호 변경</span> </label>
+						<input type="text" class="form-control inputWidth" name="password" id="password" value="비공개" readonly/> -->
 						
 						<!-- <button type="button" id="pwBtn" class="btn btn-dark" data-toggle="collapse" data-target="#passwordDiv">수정</button> -->
 						<!-- 비밀번호 수정 칸 -->
-						<div id="passwordDiv">
+						<!-- <div id="passwordDiv">
 							<label for="pwNow"><span style="color: red; font-weight:bolder;">*</span> 현재 비밀번호 : </label>
 							<input type="password" class="form-control inputWidth" name="pwNow" id="pwNow" required />
 							<p id="pwNowMsg"></p>
@@ -102,7 +102,7 @@
 							<label for="pwNow"><span style="color: red; font-weight:bolder;">*</span> 변경할 비밀번호 확인 : </label>
 							<input type="password" class="form-control inputWidth" name="pwck" id="pwck" required />
 							<p id="pwchkMsg"></p>
-						</div>
+						</div> -->
 						
 						<!-- 이메일 -->
 						<label for="email"><span style="color: red; font-weight:bolder;">*</span>이메일 : </label>
