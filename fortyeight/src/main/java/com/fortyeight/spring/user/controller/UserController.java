@@ -275,13 +275,6 @@ public class UserController {
 			m.addAttribute("msg","비밀번호 변경이 완료되었습니다.");
 			m.addAttribute("loc","/user/mypage.do?userNo="+userNo);
 			
-			// 세션에 있는 값을 update한 값으로 변경하자
-			String userId = u.getUserId();
-			User user = service.selectLogin(userId); // 변경된 유저의 값을 가져온다.
-			System.out.println("변경된 유저의 값은 ? : "+user);
-			// 변경된 유저의 값을 불러와서 model에 담는다(세션값)
-			m.addAttribute("loginUser", user);
-			
 			page="common/msg";
 		}
 		else {

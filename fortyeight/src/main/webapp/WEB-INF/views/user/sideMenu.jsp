@@ -176,7 +176,7 @@
 	    div#userProfileDiv { width: 100%; height: 150px; }
 		img#userProfile { width: 60px; height: 60px; border-radius: 50px; border: 2px solid white; margin-top: 18%; margin-left: 5%;}
 		span#userId { position: relative; top: 10%; left: 7.5%; font-weight: bolder; font-size: 20px; }
-		span#nickName { position: absolute; top: 32%; left: 10%; font-size: 12px; }
+		span#nickName { position: absolute; top: 32%; left: 6%; font-size: 12px; }
 	</style>
 
 	
