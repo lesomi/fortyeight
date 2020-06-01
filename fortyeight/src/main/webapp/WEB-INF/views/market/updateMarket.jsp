@@ -297,7 +297,7 @@
 						</td>
 					</tr>
 				</table>
-				<button type="submit" id="insert" class="btn btn-dark enrollBtn">등록하자!</button>
+				<button type="submit" id="insert" class="btn btn-dark enrollBtn">수정하자!</button>
 				<button type="button" class="btn btn-dark enrollBtn" onclick="javascript:history.back();">뒤로가기</button>
 			</form>
 		</div>

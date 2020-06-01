@@ -66,17 +66,13 @@
                         <table id="rightContent">
                             <tr>
                                 <td class="blank" id="buy_History">
-                                    <p class="marginP">구매내역</p>
+                                    <p class="marginP">구매완료내역</p>
                                     <span class="largeCount">${buySu}</span>건
                                 </td>
                                 <td class="blank">
-                                    <p class="marginP">판매내역</p>
+                                    <p class="marginP">판매완료내역</p>
                                     <span class="largeCount">${sellSu}</span>건
                                 </td>
-                                <!-- <td class="blank">
-                                    <p class="marginP">안 읽은 메세지</p>
-                                    <span class="largeCount">0</span>건
-                                </td> -->
                                 <td class="blank">
                                     <p class="marginP">찜목록</p>
                                     <span class="largeCount">${dipsSu}</span>건
