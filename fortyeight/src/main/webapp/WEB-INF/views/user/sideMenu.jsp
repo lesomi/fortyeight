@@ -189,9 +189,6 @@
 				<span id="nickName">${loginUser.nickName}님</span>
 			</div>
 
-			<hr class="sidebar-divider my-0">
-
-
 			<!-- 첫번째 사이드메뉴 -->
 			<div class="sidebar-heading">information</div>
 			<li class="nav-item">

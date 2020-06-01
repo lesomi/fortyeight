@@ -178,6 +178,12 @@ public class MarketServiceImpl implements MarketService {
 	public int updateComplete(Map<String, String> map) {
 		return dao.updateComplete(session, map);
 	}
+
+	// 마켓 수정 화면으로 전환하기 위한 데이터1(마켓내용)
+	@Override
+	public Market updateMarket(Map<String, Object> map) {
+		return dao.updateMarket(session, map);
+	}
 	
 	
 	

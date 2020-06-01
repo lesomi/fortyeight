@@ -73,10 +73,10 @@
                                     <p class="marginP">판매내역</p>
                                     <span class="largeCount">${sellSu}</span>건
                                 </td>
-                                <td class="blank">
+                                <!-- <td class="blank">
                                     <p class="marginP">안 읽은 메세지</p>
                                     <span class="largeCount">0</span>건
-                                </td>
+                                </td> -->
                                 <td class="blank">
                                     <p class="marginP">찜목록</p>
                                     <span class="largeCount">${dipsSu}</span>건

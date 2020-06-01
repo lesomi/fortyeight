@@ -98,7 +98,7 @@
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
-										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
@@ -148,7 +148,7 @@
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
-										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
@@ -218,7 +218,7 @@
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
-										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
@@ -268,7 +268,7 @@
 									    	<img src="${path }/resources/img/menubar.png" width="25px;">
 									  	</button>
 									  	<div class="dropdown-menu">
-										    <a class="dropdown-item" href="#">마켓수정</a>
+										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>

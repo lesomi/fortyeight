@@ -348,4 +348,9 @@
 	<update id="updateComplete" parameterType="map">
 		UPDATE MARKET SET DEALSTATUS='판매완료' WHERE MKNO=#{mkNo}
 	</update>
+	
+	<!-- 마켓 수정하기 위한 데이터 출력 -->
+	<select id="updateMarket" parameterType="map" resultType="market">
+		SELECT * FROM MARKET WHERE MKNO=#{mkNo} AND USERNO=#{userNo}
+	</select>
 </mapper>
