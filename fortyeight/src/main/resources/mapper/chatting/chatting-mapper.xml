@@ -4,4 +4,8 @@
 	<insert id="insertChatting" parameterType="chatting">
 		INSERT INTO CHATTING VALUES(SEQ_CHATNO.NEXTVAL,#{chatType},#{sender},#{receiver},DEFAULT,#{chatting},#{roomNo})
 	</insert>
+	
+	<select id="selectChatting" resultType="chatting" parameterType="_int">
+		SELECT * FROM CHATTING WHERE SENDER = #{userNo} OR RECEIVER = #{UserNo}
+	</select>
 </mapper>
