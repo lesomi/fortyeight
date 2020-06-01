@@ -270,7 +270,7 @@
 									  	<div class="dropdown-menu">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" href="#">마켓삭제</a>
-										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
+										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">판매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
 									  	</div>
 									</div>
