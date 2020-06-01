@@ -117,11 +117,13 @@
 						<label for="phone">전화번호 : </label>
 						<input type="text" class="form-control inputWidth" name="phone" id="phone" value="${loginUser.phone}" required/>
 						<p class="blankP" id="phoneMsg"></p>
+						<%-- 
 						<!-- 거래주소 -->
 						<label for="dealAddr">거래주소 : </label>
 						<input type="text" class="form-control inputWidth" name="dealAddr" id="dealAddr" value="${loginUser.dealAddr}" required/>
 						<!-- 지도를 표시할 div -->
 						<div id="map" style="width:500px; height:400px;"></div>
+						 --%>
 					</div>
 					
 					<button type="submit" id="modification" class="btn btn-dark">회원정보수정</button>

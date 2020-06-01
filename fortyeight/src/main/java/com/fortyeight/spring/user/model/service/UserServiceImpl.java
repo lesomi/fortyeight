@@ -134,6 +134,12 @@ public class UserServiceImpl implements UserService {
 	public int updatePasswordEnd(User u) {
 		return dao.updatePasswordEnd(session, u);
 	}
+
+	// 마이페이지-거래주소 변경
+	@Override
+	public int updateUserDealAddrEnd(Map<String, Object> map) {
+		return dao.updateUserDealAddrEnd(session, map);
+	}
 	
 	
 }

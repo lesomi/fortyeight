@@ -30,4 +30,6 @@ public interface UserService {
 	int selectDipsListCount(Map<String, Object> map); // 마이페이지-찜목록 페이징
 	List<UserDealHistory> selectDealHistory(Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-거래내역
 	int selectDealHistoryCount(Map<String, Object> map); // 마이페이지-거래내역 페이징
+	
+	int updateUserDealAddrEnd(Map<String, Object> map); // 마이페이지-거래주소 변경
 }

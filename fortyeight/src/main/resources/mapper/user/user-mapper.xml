@@ -65,7 +65,7 @@
 	<!-- 마이페이지 - 회원정보수정 -->
 	<update id="updateUser" parameterType="user">
 		UPDATE MEMBER SET 
-			NICKNAME=#{nickName}, EMAIL=#{email}, PHONE=#{phone}, DEALADDR=#{dealAddr}
+			NICKNAME=#{nickName}, EMAIL=#{email}, PHONE=#{phone}
 			<if test=' (oriProfile eq "" and oriProfile eq null) || (renameProfile eq "" and renameProfile eq null) '>
 			</if>
 			<if test=' (oriProfile neq "" and oriProfile neq null) || (renameProfile neq "" and renameProfile neq null) '>
@@ -175,5 +175,10 @@
 	<!-- 마이페이지-비밀번호 변경 -->
 	<update id="updatePasswordEnd" parameterType="user">
 		UPDATE MEMBER SET PASSWORD=#{password} WHERE USERNO=#{userNo}
+	</update>
+	
+	<!-- 마이페이지-거래주소 변경 -->
+	<update id="updateUserDealAddrEnd" parameterType="map">
+		UPDATE MEMBER SET DEALADDR=#{dealAddr} WHERE USERNO=#{userNo}
 	</update>
 </mapper>

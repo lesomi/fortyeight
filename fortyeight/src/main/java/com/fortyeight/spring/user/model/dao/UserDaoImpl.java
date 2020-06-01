@@ -125,6 +125,12 @@ public class UserDaoImpl implements UserDao {
 	public int updatePasswordEnd(SqlSessionTemplate session, User u) {
 		return session.update("user.updatePasswordEnd", u);
 	}
+
+	// 마이페이지-거래주소 변경
+	@Override
+	public int updateUserDealAddrEnd(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.update("user.updateUserDealAddrEnd", map);
+	}
 	
 	
 }

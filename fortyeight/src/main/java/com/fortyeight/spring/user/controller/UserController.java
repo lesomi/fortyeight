@@ -453,4 +453,41 @@ public class UserController {
 		return "user/selectDipsList";
 	}
 	
+	// 마이페이지-거래주소 변경 화면으로 전환
+	@RequestMapping("/user/updateUserDealAddr.do")
+	public String updateUserDealAddr(int userNo) {
+		return "user/updateUserDealAddr";
+	}
+	
+	
+	// 마이페이지-거래주소 변경
+	@RequestMapping("/user/updateUserDealAddrEnd.do")
+	public String updateUserDealAddrEnd(Model m, int userNo, String dealAddr, HttpSession session) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("거래주소 변경하려는 사용자 번호와 거래주소 :"+userNo+", "+dealAddr);
+		map.put("userNo", userNo);
+		map.put("dealAddr", dealAddr);
+		int result = service.updateUserDealAddrEnd(map);
+		
+		String page="";
+		if(result>0) {
+			m.addAttribute("msg","거래주소 변경이 완료되었습니다.");
+			m.addAttribute("loc","/user/mypage.do?userNo="+userNo);
+			
+			// 세션에 있는 값을 update한 값으로 변경하자
+			User loginUser = (User)session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			User user = service.selectLogin(userId); // 변경된 유저의 값을 가져온다.
+			System.out.println("변경된 유저의 값은 ? : "+user);
+			// 변경된 유저의 값을 불러와서 model에 담는다(세션값)
+			m.addAttribute("loginUser", user);
+			page="common/msg";
+		}
+		else {
+			m.addAttribute("msg","거래주소 변경이 실패되었습니다. 다시 수정하세요!");
+			m.addAttribute("loc","/user/updateUserDealAddr.do?userNo="+userNo);
+			page="common/msg";
+		}
+		return page;
+	}
 }
