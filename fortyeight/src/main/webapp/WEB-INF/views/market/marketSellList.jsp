@@ -551,39 +551,6 @@
 </section>
 
 <script>
-
- 
- /* 코드 주인 찾아요! 엄마를 잃어버렸어요! */
-	/* function hasClass(target, className) {
-	    if( (' ' + target.className + ' ').replace(/[\n\t]/g, ' ').indexOf(' ' + className + ' ') > -1 ) return true;
-	    return false;
-	}
-	function removeClass(target, className){
-	    var elClass = ' ' + target.className + ' ';
-	    while(elClass.indexOf(' ' + className + ' ') !== -1){
-	         elClass = elClass.replace(' ' + className + ' ', '');
-	    }
-	    target.className = elClass;
-	}
-	function addClass(target, className){
-	    target.className += ' ' + className;   
-	}
-	
-	if( hasClass( document.getElementsByTagName('html')[0], 'ie8' ) ) { // ie8 일 경우
-	    var radios = document.querySelectorAll('input[type="radio"]'),
-	        i,
-	        len = radios.length;
-	　
-	    for( i = 0; i < len; i++ ) {
-	        radios[i].attachEvent('onchange', function(e) {
-	            var siblingsChecked = this.parentNode.parentNode.querySelector('.checked'); // 이전 checked 버튼
-	            
-	            removeClass(siblingsChecked, 'checked'); // checked 삭제
-	            addClass(this, 'checked'); // checked 부여
-	        });
-	    }
-	} */
-
 /* -------------------------------------------------------[IF... category, title, sort click] ------------------------------------------------------------ */
 	$(function () {
 		// 첫 load 했을 때 고정
