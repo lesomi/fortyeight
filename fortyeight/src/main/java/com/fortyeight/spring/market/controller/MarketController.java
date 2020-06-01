@@ -75,8 +75,8 @@ public class MarketController {
 		
 		System.out.println("category : "+map.get("category"));
 		
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do")); // 로컬 환경
-		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/selMarket.do")); //서버용
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do")); // 로컬 환경
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/selMarket.do")); //서버용
 		
 		mv.setViewName("market/marketSellList");
 		return mv;
@@ -113,8 +113,8 @@ public class MarketController {
 		mv.addObject("inputTitle", map.get("title"));
 		System.out.println("category : "+map.get("category"));
 		
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do")); // 로컬 환경용
-		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/buyMarket.do")); //서버용
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do")); // 로컬 환경용
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/buyMarket.do")); //서버용
 		
 		mv.setViewName("market/marketBuyList");
 		return mv;
@@ -255,8 +255,8 @@ public class MarketController {
 		mv.addObject("total", totalData);
 		mv.addObject("nickName", nickName); // 마켓뷰 작성자 '닉네임'만 담기
 		mv.addObject("mviBuy", mviBuy); // 마켓뷰 이미지 담기
-		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo)); // 로컬 환경용
-		//mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/marketView.do", mkNo)); //서버용
+		//mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo)); // 로컬 환경용
+		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/marketView.do", mkNo)); //서버용
 		
 		// ---- ㅆ
 				

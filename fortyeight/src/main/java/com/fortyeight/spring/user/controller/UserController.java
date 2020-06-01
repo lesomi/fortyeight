@@ -424,11 +424,11 @@ public class UserController {
 		m.addAttribute("total", totalData);
 		m.addAttribute("dealStatus", dealStatus);
 		m.addAttribute("mkType", mkType);
-		m.addAttribute("pageBar", PagingFactory.getMyPageDealHistory(totalData, cPage, numPerPage, "/spring/user/selectDealHistory.do",
-						userNo, mkType, dealStatus));
+		//m.addAttribute("pageBar", PagingFactory.getMyPageDealHistory(totalData, cPage, numPerPage, "/spring/user/selectDealHistory.do",
+		//				userNo, mkType, dealStatus));
 		
-		//m.addAttribute("pageBar",PagingFactory.getMyPageDealHistory(totalData, cPage, numPerPage, "/20PM_FortyEight_final/user/selectDealHistory.do", 
-		//				userNo, mkType, dealStatus)); //서버용
+		m.addAttribute("pageBar",PagingFactory.getMyPageDealHistory(totalData, cPage, numPerPage, "/20PM_FortyEight_final/user/selectDealHistory.do", 
+						userNo, mkType, dealStatus)); //서버용
 		
 		return "user/selectDealHistory";
 	}
@@ -450,9 +450,9 @@ public class UserController {
 		m.addAttribute("dipsList",list);
 		m.addAttribute("total", totalData);
 		m.addAttribute("mkType",mkType);
-		m.addAttribute("pageBar", PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do", userNo, mkType));
-		//m.addAttribute("pageBar",PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/20PM_FortyEight_final/user/selectDipsList.do", 
-		//				userNo, mkType)); //서버용
+		//m.addAttribute("pageBar", PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/spring/user/selectDipsList.do", userNo, mkType));
+		m.addAttribute("pageBar",PagingFactory.getPagingDipsList(totalData, cPage, numPerPage, "/20PM_FortyEight_final/user/selectDipsList.do", 
+						userNo, mkType)); //서버용
 		
 		return "user/selectDipsList";
 	}
