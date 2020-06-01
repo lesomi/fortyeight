@@ -184,6 +184,12 @@ public class MarketServiceImpl implements MarketService {
 	public Market updateMarket(Map<String, Object> map) {
 		return dao.updateMarket(session, map);
 	}
+
+	// 마켓 수정 화면으로 전환하기 위한 데이터2(마켓이미지)
+	@Override
+	public String selectMkImg(int mkNo) {
+		return dao.selectMkImg(session, mkNo);
+	}
 	
 	
 	

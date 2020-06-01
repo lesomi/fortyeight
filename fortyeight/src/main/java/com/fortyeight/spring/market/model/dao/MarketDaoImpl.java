@@ -155,6 +155,13 @@ public class MarketDaoImpl implements MarketDao {
 	public Market updateMarket(SqlSessionTemplate session, Map<String, Object> map) {
 		return session.selectOne("market.updateMarket", map);
 	}
+
+	// 마켓 수정 화면으로 전환하기 위한 데이터2(마켓이미지)
+	// 나중에 여러개의 이미지를 불러올 땐 selectList로 수정되어야 한다.
+	@Override
+	public String selectMkImg(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkImg", mkNo);
+	}
 	
 	
 }

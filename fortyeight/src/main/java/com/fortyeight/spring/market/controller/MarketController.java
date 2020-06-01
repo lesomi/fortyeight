@@ -424,11 +424,14 @@ public class MarketController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userNo", userNo);
 		map.put("mkNo", mkNo);
-		Market m = service.updateMarket(map);
+		Market m = service.updateMarket(map); // 마켓 글 가져오기
+		String renameFile = service.selectMkImg(mkNo);// 마켓 이미지 가져오기
+		
 		
 		mv.addObject("market", m);
 		mv.addObject("userNo", userNo); // 그냥 담은거..
 		mv.addObject("mkNo", mkNo); // 마켓번호
+		mv.addObject("renameFile", renameFile); // 마켓이미지
 		mv.setViewName("market/updateMarket");
 		return mv;
 	}

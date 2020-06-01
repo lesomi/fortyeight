@@ -270,6 +270,8 @@
 					<!-- 여기가 여러개 추가될 것! -->
 					<tr>
 						<td colspan="2">
+							<!-- 사진값이 없으면? -->
+							<c:if test='${empty renameFile}'>
 								<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
 								<div class="custom-file" id="fileDiv">
 				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
@@ -277,6 +279,17 @@
 				                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
 				                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
 			                	</div>
+		                	</c:if>
+		                	<!-- 사진값이 있으면? -->
+		                	<c:if test='${not empty renameFile}'>
+								<img id="uploadImg" src="${path}/resources/upload/market/${renameFile}"/> <!-- width: 200px, height: 200px -->
+								<div class="custom-file" id="fileDiv">
+				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
+				                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">${renameFile}</label>
+				                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
+				                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
+			                	</div>
+		                	</c:if>
 						</td>
 					</tr>
 					<tr>
