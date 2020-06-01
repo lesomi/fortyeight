@@ -181,112 +181,106 @@
 
 	
 	<!-- 좌측 사이드 메뉴 -->
-    <div id="sidebar">
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                    <div id="userProfileDiv">
-                    	<img src="${path}/resources/upload/user/${loginUser.renameProfile}" id="userProfile"/>
-                    	<span id="userId">${loginUser.userId}</span>
-                    	<span id="nickName">${loginUser.nickName}님</span>
-                    </div>
+	<div id="sidebar">
+		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+			<div id="userProfileDiv">
+				<img src="${path}/resources/upload/user/${loginUser.renameProfile}" id="userProfile"/>
+				<span id="userId">${loginUser.userId}</span>
+				<span id="nickName">${loginUser.nickName}님</span>
+			</div>
 
-                    <hr class="sidebar-divider my-0">
-                    
-
-                    <!-- 첫번째 사이드메뉴 -->
-                    <div class="sidebar-heading">
-                         information
-                    </div>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-smile-wink"></i>
-
-                        <span>회원 정보</span></a>
-
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div class="collapse-inner rounded">
-                            <a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 변경</a>
-                            <a class="collapse-item" href="${path}/user/updateUserPassword.do?userNo=${loginUser.userNo}">비밀번호 변경</a>
-                            <a class="collapse-item" href="#">거래주소 변경</a>
-                            <a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
-                        </div>
-                    </li>
-
-                    <hr class="sidebar-divider my-0">
+			<hr class="sidebar-divider my-0">
 
 
-                    <!-- 두번째 사이드메뉴 -->
-                    <div class="sidebar-heading">
-                         chatting
-                    </div>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-comments"></i>
-                                <span>채팅 목록</span>
-                        </a>
-                        <div id="collapseOne" class="collapse" aria-labelledby="collapseOne" data-parent="#accordionSidebar">
-                            <div class="collapse-inner rounded">
-                                <a class="collapse-item" href="#">채팅목록</a>
-                            </div>
-                        </div>
-                    </li>
-
-                    <hr class="sidebar-divider my-0">
-
-
-                    <!-- 세번째 사이드 메뉴 -->
-                    <div class="sidebar-heading">
-                         list
-                    </div>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                            <i class="fas fa-list"></i>
-                            <span onclick="location.replace('${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}&mkType=전체&dealStatus=전체');">거래 내역 보기</span>
-                        </a>
-                        <!-- <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
-                            <div class="collapse-inner rounded">
-                                <a class="collapse-item" href="#">구매내역</a>
-                                <a class="collapse-item" href="#">판매내역</a>
-                                <a class="collapse-item" href="#">진행내역</a>
-                            </div>
-                        </div> -->
-                    </li>
-
-                    <hr class="sidebar-divider my-0">
+			<!-- 첫번째 사이드메뉴 -->
+			<div class="sidebar-heading">information</div>
+			<li class="nav-item">
+				<a class="nav-link" href="index.html" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+					<i class="fas fa-smile-wink"></i>
+					<span>회원 정보</span>
+				</a>
+			
+				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+					<div class="collapse-inner rounded">
+						<a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 변경</a>
+						<a class="collapse-item" href="${path}/user/updateUserPassword.do?userNo=${loginUser.userNo}">비밀번호 변경</a>
+						<a class="collapse-item" href="#">거래주소 변경</a>
+						<a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
+					</div>
+				</div>
+			</li>
+			
+			<hr class="sidebar-divider my-0">
 
 
-                    <!-- 슬기 작업 -->
-                    <!-- 네번째 사이드 메뉴 -->
-                    <div class="sidebar-heading">Wish List</div>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
-                            <i class="fas fa-list"></i>
-                            <span onclick='location.replace("${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=전체");'>찜목록</span>
-                        </a>
-                        <%-- <div id="collapseFour" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
-                            <div class="collapse-inner rounded">
-                                <a class="collapse-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}">찜목록</a>
-                            </div>
-                        </div> --%>
-                    </li>
+			<!-- 두번째 사이드메뉴 -->
+			<div class="sidebar-heading">chatting</div>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					<i class="fas fa-comments"></i>
+					<span>채팅 목록</span>
+				</a>
+				<div id="collapseOne" class="collapse" aria-labelledby="collapseOne" data-parent="#accordionSidebar">
+					<div class="collapse-inner rounded">
+						<a class="collapse-item" href="${path }/chatting/chattingList.do?userNo=${loginUser.userNo}">채팅목록</a>
+					</div>
+				</div>
+			</li>
+			
+			<hr class="sidebar-divider my-0">
 
-                    <hr class="sidebar-divider my-0">
+
+			<!-- 세번째 사이드 메뉴 -->
+			<div class="sidebar-heading">list</div>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+					<i class="fas fa-list"></i>
+					<span onclick="location.replace('${path}/user/selectDealHistory.do?userNo=${loginUser.userNo}&mkType=전체&dealStatus=전체');">거래 내역 보기</span>
+				</a>
+				<!-- <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
+					<div class="collapse-inner rounded">
+				        <a class="collapse-item" href="#">구매내역</a>
+				        <a class="collapse-item" href="#">판매내역</a>
+				        <a class="collapse-item" href="#">진행내역</a>
+				    </div>
+				</div> -->
+			</li>
+			
+			<hr class="sidebar-divider my-0">
 
 
-                    <!-- 슬기 작업 -->
-                    <!-- 다섯번째 사이드 메뉴 -->
-                    <div class="sidebar-heading">Declaration</div>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
-                            <i class="fas fa-list"></i>
-                            <span>신고</span>
-                        </a>
-                        <div id="collapseFive" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
-                            <div class="collapse-inner rounded">
-                                <a class="collapse-item" href="#">신고목록</a>
-                                <a class="collapse-item" href="#">신고하기</a>
-                            </div>
-                        </div>
-                    </li>
-            </ul>
-    </div>
+			<!-- 슬기 작업 -->
+			<!-- 네번째 사이드 메뉴 -->
+			<div class="sidebar-heading">Wish List</div>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+					<i class="fas fa-list"></i>
+					<span onclick='location.replace("${path}/user/selectDipsList.do?userNo=${loginUser.userNo}&mkType=전체");'>찜목록</span>
+				</a>
+				<%-- <div id="collapseFour" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
+						<div class="collapse-inner rounded">
+						<a class="collapse-item" href="${path}/user/selectDipsList.do?userNo=${loginUser.userNo}">찜목록</a>
+					</div>
+				</div> --%>
+			</li>
+			
+			<hr class="sidebar-divider my-0">
+
+
+			<!-- 슬기 작업 -->
+			<!-- 다섯번째 사이드 메뉴 -->
+			<div class="sidebar-heading">Declaration</div>
+			<li class="nav-item">
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
+					<i class="fas fa-list"></i>
+					<span>신고</span>
+				</a>
+				<div id="collapseFive" class="collapse" aria-labelledby="collapseThree" data-parent="#accordionSidebar">
+					<div class="collapse-inner rounded">
+						<a class="collapse-item" href="#">신고목록</a>
+						<a class="collapse-item" href="#">신고하기</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
