@@ -23,6 +23,7 @@ public interface UserDao {
 	int buySu(SqlSessionTemplate session, int userNo); // 사용자 거래내역
 	int sellSu(SqlSessionTemplate session, int userNo); // 사용자 판매내역
 	int dipsSu(SqlSessionTemplate session, int userNo); // 사용자 찜목록 수
+	int ingSu(SqlSessionTemplate session, int userNo); // 사용자 거래진행내역 수
 	
 	int updatePasswordEnd(SqlSessionTemplate session, User u); // 비밀번호 변경
 	int updateUser(SqlSessionTemplate session, User u); // 회원정보수정

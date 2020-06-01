@@ -57,6 +57,11 @@
 		SELECT COUNT(*) FROM DIPS WHERE USERNO=#{userNo}
 	</select>
 	
+	<!-- 사용자 거래진행내역 수 -->
+	<select id="ingSu" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM MARKET WHERE USERNO=#{userNo} AND DEALSTATUS='판매중'
+	</select>
+	
 	<!-- 마이페이지 - 회원정보수정 -->
 	<update id="updateUser" parameterType="user">
 		UPDATE MEMBER SET 

@@ -76,6 +76,13 @@ public class UserDaoImpl implements UserDao {
 	public int dipsSu(SqlSessionTemplate session, int userNo) {
 		return session.selectOne("user.dipsSu", userNo);
 	}
+	
+	// 마이페이지 진입시
+	// 사용자 찜목록 수
+	@Override
+	public int ingSu(SqlSessionTemplate session, int userNo) {
+		return session.selectOne("user.ingSu", userNo);
+	}
 
 	// 회원정보수정
 	@Override

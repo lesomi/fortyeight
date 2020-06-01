@@ -21,6 +21,7 @@ public interface UserService {
 	int buySu(int userNo); // 사용자 구매내역
 	int sellSu(int userNo); // 사용자 구매내역
 	int dipsSu(int userNo); // 사용자 찜목록 수
+	int ingSu(int userNo); // 사용자 거래진행내역 수
 	
 	int updatePasswordEnd(User u); // 비밀번호 수정
 	int updateUser(User u); // 회원정보수정

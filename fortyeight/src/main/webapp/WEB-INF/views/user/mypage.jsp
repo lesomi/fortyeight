@@ -70,6 +70,10 @@
                                     <span class="largeCount">${buySu}</span>건
                                 </td>
                                 <td class="blank">
+                                    <p class="marginP">거래진행내역</p>
+                                    <span class="largeCount">${ingSu}</span>건
+                                </td>
+                                <td class="blank">
                                     <p class="marginP">판매완료내역</p>
                                     <span class="largeCount">${sellSu}</span>건
                                 </td>

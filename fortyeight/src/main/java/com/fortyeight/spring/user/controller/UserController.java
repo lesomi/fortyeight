@@ -243,15 +243,18 @@ public class UserController {
 		int buySu = service.buySu(userNo); // 사용자 구매내역
 		int sellSu = service.sellSu(userNo); // 사용자 판매내역
 		int dipsSu = service.dipsSu(userNo); // 사용자 찜목록 건수
+		int ingSu = service.ingSu(userNo); // 사용자 거래진행내역 수
 		
 		System.out.println("----- 조회 결과 -----");
 		System.out.println("현재 구매내역은 "+buySu+"건입니다. ");
 		System.out.println("현재 판매내역은 "+sellSu+"건입니다. ");
 		System.out.println("현재 찜목록은 "+dipsSu+"건입니다. ");
+		System.out.println("현재 거래진행수는 "+ingSu+"건입니다. ");
 		
 		mv.addObject("buySu", buySu);
 		mv.addObject("sellSu", sellSu);
 		mv.addObject("dipsSu", dipsSu);
+		mv.addObject("ingSu", ingSu);
 		mv.setViewName("user/mypage");
 		return mv;
 	}
@@ -391,7 +394,7 @@ public class UserController {
 		}
 		else {
 			model.addAttribute("msg","회원탈퇴가 실패되었습니다. 다시 진행하세요.");
-			model.addAttribute("loc","/user/deleteUser.do");
+			model.addAttribute("loc","/user/deleteUser.do?userNo="+userNo);
 			page = "common/msg";
 		}
 		return page;
