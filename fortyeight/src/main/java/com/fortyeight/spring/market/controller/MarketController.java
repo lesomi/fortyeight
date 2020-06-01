@@ -75,9 +75,8 @@ public class MarketController {
 		
 		System.out.println("category : "+map.get("category"));
 		
-		// category 분기처리
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do"));
-//		mv.addObject("realTime",RealTimeFactory.formatTimeString());
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do")); // 로컬 환경
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/selMarket.do")); //서버용
 		
 		mv.setViewName("market/marketSellList");
 		return mv;
@@ -114,7 +113,8 @@ public class MarketController {
 		mv.addObject("inputTitle", map.get("title"));
 		System.out.println("category : "+map.get("category"));
 		
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do"));
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do")); // 로컬 환경용
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/buyMarket.do")); //서버용
 		
 		mv.setViewName("market/marketBuyList");
 		return mv;
@@ -255,7 +255,8 @@ public class MarketController {
 		mv.addObject("total", totalData);
 		mv.addObject("nickName", nickName); // 마켓뷰 작성자 '닉네임'만 담기
 		mv.addObject("mviBuy", mviBuy); // 마켓뷰 이미지 담기
-		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo));
+		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo)); // 로컬 환경용
+		//mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/marketView.do", mkNo)); //서버용
 		
 		// ---- ㅆ
 				
@@ -410,6 +411,22 @@ public class MarketController {
 			m.addAttribute("loc","/market/marketView.do?mkNo="+map.get("mkNo"));
 		}
 		return "common/msg";
+	}
+	
+	
+	// 마켓 수정 화면으로 전환
+	@RequestMapping("/market/updateMarket.do")
+	public ModelAndView updateMarket(int userNo, int mkNo, ModelAndView mv) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNo", userNo);
+		map.put("mkNo", mkNo);
+		Market m = service.updateMarket(map);
+		
+		mv.addObject("market", m);
+		mv.addObject("userNo", userNo); // 그냥 담은거..
+		mv.addObject("mkNo", mkNo); // 마켓번호
+		mv.setViewName("market/updateMarket");
+		return mv;
 	}
 }
 
