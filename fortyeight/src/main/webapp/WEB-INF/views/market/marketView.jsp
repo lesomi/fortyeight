@@ -386,7 +386,8 @@
 						<td>
 							<div class="input-group-append" id="replyDiv">
 								<c:if test='${loginUser != null}'>
-									<button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> <!-- JQuery this -->
+									<!-- 나중에 구현할 답글버튼 -->
+									<!-- <button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> --> <!-- JQuery this -->
 									<c:if test='${i.userNo eq loginUser.userNo}'>
 										<button class="btn btn-dark deleteBtn replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
 									</c:if>
