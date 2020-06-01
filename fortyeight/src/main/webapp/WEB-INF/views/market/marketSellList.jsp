@@ -143,10 +143,10 @@
             font-weight: bolder;
         	background-color: #FCC029;
         	
-        	/* 위치 설정 */
+        	/* 버튼 위치 설정 */
         	position: absolute;
         	right: 19%;
-        	top: 60%;
+        	top: 82%;
         }
         /* [판매글작성] 버튼에 마우스를 올렸을 때 */
         button#selBtn:hover {
