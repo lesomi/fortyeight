@@ -104,7 +104,7 @@ public class ChattingServer extends TextWebSocketHandler {
 				
 				try {
 					client.sendMessage(new TextMessage(mapper.writeValueAsString(msg)));
-					
+					int result=service.insertChatting(msg);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
