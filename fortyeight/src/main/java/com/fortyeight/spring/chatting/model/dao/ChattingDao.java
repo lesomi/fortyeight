@@ -1,5 +1,9 @@
 package com.fortyeight.spring.chatting.model.dao;
 
-public interface ChattingDao {
+import org.mybatis.spring.SqlSessionTemplate;
 
+import com.fortyeight.spring.chatting.model.vo.Chatting;
+
+public interface ChattingDao {
+	int insertChatting(SqlSessionTemplate session,Chatting msg);
 }
