@@ -270,13 +270,13 @@
 					<!-- 여기가 여러개 추가될 것! -->
 					<tr>
 						<td colspan="2">
-							<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
-							<div class="custom-file" id="fileDiv">
-			                    <input type="file" class="custom-file-input" name="upFile" id="upFile">
-			                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">파일을 선택하세요</label>
-			                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
-			                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
-		                	</div>
+								<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
+								<div class="custom-file" id="fileDiv">
+				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
+				                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">파일을 선택하세요</label>
+				                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
+				                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
+			                	</div>
 						</td>
 					</tr>
 					<tr>
