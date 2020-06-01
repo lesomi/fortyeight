@@ -71,12 +71,14 @@ public class MarketController {
 		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
+		String category = map.get("category");
+		
 		mv.addObject("inputTitle", map.get("title"));
 		
 		System.out.println("category : "+map.get("category"));
 		
-		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/selMarket.do")); // 로컬 환경
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/selMarket.do")); //서버용
+		//mv.addObject("pageBar",PagingFactory.getMarketCategoryPaging(totalData, cPage, numPerPage, "/spring/market/selMarket.do", category)); // 로컬 환경
+		mv.addObject("pageBar",PagingFactory.getMarketCategoryPaging(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/selMarket.do", category)); //서버용
 		
 		mv.setViewName("market/marketSellList");
 		return mv;
@@ -110,11 +112,13 @@ public class MarketController {
 		mv.addObject("comm", comm);
 		// map 보내기
 		mv.addObject("cateMap",map.get("category"));
+		String category = map.get("category");
+		
 		mv.addObject("inputTitle", map.get("title"));
 		System.out.println("category : "+map.get("category"));
 		
 		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/market/buyMarket.do")); // 로컬 환경용
-		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/buyMarket.do")); //서버용
+		mv.addObject("pageBar",PagingFactory.getMarketCategoryPaging(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/buyMarket.do", category)); //서버용
 		
 		mv.setViewName("market/marketBuyList");
 		return mv;
