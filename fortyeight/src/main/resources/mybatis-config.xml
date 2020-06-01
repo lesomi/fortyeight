@@ -13,5 +13,6 @@
 		<typeAlias type="com.fortyeight.spring.market.model.vo.MarketViewImg" alias="mkViewImg"></typeAlias>	
 		<typeAlias type="com.fortyeight.spring.user.model.vo.UserDipsList" alias="dipsList"/>	
 		<typeAlias type="com.fortyeight.spring.user.model.vo.UserDealHistory" alias="dealHistory"/>
+		<typeAlias type="com.fortyeight.spring.chatting.model.vo.Chatting" alias="chatting"/>
 	</typeAliases>
 </configuration>
