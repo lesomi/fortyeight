@@ -1,5 +1,7 @@
 package com.fortyeight.spring.chatting.model.service;
 
-public interface ChattingService {
+import com.fortyeight.spring.chatting.model.vo.Chatting;
 
+public interface ChattingService {
+	int insertChatting(Chatting msg);
 }
