@@ -41,4 +41,6 @@ public interface MarketDao {
 	
 	List<MkCommCount> marketCommentCount(SqlSessionTemplate session); // 마켓 댓글 수(삽니다)
 	List<MkCommCount> marketSellCommentCount(SqlSessionTemplate session); // 마켓 댓글 수(팝니다)
+	
+	Market updateMarket(SqlSessionTemplate session, Map<String, Object> map);// 마켓 수정 화면으로 전환하기 위해 필요한 데이터(마켓)
 }

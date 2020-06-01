@@ -38,4 +38,7 @@ public interface MarketService {
 	
 	List<MkCommCount> marketCommentCount(); // 마켓 댓글 수(삽니다)
 	List<MkCommCount> marketSellCommentCount(); // 마켓 댓글 수(팝니다)
+	
+	Market updateMarket(Map<String, Object> map); // 마켓 수정 화면으로 전환하기 위해 필요한 데이터(마켓)
+	// 마켓 수정 화면으로 전환하기 위해 필요한 데이터(마켓이미지)
 }

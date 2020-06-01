@@ -149,4 +149,12 @@ public class MarketDaoImpl implements MarketDao {
 	public int updateComplete(SqlSessionTemplate session, Map<String, String> map) {
 		return session.update("market.updateComplete", map);
 	}
+
+	// 마켓 수정 화면으로 전환하기 위한 데이터1(마켓내용)
+	@Override
+	public Market updateMarket(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.selectOne("market.updateMarket", map);
+	}
+	
+	
 }
