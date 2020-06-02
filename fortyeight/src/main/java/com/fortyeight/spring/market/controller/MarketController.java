@@ -428,22 +428,31 @@ public class MarketController {
 		mv.setViewName("market/updateMarket");
 		return mv;
 	}
+	
+	//마켓 삭제
+	@RequestMapping("/market/deleteMarket.do")
+	public String deleteMarket(int mkNo,Model m,String mkType) {
+		int result=service.deleteMarket(mkNo);
+		System.out.println(mkType);
+		
+		if(mkType.equals("삽니다")) {			
+			if(result>0) {
+				m.addAttribute("msg","구매글이 삭제되었습니다.");
+				m.addAttribute("loc","/market/buyMarket.do");
+			}else {
+				m.addAttribute("msg","구매글 삭제 실패");
+				m.addAttribute("loc","/market/marketView.do?mkNo="+mkNo);
+			}
+		}else {
+			if(result>0) {
+				m.addAttribute("msg","판매글이 삭제되었습니다.");
+				m.addAttribute("loc","/market/selMarket.do");
+			}else {
+				m.addAttribute("msg","판매글 삭제 실패");
+				m.addAttribute("loc","/market/marketView.do?mkNo="+mkNo);
+			}
+		}
+		
+		return "common/msg";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
