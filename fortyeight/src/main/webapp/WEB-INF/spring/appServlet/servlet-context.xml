@@ -39,6 +39,7 @@
 			<exclude-mapping path="/user/login.do"/>
 			<exclude-mapping path="/user/agreeUser.do"/>			
 			<exclude-mapping path="/user/insertUser*"/>
+			<exclude-mapping path="/user/insertMailSending.do"/>			
 			<exclude-mapping path="/user/check*"/>			
 			<exclude-mapping path="/user/find*"/>	
 			<exclude-mapping path="/market/selMarket.do"/>
