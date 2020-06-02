@@ -24,4 +24,20 @@
 	<update id="updateBoard" parameterType="board">
 		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent} WHERE BOARDNO = #{boardNo}
 	</update>
+	
+	<insert id="insertBoardComm" parameterType="boardComment">
+		INSERT INTO BOARDCOMMENT VALUES(SEQ_BOARD_COMMNO.NEXTVAL,#{boardRef},#{userNo},DEFAULT,#{commContent},0,DEFAULT)
+	</insert>
+	
+	<select id="selectBoardComm" resultType="boardComment" parameterType="_int">
+		SELECT * FROM BOARDCOMMENT JOIN MEMBER USING(USERNO) WHERE BOARDCOMMENT.BOARDREF = #{boardNo}
+	</select>
+	
+	<select id="selectboardCommCount" resultType="_int" parameterType="_int">
+		SELECT COUNT(*) FROM BOARDCOMMENT WHERE BOARDREF = #{boardNo}
+	</select>
+	
+	<delete id="deleteBoardComm" parameterType="_int">
+		DELETE FROM BOARDCOMMENT WHERE BOARDCOMMNO = #{boardCommNo}
+	</delete>
 </mapper>
