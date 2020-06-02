@@ -75,19 +75,19 @@
 								</c:if>
 								<!-- 찜목록이 안 비어져 있을 때 -->
 								<c:forEach items="${dips}" var="d">
-									<c:if test="${not empty dips}">
+								<c:if test="${not empty dips}">
 										<!-- 게시글과 로그인한 유저가 같을 때는 찜버튼이 보이지 않게 처리한다. -->
 										<c:if test="${d.userNo ne loginUser.userNo && mk.userNo ne loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<%-- <c:if test="${d.userNo eq loginUser.userNo && mk.userNo eq loginUser.userNo}">
+										<c:if test="${d.userNo eq loginUser.userNo && mk.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if> --%>
-									</c:if>
+										</c:if>
+								</c:if>
 								</c:forEach>
 							</td>
 							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
@@ -135,11 +135,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
+										<c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if> --%>
+										</c:if>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -216,11 +216,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
+										<c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if> --%>
+										</c:if>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -269,11 +269,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
+										<c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if> --%>
+										</c:if>
 									</c:if>
 								</c:forEach>
 							</td>

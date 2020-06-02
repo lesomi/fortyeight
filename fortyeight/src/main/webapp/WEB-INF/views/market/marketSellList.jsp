@@ -517,7 +517,7 @@
                                             <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
-                                                <p>10,000원</p>
+                                                <p><fmt:formatNumber value="${i.mkPrice}"/>원</p>
                                             </div>
                                             <!-- 댓글 수 출력 -->
                                             <c:forEach items="${comm}" var="c">
