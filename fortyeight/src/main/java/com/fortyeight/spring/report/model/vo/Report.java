@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 public class Report {
 	private int reportNo;
 	private int userNo;
+	private int mkNo;
 	private String reportText;
 	private String reportContent;
 	private String status;
+	private int reportCount;
 }
