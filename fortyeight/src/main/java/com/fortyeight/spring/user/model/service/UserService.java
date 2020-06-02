@@ -32,4 +32,6 @@ public interface UserService {
 	int selectDealHistoryCount(Map<String, Object> map); // 마이페이지-거래내역 페이징
 	
 	int updateUserDealAddrEnd(Map<String, Object> map); // 마이페이지-거래주소 변경
+	
+	int updateReportCount(int userNo,int reportNo);//유저 신고 횟수 증가
 }

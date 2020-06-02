@@ -140,6 +140,18 @@ public class UserServiceImpl implements UserService {
 	public int updateUserDealAddrEnd(Map<String, Object> map) {
 		return dao.updateUserDealAddrEnd(session, map);
 	}
+
+	//유저 신고 횟수 증가
+	@Override
+	public int updateReportCount(int userNo,int reportNo) {
+		int result=dao.updateReportCount(session,userNo);
+		
+		if(result>0) {
+			result=dao.updateReportProcess(session,reportNo);
+		}
+		
+		return result;
+	}
 	
 	
 }
