@@ -17,6 +17,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 
+<!-- 파비콘 생성 -->
+<link rel="shortcut icon" type="image/x-icon" href="${path}/resources/img/48box.PNG"/>
+
 <!-- 폰트 적용 -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
