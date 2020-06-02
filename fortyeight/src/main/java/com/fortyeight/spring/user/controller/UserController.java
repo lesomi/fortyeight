@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.common.PagingFactory;
-import com.fortyeight.spring.market.model.vo.Market;
+import com.fortyeight.spring.report.model.service.ReportService;
 import com.fortyeight.spring.user.model.service.UserService;
 import com.fortyeight.spring.user.model.vo.User;
 import com.fortyeight.spring.user.model.vo.UserDealHistory;
@@ -490,10 +490,29 @@ public class UserController {
 		}
 		return page;
 	}
-
+	
+	@Autowired
+	private ReportService rs;
 	//관리자 페이지
 	@RequestMapping("/admin/adminpage.do")
-	public String adminPage(int userNo) {
-		return "admin/adminpage";
+	public ModelAndView adminPage(int userNo,ModelAndView mv) {
+		int report=rs.selectReportCount();
+		
+		mv.addObject("report",report);
+		
+		mv.setViewName("admin/adminpage");
+		
+		return mv;
+	}
+	
+	//유저 신고 횟수 증가
+	@RequestMapping("/user/updateReportCount.do")
+	@ResponseBody
+	public boolean updateReportCount(int userNo,int reportNo) {
+		int result=service.updateReportCount(userNo,reportNo);
+		
+		Boolean flag=result>0?true:false;
+		
+		return flag;
 	}
 }
