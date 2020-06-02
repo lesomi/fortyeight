@@ -195,7 +195,7 @@
 		    } 
 		});
 		
-		$("#dealAddr").keyup(function() {
+		$("#dealAddr").blur(function() {
 			// 주소로 좌표를 검색합니다(이때, 주소는 사용자가 입력한 [거래주소]로 값을 대입한다.)
 			geocoder.addressSearch( $('#dealAddr').val() , function(result, status) {
 		
