@@ -9,6 +9,12 @@
 	<jsp:param value="Forty-Eight" name="title"/>
 </jsp:include>
 
+<style>
+	a{
+		color:black;
+	}
+</style>
+
 <section>
 	<div class="container" style="margin-top: 150px;height:600px;">
 		<div class="float-right m-4">
