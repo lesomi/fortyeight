@@ -120,7 +120,7 @@
 			<input type="text" name="emailNumber" id="emailNumber" class="form-control control2">
 		</td>
 		<td>
-			시간
+			
 		</td>
 	</tr>
 	<tr>
