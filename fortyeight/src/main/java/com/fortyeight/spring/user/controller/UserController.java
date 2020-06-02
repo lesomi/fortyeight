@@ -457,4 +457,10 @@ public class UserController {
 		return "user/selectDipsList";
 	}
 	
+	//관리자 페이지
+	@RequestMapping("/admin/adminpage.do")
+	public String adminPage(int userNo) {
+		return "admin/adminpage";
+	}
+	
 }
