@@ -33,7 +33,12 @@
 	}
 	
 	function addMessage(msg){
-		$("#msg-container").append("<p>"+msg.sender+" : "+msg.chatting+"</p>");
+		if(msg.sender=='${loginUser.userNo}'){
+			$("#msg-container").append("<div style='text-align:right;'><p class='m-2 p-2'><span class='m-2 p-2' style='background-color:rgb(251, 192, 41);border-radius:10px'>"+msg.chatting+"</span></p></div>");
+		}else{
+			$("#msg-container").append("<div><p class='m-2 p-2'><span class='m-2 p-2' style='background-color:rgb(241, 241, 241);border-radius:10px'>"+msg.chatting+"</span></p></div>");
+		}
+		//$("#msg-container").append("<p>"+msg.sender+" : "+msg.chatting+"</p>");
 		//receiver=msg.sender;
 	}
 	
@@ -73,6 +78,7 @@
 		});
 	});
 </script>
+
 </head>
 <body>
 	<div id="msg-container" style="height:540px;overflow:auto;"></div>

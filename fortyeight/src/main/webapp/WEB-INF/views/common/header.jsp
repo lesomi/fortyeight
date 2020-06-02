@@ -187,8 +187,9 @@
 		</div>
 	</div>
 	
-	<!-- 채팅 -->
+
 	<script>
+		//채팅
 		function accessChatting(userNo,receiver){
 			console.log('${loginUser.userNo}'==$("#mkWriter").val());
 			console.log($("#mkWriter").val());
