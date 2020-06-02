@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fortyeight.spring.board.model.service.BoardService;
 import com.fortyeight.spring.board.model.vo.Board;
+import com.fortyeight.spring.board.model.vo.BoardComment;
 import com.fortyeight.spring.common.PagingFactory;
 import com.fortyeight.spring.user.controller.UserController;
 
@@ -69,10 +71,19 @@ public class boardController {
 	}
 	
 	@RequestMapping("/board/boardView.do")
-	public ModelAndView boardView(int boardNo, ModelAndView mv) {
+	public ModelAndView boardView(int boardNo, ModelAndView mv,
+			@RequestParam(required=false, defaultValue="1") int cPage,
+			@RequestParam(required=false, defaultValue="10") int numPerPage) {
 		Board b=service.selectBoardView(boardNo);
+		List<BoardComment> list=service.selectBoardComm(boardNo,cPage,numPerPage);
+		
+		int totalData=service.selectboardCommCount(boardNo);
+		
+		//mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/spring/board/boardView.do"));
+		mv.addObject("pageBar",PagingFactory.getPage(totalData, cPage, numPerPage, "/20PM_FortyEight_final/board/boardView.do")); //서버용
 		
 		mv.addObject("b",b);
+		mv.addObject("bc",list);
 		mv.setViewName("board/boardView");
 		
 		return mv;
@@ -119,5 +130,27 @@ public class boardController {
 		}
 		
 		return "common/msg";
+	}
+	
+	@RequestMapping("/board/insertBoardComm.do")
+	@ResponseBody
+	public boolean insertBoardComm(BoardComment bc) {
+		bc=new BoardComment(0,bc.getBoardRef(),bc.getUserNo(),0,bc.getCommContent(),0,null,null);
+		
+		int result=service.insertBoardComm(bc);
+		
+		Boolean flag=result>0?true:false;
+		
+		return flag;
+	}
+	
+	@RequestMapping("/board/deleteBoardComm.do")
+	@ResponseBody
+	public boolean deleteBoardComm(int boardCommNo) {
+		int result=service.deleteBoardComm(boardCommNo);
+		
+		Boolean flag=result>0?true:false;
+		
+		return flag;
 	}
 }
