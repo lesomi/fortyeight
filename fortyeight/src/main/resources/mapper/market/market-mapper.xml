@@ -353,4 +353,9 @@
 	<select id="updateMarket" parameterType="map" resultType="market">
 		SELECT * FROM MARKET WHERE MKNO=#{mkNo} AND USERNO=#{userNo}
 	</select>
+	
+	<!-- 마켓 삭제 -->
+	<update id="deleteMarket" parameterType="_int">
+		UPDATE MARKET SET DELETED = 'Y' WHERE MKNO = #{mkNo}
+	</update>
 </mapper>
