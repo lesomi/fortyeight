@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.fortyeight.spring.board.model.dao.BoardDao;
 import com.fortyeight.spring.board.model.vo.Board;
+import com.fortyeight.spring.board.model.vo.BoardComment;
 import com.fortyeight.spring.user.model.service.UserServiceImpl;
 
 @Service
@@ -50,5 +51,25 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int updateBoard(Board b) {
 		return dao.updateBoard(session,b);
+	}
+
+	@Override
+	public int insertBoardComm(BoardComment bc) {
+		return dao.insertBoardComm(session,bc);
+	}
+
+	@Override
+	public List<BoardComment> selectBoardComm(int boardNo,int cPage,int numPerPage) {
+		return dao.selectBoardComm(session,boardNo,cPage,numPerPage);
+	}
+
+	@Override
+	public int selectboardCommCount(int boardNo) {
+		return dao.selectboardCommCount(session,boardNo);
+	}
+
+	@Override
+	public int deleteBoardComm(int boardCommNo) {
+		return dao.deleteBoardComm(session,boardCommNo);
 	}
 }
