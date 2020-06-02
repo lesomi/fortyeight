@@ -187,8 +187,58 @@ public class MarketServiceImpl implements MarketService {
 
 	// 마켓 수정 화면으로 전환하기 위한 데이터2(마켓이미지)
 	@Override
-	public String selectMkImg(int mkNo) {
+	public MkImg selectMkImg(int mkNo) {
 		return dao.selectMkImg(session, mkNo);
+	}
+
+	// 마켓 글 수정 - 트랜잭션 처리 필요
+	@Override
+	public int updateMarketEnd(Market mk, List<MkImg> files) {
+		logger.debug("----- market 글 수정 메소드에 진입했어요! -----");
+		// 1. market update
+		int result = dao.updateMarketEnd(session, mk);
+		logger.debug(""+mk.getMkNo());
+		System.out.println("----- service Impl에서 market 수정한 result값은? : " +result+" -----");
+		
+		// 입력값이 없을 경우 예외처리하기
+		if(result == 0) {
+			throw new MyException("[ERROR : market 수정 에러]");
+		}
+		
+		// 2. files update
+		if(!files.isEmpty()) {
+			for(MkImg mi : files) {
+				mi.setMkNo(mk.getMkNo());
+				int mkNo = mk.getMkNo();
+				
+				// 조회하기
+				MkImg mkImg = dao.selectMkImg(session, mkNo);
+				
+				// mkNo의 이미지가 있으면 update
+				 if(mkImg != null) {
+					 result = dao.updateMarketEnd(session, mi);
+				 }
+				 else {
+					 // insert 필요..
+					 result = dao.insertMarket(session, mi);
+				 }
+				 
+				
+				if(result == 0) {
+					throw new MyException("[ERROR : MkImg 수정 에러]");
+				}
+				System.out.println("----- [마켓수정]service Impl에서 result값은? : " +result+" -----");
+			}
+		}
+		else if(files.isEmpty()) {
+			int mkNo = mk.getMkNo();
+			result = dao.deleteMkImg(session, mkNo);
+			if(result == 0) {
+				throw new MyException("[ERROR : MkImg 수정 에러]");
+			}
+			System.out.println("----- [마켓수정]service Impl에서 result값은? : " +result+" -----");
+		}
+		return result;
 	}
 	
 	

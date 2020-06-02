@@ -425,15 +425,114 @@ public class MarketController {
 		map.put("userNo", userNo);
 		map.put("mkNo", mkNo);
 		Market m = service.updateMarket(map); // 마켓 글 가져오기
-		String renameFile = service.selectMkImg(mkNo);// 마켓 이미지 가져오기
+		MkImg img = service.selectMkImg(mkNo);// 마켓 이미지 가져오기
 		
 		
 		mv.addObject("market", m);
 		mv.addObject("userNo", userNo); // 그냥 담은거..
 		mv.addObject("mkNo", mkNo); // 마켓번호
-		mv.addObject("renameFile", renameFile); // 마켓이미지
+		mv.addObject("img", img); // 마켓 이미지
 		mv.setViewName("market/updateMarket");
 		return mv;
+	}
+	
+	// 마켓 수정하기
+	@RequestMapping("/market/updateMarketEnd.do")
+	public String updateMarketEnd(Model m, int mkNo, Market mk, MultipartFile upFile, HttpSession session) {
+		logger.debug("----- 마켓 글 수정 Controller 로직 진행 들어옴 -----");
+		String path = session.getServletContext().getRealPath("/resources/upload/market"); // 저장경로
+		// 파일을 담을 객체 생성(여러개일 수 있음)
+		List<MkImg> files = new ArrayList();
+		File f = new File(path);
+		
+		if(!f.exists()) { // 파일이 없으면 생성한다.
+			f.mkdirs();
+		}
+		
+		// 파일 저장 로직 : 파일 이름이 중복적으로 저장되면 안 되기 때문에 rename 처리가 필요하다.
+		if(!upFile.isEmpty()) {
+			// 파일명 생성
+			String ori = upFile.getOriginalFilename();
+			String ext = ori.substring(ori.lastIndexOf('.'));
+			
+			// 파일 이름 리네임
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+			int rnd = (int)(Math.random()*1000);
+			String rename = sdf.format(System.currentTimeMillis())+"_"+rnd+ext; // 새 이름 부여
+			
+			// 리네임 파일 저장
+			try {
+				upFile.transferTo(new File(path+"/"+rename)); // 파일을 실제로 저장
+			}
+			catch(IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			new File(path+"/"+mk.getRenamemkFile()).delete();
+			
+			// 담을 객체 생성
+			MkImg imgName = new MkImg();
+			imgName.setOriMkImg(ori);
+			imgName.setRenameMkImg(rename);
+			mk.setOrimkFile(ori);
+			mk.setRenamemkFile(rename);
+			
+			files.add(imgName);
+		}
+		
+		// 마켓 정보 불러오기
+		Market market = service.selectView(mkNo);
+		System.out.println("가져온 마켓번호와 거래타입?"+market.getMkNo()+", "+market.getMkType());
+		
+		// 세션 갖고오기
+		User loginUser = (User)session.getAttribute("loginUser");
+		// 가져온 값 확인하기
+		System.out.println("--------------------------"
+						   +"\n mkNo : "+mk.getMkNo()
+						   +"\n userNo : "+loginUser.getUserNo() 
+						   +"\n type : "+mk.getMkType()
+						   +"\n title : "+mk.getMkTitle()
+						   +"\n dealAddr : "+loginUser.getDealAddr()
+						   +"\n category : "+mk.getCategory()
+						   +"\n price : "+mk.getMkPrice()
+						   +"\n dealType : "+mk.getDealType()
+						   +"\n content : "+mk.getMkContent()
+						   +"\n oriFile : "+mk.getOrimkFile()
+						   +"\n renameFile : "+mk.getRenamemkFile()
+						   +"\n--------------------------");
+		
+		mk = new Market(mk.getMkNo(), loginUser.getUserNo(), market.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
+						mk.getDealType(), mk.getMkContent(), mk.getDealStatus(), null, null, 0, null);
+		
+		// DB에 값 저장
+		int result = 0;
+		try {
+			result = service.updateMarketEnd(mk, files);
+		}
+		catch(RuntimeException e) {
+			e.printStackTrace();
+			for(MkImg mm : files) {
+				File delF = new File(path+"/"+mm.getRenameMkImg());
+				if(delF.exists()) {
+					delF.delete();
+				}
+			}
+		}
+		
+		String page="";
+		if(result>0) {
+			m.addAttribute("msg","마켓 글 수정이 수정되었습니다.");
+			m.addAttribute("loc","/market/marketView.do?mkNo="+mk.getMkNo());
+			page="common/msg";
+		}
+		else {
+			m.addAttribute("msg","마켓 글 수정이 실패되었습니다. 다시 처리하세요.");
+			m.addAttribute("loc","/market/updateMarket.do?userNo="+loginUser.getUserNo()+"&mkNo="+mk.getMkNo());
+			page="common/msg";
+		}
+		
+		return page;
 	}
 }
 
