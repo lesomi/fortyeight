@@ -91,21 +91,24 @@
 								</c:forEach>
 							</td>
 							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
-							<c:if test="${loginUser.userNo eq mk.userNo}">
-								<td style="width:50px;">
-									<div class="dropdown">
-										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
-									    	<img src="${path }/resources/img/menubar.png" width="25px;">
-									  	</button>
-									  	<div class="dropdown-menu">
+							<td style="width:50px;">
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo eq mk.userNo}">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" data-toggle="modal" data-target="#buyDelModal">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
-									  	</div>
-									</div>
-								</td>
-							</c:if>
+										</c:if>
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
+							</td>
 						</c:if>
 						
 						<!-- 2. 삽니다 이면서 [예약중]일때 -->
@@ -141,20 +144,23 @@
 								</c:forEach>
 							</td>
 							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
-							<c:if test="${loginUser.userNo eq mk.userNo}">
-								<td style="width:50px;">
-									<div class="dropdown">
-										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
-									    	<img src="${path }/resources/img/menubar.png" width="25px;">
-									  	</button>
-									  	<div class="dropdown-menu">
+							<td style="width:50px;">
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo eq mk.userNo}">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
-									  	</div>
-									</div>
-								</td>
-							</c:if>
+										</c:if>
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
+							</td>
 						</c:if>
 						
 						<!-- if문 분기처리   3. 삽니다 이면서 [구매완료]일때(값은 판매완료!) -->
@@ -166,7 +172,16 @@
 								
 							</td>
 							<td style="width:50px;">
-								
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
 							</td>
 						</c:if>
 					</tr>
@@ -210,21 +225,24 @@
 								</c:forEach>
 							</td>
 							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
-							<c:if test="${loginUser.userNo eq mk.userNo}">
-								<td style="width:50px;">
-									<div class="dropdown">
-										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
-									    	<img src="${path }/resources/img/menubar.png" width="25px;">
-									  	</button>
-									  	<div class="dropdown-menu">
+							<td style="width:50px;">
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo eq mk.userNo}">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" data-toggle="modal" data-target="#sellDelModal">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
-									  	</div>
-									</div>
-								</td>
-							</c:if>
+										</c:if>
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
+							</td>
 						</c:if>
 						
 						<!-- 2. 팝니다 이면서 [예약중]일때 -->
@@ -260,20 +278,23 @@
 								</c:forEach>
 							</td>
 							<!-- if문 분기처리. 마켓 글 작성자일 경우 수정할 수 있도록 처리하기 -->
-							<c:if test="${loginUser.userNo eq mk.userNo}">
-								<td style="width:50px;">
-									<div class="dropdown">
-										<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
-									    	<img src="${path }/resources/img/menubar.png" width="25px;">
-									  	</button>
-									  	<div class="dropdown-menu">
+							<td style="width:50px;">
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo eq mk.userNo}">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
-									  	</div>
-									</div>
-								</td>
-							</c:if>
+										</c:if>
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
+							</td>
 						</c:if>
 						
 						<!-- if문 분기처리   3. 삽니다 이면서 [구매완료]일때(값은 판매완료!) -->
@@ -282,20 +303,19 @@
 								 ${mk.mkTitle} <span class="badge badge-danger" id="dealStatus">판매완료</span>
 							</td>
 							<td style="width:50px;" colspan="1">
-								<!-- 찜목록 분기처리 -->
-								<%-- <c:if test="${empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
-									</button>
-								</c:if>
-								<c:if test="${not empty dips}">
-									<button type="button" id="canDipsBtn">
-										<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
-									</button>
-								</c:if> --%>
+							
 							</td>
 							<td style="width:50px;">
-								
+								<div class="dropdown">
+									<button type="button" data-toggle="dropdown" style="border:none;outline:none;">
+								    	<img src="${path }/resources/img/menubar.png" width="25px;">
+								  	</button>
+								  	<div class="dropdown-menu">
+										<c:if test="${loginUser.userNo ne mk.userNo }">
+											<a class="dropdown-item" data-toggle="modal" data-target="#reportModal">신고</a>
+										</c:if>
+								  	</div>
+								</div>
 							</td>
 						</c:if>
 					</tr>
@@ -469,7 +489,62 @@
 	</div>
 </div>
 
+<!-- 신고 모달 -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="${pageContext.request.contextPath}/report/insertReport.do?mkNo=${mk.mkNo}" method="post">
+				<div class="modal-body" style="text-align: center;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div style="padding-top:30px;">
+						<span>[${mk.mkTitle }]</span><br>
+						<input type="hidden" name="userNo" value="${mk.userNo }">
+						<span>게시글을 신고하는 이유를 선택해주세요.</span><br><br>
+						<div style="margin:0 auto;width:300px;text-align:left">
+							<label><input type="checkbox" class="reportCk" name="reportText" value="1. 광고성 게시글이에요."> 1. 광고성 게시글이에요.</label><br>
+							<label><input type="checkbox" class="reportCk" name="reportText" value="2. 비매너 유저에요."> 2. 비매너 유저에요.</label><br>
+							<label><input type="checkbox" class="reportCk" name="reportText" value="3. 음란성 게시글이에요."> 3. 음란성 게시글이에요.</label><br>
+							<label><input type="checkbox" class="reportCk" name="reportText" value="4. 사진 도용이에요."> 4. 사진 도용이에요.</label><br>
+							<label><input type="checkbox" class="reportCk" id="reportEtc" name="reportText" value="5. 기타"> 5. 기타 </label>
+							<input type="text" class="form-control" id="reportEtcText" name="reportContent">
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center pb-4">
+					<button type="button" class="btn btn-dark hdBtn" data-dismiss="modal" aria-label="Close">취소</button>
+					&nbsp;&nbsp;
+					<button type="submit" class="btn btn-dark hdBtn">신고</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <script>
+	$(function(){
+		$("#reportEtcText").hide();
+		
+		$(".reportCk").change(function() {
+            var cnt = 1;
+            
+            //체크박스 개수 제한
+            if( cnt == $(".reportCk:checked").length ) {
+                $(".reportCk:not(:checked)").attr("disabled", "disabled");
+            }else {
+                $(".reportCk").removeAttr("disabled");
+            }
+            
+            //기타 글 나왔다 사라졌다
+    		if($("#reportEtc").is(":checked")==true){
+    			$("#reportEtcText").show();
+    		}else{
+    			$("#reportEtcText").hide();
+    		}
+        });
+	});
+
 	// -----
 	$(function () {
 		// 댓글 글자수 카운트
