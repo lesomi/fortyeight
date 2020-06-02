@@ -162,5 +162,31 @@ public class MarketDaoImpl implements MarketDao {
 		return session.update("market.deleteMarket",mkNo);
 	}
 	
+	// 마켓 수정 화면으로 전환하기 위한 데이터2(마켓이미지)
+	// 나중에 여러개의 이미지를 불러올 땐 selectList로 수정되어야 한다.
+	@Override
+	public MkImg selectMkImg(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkImg", mkNo);
+	}
+	
+	// 마켓 글 수정 1. market update
+	@Override
+	public int updateMarketEnd(SqlSessionTemplate session, Market mk) {
+		System.out.println("---- dao Impl ----");
+		return session.update("market.updateMarketEnd", mk);
+	}
+
+	// 마켓 글 수정 2. file update
+	@Override
+	public int updateMarketEnd(SqlSessionTemplate session, MkImg mi) {
+		return session.update("market.updateMkImg", mi);
+	}
+
+	// 마켓 글 수정 3. file delete(if... files.Empty()!!!!!!!!!!!!)
+	@Override
+	public int deleteMkImg(SqlSessionTemplate session, int mkNo) {
+		return session.delete("market.deleteMkImg", mkNo);
+	}
+	
 	
 }

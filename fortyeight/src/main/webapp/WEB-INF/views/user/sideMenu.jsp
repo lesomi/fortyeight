@@ -176,7 +176,7 @@
 	    div#userProfileDiv { width: 100%; height: 150px; }
 		img#userProfile { width: 60px; height: 60px; border-radius: 50px; border: 2px solid white; margin-top: 18%; margin-left: 5%;}
 		span#userId { position: relative; top: 10%; left: 7.5%; font-weight: bolder; font-size: 20px; }
-		span#nickName { position: absolute; top: 28%; left: 6%; font-size: 12px; }
+		span#nickName { position: absolute; top: 32%; left: 6%; font-size: 12px; }
 	</style>
 
 	
@@ -201,7 +201,7 @@
 					<div class="collapse-inner rounded">
 						<a class="collapse-item" href="${path}/user/updateUser.do?userNo=${loginUser.userNo}">회원 정보 변경</a>
 						<a class="collapse-item" href="${path}/user/updateUserPassword.do?userNo=${loginUser.userNo}">비밀번호 변경</a>
-						<a class="collapse-item" href="#">거래주소 변경</a>
+						<a class="collapse-item" href="${path}/user/updateUserDealAddr.do?userNo=${loginUser.userNo}">거래주소 변경</a>
 						<a class="collapse-item" href="${path}/user/deleteUser.do?userNo=${loginUser.userNo}">회원 탈퇴</a>
 					</div>
 				</div>

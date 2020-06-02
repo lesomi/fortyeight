@@ -47,8 +47,8 @@
 	/* 제목 글자수 설정 */
 	span#titleCounter {
 		position: absolute;
-		right: 15%;
-		top: 68%;
+		right: 12%;
+		top: 78%;
 	}
 	
 	/* '여기' 설정 */
@@ -71,8 +71,8 @@
 	/* 내용 글자수 체크하는 놈 설정 */
 	span#counter {
 		position: absolute;
-		right: 17%;
-		margin-top: 14%;
+		right: 12%;
+		margin-top: 16%;
 	}
 	
 	/* 사진등록 div 설정 */
@@ -139,14 +139,14 @@
 		</div>
 		
 		<div id="writeSellDiv">
-			<form action="${path}/market/여기아직안정했어.do" method="post" enctype="multipart/form-data" onsubmit="return checkSelect();">
+			<form action="${path}/market/updateMarketEnd.do?mkNo=${market.mkNo}" method="post" enctype="multipart/form-data" onsubmit="return checkSelect();">
 				<table id="writeTB" class="table table-borderless">
 					<tr>
 						<td>거래활동</td>
 						<td>
 							<div class="form-group">
 								<select class="form-control" name="mkType" id="mkType">
-									<option value="${market.mkType}" disabled selected>${market.mkType}</option>
+									<option value="${market.mkType}" selected>${market.mkType}</option>
 								</select>
 							</div>
 						</td>
@@ -157,7 +157,7 @@
 						<td>
 							<div class="form-group">
 								<select class="form-control" name="category" id="category">
-									<option value="${market.category}" disabled selected>
+<%-- 									<option value="${market.category}"  selected>
 										<c:if test='${market.category eq "digital"}'>
 											<c:out value="디지털/가전"/>
 										</c:if>
@@ -185,17 +185,16 @@
 										<c:if test='${market.category eq "etc"}'>
 											<c:out value="기타"/>
 										</c:if>
-									</option>
-									
-									<option class="selectOption" value="digital">디지털/가전</option>
-									<option class="selectOption" value="interior">가구/인테리어</option>	
-									<option class="selectOption" value="child">유아용/유아도서</option>
-									<option class="selectOption" value="life">생활/가공식품</option>
-									<option class="selectOption" value="woman">여성의류/잡화</option>
-									<option class="selectOption" value="beauty">뷰티/미용</option>
-									<option class="selectOption" value="man">남성의류/잡화</option>
-									<option class="selectOption" value="sport">스포츠/레저/게임</option>
-									<option class="selectOption" value="etc">기타</option>
+									</option> --%>
+									<option class="selectOption" value="digital" <c:out value="${market.category eq 'digital'?'selected':'' }"/> >디지털/가전</option>
+									<option class="selectOption" value="interior" <c:out value="${market.category eq 'interior'	?'selected':'' }"/>>가구/인테리어</option>	
+									<option class="selectOption" value="child" <c:out value="${market.category eq 'child'?'selected':'' }"/>>유아용/유아도서</option>
+									<option class="selectOption" value="life" <c:out value="${market.category eq 'life'?'selected':'' }"/>>생활/가공식품</option>
+									<option class="selectOption" value="woman" <c:out value="${market.category eq 'woman'?'selected':'' }"/>>여성의류/잡화</option>
+									<option class="selectOption" value="beauty" <c:out value="${market.category eq 'beauty'?'selected':'' }"/>>뷰티/미용</option>
+									<option class="selectOption" value="man" <c:out value="${market.category eq 'man'?'selected':'' }"/>>남성의류/잡화</option>
+									<option class="selectOption" value="sport" <c:out value="${market.category eq 'sport'?'selected':'' }"/>>스포츠/레저/게임</option>
+									<option class="selectOption" value="etc" <c:out value="${market.category eq 'etc'?'selected':'' }"/>>기타</option>
 								</select>
 							</div>
 						</td>
@@ -232,7 +231,7 @@
 						<td>
 							<div class="form-group">
 								<select class="form-control" name="dealType" id="dealType">
-									<option value="${market.dealType}" disabled selected>${market.dealType}</option>
+									<option value="${market.dealType}" selected>${market.dealType}</option>
 									<c:if test='${market.dealType eq "택배"}'>
 										<option class="selectOption" value="직거래">직거래</option>										
 									</c:if>
@@ -268,8 +267,12 @@
 					
 					
 					<!-- 여기가 여러개 추가될 것! -->
+					<input type="hidden" name="${img.oriMkImg}" value="${img.oriMkImg}"/>
+					<input type="hidden" name="${img.renameMkImg}" value="${img.renameMkImg}"/>
 					<tr>
 						<td colspan="2">
+							<!-- 사진값이 없으면? -->
+							<c:if test='${empty img}'>
 								<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
 								<div class="custom-file" id="fileDiv">
 				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
@@ -277,6 +280,17 @@
 				                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
 				                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
 			                	</div>
+		                	</c:if>
+		                	<!-- 사진값이 있으면? -->
+		                	<c:if test='${not empty img}'>
+								<img id="uploadImg" src="${path}/resources/upload/market/${img.renameMkImg}"/> <!-- width: 200px, height: 200px -->
+								<div class="custom-file" id="fileDiv">
+				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
+				                    <label class="custom-file-label" id="selectLabel" style="width: 400px; margin-left: 50px;" for="upFile">${img.renameMkImg}</label>
+				                    <%-- <img src="${path}/resources/img/plusIcon.png" id="plus"> --%>
+				                    <img src="${path}/resources/img/minusIcon.png" id="minus">			                    
+			                	</div>
+		                	</c:if>
 						</td>
 					</tr>
 					<tr>
@@ -297,7 +311,7 @@
 						</td>
 					</tr>
 				</table>
-				<button type="submit" id="insert" class="btn btn-dark enrollBtn">등록하자!</button>
+				<button type="submit" id="insert" class="btn btn-dark enrollBtn">수정하자!</button>
 				<button type="button" class="btn btn-dark enrollBtn" onclick="javascript:history.back();">뒤로가기</button>
 			</form>
 		</div>
@@ -307,6 +321,20 @@
 </section>
 
 <script>
+	function checkSelect(){
+		
+		if($("#category option:selected").val()==null){
+			alert("카테고리를 선택해주세요.");
+			$("#category").focus();
+			return false;
+		}
+		
+		if($("#dealType option:selected").val()==null){
+			alert("거래 방법을 선택해주세요.");
+			$("#dealType").focus();
+			return false;
+		}
+	}
 /* ---------------------------------------------- [글자 수 카운트] ----------------------------------------------------- */
 	// 제목 글자수 카운트
 	$(function () {
@@ -335,6 +363,67 @@
 					color: 'red',
 					fontWeight: 'bolder'
 				});
+			}
+		});
+	});
+	
+/* ---------------------------------------------- [첫번째 파일 업로드] ----------------------------------------------------- */
+	$(function() {
+		$( document ).ready(function() {
+			/* minus 클릭 시 이미지 삭제 */
+			$('#minus').click(function () {
+				$('#upFile').next(".custom-file-label").html('파일을 선택하세요.');
+				$('#uploadImg').prop('src','${path}/resources/img/plusImg원본.png'); // 이미지 삭제
+			});
+		});
+		
+		const upFile = document.querySelector('#upFile');
+		upFile.addEventListener('change', function(e) {
+			// 파일명 변경
+			const fileName = this.files[0].name;
+			$(this).next(".custom-file-label").html(fileName);
+	
+			// 업로드한 파일 속성 보기
+			var getFile = e.target.files;
+			console.log(getFile);
+	
+			// 이미지 태그 생성
+			//var image = document.createElement('img');
+			var img = document.getElementById('uploadImg');
+	
+			/* FileReader 객체 생성 */
+			var reader = new FileReader();
+	
+			/* reader 시작시 함수 구현 */
+			reader.onload = (function(aImg) {
+				console.log(1);
+	
+				return function(e) {
+					console.log(3);
+					/* base64 인코딩 된 스트링 데이터 */
+					// aImg.src = e.target.result
+					aImg.setAttribute("src",e.target.result);
+					
+					
+					
+					// ----
+					/* minus 클릭 시 이미지 삭제 */
+					$('#minus').click(function () {
+						$('#upFile').next(".custom-file-label").html('파일을 선택하세요.');
+						e.target.result
+						aImg.setAttribute('src','${path}/resources/img/plusImg원본.png'); // 이미지 삭제
+					});
+				}
+			})(img);
+	
+			if (getFile) {
+				/* 
+				    get_file[0] 을 읽어서 read 행위가 종료되면 loadend 이벤트가 트리거 되고 
+				    onload 에 설정했던 return 으로 넘어간다.
+				        이와 함게 base64 인코딩 된 스트링 데이터가 result 속성에 담겨진다.
+				 */
+				reader.readAsDataURL(getFile[0]);
+				console.log(2);
 			}
 		});
 	});

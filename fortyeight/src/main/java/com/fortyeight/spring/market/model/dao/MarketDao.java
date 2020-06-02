@@ -45,4 +45,10 @@ public interface MarketDao {
 	Market updateMarket(SqlSessionTemplate session, Map<String, Object> map);// 마켓 수정 화면으로 전환하기 위해 필요한 데이터(마켓)
 	
 	int deleteMarket(SqlSessionTemplate session, int mkNo); //마켓 삭제
+
+	MkImg selectMkImg(SqlSessionTemplate session, int mkNo); // 마켓 수정 화면으로 전환하기 위해 필요한 데이터(마켓이미지)
+	
+	int updateMarketEnd(SqlSessionTemplate session, Market mk); // 마켓 글 수정1
+	int updateMarketEnd(SqlSessionTemplate session, MkImg mi); // 마켓 글 수정2
+	int deleteMkImg(SqlSessionTemplate session, int mkNo); // 마켓 글 수정3
 }

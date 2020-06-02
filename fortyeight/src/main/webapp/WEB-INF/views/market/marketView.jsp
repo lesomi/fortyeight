@@ -286,7 +286,7 @@
 								  	<div class="dropdown-menu">
 										<c:if test="${loginUser.userNo eq mk.userNo}">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
-										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
+										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">판매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
 										</c:if>
 										<c:if test="${loginUser.userNo ne mk.userNo }">
@@ -404,7 +404,8 @@
 						<td>
 							<div class="input-group-append" id="replyDiv">
 								<c:if test='${loginUser != null}'>
-									<button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> <!-- JQuery this -->
+									<!-- 나중에 구현할 답글버튼 -->
+									<!-- <button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> --> <!-- JQuery this -->
 									<c:if test='${i.userNo eq loginUser.userNo}'>
 										<button class="btn btn-dark deleteBtn replyDelete" type="button" style="margin-left: -50px;" >삭제</button>
 									</c:if>
@@ -674,32 +675,4 @@
 		});
 		
 	});
-
-// -----------------------------------------------------[ 마켓뷰 거래상태 ajax 처리 ]--------------------------------------------------------------------
-	/* $(function () {
-		// 거래상태 [예약중]을 눌렀을 때
-		$('#reservation').click(function () {
-			$.ajax({
-				url: "${path}/market/updateReservation.do",
-				data: {mkNo:'${mkNo}'},
-				success: function(data) {
-					if(data) {
-						console.log('거래상태 [예약중]으로 수정 완료!');
-						// 클래스 변경
-						$('#dealStatus').addClass("badge-warning");
-						$('#dealStatus').removeClass("badge-success");
-						// 뱃지 컬러 변경
-						$('#dealStatus').html('예약중');
-						// dropdown 내용 변경
-						$('#reservation').html('구매중').css('cursor','pointer');
-						$('#buyComplete').html('구매완료').css('cursor','pointer');
-					}
-					else {
-						console.log('거래상태 수정이 실패');
-						alert('거래상태 수정이 실패되었습니다. 관리자에게 문의하세요!');
-					}
-				}
-			});
-		});
-	}); */
 </script>

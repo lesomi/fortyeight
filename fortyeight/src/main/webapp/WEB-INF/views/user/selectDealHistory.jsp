@@ -98,8 +98,8 @@
            								onclick="location.replace('${path}/market/marketView.do?mkNo=${i.mkNo}');">보러가자!</button>
 							</td>
            					<td>
-           						<button type="button" class="btn btn-dark" id="moveBtn"
-           								onclick="location.replace('${path}/market/marketView.do?mkNo=${i.mkNo}');">수정하자!</button>
+           						<button type="button" class="btn btn-dark" id="moveBtn" 
+           						onclick="location.replace('${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${i.mkNo}');">수정하자!</button>
            					</td>
            					
 	            		</tr>

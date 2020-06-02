@@ -21,6 +21,7 @@ public interface UserService {
 	int buySu(int userNo); // 사용자 구매내역
 	int sellSu(int userNo); // 사용자 구매내역
 	int dipsSu(int userNo); // 사용자 찜목록 수
+	int ingSu(int userNo); // 사용자 거래진행내역 수
 	
 	int updatePasswordEnd(User u); // 비밀번호 수정
 	int updateUser(User u); // 회원정보수정
@@ -29,4 +30,6 @@ public interface UserService {
 	int selectDipsListCount(Map<String, Object> map); // 마이페이지-찜목록 페이징
 	List<UserDealHistory> selectDealHistory(Map<String, Object> map, int cPage, int numPerPage); // 마이페이지-거래내역
 	int selectDealHistoryCount(Map<String, Object> map); // 마이페이지-거래내역 페이징
+	
+	int updateUserDealAddrEnd(Map<String, Object> map); // 마이페이지-거래주소 변경
 }

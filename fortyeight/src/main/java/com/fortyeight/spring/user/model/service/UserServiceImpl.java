@@ -85,6 +85,13 @@ public class UserServiceImpl implements UserService {
 	public int dipsSu(int userNo) {
 		return dao.dipsSu(session, userNo);
 	}
+	
+	// 마이페이지 진입시
+	// 사용자 거래진행내역 수
+	@Override
+	public int ingSu(int userNo) {
+		return dao.ingSu(session, userNo);
+	}
 
 	// 회원정보 수정
 	@Override
@@ -126,6 +133,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int updatePasswordEnd(User u) {
 		return dao.updatePasswordEnd(session, u);
+	}
+
+	// 마이페이지-거래주소 변경
+	@Override
+	public int updateUserDealAddrEnd(Map<String, Object> map) {
+		return dao.updateUserDealAddrEnd(session, map);
 	}
 	
 	

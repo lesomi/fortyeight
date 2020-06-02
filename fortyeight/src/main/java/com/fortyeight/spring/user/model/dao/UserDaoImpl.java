@@ -76,6 +76,13 @@ public class UserDaoImpl implements UserDao {
 	public int dipsSu(SqlSessionTemplate session, int userNo) {
 		return session.selectOne("user.dipsSu", userNo);
 	}
+	
+	// 마이페이지 진입시
+	// 사용자 찜목록 수
+	@Override
+	public int ingSu(SqlSessionTemplate session, int userNo) {
+		return session.selectOne("user.ingSu", userNo);
+	}
 
 	// 회원정보수정
 	@Override
@@ -117,6 +124,12 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int updatePasswordEnd(SqlSessionTemplate session, User u) {
 		return session.update("user.updatePasswordEnd", u);
+	}
+
+	// 마이페이지-거래주소 변경
+	@Override
+	public int updateUserDealAddrEnd(SqlSessionTemplate session, Map<String, Object> map) {
+		return session.update("user.updateUserDealAddrEnd", map);
 	}
 	
 	

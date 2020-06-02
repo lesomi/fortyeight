@@ -47,8 +47,8 @@
 	/* 제목 글자수 설정 */
 	span#titleCounter {
 		position: absolute;
-		right: 15%;
-		top: 68%;
+		right: 12%;
+		top: 78%;
 	}
 	
 	/* '여기' 설정 */
@@ -71,8 +71,8 @@
 	/* 내용 글자수 체크하는 놈 설정 */
 	span#counter {
 		position: absolute;
-		right: 17%;
-		margin-top: 14%;
+		right: 12%;
+		margin-top: 16%;
 	}
 	
 	/* 사진등록 div 설정 */

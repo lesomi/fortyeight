@@ -86,7 +86,7 @@
 			}
 			else {
 				alert('좋은 생각이에요! 우리 오래 봐요!');
-				location.replace('${path}/user/mypage.do');
+				location.replace('${path}/user/mypage.do?userNo=${loginUser.userNo}');
 			}
 		});
 	});
