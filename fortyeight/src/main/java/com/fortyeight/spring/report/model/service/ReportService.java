@@ -1,5 +1,7 @@
 package com.fortyeight.spring.report.model.service;
 
-public interface ReportService {
+import com.fortyeight.spring.report.model.vo.Report;
 
+public interface ReportService {
+	int insertReport(Report r);
 }
