@@ -4,7 +4,9 @@
     
     <footer>
 		<div>
-			FORTYEIGHT
+			개발기간 : 5월 11일 ~ 6월 3일	KH정보교육원 RClassPM<br>
+			FORTYEIGHT 개발자 이소미 , 유슬기<br>
+			Copyright © Fortyeight Inc. All rights reserved.
 		</div>
 	</footer>
 
