@@ -49,7 +49,7 @@
                             <tr>
                                 <td class="blank" id="buy_History">
                                     <p class="marginP">신고내역</p>
-                                    <span class="largeCount">0</span>건
+                                    <span class="largeCount">${report }</span>건
                                 </td>
                             </tr>
                         </table>
