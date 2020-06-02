@@ -12,4 +12,5 @@ public class Report {
 	private int userNo;
 	private String reportText;
 	private String reportContent;
+	private String status;
 }
