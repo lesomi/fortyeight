@@ -82,11 +82,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<c:if test="${d.userNo eq loginUser.userNo}">
+										<%-- <c:if test="${d.userNo eq loginUser.userNo && mk.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if>
+										</c:if> --%>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -135,11 +135,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<c:if test="${d.userNo eq loginUser.userNo}">
+										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if>
+										</c:if> --%>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -216,11 +216,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<c:if test="${d.userNo eq loginUser.userNo}">
+										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn" style="border:none;outline:none;">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if>
+										</c:if> --%>
 									</c:if>
 								</c:forEach>
 							</td>
@@ -269,11 +269,11 @@
 												<img src="${path}/resources/img/blackStar.png" id="starDips" width="25px">
 											</button>
 										</c:if>
-										<c:if test="${d.userNo eq loginUser.userNo}">
+										<%-- <c:if test="${d.userNo eq loginUser.userNo}">
 											<button type="button" id="canDipsBtn">
 												<img src="${path}/resources/img/yellowStar.png" id="starDips" width="25px">
 											</button>
-										</c:if>
+										</c:if> --%>
 									</c:if>
 								</c:forEach>
 							</td>
