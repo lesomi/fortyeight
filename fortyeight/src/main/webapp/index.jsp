@@ -10,6 +10,7 @@
 		<jsp:param value="Forty-Eight" name="title"/>
 	</jsp:include>
 	
+	<link rel="icon" type="image/png" href="http://example.com/myicon.png"> 
 	
 	<!-- index style -->
 	<style>

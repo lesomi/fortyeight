@@ -91,7 +91,7 @@
                     <br><br><br>
                     <aside>
                         <h3 style="text-align: center; margin-bottom: 50px; ">${loginUser.nickName}님의 후기가 필요합니다!</h3>
-                        <button class="btn btn-dark" id="reviewBtn">후기 써 보자!</button>
+                        <button class="btn btn-dark" id="reviewBtn" onclick="alert('서비스 준비중! 쫌만 기다려줘!');">후기 써 보자!</button>
                     </aside>
                     <br><br><br><br>
 

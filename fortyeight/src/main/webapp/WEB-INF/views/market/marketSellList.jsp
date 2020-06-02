@@ -448,7 +448,7 @@
 		                <button type="button" class="btn btn-warning" id="selBtn" onclick="location.replace('${path}/market/writeBuySell.do');">작성</button>
 		                <button type="button" class="btn btn-outline-light text-dark" id="selBtn" 
 		                		style="width: 150px; margin-right: 115px; color: rgb(60,60,60); background-color: rgb(244,244,244);" 
-		                		onclick="location.replace('');">거래위치 수정</button>
+		                		onclick="location.replace('${path}/user/updateUserDealAddr.do?userNo=${loginUser.userNo}');">거래위치 수정</button>
 	             	</c:if>
 	            </div>
             
@@ -517,7 +517,7 @@
                                             <div id="selContent">
                                                 <p id="articleTitle">${i.mkTitle}</p>
                                                 <p id="addr">${i.dealAddr}<span></span></p>
-                                                <p>10,000원</p>
+                                                <p><fmt:formatNumber value="${i.mkPrice}"/>원</p>
                                             </div>
                                             <!-- 댓글 수 출력 -->
                                             <c:forEach items="${comm}" var="c">
@@ -525,7 +525,7 @@
 	                                            	<span id="spanChatt">댓글 &nbsp;&nbsp; ${c.commCount}</span> 
 	                                            </c:if>
                                             </c:forEach> 
-											<span>찜하기 &nbsp;&nbsp; 1</span> 
+											<!-- <span>찜하기 &nbsp;&nbsp; 1</span>  -->
                                         </div>
                                     </div>
                                     <!-- div.row -->

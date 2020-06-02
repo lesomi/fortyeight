@@ -222,7 +222,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<p id="dealAddrMsg">거래주소를 변경하고 싶으신가요? <strong onclick="location.replace('');">여기</strong>를 눌러주세요.</p>
+							<p id="dealAddrMsg">거래주소를 변경하고 싶으신가요? <strong onclick="location.replace('${path}/user/updateUserDealAddr.do?userNo=${loginUser.userNo}');">여기</strong>를 눌러주세요.</p>
 						</td>
 					</tr>
 					

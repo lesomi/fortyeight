@@ -98,8 +98,14 @@
            								onclick="location.replace('${path}/market/marketView.do?mkNo=${i.mkNo}');">보러가자!</button>
 							</td>
            					<td>
-           						<button type="button" class="btn btn-dark" id="moveBtn" 
-           						onclick="location.replace('${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${i.mkNo}');">수정하자!</button>
+           						<c:if test='${i.mkType eq "팝니다" and i.dealStatus eq "판매완료" or i.mkType eq "삽니다" and i.dealStatus eq "판매완료"}'>
+           							<button type="button" class="btn btn-dark" id="moveBtn" 
+           							onclick="alert('거래가 완료된 마켓글은 수정이 불가합니다');">수정못해!</button>
+           						</c:if>
+           						<c:if test='${i.mkType eq "팝니다" and i.dealStatus ne "판매완료" or i.mkType eq "삽니다" and i.dealStatus ne "판매완료"}'>
+	           						<button type="button" class="btn btn-dark" id="moveBtn" 
+	           						onclick="location.replace('${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${i.mkNo}');">수정하자!</button>
+           						</c:if>
            					</td>
            					
 	            		</tr>

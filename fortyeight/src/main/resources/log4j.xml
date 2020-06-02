@@ -30,7 +30,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.fortyeight.spring">
-		<level value="debug" />
+		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
