@@ -19,9 +19,9 @@ public class LoginUserInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-		User u = (User)request.getAttribute("loginUser");
+		User u = (User)session.getAttribute("loginUser");
 		
-		if(u!=null) {
+		if(u==null) {
 			request.setAttribute("msg", "로그인 후 서비스 이용이 가능합니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);

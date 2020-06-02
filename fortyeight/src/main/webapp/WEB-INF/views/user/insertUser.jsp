@@ -406,7 +406,7 @@
 					// 아이디가 유효성 검사에 일치하지 않으면... 
 					$("#idMsg").css("visibility", "visible");
 					$("#idMsg").css("color", "red");
-					$("#idMsg").html('1개 이상의 문자와 숫자 필수 작성.');
+					$("#idMsg").html('대문자 불가, 1개 이상의 문자와 숫자 필수 작성.');
 					return;
 				}
 			}else {

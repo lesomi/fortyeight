@@ -44,6 +44,15 @@
 			<exclude-mapping path="/market/selMarket.do"/>
 			<exclude-mapping path="/market/buyMarket.do"/>
 			<exclude-mapping path="/market/marketView.do"/>
+			<exclude-mapping path="/board/boardList.do"/>
+			<exclude-mapping path="/board/boardView.do"/>
+			<exclude-mapping path="/board/boardView.do"/>
+			<exclude-mapping path="/**/*.png"/>
+			<exclude-mapping path="/**/*.css"/>
+			<exclude-mapping path="/**/*.PNG"/>
+			<exclude-mapping path="/**/*.mp4"/>
+			<exclude-mapping path="/**/*.jpg"/>
+			
 			<!-- login interceptor를 거쳐갈 것 -->
 			<beans:bean class="com.fortyeight.spring.common.interceptor.LoginUserInterceptor"></beans:bean>
 			
