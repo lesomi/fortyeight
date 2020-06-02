@@ -155,6 +155,12 @@ public class MarketDaoImpl implements MarketDao {
 	public Market updateMarket(SqlSessionTemplate session, Map<String, Object> map) {
 		return session.selectOne("market.updateMarket", map);
 	}
+
+	//마켓 삭제
+	@Override
+	public int deleteMarket(SqlSessionTemplate session, int mkNo) {
+		return session.update("market.deleteMarket",mkNo);
+	}
 	
 	
 }
