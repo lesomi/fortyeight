@@ -21,7 +21,7 @@ public class ReportController {
 	
 	@RequestMapping("/report/insertReport.do")
 	public String insertReport(Report r,int mkNo,Model m) {
-		r=new Report(0,r.getUserNo(),r.getReportText(),r.getReportContent(),null);
+		r=new Report(0,r.getUserNo(),mkNo,r.getReportText(),r.getReportContent(),null,0);
 		
 		int result=service.insertReport(r);
 		
