@@ -34,4 +34,7 @@ public interface UserDao {
 	int selectDealHistoryCount(SqlSessionTemplate session, Map<String, Object> map); // 마이페이지-거래내역 페이징
 	
 	int updateUserDealAddrEnd(SqlSessionTemplate session, Map<String, Object> map);// 마이페이지-거래주소 변경
+	
+	int updateReportCount(SqlSessionTemplate session,int userNo); //유저 신고 횟수 증가
+	int updateReportProcess(SqlSessionTemplate session,int reportNo);//신고 처리
 }

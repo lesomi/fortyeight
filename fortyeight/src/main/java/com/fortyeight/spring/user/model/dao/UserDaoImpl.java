@@ -131,6 +131,18 @@ public class UserDaoImpl implements UserDao {
 	public int updateUserDealAddrEnd(SqlSessionTemplate session, Map<String, Object> map) {
 		return session.update("user.updateUserDealAddrEnd", map);
 	}
+
+	//유저 신고 횟수 증가
+	@Override
+	public int updateReportCount(SqlSessionTemplate session, int userNo) {
+		return session.update("user.updateReportCount",userNo);
+	}
+
+	//신고처리
+	@Override
+	public int updateReportProcess(SqlSessionTemplate session, int reportNo) {
+		return session.update("report.updateReportProcess",reportNo);
+	}
 	
 	
 }
