@@ -99,7 +99,7 @@
 									  	</button>
 									  	<div class="dropdown-menu">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
-										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" data-toggle="modal" data-target="#buyDelModal">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
 									  	</div>
@@ -149,7 +149,6 @@
 									  	</button>
 									  	<div class="dropdown-menu">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
-										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">구매완료</a>
 									  	</div>
@@ -219,7 +218,7 @@
 									  	</button>
 									  	<div class="dropdown-menu">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
-										    <a class="dropdown-item" href="#">마켓삭제</a>
+										    <a class="dropdown-item" data-toggle="modal" data-target="#sellDelModal">마켓삭제</a>
 										    <a class="dropdown-item" id="reservation" href="${path}/market/updateReservation.do?mkNo=${mk.mkNo}">예약중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
 									  	</div>
@@ -269,7 +268,6 @@
 									  	</button>
 									  	<div class="dropdown-menu">
 										    <a class="dropdown-item" href="${path}/market/updateMarket.do?userNo=${loginUser.userNo}&mkNo=${mk.mkNo}">마켓수정</a>
-										    <a class="dropdown-item" href="#">마켓삭제</a>
 										    <a class="dropdown-item" id="buying" href="${path}/market/updateBuying.do?mkNo=${mk.mkNo}">구매중</a>
 										    <a class="dropdown-item" id="buyComplete" href="${path}/market/updateComplete.do?mkNo=${mk.mkNo}">판매완료</a>
 									  	</div>
@@ -420,6 +418,56 @@
 
 <!-- footer 설정 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+<!-- 삽니다 삭제 모달 -->
+<div class="modal fade" id="buyDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="${pageContext.request.contextPath}/market/deleteMarket.do?mkNo=${mk.mkNo}&mkType=삽니다" method="post">
+				<div class="modal-body" style="text-align: center;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div style="padding-top:30px;">
+						<span>[${mk.mkTitle }]을 삭제하시겠습니까?</span>
+						<br>
+						<span style="color:red;">삭제시 복구가 불가능합니다.</span>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center pb-4">
+					<button type="button" class="btn btn-dark hdBtn" data-dismiss="modal" aria-label="Close">취소</button>
+					&nbsp;&nbsp;
+					<button type="submit" class="btn btn-dark hdBtn">삭제</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 팝니다 삭제 모달 -->
+<div class="modal fade" id="sellDelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form action="${pageContext.request.contextPath}/market/deleteMarket.do?mkNo=${mk.mkNo}&mkType=팝니다" method="post">
+				<div class="modal-body" style="text-align: center;">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<div style="padding-top:30px;">
+						<span>[${mk.mkTitle }]을 삭제하시겠습니까?</span>
+						<br>
+						<span style="color:red;">삭제시 복구가 불가능합니다.</span>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center pb-4">
+					<button type="button" class="btn btn-dark hdBtn" data-dismiss="modal" aria-label="Close">취소</button>
+					&nbsp;&nbsp;
+					<button type="submit" class="btn btn-dark hdBtn">삭제</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <script>
 	// -----
