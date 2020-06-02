@@ -9,27 +9,23 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp">
 		<jsp:param value="Forty-Eight" name="title"/>
 	</jsp:include>
-
+	
 <style>
 	div.container {
 		text-align: center;
 	}
-	#hand {
-		width: 30px;
-		height: 40px;
-	}
 	p {
-		color: rgb(60, 60, 60);
+		color: rgb(231, 231, 231);
 	}
 </style>
 
 <section>
 	<div class="container" style="margin-top: 200px;">
 		<img src="${path}/resources/img/forty-eight.png">
-		<h3><strong>잠깐!</strong> <img id="hand" src="${path}/resources/img/hand.png"></h3>
+		<h3><strong>앗!</strong> <img id="hand" src="${path}/resources/img/hand.png"></h3>
 		<p>
-			찾을 수 없는 페이지가 떴네요! <br>
-			요청한 페이지가 사라졌거나 잘못된 경로랍니다!
+			서버 내부의 오류가 발생했어요! <br>
+			시스템 관리자에게 빠른 문의가 필요합니다!
 		</p>
 		<p></p> 
 		<br><br><br>
