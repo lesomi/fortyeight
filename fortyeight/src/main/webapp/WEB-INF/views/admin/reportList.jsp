@@ -38,12 +38,12 @@
 							<td>
 								<input type="hidden" id="userNo" name="userNo" value="${r.userNo }">
 								<input type="hidden" id="reportNo" name="reportNo" value="${r.reportNo }">
-								<button type="button" onclick="location.replace('${path}/market/marketView.do?mkNo=${r.mkNo }')">게시글보기</button>
-								<c:if test="${r.reportCount ne 3 }">
-									<button type="button" id="reportProcess">경고</button>
+								<button type="button" class="btn btn-warning m-2" onclick="location.replace('${path}/market/marketView.do?mkNo=${r.mkNo }')">게시글보기</button>
+								<c:if test="${r.reportCount lt 3 }">
+									<button type="button" class="btn btn-warning m-2" id="reportProcess">경고</button>
 								</c:if>
-								<c:if test="${r.reportCount eq 3 }">
-									<button type="button">정지</button>
+								<c:if test="${r.reportCount ge 3 }">
+									<button type="button" class="btn btn-warning m-2" id="reportProcess">정지</button>
 								</c:if>
 							</td>
 						</tr>
@@ -80,6 +80,7 @@
 						location.reload();
 					}else{
 						alert("신고 처리 실패");
+						location.reload();
 					}
 				}
 			});
