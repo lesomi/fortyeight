@@ -34,7 +34,7 @@
 	
 	function addMessage(msg){
 		$("#msg-container").append("<p>"+msg.sender+" : "+msg.chatting+"</p>");
-		receiver=msg.sender;
+		//receiver=msg.sender;
 	}
 	
 	function Chatting(chatNo,chatType,sender,receiver,chatDate,chatting,roomNo){

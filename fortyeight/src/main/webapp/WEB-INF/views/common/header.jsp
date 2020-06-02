@@ -141,9 +141,16 @@
 	        
 	        <!-- 만약, session에 로그인한 값이 있으면? -->
 	        <c:if test="${loginUser!=null }">
-	        	<div class="p-1 divSize">
-	                <a href="${path}/user/mypage.do?userNo=${loginUser.userNo}" class="aFont">마이페이지</a>
-	            </div>
+	        	<c:if test="${loginUser.userId ne 'admin' }">
+		        	<div class="p-1 divSize">
+		                <a href="${path}/user/mypage.do?userNo=${loginUser.userNo}" class="aFont">마이페이지</a>
+		            </div>
+	            </c:if>
+	            <c:if test="${loginUser.userId eq 'admin' }">
+		        	<div class="p-1 divSize">
+		                <a href="${path}/admin/adminpage.do?userNo=${loginUser.userNo}" class="aFont">관리자페이지</a>
+		            </div>
+	            </c:if>
 	            <div class="p-1 divSize">
 	                <a href="${path}/user/logout.do" class="aFont">로그아웃</a>
 	            </div>
@@ -210,7 +217,7 @@
 			console.log("openChatting 실행했니?");
 			if('${loginUser.userNo}'==msg.receiver){
 				if(confirm("구매 / 판매 문의 메세지가 왔습니다.")){
-					accessChatting(msg.sender,msg.receiver);
+					accessChatting(msg.sender,msg.sender);
 				}
 			}
 		}
