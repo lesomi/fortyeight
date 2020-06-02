@@ -9,6 +9,12 @@
 	<jsp:param value="Forty-Eight" name="title"/>
 </jsp:include>
 
+<style>
+	span#fontSize {
+		margin-left: 5%; font-weight: normal; font-size: 12px;
+	}
+</style>
+
 <section>
 	<div class="container" style="margin-top: 150px;">
 		<div class="float-right m-2">
@@ -20,17 +26,82 @@
 		</div>
 		<table class="table">
 			<tr style="background-color:rgb(241,241,241);">
-				<td>${b.nickName }</td>
+				<td style="width:300px">${b.nickName }</td>
 				<td style="text-align:center;">${b.boardTitle }</td>
-				<td style="text-align:right;">${b.boardDate }</td>
+				<td style="text-align:right;width:300px">${b.boardDate }</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="height:300px" colspan="3">
 				${b.boardContent }
 				</td>
 			</tr>
 		</table>
 	</div>
+	
+	<!-- 댓글 -->
+	<div class="container">
+		<div class="input-group mb-3">
+			<input type="text" id="boardComm" class="form-control" placeholder="댓글 입력(50글자 제한)" maxlength="50">
+			<!-- <span id="titleCounter">0 / 최대 50자</span> -->
+			
+			<div class="input-group-append">
+				<c:if test='${loginUser != null}'>
+					<button class="btn btn-dark" id="writeBtn" type="button">작성</button>
+				</c:if>
+				<c:if test='${loginUser == null}'>
+					<button class="btn btn-dark" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
+				</c:if>
+			</div>
+		</div>
+		
+		<br>
+		
+		<!-- 댓글 결과창 -->
+		<table class="table" style="text-align: center;">
+			<c:forEach var="bc" items="${bc}">
+				<c:if test="${bc.commLevel eq 1}">
+					<tr>
+						<th colspan="4" style="text-align: left; background-color: rgb(241,241,241);">
+							 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${bc.nickName}님
+							<span id="fontSize">
+								<fmt:formatDate value="${bc.commDate}" pattern="yyyy년 MM월 dd일, HH시 mm분"/> 등록
+							</span>
+							<input type="hidden" id="boardCommNo" value="${bc.boardCommNo}"/>
+						</th>
+					</tr>
+					<tr>
+						<td colspan="3" id="comment" style="text-align: left;">
+							${bc.commContent}
+						</td>
+						<td style="width:100px">
+							<div class="input-group-append" id="replyDiv">
+								<c:if test='${loginUser != null}'>
+									<!-- 나중에 구현할 답글버튼 -->
+									<!-- <button class="btn btn-dark replyBtn" id="replyBtns" type="button" >답글</button> --> <!-- JQuery this -->
+									<c:if test='${bc.userNo eq loginUser.userNo}'>
+										<button class="btn btn-dark deleteBtn" type="button">삭제</button>
+									</c:if>
+								</c:if>
+							</div>
+						</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+			<c:if test="${empty bc }">
+				<tr>
+					<td colspan="4" style="text-align:center">
+						등록된 댓글이 없어요...
+					</td>
+				</tr>
+			</c:if>
+		</table>
+	</div>
+	
+	
+	<div id="page-container">
+		${pageBar}
+	</div>
+	
 	<div class="push"></div>
 </section>
 
@@ -60,3 +131,43 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(function(){
+		$("#writeBtn").click(function(){
+			if($("#boardComm").val().trim().length==0){
+				alert("댓글을 입력해주세요.");
+			}else{
+				$.ajax({
+					url:"${path}/board/insertBoardComm.do",
+					data:{commContent:$("#boardComm").val(),userNo:'${loginUser.userNo}',boardRef:'${b.boardNo}'},
+					success:function(data){
+						if(data){
+							alert("댓글이 등록되었습니다.");
+							location.reload();
+						}else{
+							alert("댓글 등록 실패");
+							location.reload();
+						}
+					}
+				});
+			}
+		});
+		
+		$(".deleteBtn").click(function(){
+			$.ajax({
+				url:"${path}/board/deleteBoardComm.do",
+				data:{boardCommNo:$("#boardCommNo").val()},
+				success:function(data){
+					if(data){
+						alert("댓글을 삭제했습니다.");
+						location.reload();
+					}else{
+						alert("댓글 삭제 실패");
+						location.reload();
+					}
+				}
+			});
+		});
+	});
+</script>
