@@ -264,9 +264,8 @@
 			<hr class="sidebar-divider my-0">
 
 
-			<!-- 슬기 작업 -->
 			<!-- 다섯번째 사이드 메뉴 -->
-			<div class="sidebar-heading">Declaration</div>
+			<!-- <div class="sidebar-heading">Declaration</div>
 			<li class="nav-item">
 				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseThree">
 					<i class="fas fa-list"></i>
@@ -278,6 +277,6 @@
 						<a class="collapse-item" href="#">신고하기</a>
 					</div>
 				</div>
-			</li>
+			</li> -->
 		</ul>
 	</div>
