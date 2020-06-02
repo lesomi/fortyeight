@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="report">
 	<insert id="insertReport" parameterType="report">
-		INSERT INTO REPORT VALUES(SEQ_REPORTNO.NEXTVAL,#{userNo},#{reportText},#{reportContent})
+		INSERT INTO REPORT VALUES(SEQ_REPORTNO.NEXTVAL,#{userNo},#{reportText},#{reportContent},DEFAULT)
 	</insert>
+	
+	<select id="selectReport" resultType="report">
+		SELECT * FROM REPORT WHERE STATUS = 'N'
+	</select>
+	
+	<select id="selectReportCount" resultType="_int">
+		SELECT COUNT(*) FROM REPORT WHERE STATUS = 'N'
+	</select>
 </mapper>
