@@ -184,6 +184,12 @@ public class MarketServiceImpl implements MarketService {
 	public Market updateMarket(Map<String, Object> map) {
 		return dao.updateMarket(session, map);
 	}
+
+	// 마켓 삭제
+	@Override
+	public int deleteMarket(int mkNo) {
+		return dao.deleteMarket(session,mkNo);
+	}
 	
 	
 	
