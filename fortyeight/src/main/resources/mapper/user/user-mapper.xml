@@ -181,4 +181,9 @@
 	<update id="updateUserDealAddrEnd" parameterType="map">
 		UPDATE MEMBER SET DEALADDR=#{dealAddr} WHERE USERNO=#{userNo}
 	</update>
+	
+	<!-- 유저 신고 횟수 증가 -->
+	<update id="updateReportCount" parameterType="_int">
+		UPDATE MEMBER SET REPORTCOUNT = REPORTCOUNT+1 WHERE USERNO = #{userNo}
+	</update>
 </mapper>
