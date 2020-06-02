@@ -55,7 +55,12 @@ public class UserController {
 		User login = service.selectLogin(userId);
 
 		String page = "";
-		if ( login != null && encoder.matches(password, login.getPassword()) && login.getStatus().equals("N") ) {
+		if( login != null && encoder.matches(password, login.getPassword()) && login.getReportcount()>3) {
+			//아이디 정지
+			model.addAttribute("msg", "관리자에의해 정지된 회원입니다.");
+			model.addAttribute("loc", "/");
+			page = "common/msg";
+		}else if ( login != null && encoder.matches(password, login.getPassword()) && login.getStatus().equals("N") ) {
 			// 로그인 성공
 			model.addAttribute("loginUser", login);
 			page = "redirect:/";
