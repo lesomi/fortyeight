@@ -6,7 +6,7 @@
 	</insert>
 	
 	<select id="selectReport" resultType="report">
-		SELECT * FROM REPORT JOIN MEMBER USING(USERNO) WHERE REPORT.STATUS = 'N'
+		SELECT * FROM REPORT JOIN MEMBER USING(USERNO) WHERE REPORT.STATUS = 'N' ORDER BY REPORTNO DESC
 	</select>
 	
 	<select id="selectReportCount" resultType="_int">
