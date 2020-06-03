@@ -40,10 +40,10 @@
 								<input type="hidden" id="reportNo" name="reportNo" value="${r.reportNo }">
 								<button type="button" class="btn btn-warning m-2" onclick="location.replace('${path}/market/marketView.do?mkNo=${r.mkNo }')">게시글보기</button>
 								<c:if test="${r.reportCount lt 3 }">
-									<button type="button" class="btn btn-warning m-2" id="reportProcess">경고</button>
+									<button type="button" class="btn btn-warning m-2 reportProcess">경고</button>
 								</c:if>
 								<c:if test="${r.reportCount ge 3 }">
-									<button type="button" class="btn btn-warning m-2" id="reportProcess">정지</button>
+									<button type="button" class="btn btn-warning m-2 reportProcess">정지</button>
 								</c:if>
 							</td>
 						</tr>
@@ -69,10 +69,12 @@
 	$(function(){
 		var userNo=$("#userNo").val();
 		var reportNo=$("#reportNo").val();
-		$("#reportProcess").click(function(){
-			console.log("dd?"+userNo);
+		console.log("작동하니?");
+		
+		$(".reportProcess").click(function(){
+			console.log("버튼 눌렸니?");
 			$.ajax({
-				url:"${pageContext.request.contextPath}/user/updateReportCount.do",
+				url:"${path}/user/updateReportCount.do",
 				data:{userNo:userNo,reportNo:reportNo},
 				success:function(date){
 					if(date){
