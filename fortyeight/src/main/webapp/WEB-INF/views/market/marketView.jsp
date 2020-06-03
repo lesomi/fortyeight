@@ -44,7 +44,7 @@
 					</c:if>
 					<c:if test="${mviSell.renameMkImg ne null }">
 						<td colspan="4">
-							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
+							<img id="slideImg" src="${path}/resources/upload/market/${mviSell.renameMkImg}">
 						</td>
 					</c:if>
 				</tr>
