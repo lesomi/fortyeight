@@ -26,7 +26,8 @@ public interface MarketDao {
 	int updateComplete(SqlSessionTemplate session, Map<String, String> map); // 마켓 뷰 거래상태 변경(구매완료) -실제값:판매완료
 	
 	String selectMkViewNick(SqlSessionTemplate session,int mkNo); // 마켓 상세뷰 닉네임만 출력
-	MarketViewImg selectMkViewImg(SqlSessionTemplate session,int mkNo);
+	MarketViewImg selectMkViewImg(SqlSessionTemplate session,int mkNo); //삽니다 이미지
+	MarketViewImg selectMkViewImgSell(SqlSessionTemplate session,int mkNo);//팝니다 이미지
 	List<MkComment> selectComment(SqlSessionTemplate session, int mkNo, int cPage, int numPerPage); // 마켓 상세화면 밑 댓글 리스트 출력
 	int selectCommentCount(SqlSessionTemplate session, int mkNo); // 마켓 상세화면 밑 댓글 페이징처리
 	int marketCommentDelete(SqlSessionTemplate session, Map<String, String> map);// 마켓 댓글 삭제

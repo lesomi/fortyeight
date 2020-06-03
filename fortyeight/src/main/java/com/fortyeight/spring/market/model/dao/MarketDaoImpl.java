@@ -187,6 +187,11 @@ public class MarketDaoImpl implements MarketDao {
 	public int deleteMkImg(SqlSessionTemplate session, int mkNo) {
 		return session.delete("market.deleteMkImg", mkNo);
 	}
+
+	@Override
+	public MarketViewImg selectMkViewImgSell(SqlSessionTemplate session, int mkNo) {
+		return session.selectOne("market.selectMkViewImgSell",mkNo);
+	}
 	
 	
 }

@@ -42,6 +42,11 @@
 							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
 						</td>
 					</c:if>
+					<c:if test="${mviSell.renameMkImg ne null }">
+						<td colspan="4">
+							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
+						</td>
+					</c:if>
 				</tr>
 				
 				<!-- 로그인이 아닐 때, 찜목록/드롭다운리스트 안 보이게 처리한다. -->

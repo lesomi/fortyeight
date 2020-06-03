@@ -315,10 +315,16 @@
 		SELECT NICKNAME FROM MARKET MK FULL JOIN MEMBER M ON(MK.USERNO = M.USERNO) WHERE MKNO=#{mkNo}
 	</select>
 	
-	<!-- 마켓 상세뷰 '이미지' 출력 -->
+	<!-- 마켓 상세뷰 '이미지' 출력 삽니다 -->
 	<select id="selectMkViewImg" resultType="mkViewImg" parameterType="_int">
 		SELECT MARKET.MKNO, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
 		WHERE MARKET.MKTYPE='삽니다' AND MARKET.DELETED='N'AND MARKET.MKNO=#{mkNo}
+	</select>
+	
+	<!-- 마켓 상세뷰 '이미지' 출력 팝니다 -->
+	<select id="selectMkViewImgSell" resultType="mkViewImg" parameterType="_int">
+		SELECT MARKET.MKNO, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
+		WHERE MARKET.MKTYPE='팝니다' AND MARKET.DELETED='N'AND MARKET.MKNO=#{mkNo}
 	</select>
 	
 	<!-- 마켓 상세뷰 찜 추가 -->

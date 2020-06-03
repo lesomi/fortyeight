@@ -23,7 +23,8 @@ public interface MarketService {
 	int updateComplete(Map<String, String> map); // 마켓 뷰 거래상태 변경(구매완료) -실제값:판매완료
 	
 	String selectMkViewNick(int mkNo); // 마켓 상세 닉네임
-	MarketViewImg selectMkViewImg(int mkNo); // 마켓 뷰 '이미지'만 출력
+	MarketViewImg selectMkViewImg(int mkNo); // 마켓 뷰 '이미지'만 출력	삽니다
+	MarketViewImg selectMkViewImgSell(int mkNo); // 마켓 뷰 '이미지'만 출력	팝니다
 	List<MkComment> selectComment(int mkNo, int cPage, int numPerPage); // 마켓 댓글리스트 출력
 	int selectCommentCount(int mkNo); // 댓글리스트 페이징
 	int marketCommentDelete(Map<String, String> map); // 댓글 삭제

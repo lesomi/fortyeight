@@ -246,5 +246,10 @@ public class MarketServiceImpl implements MarketService {
 		}
 		return result;
 	}
+
+	@Override
+	public MarketViewImg selectMkViewImgSell(int mkNo) {
+		return dao.selectMkViewImgSell(session,mkNo);
+	}
 	
 }

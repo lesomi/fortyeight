@@ -247,6 +247,7 @@ public class MarketController {
 		
 		// ---- ㅆ
 		MarketViewImg mviBuy = service.selectMkViewImg(mkNo); // 마켓이미지 불러오기(삽니다)
+		MarketViewImg mviSell = service.selectMkViewImgSell(mkNo); // 마켓이미지 불러오기(삽니다)
 		System.out.println("[삽니다]마켓이미지는 잘 가져오는가? "+mviBuy);
 		
 		String nickName = service.selectMkViewNick(mkNo); // 마켓뷰 작성자 '닉네임'만 불러오기
@@ -258,7 +259,8 @@ public class MarketController {
 		mv.addObject("list",list);
 		mv.addObject("total", totalData);
 		mv.addObject("nickName", nickName); // 마켓뷰 작성자 '닉네임'만 담기
-		mv.addObject("mviBuy", mviBuy); // 마켓뷰 이미지 담기
+		mv.addObject("mviBuy", mviBuy); // 마켓뷰 이미지 담기 삽니다
+		mv.addObject("mviSell", mviSell); // 마켓뷰 이미지 담기 팝니다
 		//mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/spring/market/marketView.do", mkNo)); // 로컬 환경용
 		mv.addObject("pageBar",PagingFactory.getMarketComment(totalData, cPage, numPerPage, "/20PM_FortyEight_final/market/marketView.do", mkNo)); //서버용
 		
