@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="evaluation">
+	<!-- 평가정보 화면에 필요한 마켓정보 가져오기 -->
+	<select id="selectUser" resultType="market" parameterType="map">
+		SELECT MARKET.*, MEMBER.NICKNAME FROM MARKET FULL JOIN MEMBER ON(MARKET.USERNO = MEMBER.USERNO) 
+		WHERE MARKET.USERNO=#{userNo} AND MARKET.MKTYPE='팝니다'
+		ORDER BY MKDATE DESC
+	</select>
+</mapper>
