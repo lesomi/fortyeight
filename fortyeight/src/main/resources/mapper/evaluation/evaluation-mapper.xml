@@ -7,4 +7,8 @@
 		WHERE MARKET.USERNO=#{userNo} AND MARKET.MKTYPE='팝니다'
 		ORDER BY MKDATE DESC
 	</select>
+	
+	<select id="selectUserNickName" resultType="user" parameterType="map">
+		SELECT NICKNAME, DEALADDR, RENAMEPROFILE FROM MEMBER WHERE USERNO=#{userNo}
+	</select>
 </mapper>

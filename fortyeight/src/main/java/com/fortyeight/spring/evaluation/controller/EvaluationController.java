@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fortyeight.spring.evaluation.model.service.EvaluationService;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.controller.UserController;
+import com.fortyeight.spring.user.model.vo.User;
 
 @Controller
 public class EvaluationController {
@@ -30,8 +31,11 @@ public class EvaluationController {
 		logger.debug("----- [마켓 게시글을 작성한 사용자의 평가정보 화면으로 이동합니다.] -----");
 		System.out.println("가져온 유저번호 : "+map);
 		List<Market> list = service.selectUser(map); // 해당하는 번호의 market, member(nickName) 가져오기
-		System.out.println("해당하는 유저번호의 list의 값은?");
+		User u = service.selectUserNickName(map);// 해당하는 번호의 닉네임, 프로필, 주소 가져오기
+		System.out.println("해당하는 유저번호의 list의 값은?"+list);
+		System.out.println("해당하는 유저번호의 정보는?"+u);
 		mv.addObject("list",list);
+		mv.addObject("user", u);
 		mv.setViewName("evaluation/userInformation");
 		return mv;
 	}

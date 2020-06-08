@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fortyeight.spring.evaluation.model.dao.EvaluationDao;
 import com.fortyeight.spring.market.model.vo.Market;
 import com.fortyeight.spring.user.controller.UserController;
+import com.fortyeight.spring.user.model.vo.User;
 
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
@@ -29,4 +30,11 @@ public class EvaluationServiceImpl implements EvaluationService {
 		return dao.selectUser(session, map);
 	}
 
+	// 평가정보 화면에 필요한 닉네임,프로필,주소 가져오기
+	@Override
+	public User selectUserNickName(Map<String, Object> map) {
+		return dao.selectUserNickName(session, map);
+	}
+
+	
 }
