@@ -48,6 +48,9 @@
 			<exclude-mapping path="/board/boardList.do"/>
 			<exclude-mapping path="/board/boardView.do"/>
 			<exclude-mapping path="/board/boardView.do"/>
+
+			<exclude-mapping path="/evaluation/selectUser.do"/>			
+			
 			<exclude-mapping path="/**/*.png"/>
 			<exclude-mapping path="/**/*.css"/>
 			<exclude-mapping path="/**/*.PNG"/>
