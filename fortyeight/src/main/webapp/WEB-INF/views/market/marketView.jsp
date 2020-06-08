@@ -331,7 +331,9 @@
 				<tr>
 					<c:if test="${loginUser ne null }">
 						<td style="width:200px;">
-							${nickName}님
+							<a href="${path}/evaluation/selectUser.do?userNo=${mk.userNo}" style="text-decoration: underline; font-weight: bolder; color: rgb(251,191,42);">
+								${nickName}
+							</a>님
 						</td>
 						<td colspan="3">
 							<button class="btn btn-dark hdBtn" type="button" onclick="accessChatting('${loginUser.userNo}','${mk.userNo }');">채팅</button>
@@ -339,9 +341,16 @@
 					</c:if>
 					<c:if test="${loginUser eq null }">
 						<td colspan="4">
-							${nickName}님
+							<a href="${path}/evaluation/selectUser.do?userNo=${mk.userNo}" style="text-decoration: underline; font-weight: bolder; color: rgb(251,191,42);">
+								${nickName}
+							</a>님
 						</td>
 					</c:if>
+				</tr>
+				<tr>
+					<td style="width:200px;">
+						거래방법 : <strong>${mk.dealType}</strong>
+					</td>
 				</tr>
 				<tr>
 					<td style="width:200px;">
