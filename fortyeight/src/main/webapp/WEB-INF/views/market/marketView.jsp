@@ -39,12 +39,16 @@
 					<!-- 이미지 슬라이드 -->
 					<c:if test="${mviBuy.renameMkImg ne null }">
 						<td colspan="4">
-							<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
+							<c:if test='${mviBuy.oriMkImg!="NULL"}'>
+								<img id="slideImg" src="${path}/resources/upload/market/${mviBuy.renameMkImg}">
+							</c:if>
 						</td>
 					</c:if>
 					<c:if test="${mviSell.renameMkImg ne null }">
 						<td colspan="4">
-							<img id="slideImg" src="${path}/resources/upload/market/${mviSell.renameMkImg}">
+							<c:if test='${mviSell.oriMkImg!="NULL"}'>
+								<img id="slideImg" src="${path}/resources/upload/market/${mviSell.renameMkImg}">
+							</c:if>
 						</td>
 					</c:if>
 				</tr>

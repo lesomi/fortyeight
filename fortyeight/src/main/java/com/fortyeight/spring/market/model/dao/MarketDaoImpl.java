@@ -183,9 +183,10 @@ public class MarketDaoImpl implements MarketDao {
 	}
 
 	// 마켓 글 수정 3. file delete(if... files.Empty()!!!!!!!!!!!!)
+	// delete -> update 수정 2020.06.10
 	@Override
 	public int deleteMkImg(SqlSessionTemplate session, int mkNo) {
-		return session.delete("market.deleteMkImg", mkNo);
+		return session.update("market.deleteMkImg", mkNo);
 	}
 
 	@Override

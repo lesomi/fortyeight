@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class MarketViewImg {
 	// MARKET, MKIMG 테이블 관련 객체
 	private int mkNo;
+	private String oriMkImg;
 	private String renameMkImg;
 }

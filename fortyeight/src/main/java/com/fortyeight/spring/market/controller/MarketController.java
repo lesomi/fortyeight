@@ -195,7 +195,7 @@ public class MarketController {
 						   +"\n--------------------------");
 		
 		mk = new Market(0, loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), null, null, null, 0, null);
+						mk.getDealType(), mk.getMkContent(), null, null, null, 0, null, null);
 		
 		// DB에 값 저장
 		int result = 0;
@@ -511,6 +511,11 @@ public class MarketController {
 			
 			files.add(imgName);
 		}
+		else {
+			System.out.println("삘릴리 삘릴리 "+oriImg+", "+renameImg);
+			mk.setOrimkFile(oriImg);
+			mk.setRenamemkFile(renameImg);
+		}
 		
 		// 마켓 정보 불러오기
 		Market market = service.selectView(mkNo);
@@ -533,8 +538,8 @@ public class MarketController {
 						   +"\n renameFile : "+mk.getRenamemkFile()
 						   +"\n--------------------------");
 		
-		mk = new Market(mk.getMkNo(), loginUser.getUserNo(), market.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
-						mk.getDealType(), mk.getMkContent(), mk.getDealStatus(), null, null, 0, null);
+		mk = new Market(mk.getMkNo(), loginUser.getUserNo(), mk.getMkTitle(), mk.getDealAddr(), mk.getCategory(), mk.getMkPrice(), mk.getMkType(), 
+						mk.getDealType(), mk.getMkContent(), mk.getDealStatus(), null, null, 0, null, null);
 		
 		// DB에 값 저장
 		int result = 0;

@@ -27,5 +27,6 @@ public class Market {
 	private int commCount;// 댓글 수
 	
 	// 마켓 리스트 불러올때 필요한 객체
+	private String oriMkImg;
 	private String renameMkImg;
 }

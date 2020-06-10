@@ -274,7 +274,8 @@
 						<input type="hidden" name="renameImg" id="renameImg" value="${img.renameMkImg}"/>
 						
 							<!-- 사진값이 없으면? -->
-							<c:if test='${empty img}'>
+							<%-- <c:if test='${empty img}'> --%>
+							<c:if test='${img.oriMkImg=="NULL"}'>
 								<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
 								<div class="custom-file" id="fileDiv">
 				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >
@@ -284,7 +285,8 @@
 			                	</div>
 		                	</c:if>
 		                	<!-- 사진값이 있으면? -->
-		                	<c:if test='${not empty img}'>
+		                	<%-- <c:if test='${not empty img}'> --%>
+		                	<c:if test='${img.oriMkImg!="NULL"}'>
 								<img id="uploadImg" src="${path}/resources/upload/market/${img.renameMkImg}"/> <!-- width: 200px, height: 200px -->
 								<div class="custom-file" id="fileDiv">
 				                    <input type="file" class="custom-file-input" name="upFile" id="upFile" >

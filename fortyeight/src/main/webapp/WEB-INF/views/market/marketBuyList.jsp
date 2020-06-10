@@ -485,7 +485,12 @@
                                         <div class="marginDiv col-6">
                                         	<!-- 사진은 불러오는 방법이 다름 -->
                                         	<c:if test='${not empty i.renameMkImg}'> 
-                                            	<img id="selArticle_img" src="${path}/resources/upload/market/${i.renameMkImg}">
+                                            	<c:if test='${i.oriMkImg!="NULL"}'>
+                                            		<img id="selArticle_img" src="${path}/resources/upload/market/${i.renameMkImg}">
+                                           		</c:if>
+                                           		<c:if test='${i.oriMkImg=="NULL"}'>
+                                           			<img id="selArticle_img" src="${path}/resources/img/noImage.png">
+                                           		</c:if>
                                             </c:if>
                                             <c:if test='${empty i.renameMkImg}'>
                                             	<img id="selArticle_img" src="${path}/resources/img/noImage.png">

@@ -317,13 +317,13 @@
 	
 	<!-- 마켓 상세뷰 '이미지' 출력 삽니다 -->
 	<select id="selectMkViewImg" resultType="mkViewImg" parameterType="_int">
-		SELECT MARKET.MKNO, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
+		SELECT MARKET.MKNO, MKIMG.ORIMKIMG, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
 		WHERE MARKET.MKTYPE='삽니다' AND MARKET.DELETED='N'AND MARKET.MKNO=#{mkNo}
 	</select>
 	
 	<!-- 마켓 상세뷰 '이미지' 출력 팝니다 -->
 	<select id="selectMkViewImgSell" resultType="mkViewImg" parameterType="_int">
-		SELECT MARKET.MKNO, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
+		SELECT MARKET.MKNO, MKIMG.ORIMKIMG, MKIMG.RENAMEMKIMG FROM MARKET FULL JOIN MKIMG ON(MARKET.MKNO=MKIMG.MKNO) 
 		WHERE MARKET.MKTYPE='팝니다' AND MARKET.DELETED='N'AND MARKET.MKNO=#{mkNo}
 	</select>
 	
@@ -388,7 +388,7 @@
 	</update>
 	
 	<!-- 마켓 글 수정 3 이미지 삭제 -->
-	<delete id="deleteMkImg" parameterType="_int">
-		DELETE FROM MKIMG WHERE MKNO=#{mkNo}
-	</delete>
+	<update id="deleteMkImg" parameterType="_int">
+		UPDATE MKIMG SET ORIMKIMG='NULL' WHERE MKNO=#{mkNo}
+	</update>
 </mapper>
