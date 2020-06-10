@@ -122,6 +122,10 @@ public class UserController {
 			u.setOriProfile(ori);
 			u.setRenameProfile(rename);
 		}
+		else {
+			u.setOriProfile("NULL");
+			u.setRenameProfile("NULL");
+		}
 		// 비밀번호 암호화
 		System.out.println("암호화 되기 전 비밀번호 : " + u.getPassword());
 		u.setPassword(encoder.encode(u.getPassword())); // 단방향 암호화
