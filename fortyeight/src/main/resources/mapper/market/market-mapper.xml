@@ -384,7 +384,7 @@
 	
 	<!-- 마켓 글 수정 2 이미지 -->
 	<update id="updateMkImg" parameterType="mkImg">
-		UPDATE MKIMG SET ORIMKIMG=#{oriMkImg}, RENAMEMKIMG=#{renameMkImg} WHERE MKNO=#{mkNo};
+		UPDATE MKIMG SET ORIMKIMG=#{oriMkImg}, RENAMEMKIMG=#{renameMkImg} WHERE MKNO=#{mkNo}
 	</update>
 	
 	<!-- 마켓 글 수정 3 이미지 삭제 -->
