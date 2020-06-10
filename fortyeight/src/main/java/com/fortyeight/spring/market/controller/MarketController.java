@@ -467,7 +467,7 @@ public class MarketController {
 	
 	// 마켓 수정하기
 	@RequestMapping("/market/updateMarketEnd.do")
-	public String updateMarketEnd(Model m, int mkNo, Market mk, MultipartFile upFile, HttpSession session) {
+	public String updateMarketEnd(Model m, int mkNo, Market mk, String oriImg, String renameImg, MultipartFile upFile, HttpSession session) {
 		logger.debug("----- 마켓 글 수정 Controller 로직 진행 들어옴 -----");
 		String path = session.getServletContext().getRealPath("/resources/upload/market"); // 저장경로
 		// 파일을 담을 객체 생성(여러개일 수 있음)
@@ -477,6 +477,9 @@ public class MarketController {
 		if(!f.exists()) { // 파일이 없으면 생성한다.
 			f.mkdirs();
 		}
+		
+		System.out.println("oriImg : "+oriImg);
+		System.out.println("renameImg : "+renameImg);
 		
 		// 파일 저장 로직 : 파일 이름이 중복적으로 저장되면 안 되기 때문에 rename 처리가 필요하다.
 		if(!upFile.isEmpty()) {
@@ -496,7 +499,6 @@ public class MarketController {
 			catch(IOException e) {
 				e.printStackTrace();
 			}
-			
 			
 			new File(path+"/"+mk.getRenamemkFile()).delete();
 			

@@ -267,10 +267,12 @@
 					
 					
 					<!-- 여기가 여러개 추가될 것! -->
-					<input type="hidden" name="${img.oriMkImg}" value="${img.oriMkImg}"/>
-					<input type="hidden" name="${img.renameMkImg}" value="${img.renameMkImg}"/>
 					<tr>
 						<td colspan="2">
+						<!-- 히든으로 값을 숨겨서 받는다 -->
+                		<input type="hidden" name="oriImg" id="oriImg" value="${img.oriMkImg}"/>
+						<input type="hidden" name="renameImg" id="renameImg" value="${img.renameMkImg}"/>
+						
 							<!-- 사진값이 없으면? -->
 							<c:if test='${empty img}'>
 								<img id="uploadImg" src="${path}/resources/img/plusImg원본.png"/> <!-- width: 200px, height: 200px -->
